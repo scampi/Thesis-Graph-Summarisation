@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+% field entity
+\node at (-1,1.2) {$entity$};
+\node at (-1,.5) {a};
+\draw (-1.5,0) rectangle (-.5,1);
+% field b
+\node at (.5,1.2) {$b$};
+\node at (.5,.5) {b c};
+\draw (0,0) rectangle (1,1);
+% field d
+\node at (2,1.2) {$d$};
+\node at (2,.75) {d e};
+\node at (2,.25) {f g};
+\draw (1.5,0) rectangle (2.5,1);
+% Aggregate contributions of each field
+\node at (.5,2) {*};
+\draw (.5,1.9) -- (-1,1.45);
+\draw (.5,1.9) -- (.5,1.45);
+\draw (.5,1.9) -- (2,1.45);
+\end{tikzpicture}

@@ -1,0 +1,49 @@
+\begin{tikzpicture}[>=latex]
+\node (city) [draw,thick,rectangle,inner sep=0] {
+\begin{tabular}{l|l}
+- City & - label \\
+\hline
+\multicolumn{2}{c}{$N_3$}
+\end{tabular}
+};
+\node (country) [draw,thick,rectangle,inner sep=0, right = 2.5cm of city] {
+\begin{tabular}{l|l}
+- Country & - capital \\
+ & - label \\
+\hline
+\multicolumn{2}{c}{$N_6$, $N_7$}
+\end{tabular}
+};
+\node (person) [draw,thick,rectangle,inner sep=0,above = 1.5cm of city] {
+\begin{tabular}{l|l}
+- Person & - name \\
+\hline
+\multicolumn{2}{c}{$N_1$, $N_2$}
+\end{tabular}
+};
+\node (place) [draw,thick,rectangle,inner sep=0,above =1.5cm of country] {
+\begin{tabular}{l|l}
+- Place & - capital \\
+ & - label \\
+\hline
+\multicolumn{2}{c}{$N_4$, $N_5$, $N_6$, $N_7$}
+\end{tabular}
+};
+\node (pub) [draw,thick,rectangle,inner sep=0,above = of person] {
+\begin{tabular}{l|l}
+$\varnothing$ & - title \\
+\hline
+\multicolumn{2}{c}{$N_0$}
+\end{tabular}
+};
+
+\draw [->] (person) to node [fill=white] {lives} (city);
+\draw [->] (person) to node [fill=white] {works} (place);
+\draw [->] (city) to node [fill=white] {location} (place);
+\draw [->] (city) to node [fill=white] {location} (country);
+\draw [->] (place) to node [fill=white] {location} (country);
+\draw [loop,distance=2cm,->] (place) to node [fill=white] {location} (place);
+\draw [bend left=50,->] (pub) to node [fill=white] {author} (person);
+\draw [bend right=50,->] (pub) to node [fill=white] {creator} (person);
+
+\end{tikzpicture}

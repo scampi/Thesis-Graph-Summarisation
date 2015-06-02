@@ -1,0 +1,29 @@
+\begin{minted}[linenos,frame=lines,framesep=4mm]{sparql}
+CONSTRUCT {
+    ?hs ?p ?ho
+} WHERE {
+    {
+        # Sumnode features of the subject based on the summarisation relation
+        ...
+    }
+    # Subject sumnode URI creation based on ?sID
+    BIND(URI(CONCAT("http://example.org/", ?sID)) AS ?hs)
+
+    ?s ?p ?o
+
+    OPTIONAL {
+        {
+            # Sumnode features of the object based on the summarisation relation
+            ...
+        }
+        # Object sumnode URI creation based on ?oID
+        BIND(URI(CONCAT("http://example.org/", ?oID)) AS ?ho2)
+    }
+    # Support case when ?o has no features
+    BIND(IF(
+        BOUND(?oID),
+        ?ho2,
+        IF(?p = rdf:type, ?o, "")
+    ) AS ?ho)
+}
+\end{minted}

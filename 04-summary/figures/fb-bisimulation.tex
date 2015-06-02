@@ -1,0 +1,53 @@
+\usetikzlibrary{arrows}
+
+\begin{tikzpicture}[->,>=stealth',node distance=4cm]
+
+\node [draw,circle] (n0) {$H_0$};
+\node [draw,circle,right of = n0] (n1) {$H_1$};
+\node [draw,circle,below of = n1,yshift=-.75cm] (n2) {$H_2$};
+\node [draw,circle,right of = n1] (n3) {$H_3$};
+\node [draw,circle,right of = n3] (n6) {$H_6$};
+\node [draw,circle,below of = n6,yshift=-.75cm] (n4) {$H_4$};
+\node [draw,circle,right of = n6] (n7) {$H_7$};
+\node [draw,circle,right of = n4] (n5) {$H_5$};
+
+\node [draw,circle,above of = n3] (city) {City};
+\node [draw,circle,below right of = n6,xshift=-1cm,yshift=.5cm] (place) {Place};
+\node [draw,circle,above of = place,yshift=.5cm] (country) {Country};
+\node [draw,circle,above of = n2,yshift=-1.65cm] (person) {Person};
+
+\node [draw,circle,above right of = n0,xshift=-.75cm] (s1) {$\varnothing$};
+\node [draw,circle,above right of = n3,xshift=-.75cm] (s2) {$\varnothing$};
+\node [draw,circle,below of = n4,yshift=1cm,xshift=-2cm] (s3) {$\varnothing$};
+\node [draw,circle,above of = n7] (s4) {$\varnothing$};
+
+\path
+(n0) edge[bend right] node[fill=white] {creator} (n1)
+(n0) edge[bend left] node[fill=white] {author} (n1)
+(n0) edge node[fill=white] {author} (n2)
+(n1) edge node[fill=white] {lives} (n3)
+(n1) edge node[fill=white] {works} (n4)
+(n2) edge node[fill=white] {lives} (n3)
+(n2) edge node[fill=white] {works} (n4)
+(n3) edge node[fill=white] {location} (n6)
+(n4) edge node[fill=white] {location} (n6)
+(n5) edge node[fill=white] {location} (n7)
+(n4) edge node[fill=white] {\gls{atype}} (place)
+(n5) edge node[fill=white] {\gls{atype}} (place)
+(n6) edge node[fill=white] {\gls{atype}} (place)
+(n7) edge node[fill=white] {\gls{atype}} (place)
+(n6) edge node[fill=white] {\gls{atype}} (country)
+(n7) edge node[fill=white] {\gls{atype}} (country)
+(n1) edge node[fill=white] {\gls{atype}} (person)
+(n2) edge node[fill=white] {\gls{atype}} (person)
+(n3) edge node[fill=white] {\gls{atype}} (city)
+(n0) edge node[fill=white] {title} (s1)
+(n1) edge node[fill=white] {name} (s1)
+(n3) edge node[fill=white] {label} (s2)
+(n6) edge node[fill=white] {label} (s2)
+(n2) edge node[fill=white] {name} (s3)
+(n4) edge node[fill=white] {label} (s3)
+(n5) edge node[fill=white] {label} (s3)
+(n7) edge node[fill=white] {capital} (s4)
+;
+\end{tikzpicture}

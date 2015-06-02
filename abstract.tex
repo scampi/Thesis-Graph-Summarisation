@@ -1,0 +1,30 @@
+%- Huge amount of knowledge is now accessible on the web
+%-- science, social, government data, news, entertainment
+%-- noticeable leap by the Linked Data movement
+%-- Data is available at a very fine granularity: entity level
+%
+%- The other side of the coin is that this data growth was possible thanks to a flexible data model, RDF
+%-- model allows a flexible and dynamic management of the data
+%-- drawback is the lack of insight on the data, as it is the case of databases thanks to the tight relational schema requirements
+%-- The schema in database leverage many applications: query optimization, data exploration
+%
+%- In the Linked Data world, there is no such schema of the data
+%-- prevents an effective use of the available knowledge
+%-- Top-down and bottom-up approaches for having a schema in the Web of Data
+%--- top-down -> ontology approach, is not appropriate to the Web of Data because of the rigidity it requires
+%--- bottom-up -> data summarization, appropriate for the Web of Data because its growth is independent of the schema construction
+
+The advent of the Internet enabled the sharing of information between people, all around the world. Projects like \emph{Wikipedia} have made human knowledge accessible to anybody with a simple mouse click. The Web has made possible interactions between people all over the globe. The Linked Data movement has made a considerable leap in the amount of data available. Information about e-science, e-social, government, entertainment and news data is now available to anybody. The data is described at a very fine granularity, allowing to describe entities (people, films, monuments, \ldots) and relationships between entities with precision. This marks a shift in the data management on the Web: instead of a graph of web documents, we witness now a graph of entities with links carrying semantic; we call this the Web of Data.
+
+The Linked Data movement is characterized by the Resource Description Framework (RDF) data model, which has contributed significantly to the growth of data on the Web. The RDF model enables a flexible and dynamic management of information, allowing anyone to easily create, describe, and change data. With this flexibility comes the drawback of poor data insight. Faced with large and heterogeneous datasets, it becomes complex to understand what knowledge a dataset has to offer. In the database domain, the rigidity of the data model provides such insights at a glance thanks to the definition of a schema. The schema is at the core of many applications in relational databases, e.g., query optimization, data exploration, data integration, \ldots .
+
+Within the Linked Data realm, there is no such schema. This prevents an effective use of the available knowledge. The schema is the key for unlocking the strength of the Web of Data: the creation of new knowledge via exhaustive machine-understandable human knowledge. There exist two approaches to the creation of a schema, i.e.,
+\begin{inparaenum}[(1)]
+\item a top-down approach, i.e., the definition of \emph{ontologies} which people have to follow; and
+\item a bottom-up approach, i.e., the creation of a schema from the data itself via the process of \emph{graph summarisation}.
+\end{inparaenum}
+On the one hand, the ontology approach is not appropriate for the Web of Data. The reason is that it forces people to follow a made-up model, while they might now share the same design decisions as the ontology creator. In addition, the dynamicity of the data makes difficult to enforce a pre-defined ontology. On the other hand, the graph summarisation generates the schema from the data itself. Since this process is independent to the growth of the Web of Data, a generated schema provides several benefits, i.e.,
+\begin{inparaenum}[(1)]
+\item it eases the management of the data evolution, e.g., when integrating new information; and
+\item it reflects the actual content of the data.
+\end{inparaenum}

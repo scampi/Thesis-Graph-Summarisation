@@ -1,0 +1,23 @@
+\begin{tikzpicture}[->,>=stealth']
+\node[draw,circle] (a1) {$a_1$};
+\node[draw,circle,right of = a1,xshift=1cm] (b1) {$b_1$};
+
+\node[draw,circle,above of = a1] (a2) {$a_2$};
+\node[draw,circle,right of = a2,xshift=1cm] (b2) {$b_2$};
+
+\node[draw,circle,above of = a2,yshift=.5cm] (an) {$a_n$};
+\node[draw,circle,right of = an,xshift=1cm] (bn) {$b_n$};
+
+% summary
+\node[dashed,draw,circle,right of = b2,xshift=.5cm,yshift=.25cm] (sa) {$s_a$};
+\node[dashed,draw,circle,right of = sa,xshift=1cm] (sb) {$s_2$};
+
+\path[every node/.style={fill=white,font=\footnotesize}]
+(a1) edge node {$\alpha_1$} (b1)
+(a2) edge node {$\alpha_2$} (b2)
+(an) edge node {$\alpha_n$} (bn)
+(sa) edge[dashed,bend right=50] node {$\alpha_1$} (sb)
+(sa) edge[dashed] node {$\alpha_2$} (sb)
+(sa) edge[dashed,bend left=50] node {$\alpha_n$} (sb)
+;
+\end{tikzpicture}

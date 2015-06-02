@@ -1,0 +1,29 @@
+\begin{tikzpicture}
+\node (a) at (-.25,0) {$f_{t}(\sum)$};
+\node (labela) at (-.25,-1) {$f_{t,l}$};
+\node (b) at (-1.5,-1) {$f_{t}(\sum)$};
+\node (labelb) at (-2,-2) {$f_{t,l}$};
+\node (c) at (-1,-2) {$f_{t,l}$};
+\node (d) at (1,-1) {$f_{t}(\sum)$};
+\node (labeld) at (1,-2) {$f_{t,l}$};
+\node (e) at (0,-2) {$f_{t}(\sum)$};
+\node (labele) at (-.5,-3) {$f_{t,l}$};
+\node (f) at (2,-2) {$f_{t,l}$};
+\node (g) at (.5,-3) {$f_{t,l}$};
+
+\draw (a) -- (labela);
+\draw (a) -- (b) -- (c);
+\draw (b) -- (labelb);
+\draw (d) -- (labeld);
+\draw (e) -- (labele);
+\draw (a) -- (d) -- (e) -- (g);
+\draw (a) -- (d) -- (f);
+
+\draw [red, dashed] (-2.3,-2.3) rectangle (-1.7,-1.7);
+\draw (-1.3,-2.3) rectangle (-.7,-1.7);
+\draw [red, dashed] (-.55,-1.3) rectangle (.05,-.7);
+\draw [red, dashed] (.7,-2.3) rectangle (1.3,-1.7);
+\draw (1.7,-2.3) rectangle (2.3,-1.7);
+\draw [red, dashed] (-.8,-3.3) rectangle (-.2,-2.7);
+\draw (.2,-3.3) rectangle (.8,-2.7);
+\end{tikzpicture}

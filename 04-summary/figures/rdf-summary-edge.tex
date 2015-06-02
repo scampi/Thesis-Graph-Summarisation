@@ -1,0 +1,17 @@
+\begin{tikzpicture}[->,node/.style={draw,circle},leaf/.style={draw,rounded corners},node distance=3cm]
+
+\node[node] (edge) {SEdge};
+\node[node,below left of = edge] (source) {SNode};
+\node[node,below right of = edge] (target) {SNode};
+\node[leaf,above left of = edge,yshift=.2cm] (label) {xsd:anyURI};
+\node[leaf,above of = edge] (card) {xsd:int};
+\node[leaf,above right of = edge,yshift=.2cm] (origin) {xsd:anyURI};
+
+\path[every node/.style={fill=white,font=\small\ttfamily}]
+(edge)	edge node {source} (source)
+			edge node {target} (target)
+			edge node {label} (label)
+			edge node {statistic} (card)
+			edge node {origin} (origin)
+;
+\end{tikzpicture}

@@ -1,0 +1,188 @@
+\chapter{Semi-Structured Data}
+\label{chap:ssd}
+
+Despite the fact that the Web is best known as a large collection of textual documents, it also provides an increasing amount of structured data sources in various forms, from HTML tables to Deep Web databases, XML documents, documents embedding semantic markups, e.g., Microformats, Microdata, RDF, RDFa. Structured data on the Web covers a large range of domains, e.g., e-commerce, e-government, social network, scientific, editorial world, \ldots, and can describe any kind of \emph{entities}, e.g., people, organisations, products, locations, etc. We define as \emph{Web Data} the collection of structured data sources that are exposed on the Web.
+
+Each data source can have its own schema, ranging from loosely to strictly defined. Therefore, the data structure does not follow strict rules as in a database. Even within a given data source, the schema might not be fixed and may change as the information grows. The information structure evolves over time and new entities can require new attributes. Hence, we consider Web Data as being \emph{semi-structured}~\cite{abiteboul:1997:icdt}.
+
+%\subsection{Web Data}
+%\label{chap:ssd:gdm:wod}
+%
+%The \emph{Web Data} is a collection of structured data sources that are exposed on the Web through various forms such as HTML tables, Deep Web databases, XML documents, documents embedding semantic markups, e.g., Microformats, Microdata, RDF, RDFa. Since each data source might have its own defined schema, ranging from loosely to strictly defined, the data structure does not follow strict rules as in a database. Even within a given data source, the schema might not be fixed and may change as the information grows. The information structure evolves over time and new entities can require new attributes. We therefore consider the Web of Data as being \emph{semi-structured}~\cite{abiteboul:1997:icdt}. In this context, we consider a graph as a generic model for representing data.
+
+\section{Semi-Structured Data Models}
+
+Information on the Web is available in variety of formats and design, e.g., from HTML tables to documents embedding semantic markups. Each data source has its own schema, ranging from loosely to strictly defined. The data evolves over time, e.g., new attributes are required or new entities have been integrated from an external source. As such, data that does not follow a strict schema is called \emph{semi-structured}~\cite{abiteboul:1997:icdt}.
+
+\minisec{OEM --- Object Exchange Model}
+
+A seminal work in modelling semi-structured is the OEM model~\cite{papakonstantinou:1995:oea}. OEM served as the basic data model in projects such as Tsimmis~\cite{chawathe:1994:ipsj}, Lore~\cite{quass:1996:sigmod} and Lorel~\cite{abiteboul:97:ijdl}. In the Object Exchange Model, the data is a collection of objects, where each object can be either atomic or complex. An atomic object represents some base data types, while a complex object is a (attribute, object) pair. OEM is a graph-based data model, where the nodes are the objects and the edges are labelled with attribute names.
+
+\minisec{XML --- Extensible Markup Language}
+
+XML~\cite{bray:1998:xml} is a W3C standard for exchanging data on the Web. Nested, tagged elements are the building blocks of XML. A tagged element can have attribute value pairs and sub-elements. A sub-element may be either a tagged element or an atomic value such as text. XML is well suited for semi-structured data since there is no restriction regarding the naming of tags or the relationships between tags.
+
+\minisec{RDF --- Resource Description Format}
+
+RDF~\cite{klyne_carroll:2004} is a generic data model proposed for exchanging data on the Web. A resource description in RDF is composed of statements about the resource. A statement asserts that a resource has a value associated with a property. It is modelled as a triple consisting of a subject, a predicate, and an object. A set of RDF statements forms a directed labelled graph. While it is similar to the OEM model, RDF proposes some additional features such as the use of URIs as global identifiers which helps to avoid ambiguities and enables the creation of a global data graph.
+
+Any kind of data can generally be modelled using a graph, since it is versatile enough to accommodate different specifications. As such, we build the work in this thesis upon a generic graph model.
+
+\section{Abstract Model}
+\label{chap:ssd:gdm:abstract-model}
+
+Information is commonly represented with graphs, as it is expressive enough for modelling data with complex relationships. Graphs are used in social science for describing interactions between people. Graphs such as semantic networks~\cite{sowa2006semantic} have been used in artificial intelligence and machine translation, with the Semantic Web being a large scale instance.
+
+We consider the data as being a labelled directed graph and build methods based on this model. Therefore, the findings presented in this work can be applied to any domain where a graph is used as data representation.
+
+We describe in this Section a graph data model based on the work of \cite{delbru:jws:entity}. The graph is represented with two layers that depict the data at two extremes: the \emph{dataset} and the \emph{entity} layers. The Figure~\ref{fig:gdm} depicts the layers of the model, where the dataset layer is depicted at the top, and the entity layer at the bottom.
+\begin{labeling}{\textbf{Dataset Layer:}}
+	\item[\textbf{Dataset Layer:}] The dataset layer is the ensemble of entities' collections. It provides coarse information about the data where the focus is on the relationships between datasets. In the figure, the dataset \emph{D1} connects to the dataset \emph{D2} via the link \emph{p1}, and \emph{D2} is connected to \emph{D1} via two links, i.e., \emph{p2} and \emph{p3}.
+	\item[\textbf{Entity Layer:}] The entity layer contains information about entities. Of the two layers, this provides the finer details about the data where relationships between and attributes about entities are described. In the figure, the entity layer provides additional information on those links, showing which entities are actually connected within and across datasets. 
+\end{labeling}
+
+The dataset layer shows the links between datasets, i.e., \emph{inter-dataset} links, while the entity layer provides in addition information on the links within a dataset, i.e., \emph{intra-dataset} links.
+
+The dataset layer is blind to the information the entity layer provides: its focus is on the relationships between datasets, and not between the entities that compose the datasets.
+Regardless of the layer, we represent the information using a node and edge labelled directed graph, referred simply as a \emph{graph} from this point on. Also, we will call the graph on the dataset layer the \emph{dataset graph}, and the graph on the entity layer the \emph{entity graph}.
+
+\begin{figure}
+	\centering
+	\resizebox{.8\textwidth}{!}{
+		\input{02-foundations/figures/graph-abstract-model}
+	}
+	\caption{The graph data abstract model}
+	\label{fig:gdm}
+\end{figure}
+
+\section{Formal Model}
+\label{sec:gdm:formal-model}
+
+In the following we formally define a graph and introduce concepts used in the rest of the thesis. We use a graph as a generic representation of semi-structured data on the Web of Data. A graph is defined as a tuple consisting of a set of nodes $V$ and a set of directed labelled edges $a$. We consider labels, edge and node labels, to come from a set we call $\mathcal{L}$. The Figure~\ref{fig:graph} depicts the graph of people and place along with their relationships.
+
+\begin{definition}[Graph]
+	Let $V$ be a set of nodes and $\mathcal{L}$ a set of labels. The set of labelled edges is defined as $A \subseteq \left\lbrace (x, \alpha, y) \mid (x, y) \in V^2, \alpha \in \mathcal{L} \right\rbrace$.
+	
+	A \emph{graph} $G$ is a tuple $G = \left\langle V, A, l_V \right\rangle$ where $l_V : V \mapsto \mathcal{L}$ is a node-labelling function.
+\end{definition}
+
+We introduce below some vocabulary terms used throughout the thesis.
+
+\begin{labeling}{\textbf{Attribute}}
+	\item[\textbf{Edge}] An edge labelled $\alpha$ from the node $x$ to the node $y$ is written as $\left(x, \alpha, y\right)$. We say that $x$ is the \emph{source}, and $y$ is the \emph{target}.
+
+	\item[\textbf{Path}] We call a \emph{path} a sequence of edges label $\alpha_1.\cdots.\alpha_n$. A path exists in the graph $G$ if there is a sequence of nodes $\left\lbrace v_1, \cdots, v_{n+1} \right\rbrace \subseteq V$ connected with such labelled edges.
+	
+	The Figure~\ref{fig:graph} depicts a graph of people and their relations with various places. The path $author.lives$ exists in that graph as it connects the nodes $\left\lbrace N_0, N_2, N_3 \right\rbrace$.
+
+	\item[\textbf{Attribute}] We call \emph{attribute} the label of an edge.
+	
+	We define as $attributes\left(x \in V\right) = \left\lbrace \alpha \in \mathcal{L} \mid \exists y \in V, (x, \alpha, y) \in A \right\rbrace$ the set of attributes associated with a node $x$ in $G$.
+	
+	Similarly, we define the set of \emph{incoming} attributes as
+	$$
+	attributes^{-1}\left(x \in V\right) = \left\lbrace \alpha \in \mathcal{L} \mid \exists w \in V, (w, \alpha, x) \in A \right\rbrace
+	$$
+	\item[\textbf{Value}] We call \emph{value} the label of a node which is the target of an edge.
+\end{labeling}
+
+\begin{figure}
+	\centering
+	\resizebox{\textwidth}{!}{
+		\input{02-foundations/figures/graph}
+	}
+	\caption{An entity graph.}
+	\label{fig:graph}
+\end{figure}
+
+\subsection{Type Attribute}
+
+In a graph, attributes provide a semantic layer: for example, we can expect that the value of the edge labelled ``name'' represents a textual identification of the node $N_1$. Among attributes we refer as \emph{type attributes} those that define a type to which the node belongs to, e.g., the edge labelled $a$ in Figure~\ref{fig:graph} assigns the type \emph{Person} to the node $N_1$.
+
+An arbitrary set of attributes may represent the type information: in RDF graphs, we use the attribute \emph{rdf:type}\footnote{RDF type attribute: \url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#type}}. We abstract from the actual type attribute used in a dataset and denote with \gls{atype} an element of the type attributes set.
+
+\begin{definition}[Type Attribute \gls{atype}]
+Let $t \in \mathcal{L}$ be an attribute. Let $l_t : \mathcal{L} \mapsto \{0, 1\}$ be an indicator function that is:
+$$
+l_t(\alpha \in \mathcal{L}) = \left\{
+	\begin{aligned}
+		1 & \mbox{ if } \alpha \mbox{ is a type attribute}\\
+		0 & \mbox{ otherwise.}
+	\end{aligned}
+\right.
+$$
+We call $\alpha \in \mathcal{L}$ a type attribute, denoted with $\tau$, if $l_t(\alpha) = 1$.
+\end{definition}
+
+For a given node $x \in V$, we consider $types(x)$ as the set of values for which the attribute is a type attribute. More formally, let $types(x\in V) = \left\lbrace l_V(c) \mid \exists c \in V, \exists (x, \gls{atype}, c) \in A \right\rbrace$ be the set of type values. For instance, we have $types\left(N_6\right) = \left\{ \text{Country}, \text{Place} \right\}$ in Figure~\ref{fig:graph} as the set of type values for the node $N_6$.
+
+\subsection{Entity description}
+
+The Web Data represents a graph of interconnected \emph{entities}, where an entity may be a person, a place, or an organisation, \ldots. We call an \emph{entity description} the pieces of informations in the graph that are about that entity. For instance, we can consider ``Galway'' to be part of the entity description of $N_3$ in Figure~\ref{fig:graph}, but not ``Rome''.
+
+There exists several ways to define which parts of the graph describe an entity. One may consider all the edges, incoming and outgoing, to form the entity description. For some graphs, edges that are two-hops away might be part of it too. We illustrate this in Figure~\ref{fig:edesc} where we might consider the entity description to consist of edges 1-hop away from the node given the graph in Figure~\ref{fig:edesc1}, although it is more adapted to extend it to 2-hops with the graph in Figure~\ref{fig:edesc2}. The reason for the design in the latter graph might be to add more information about a person's label, e.g., the honorific.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{.45\textwidth}
+		\resizebox{.6\textwidth}{!}{
+			\input{02-foundations/figures/edesc1}
+		}
+		\caption{1-hop entity description}
+		\label{fig:edesc1}
+	\end{subfigure}
+	\quad
+	\begin{subfigure}[b]{.45\textwidth}
+		\resizebox{\textwidth}{!}{
+			\input{02-foundations/figures/edesc2}
+		}
+		\caption{2-hops entity description}
+		\label{fig:edesc2}
+	\end{subfigure}
+	\caption{Interpretation of the entity description dependent on the graph structure.}
+	\label{fig:edesc}
+\end{figure}
+
+%In this thesis, we do not attempt to find the most appropriate entity description for a given graph. We choose the approach taken in Delbru et. al.~\cite{delbru:jws:entity}, where an entity description consists of the \emph{outgoing} edges adjacent to a node. This forms then what we call a \emph{star graph}.
+%
+%\begin{definition}[Entity Description]
+%Let $G = \left\langle V, A, l_V \right\rangle$ be a graph. We define the \emph{entity description} $\gls{edesc}(u \in V)$ as the set of outgoing edges:
+%$$
+%\gls{edesc}(u \in V) = \left\lbrace (u, \alpha, v) \in A \mid \exists v \in V \right\rbrace
+%$$
+%\end{definition}
+
+\begin{definition}[Entity Description]
+Let $G = \left\langle V, A, l_V \right\rangle$ be a graph. We define the entity description of a node $u \in V$ as the set of edges $\gls{edesc}(u) \subseteq A$ that describe that node.
+\end{definition}
+
+For example, if we consider the outgoing edges to form the entity description, we have for the node $N_6$ the following set:
+$$
+\begin{aligned}
+\mathcal{E}\left( N_6 \right) = \{ & \left( N_6, \text{label}, \text{Ireland} \right),\\
+& \left( N_6, \tau, \text{Country} \right),\\
+& \left( N_6, \tau, \text{Place} \right) \}
+\end{aligned}
+$$
+
+\subsection{Dataset}
+
+In the Web of Data, a dataset~\cite{alexander:2009:dld} represents a collection of \emph{edges} which, e.g., are located in a same website, or share a common topic. A dataset can be a \emph{dump} in RDF, or the embedded metadata of pages in a website.
+%A dataset can refer to graphs from a collection of sources, e.g., several websites.
+%	In the Web Data scenario, we identify a dataset label by the top-level domain (TLD) name of an  's URI as in Delbru~\cite{delbru:jws:entity}. In RDF, we determine the dataset label of a statement based on the TLD of the subject's resource. If the latter is a \emph{blank node}, the website that hosts the data is then considered as the dataset. For instance, the statement below belongs to the dataset \emph{dbpedia.org}.
+%	\begin{quote}
+%		{\small $<$\url{http://dbpedia.org/resource/Tim_Berners-Lee}$>$ rdf:type foaf:Person .}
+%	\end{quote}
+
+\begin{definition}[Dataset]
+Let $G_1, \cdots, G_n$ be $n$ graphs such that $G_i = \left\langle V_i, A_i, l_{V_i} \right\rangle$ is a graph.
+Let $\gls{Glabel} : G \mapsto \mathcal{L}$ be a function that assigns a label to a graph.
+We define a dataset as the tuple $\left\langle D, \alpha \right\rangle$, where $D = \left\lbrace A_1, \cdots, A_n \right\rbrace$ and $\alpha \in \mathcal{L}$ is the dataset label such that $\forall 0 < i \le n\; \gls{Glabel}(G_i) = \alpha$.
+\end{definition}
+
+We extend without loss of generality the definitions presented in this chapter to a dataset, which we indicate by adding a subscript $d$. We shall omit this subscript if it is clear from the context that only one dataset is considered. Therefore, we have the following definitions:
+
+\begin{labeling}{$G_d = \left\langle V_i, A_i, l_{V_i} \right\rangle$}
+\item[$G_d = \left\langle V_i, A_i, l_{V_i} \right\rangle$] The edges from the graph $G$ belong to the dataset labelled $d$, i.e., $l_G(G) = d$.
+\item[$\gls{edesc}_d$] The edges from the entity description belong to the dataset labelled $d$.
+\end{labeling}

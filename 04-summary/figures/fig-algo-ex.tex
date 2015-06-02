@@ -1,0 +1,38 @@
+\begin{tikzpicture}[every node/.style={font=\ttfamily\small},main node/.style={draw,circle},type node/.style={rounded corners,draw},->,>=stealth',node distance=2cm]
+
+\node[main node] (e1) {e1};
+\node[main node,left of = e1] (e3) {e3};
+\node[main node,right of = e1,xshift=1cm] (e2) {e2};
+
+\node[main node,above right of = e1,xshift=-.5cm,yshift=.5cm] (alice) {Alice};
+\node[main node,above left of = e3,xshift=.5cm,yshift=.5cm] (bob) {Bob};
+
+\node[type node,above of = e1,xshift=-1cm] (person) {Person};
+\node[type node,above of = e2] (doc) {Document};
+
+\node[main node,below of = e1,xshift=-1cm,yshift=.5cm] (h1) {h1};
+\node[main node,below of = e2,yshift=.5cm] (h2) {h2};
+
+\node[type node,below of = h1,yshift=.5cm] (tperson) {Person};
+\node[type node,below of = h2,yshift=.5cm] (tdoc) {Document};
+\node[main node,below left of = h1] (not) {$\varnothing$};
+
+\path[every node/.style={font=\small}]
+(e1) edge node[fill=white] {\gls{atype}} (person)
+(e3) edge node[fill=white] {\gls{atype}} (person)
+(e2) edge node[fill=white] {\gls{atype}} (doc)
+(e1) edge node[fill=white] {author} (e2)
+(e1) edge node[fill=white] {name} (alice)
+(e3) edge node[fill=white] {name} (bob)
+
+(e1) edge[dotted] node[right] {$R_t$} (h1)
+(e2) edge[dotted] node[left] {$R_t$} (h2)
+(e3) edge[dotted] node[left] {$R_t$} (h1)
+
+(h1) edge node[fill=white] {\gls{atype}} (tperson)
+(h2) edge node[fill=white] {\gls{atype}} (tdoc)
+(h1) edge node[fill=white] {name} (not)
+(h1) edge node[fill=white] {author} (h2)
+
+;
+\end{tikzpicture}

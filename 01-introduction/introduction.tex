@@ -1,0 +1,216 @@
+\chapter{Introduction}
+\label{chap:introduction}
+
+Since the advent of the Internet, people and companies exchange information on the Web. There is now an abundance of information about various domains such as science, commerce, leisure, etc. Although the Web browsed by Humans mainly contains unstructured data such as text, a significant amount of structured data exists.
+
+\begin{itemize}
+\item hyperlinks from a web page to an other in order to point to additional or related information;
+\item structural information encoded into the HTML pages using \texttt{table} or \texttt{list} tags for instance;
+\item metadata encoded into web pages that provides some meaning about their content.
+\end{itemize}
+
+The Semantic Web vision is to enrich this data with machine-readable semantic information, transforming the Web into a global database that we call the \emph{Web of Data}~\cite{bizer:2009:linked}. For example, the description of a table within a web page can be improved by associating some semantic markup, e.g., using the RDFa\footnote{RDFa: \url{http://www.w3.org/TR/xhtml-rdfa-primer/}} markup language, so that the columns of the table have a sense: for instance is it concerned with time data, people's name, geographic places, etc.
+
+The Semantic Web movement amplified the growth of, now semantically enriched, information on the Web. The Linking Open Data\footnote{\url{http://www.w3.org/wiki/SweoIG/TaskForces/CommunityProjects/LinkingOpenData}} (LOD) project is a successful example, which provides a collection of inter-linked datasets about diverse domains.
+
+A core point of the Semantic Web is the use of ``Uniform resource identifiers'' (URIs) for denoting things, e.g., objects, people, places. \ldots. This allows to uniquely name something and describe it, so that it may be reused in other places. Once the data is described using URIs, and also that existing URIs are reused, we reach a state where the data published on the Web is \emph{inter-connected}. The data thus forms a ``graph'', with nodes being the things, and the edges being the kind of relationship between two things.
+
+The inter-connected data is at the ``scale of the Web'', consisting of thousands, if not millions, of different pieces of information about some topics. This scale opens up interesting ways of searching, browsing, exploring the data. In order to account for the variety of data about a subject calls for ``Data Mashup'' as a mean for reading through all different things being said about a specific subject. Also, within the context of a data mashup, one may be more interested in aggregated measures rather than specific details.\\
+
+The data exploration endeavour ultimately requires some knowledge about the \emph{structure} of the (graph) data. There is a need to know what attributes a piece of information contains along with their semantics, so to enable one to search for relevant data. Such knowledge about the structure requires techniques for \emph{managing} the data. In Section~\ref{chap:introduction:data-mgmt}, we present two data management approaches that are suited to different kinds of data.
+
+The data exploration endeavour is challenged by the scale, heterogeneity, and quality of the data itself. The Web of Data is composed of at least a thousand\footnote{Datahub portal: \url{http://datahub.io/dataset?tags=lod}} of datasets, spanning over a variety of topics. Web Data presents a structure that changes from a dataset to the other, evolving over time. The amount of information about a topic varies from data sources, some being more complete in one aspect and less in an other. To overcome these challenges, there is a need for \emph{ranking} the data. This calls for a novel ranking mechanism that leverage the rich structured information of the Web Data; we ponder this in Section~\ref{chap:introduction:ranking}.\\
+
+Throughout this thesis, we present methodologies designed at shedding light on the structure of the Web Data. We propose methods that take into account the shifting nature of the Web Data. We develop then an approach which highlights the ``skeleton'' (structure) of datasets. We leverage the rich structure of the Web of Data in a novel ranking model for (semi-)structured data. We finally present how these techniques can be combined for a more effective exploration of datasets.
+
+In this thesis, we use \emph{Web of Data} to refer to the infrastructure that makes possible the inter-connected (semi-)structured data; and \emph{Web Data} to refer to that (semi-)structured data \cite{delbru:jws:entity}.
+
+%Throughout this thesis, we present methodologies designed at shedding light on the structure of Web of Data. The methods take into account the shifting nature of the Web of Data. We develop then an approach which highlights the ``skeleton'' of datasets. We leverage the rich structure of the Web of Data in a novel ranking model for semi-structured data. We finally present how these techniques can be combined for a more effective exploration of datasets.
+
+\section{Motivation}
+\label{chap:introduction:motivation}
+
+%- difficulty of formulating queries and data integration from multiple sources
+%	- unknown data structure: what vocabulary(ies), what predicate is used, which predicate is relevant
+%	- data heterogeneity: data comes from a variety of sources with different schema. the ontology does not help here to know the structure!
+%	- structure inconsistency: not all entities have the same set of properties, even if they are of the same type.
+%		- makes the query more complex since we need to account for missing properties
+%		- should a structure description reflect this fact ? This has impact on the space needed for that description.
+%
+%- ranking of graphs
+%	- ranking model retains or not the structure
+%	- due to the data heterogeneity, an attribute of a concept may have several values. How to cope with this ?
+%	- because of the graph structure of the ranked documents, the rank of a document depends on the rank of some related entities. Bring a parallel with PageRank ? Maybe not, this is the opposite: the parent score is dependent of the child's score.
+%	- challenge of data structure inconsistency
+%	- ranking model needs to be data structure agnostic
+%	- position of keywords occurrences in the graph is important
+
+A user with an information need has at his disposition several ways to find relevant data. A search engine may be used so that documents embedding relevant, structured data, can be retrieved: for example, thanks to services such as Swoogle~\cite{ding:2004:ssm} or Sindice~\cite{oren:2008:sdl}. Such engines provide search access using Information Retrieval indices, on which boolean queries are evaluated.
+
+However, it is better to rely on graph query languages such as the standardised SPARQL\footnote{SPARQL: \url{http://www.w3.org/TR/sparql11-overview/}} language, if the user's quest requires more expressivity than what is possible with boolean queries. In such a case, a direct access to the data is needed. Platforms such as DataHub\footnote{DataHub: \url{http://datahub.io/}} or Publicdata\footnote{PublicData.eu: \url{https://publicdata.eu/}} present available data accesses, e.g., download of dumps or a SPARQL endpoint. Once a user found a possibly relevant dataset, he has the actual daunting task of querying: not because of the language itself, but due to the lack of information about the dataset's structure.
+
+As an illustration, we consider the Eunis\footnote{Eunis on DataHub: \url{http://datahub.io/dataset/eunis}} dataset which contains information about species and their habitats.
+
+\paragraph{Query formulation.}
+
+Although the Eunis dataset can be considered as a small dataset, a user is nonetheless challenged in effectively and efficiently querying the dataset. In order to formulate a query, predicates and/or types occurring in the dataset are needed. However, such information is in general not available. Here, a VoID~\cite{alexander:2009:dld} description is present, but that specific file does not provide sufficient information for querying purpose.
+
+A simple way to retrieve such information is to query the dataset directly. However, we then have to choose among 500 types and at least 1500 predicates. The Eunis dataset exhibits as well the use of over 40 different vocabularies. A possible reason of such heterogeneity can be that the Eunis dataset is the end result of several integrated data sources. Also, as a consequence of this heterogeneity, a single ontology cannot help in learning about the dataset's structure.
+
+As the query construction progresses, the user needs to know which predicates/types can be used in \emph{conjunction} with the already selected ones. At this point, a user is faced with the issue of data \emph{inconsistency}: the resources in a datasets do not all share the same set of predicates/types. Thus, the query must be carefully built so to avoid a zero-result query. The complexity of the query increases since the user needs to account for missing predicates (or types). \textit{How can the user learn about the data structure so to formulate intelligent queries ?}
+
+\paragraph{Ranking.}
+
+With the Eunis dataset having at least 500 types and 1500 predicates, the user is left with the challenge of deciding which one to use. Are the ones most used the more relevant for the user ? Does the predicate label, e.g., \url{http://xmlns.com/foaf/0.1/name}, give some indication about the semantic of that predicate ? One may dereference it and read its description, but this demands yet additional work for the user. \textit{How can a user decide which type/predicate to use ?}
+
+\section{Data Management}
+\label{chap:introduction:data-mgmt}
+
+The decentralised nature of the Web has the effect that information about a same \emph{entity} is available on several web pages. Data sources can be complementary in some aspects, and redundant in others. Furthermore, each source has its own take on data modelling. Sources may label an attribute of an entity differently although what is described is the same. Sources may also represent an attribute differently, e.g., the name of a person as two properties with first and last name, versus a single property which is a concatenation of the two. These various points highlight the \emph{heterogeneity} of the data on the Web, which stand as a challenge when managing data.\\
+
+In order to fulfil an information need, a user generally uses a web search engine. This allows him to browse only the most relevant pages with regards to his need out of the billions of web pages that the Web consists of. To achieve this, search engines rely on the structure of the data so to rank documents appropriately. The knowledge of the structure of the data, which can sometimes be seen as a \emph{schema}, is a necessary medium for exploration and, ultimately, finding the answer to one's need.
+
+To ease this process, many vocabularies have been built over the years for representing one's data; for example the non-exhaustive list as the following:
+\begin{description}
+	\item[FOAF\protect\footnotemark] defines terms for describing a person and the relationships between people;
+	\footnotetext{\url{http://xmlns.com/foaf/spec/}}
+	\item[SKOS\protect\footnotemark] is used for representing knowledge organisation systems such as taxonomies; or
+	\footnotetext{\url{http://www.w3.org/2009/08/skos-reference/skos.html}}
+	\item[GEO\protect\footnotemark] represents geospatial coordinates.
+	\footnotetext{\url{http://www.w3.org/2003/01/geo/wgs84\_pos}}
+\end{description}
+
+However, vocabularies tend to be loosely followed in datasets --- this is reflected by the disparate use of vocabulary terms and ontologies across datasets in \cite{campinas:2011:eos}. One of the reasons is that many different design choices are possible while modelling its data. The structure of the data and use of vocabularies evolve over time as new requirements come: new terms are added, some are deleted, or the semantic of some are modified. Furthermore, changes in the vocabulary upstream may not be reflected in the datasets in which it is used. As a consequence, we refer to Web Data as being \emph{semi-structured}~\cite{abiteboul:1997:icdt}.\\
+
+The vocabulary heterogeneity, combined with the scale of datasets, actually complicates the effective use of the data. This calls for novel techniques designed at ``understanding'' the data while taking into account its structural richness.
+
+\subsection{Schema-based Data Management}
+
+In the relational database community, a \emph{logical schema} provides an overview of a database. The schema describes the content of the database, how it is structured and what attributes it has. In the Web of Data, such a description is generally not available, thus preventing an effective exploration of the data.
+
+Web Data is in general not bundled with a schema, or a description akin to a schema. This is due to the very nature of Web Data: it is dynamic, diverse, evolving over time. The growth of Web Data is in essence similar to that of the Web: it evolves organically, constrained by nothing specifically. In such an environment, a schema-based data management is extremely difficult to put into place, if not impossible.
+
+\subsection{Decentralised Data Management}
+
+Web Data can be created without the need to follow specific rules. The data does not then to adhere to some kind of pre-defined schema. Inter-linking with others' data is promoted in the Web of Data by the use of URIs. The distributed aspect of the data is emphasised by Halevy et al.~\cite{halevy:2003:smp} where a peer-to-peer data management system is proposed. However, data sources are assumed to have a schema, and the existence of a global schema that \emph{mediates} the sharing of information between sources is needed.
+
+In the Web of Data, the existence of a central place where the schema of data sources is kept is unreasonable due to the scale and dynamicity of the data. Our rationale is that a pre-defined schema cannot be enforced. Hence, we propose the \emph{graph summary} as a novel system for managing distributed, heterogeneous data sources on the Web.
+
+%\section{Graph Exploration}
+%
+% In order to put this information into use, there exists several approaches that range from manual to supervised exploration.
+%
+%\subsection{Follow-Your-Nose}
+%
+%Graph data can be explored by going from node to node, where a node provides more information about a concept related to the originating node. In the Web of Data, this is done by looking up URIs\footnote{\url{http://www.w3.org/wiki/FollowLinksForMoreInformation}}. However, this approach presents scalability and trust issues. The number of resources in the Web of Data is overwhelming and so the number of data to look up grows exponentially. Also, the data retrieved by following a link can be questionable regarding its accuracy. This approach starts with a set of seed URIs, which poses the challenge of choosing which URI to choose. The follow-your-nose paradigm can be used at query-time~\cite{hartig:2009:esq} for finding potentially relevant data.
+%
+%\subsection{Keyword-based Exploration}
+%
+%Web search engines are used for browsing a large set of documents which are retrieved based on a keyword query. The documents are then ranked based on how relevant they are with regards to the query. A similar line of thought is followed for browsing the Web of Data~\cite{ding:2004:ssm,cheng:2008:fsb,oren:2008:sdl}. These services provide an index of documents embedding structured data, e.g., RDFa. Documents are retrieved by querying for a specific URI or by passing a complex boolean query. Such systems are useful in locating documents that can be used as seeds for deeper exploration. Although keyword queries allow for a quick loop up of documents, they do not consider the rich structure of documents. Complex queries can be expressed using systems like Sindice~\cite{oren:2008:sdl}, but this assumes that the schema of relevant documents is partially known.
+%
+%\subsection{Metadata-based Exploration}
+%
+%The exploration of data can be performed at different levels of abstraction. At the lowest level, the browsing focuses on the resources. At the highest level, the browsing is done over datasets, where a dataset represents a sub-graph of the Web of Data. At that level, information about a single resource is of little to no importance. The information need in this case is a concept that refers to a group of resources. Metadata information about datasets is then needed to understand their content or what kind of information they have available. Different approaches have been proposed for describing the content and structure of datasets~\cite{alexander:2009:dld,konrath:2012:schemex}. which can then be used to facilitate the discovery of datasets \cite{akar:2012:ldow,konrath:2012:schemex}.
+
+\section{Ranking of Web Data}
+\label{chap:introduction:ranking}
+
+With the growth of the Web in the early days of The Internet, the use of web search engines to sift through the mass of documents marked a significant milestone in the interaction of people with regards to data. Then, the ability of search engines not only to retrieve but also to \emph{rank} the data by relevance to a query marked an other milestone: the possibility to find a needle in the haystack.
+
+Traditionally, the documents ranked contain mostly textual information, with little structure that can be leveraged by a ranking algorithm. Web documents contain HTML markup for display purposes, but those can be cues for the importance of a piece of text within the document. Web Data instead is structured beyond what can be extrapolated from the markup cues. Therefore, this calls for a novel ranking mechanism that supports this rich structure.
+
+\subsection{Traditional Ranking on The Web}
+
+The documents are mainly textual, containing information only for Humans to process. In order to rank such documents, a straight-forward approach is to consider a document as a set of words and using word frequencies to estimate its importance within the document. Thus, with such a modelling a document is referred to as a \emph{bag of words}.
+
+The ranking of a document can be improved by, for example, adding some structural information into the algorithm. Some specific parts can be extracted so to apply a weight, for instance the title. Such approaches are referred to as \emph{field-based} ranking. However, the structure considered in those are too simple and so they cannot leverage the complex (graph) structure that is exhibited in Web Data. This marks a shift from the ranking of (field-based) documents to graph data.
+
+\subsection{Ranking of Graph Data}
+
+In the Web of Data, we use URIs to name things, e.g., people, monuments, places, \ldots, which allows one to lookup an URI and learn about it, but also for others to reference that URI in their own dataset. The Web Data takes then the form of a graph, where a node represent a concept and the edge the relationship that links two nodes.
+
+In Web Data, the structure of the graph carries some information about the data. However, most of this information is discarded by the field-based ranking approach due to its bag of words modelling. The Figure~\ref{fig:bow-graph} depicts a  graph about ``Ireland'' and its neighbouring country; the Figure~\ref{fig:bow} is a depiction of its bag of words. We can see that with the bag of words modelling, we lose some semantic that is carried by the structure: the population number is not closely associated with the ``United Kingdom'' anymore.
+The ranking of a graph requires a novel way of modelling the data, in which the ``bag of words'' approach does not discard the structure.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+			\input{01-introduction/figures/bag-of-words_graph}
+		}
+		\caption{A simple graph}
+		\label{fig:bow-graph}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+			\input{01-introduction/figures/bag-of-words}
+		}
+		\caption{Bag of words modelling}
+		\label{fig:bow}
+	\end{subfigure}
+	\caption{A graph modelled as a bag of words}
+\end{figure}
+
+\section{Challenges}
+
+A schema is the basis of many algorithms over the data. A schema describes the content thus facilitating users searching for a particular resource. A schema may provide statistical information about the data, which is useful for query optimisation. Schemas help in the integration process of several data sources. As a consequence, a major challenge is to determine what features of the data can be used in order to effectively generate a schema.
+
+Applications may need different information about the data from the schema. Indeed, some errors in the schema can be acceptable for a user exploring the data, but not for a query optimizer. Hence, it is necessary to measure how accurate a schema is with regards to the data.
+
+In the recent years, the amount of data has been growing increasingly. A glimpse of this growth over the years can be visually appreciated\footnote{The Linking Open Data cloud diagram: \url{http://lod-cloud.net/}} through the various diagrams. It is common to see data with millions of entities and billions of statements, to which the ``Open Data'' movement contributed a significant part. However, the ease of sharing data has the downside of that data not following a strict schema, if any. As a consequence, there is a need for techniques that can provide a schema without restraining the ``evolution'' of the data, while at the same time that can scale to large volumes of data.
+
+\section{Scope of the Research}
+
+The scope of this thesis is to study the extraction of schemas from large scale semi-structured information sources. By semi-structured we refer to data that present some structured but that is not followed strictly by all records in the data set. By large scale we mean data which contain millions of entities with billions of statements describing said entities.
+
+The main challenge is to present a schema extraction process that is able to cope with the scale of the data, as well as with the variability of the data due to the heterogeneous and loose use of vocabularies. To this end, we investigate graph summarisation approaches which generate schemas via graph homomorphism. Due to the heterogeneity of the data, the generation of \emph{approximate} schemas is the only viable option.
+
+Different applications have varying interactivity with respect to the schema. We investigate ranking techniques for retrieving first the parts of the schema an application need. We evaluate how ranking can be used for improving the exploration of data.
+
+\section{Applications}
+
+Graph summarisation produces a \emph{summary} of the graph's structure, providing information akin to a schema in relational databases. We can then leverage the summary in various ways, of which some are presented in this thesis.
+
+\begin{labeling}{\emph{Browsing of a dataset's structure.}}
+\item[\emph{Querying assistance.}] We use the structural information from a summary in order to assist a user in writing a query. This allows users having little to no knowledge about the data to build meaningful queries.
+
+\item[\emph{Browsing of a dataset's structure.}] The information gathered during the graph summarisation process of a dataset is made available for browsing. This enables a user to learn about the internals of a dataset: its structure, the kind of information it carries, the relationships between concepts, or its connections to other datasets.
+\end{labeling}
+
+\section{Outline}
+
+The thesis is divided in four parts. This first part \emph{Prelude} contains the introduction to the thesis. The second \emph{Foundations} presents fundamental concepts and models that will reused throughout the rest of the thesis. We introduce in the third part \emph{Methods} new techniques for generating and evaluating graph schemas, as well as a new ranking model for semi-structured data. In the final part \emph{Putting the Pieces Together}, we describe applications of the presented methods.
+
+\minisec{Part II: Foundations}
+
+\begin{labeling}{Chapter~\ref{chap:ssd}:}
+\item[Chapter~\ref{chap:ssd}:] We present here a graph data model that encompasses the various formats used for modelling structured data. The model is layered so to represent the concepts of entity and dataset. Then we describe a graph schema model which fits between those two layers.
+\end{labeling}
+
+\minisec{Part III: Methods}
+
+\begin{labeling}{Chapter~\ref{chap:summary}:}
+\item[Chapter~\ref{chap:summary}:] We discuss current approaches at summarising graphs and the targeted use cases. We present a technique for generating graph schemas for Web Data at scale. Also, we introduce a model for measuring the quality of a generated graph schema.
+\item[Chapter~\ref{chap:tree-ranking}:] In this chapter, we introduce a ranking model for semi-structured data. The model considers the structural heterogeneity of the data for a better scoring of entities.
+\item[Chapter~\ref{chap:summary-ranking}:] We discuss in this chapter how the ranking model is applied on generated graph schemas. This allows to rank parts of a graph schema with regards to a graph-shaped query.
+\end{labeling}
+
+\minisec{Part IV: Putting the Pieces Together}
+
+\begin{labeling}{Chapter~\ref{chap:system}:}
+\item[Chapter~\ref{chap:system}:] In this chapter, we present applications of the introduced methods. We develop a system based on a generated schema that assists users in writing graph-shaped queries without a priori knowledge of the data structure. We develop an application that provides a structural description of datasets, as well as the connections between datasets. Finally, we make available a repository of generated graph schemas to the Web of Data community in order to facilitate the browsing and applications of Web Data.
+\end{labeling}
+
+\section{Contributions}
+
+In this work, the main contribution is a method for generating schemas from large and distributed semi-structured datasets. We apply this methodology for providing a repository of generated schemas to foster applications on Web Data. To this end, we investigate the aspects of graph summarisation and semi-structured data ranking. Specific contributions include:
+
+\begin{itemize}
+\item a formal model for graph schema with varying granularity in Chapter~\ref{chap:ssd};
+\item a method for generating graph schemas of large and distributed semi-structured data in Chapter~\ref{chap:summary};
+\item a novel ranking model specifically design for dealing with the structural and content heterogeneity of Web Data in Chapter~\ref{chap:tree-ranking}; and
+\item a set of tools for improving the exploitation of semi-structured data in Chapter~\ref{chap:system}.
+\end{itemize}

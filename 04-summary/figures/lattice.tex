@@ -1,0 +1,30 @@
+\begin{tikzpicture}[->,>=stealth',node distance=2cm]
+\node (base) {\emph{Infimum}};
+\node[right of = base] (ioat) {$R_{ioat}$};
+\node[right of = ioat] (ta1) {$R_{iat}$};
+\node[above of = ta1] (at) {$R_{at}$};
+\node[below of = ta1] (ioa) {$R_{ioa}$};
+\node[right of = at] (t) {$R_t$};
+\node[right of = ta1] (a) {$R_a$};
+\node[right of = ioa] (a1) {$R_{ia}$};
+\node[right of = t] (st) {$R_{st}$};
+\node[right of = a] (phantom) {};
+\node[right of = phantom] (apex) {\emph{Supremum}};
+
+\path
+(base) edge (ioat)
+(ioat) edge (ta1)
+(ioat) edge (at)
+(ioat) edge (ioa)
+(at) edge (t)
+(at) edge (a)
+(ioa) edge (a)
+(ioa) edge (a1)
+(ta1) edge (t)
+(ta1) edge (a1)
+(t) edge (st)
+(st) edge (apex)
+(a) edge (apex)
+(a1) edge (apex)
+;
+\end{tikzpicture}

@@ -1,0 +1,81 @@
+\begin{table}
+	\centering
+	\ra{0.5}
+	\begin{subfigure}{\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{lc@{\hs}llrcllrc@{\hs}llrcllrc@{\hs}llrcllr}
+			\toprule
+			     & \phantom{a} & \multicolumn{7}{c}{INEX09}
+			     & \phantom{a} & \multicolumn{7}{c}{SS10}
+			     & \phantom{a} & \multicolumn{7}{c}{SS11} \\
+			     \cmidrule{3-9} \cmidrule{11-17} \cmidrule{19-25}
+			BM25MF & \phantom{a} & $b_a$ & $=$ & $0.00$ & \phantom{a} & $b_v$ & $=$ & $0.75$
+			       & \phantom{a} & $b_a$ & $=$ & $0.58$ & \phantom{a} & $b_v$ & $=$ & $0.75$
+			       & \phantom{a} & $b_a$ & $=$ & $0.58$ & \phantom{a} & $b_v$ & $=$ & $0.75$ \\
+			BM25 & \phantom{a} & $b$ & $=$ & $0.20$ & \multicolumn{4}{c}{\phantom{a}}
+			     & \phantom{a} & $b$ & $=$ & $0.20$ & \multicolumn{4}{c}{\phantom{a}}
+			     & \phantom{a} & $b$ & $=$ & $0.20$ & \multicolumn{4}{c}{\phantom{a}} \\
+			BM25F & \phantom{a} & $b_a$ & $=$ & $0.82$ & \multicolumn{4}{c}{\phantom{a}}
+			      & \phantom{a} & $b_a$ & $=$ & $0.82$ & \multicolumn{4}{c}{\phantom{a}}
+			      & \phantom{a} & $b_a$ & $=$ & $0.82$ & \multicolumn{4}{c}{\phantom{a}} \\
+			\midrule
+			PL2MF & \phantom{a} & $c_a$ & $=$ & $9.19$ & \phantom{a} & $c_v$ & $=$ & $0.76$
+			      & \phantom{a} & $c_a$ & $=$ & $1.52$ & \phantom{a} & $c_v$ & $=$ & $1.03$
+			      & \phantom{a} & $c_a$ & $=$ & $1.79$ & \phantom{a} & $c_v$ & $=$ & $1.88$ \\
+			PL2 & \phantom{a} & $c$ & $=$ & $17.01$ & \multicolumn{4}{c}{\phantom{a}}
+			    & \phantom{a} & $c$ & $=$ & $10.09$ & \multicolumn{4}{c}{\phantom{a}}
+			    & \phantom{a} & $c$ & $=$ & $10.09$ & \multicolumn{4}{c}{\phantom{a}} \\
+			PL2F & \phantom{a} & $c_a$ & $=$ & $1.87$ & \multicolumn{4}{c}{\phantom{a}}
+			      & \phantom{a} & $c_a$ & $=$ & $0.51$ & \multicolumn{4}{c}{\phantom{a}}
+			      & \phantom{a} & $c_a$ & $=$ & $1.51$ & \multicolumn{4}{c}{\phantom{a}} \\
+			\bottomrule
+		\end{tabular}}
+		\caption{Normalization parameters values, found through a constrained particle swarm optimization.}
+		\label{tab:norm-param}
+	\end{subfigure}
+	\qquad%
+	\begin{subfigure}{\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{lc@{\hs}rrccc@{\hs}rrccc@{\hs}rrcc}
+			\toprule
+			     & \phantom{a} & \multicolumn{4}{c}{INEX09}
+			     & \phantom{a} & \multicolumn{4}{c}{SS10}
+			     & \phantom{a} & \multicolumn{4}{c}{SS11} \\
+			     & \phantom{a} & MAP & P@10 & $p$-Value & $\Delta\%$
+			     & \phantom{a} & MAP & P@10 & $p$-Value & $\Delta\%$
+			     & \phantom{a} & MAP & P@10 & $p$-Value & $\Delta\%$ \\
+			\cmidrule{3-6} \cmidrule{8-11} \cmidrule{13-16}
+			BM25MF & \phantom{a} & 0.1593 & 0.3982 & - & -
+			       & \phantom{a} & 0.1303 & 0.3783 & - & -
+			       & \phantom{a} & 0.1811 & 0.1880 & - & - \\
+			TF-IDF & \phantom{a} & 0.1246 & 0.3109 & $3.2e^{-04**}$ & $-21.78$
+			       & \phantom{a} & 0.0581 & 0.2304 & $2.1e^{-10**}$ & $-55.41$
+			       & \phantom{a} & 0.0655 & 0.1040 & $1.4e^{-06**}$ & $-176.49$ \\
+			BM25 & \phantom{a} & 0.1330 & 0.3309 & $8.4e^{-05**}$ & $-16.51$
+			     & \phantom{a} & 0.1350 & 0.4000 & $3.7e^{-01}$ & -
+			     & \phantom{a} &0.1625 & 0.1920 & $1.4e^{-01*}$ & $-11.45$ \\
+			BM25F & \phantom{a} & 0.1489 & 0.3764 & $5.7e^{-03**}$ & $-6.53$
+			      & \phantom{a} & 0.1100 & 0.3283 & $3.0e^{-05**}$ & $-15.58$
+			      & \phantom{a} & 0.1401 & 0.1680 & $1.1e^{-04**}$ & $-29.26$ \\
+			\midrule
+			PL2MF & \phantom{a} & 0.1525 & 0.3800 & - & -
+			      & \phantom{a} & 0.1232 & 0.3707 & - & -
+			      & \phantom{a} & 0.1797 & 0.1880 & - & - \\
+			TF-IDF & \phantom{a} & 0.1246 & 0.3109 & $5.4e^{-03**}$ & $-18.30$
+			       & \phantom{a} & 0.0581 & 0.2304 & $5.4e^{-10**}$ & $-52.84$
+			       & \phantom{a} & 0.0655 & 0.1040 & $6.9e^{-07**}$ & $-174.35$ \\
+			PL2 & \phantom{a} & 0.1331 & 0.3218 & $6.0e^{-03**}$ & $-12.72$
+			    & \phantom{a} & 0.1289 & 0.3946 & $4.1e^{-01}$ & -
+			    & \phantom{a} & 0.1614 & 0.2000 & $3.3e^{-01*}$ & $-11.34$ \\
+			PL2F & \phantom{a} & 0.1514 & 0.3473 & $7.7e^{-01}$ & -
+			      & \phantom{a} & 0.1023 & 0.3163 & $2.4e^{-04**}$ & $-16.96$
+			      & \phantom{a} & 0.1264 & 0.1560 & $4.5e^{-05**}$ & $-42.17$ \\
+			\bottomrule
+		\end{tabular}}
+			\caption{Mean Average Precision (MAP) and the Precision at 10 (P@10) scores of PL2MF and BM25MF and the other state-of-the-art candidates; a $p$-Value is computed using the two-tailed Wilcoxon matched-pairs signed-ranks test, where one star $*$ marks statistically significant difference at level $0.10$, and two stars $**$ at level $0.05$, with BM25MF (resp., PL2MF) used as a baseline; $\Delta\%$ indicates the difference in percentage between the two MAP values compared in that test.}
+			\label{tab:final-results}
+	\end{subfigure}
+	\caption{Comparison of state-of-the-art candidates against the MF generalizations.}
+\end{table}

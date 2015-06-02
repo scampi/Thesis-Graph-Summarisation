@@ -1,0 +1,116 @@
+\section{Experiments}
+\label{sec:experiments}
+
+In order to evaluate the MF model, we perform several experiments using three different datasets. We start by experimenting on the normalization parameters in order to study their impact on the effectiveness of the approach. We then compare the MF ranking functions against other traditional ones. We finally discuss the consequence of \textbf{not} considering the attribute label as a source of potential relevant terms and demonstrate the effectiveness of the proposed weights.
+
+While there are other ways to perform entity ranking on the Web of Data, e.g., one can look at the other SemSearch 2011\footnote{SemSearch2011: \url{http://km.aifb.kit.edu/ws/semsearch11}} candidates. In this evaluation we concentrate on demonstrating how the MF model specifically extends and improves the very popular PRF and DFR frameworks.
+
+\subsection{Datasets}
+\label{sec:datasets}
+
+The datasets we are using in our experiments are the following:
+\begin{description}
+  \item[INEX09] a dataset of 2,491,134 triples from DBpedia containing the description of entities in English, and converted for the INEX evaluation framework~\cite{Perez-Aguera:2010:UBS};
+  \item[SS10] the ``Billion Triple Challenge''\footnote{Billion Triple Challenge: \url{http://vmlion25.deri.ie}} (BTC) dataset, containing more than one billion triples, with the assessments of the SemSearch2010\footnote{SemSearch2010: \url{http://km.aifb.kit.edu/ws/semsearch10}} challenge;
+  \item[SS11] the BTC dataset with the assessments of the ``Entity Search track'' of the SemSearch2011 challenge.
+\end{description}
+The INEX09 dataset is significantly different than the other two based on BTC. Indeed, BTC is a heterogeneous dataset, created from web crawls of several search engines. INEX09 is a highly curated dataset from DBpedia.
+
+\subsection{Effectiveness of the MF Ranking Model}
+\label{sec:mv-fields-effectiveness}
+
+In this section, we study the impact on the retrieval performance of the normalization parameters. Next we perform a comparison between the MF extensions, i.e., BM25MF and PL2MF, against other ranking approaches. 
+
+\subsubsection{\emph{The Normalization Parameters}}
+\label{sec:norm-exp}
+
+The effectiveness of the methods from the PRF and DFR frameworks depends on finding the right values for the normalization parameters. However, these parameters are highly dependent on the dataset.
+In addition to the length normalization of field-based ranking function, the MF ranking model offers an additional normalization on the attribute's cardinality.
+
+The Figures~\ref{fig:bm25mf-norm} and~\ref{fig:pl2mf-norm} depict the impact of the normalization parameters on the retrieval performance of BM25MF and PL2MF respectively. Each figure depicts the Mean Average Precision (MAP) scores on the three datasets for BM25MF (resp., PL2MF), with the value normalization parameter $b_v$ (resp., $c_v$) on the $x$ axis and the MAP score on the $y$ axis. Each curve plots the results with a fixed attribute normalization parameter $b_a$ (resp., $c_a$). The grid of parameters values in Figure~\ref{fig:bm25mf-norm} ranges from $0$ to $1$ with a step of $0.1$. In Figure~\ref{fig:pl2mf-norm}, the grid ranges from $0.5$ to $10.5$ with a step of $1$. Although these parameters can be attribute and value-specific, this experiment considers a constant parameter in order to reduce the number of combinations and to lower the variability of the results. Dashed lines depict the MAP scores of BM25F and PL2F and solid lines the scores of their MF extension, BM25MF and PL2MF respectively.
+
+These plots show that using a normalization on the value node provides improved performance. Indeed, the attribute normalization parameters $b_a$ and $c_a$ alone do not grasp the heterogeneity in the data, which results in lower performance when compared to the MF extensions. This indicates that the distinction of an attribute being a set of values has a positive effect on the ranking.
+
+\input{05-ranking/figures/tikz/norm-exp-bm25mf}
+
+\input{05-ranking/figures/tikz/norm-exp-pl2mf}
+
+\subsection{Comparison between MF and Field-Based Models}
+\label{sec:mf-field-cmp}
+
+In this section, we evaluate and compare the performance of BM25 and PL2 ranking model against their MF extensions, BM25MF and PL2F respectively, and show the superiority of the MF model. TF-IDF is used as baseline.
+
+\begin{description}
+  \item[TF-IDF] is a logarithmic function of the term frequency and defines the Equation (\ref{eq:tfidf-score}) as 
+  $
+  tfn=log(f_{t,e})+1
+  $,
+  where $f_{t,e}$ is the number of occurrences of the term $t$ in the entity $e$.
+  \item[BM25~\cite{robertson:1994:sigir}] considers the document as a simple bag of words. It is a function of the term frequency derived from a two-Poisson model and using an entity-length normalization. The entity length is computed as the sum of the \emph{attribute length} defined in the Section~\ref{sec:ranking-wod}. It defines the Equation (\ref{eq:tfidf-score}) as 
+  $
+  tfn=\frac{f_{t,e}\times(k_1+1)}{f_{t,e}+k_1\times \left(1+b\times\left(\frac{l_e}{l_{avg}}-1\right)\right)}
+  $,
+where $l_e$ is the \emph{entity length} of the entity $e$, $l_{avg}$ is the average of the \emph{entity length} in the collection and $b$ is a normalization parameter.
+  \item[BM25F] is defined in Equation (\ref{eq:tfidf-score}). It considers documents as composed of fields, each field being a bag of words.
+  \item[PL2~\cite{amati:2002:acm}] considers the document as a simple bag of words. It is a model derived from the DFR framework, with the Equation (\ref{eq:pl2f}) formulated as 
+  $
+  tfn=f_{t,e}\times log_2\left(1+c\times\frac{l_{avg}}{l_e}\right)
+  $,
+  where $c$ is a normalization parameter.
+  \item[PL2F] is defined in Equation (\ref{eq:dfr-score}). It considers a document as a set of fields, each field being a bag of words.
+\end{description}
+
+\subsubsection{Comparison}
+
+The Table~\ref{tab:norm-param} reports the values of the normalization parameters of each ranking function found through a constrained particle swarm optimization~\cite{xiaohui:2002:sci} on each dataset. Using such parameters, we report in Table~\ref{tab:final-results} the performance of the ranking functions on the three datasets. The $p$-Value is computed with the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, where a statistically significant difference at level $0.10$ is marked with one star $*$ and at level $0.05$ with two stars $**$. BM25MF and PL2MF are used as a baseline in this test. $\Delta\%$ indicates the difference in percentage between the two MAP values compared in that test.
+We note that for field-based ranking models and their MF extensions, the attribute label is considered as a value node, in order to be a source of potential relevant terms.
+
+TF-IDF provides a clear-cut discrepancy between INEX09 and the datasets based on BTC, i.e., SS10 and SS11, the reason being it is not suited to heterogeneous datasets.
+On SS10, BM25MF (resp., PL2MF) does not report a significant difference with BM25 (resp., PL2). On INEX09 and SS11, the MF extensions provide an increase of at least $10\%$ in retrieval performance compared to BM25 and PL2. On SS10 and SS11, the MF extensions provide better retrieval performance with a significant difference than the field-based ranking functions with an increase of $15\%$ at the minimum. On INEX09, BM25MF provides slightly better results than BM25F. Overall, the experiments show that the MF model improves significantly the ranking effectiveness.
+
+\input{05-ranking/figures/experiments/field-cmp}
+
+\subsection{Effectiveness of the Weights}
+\label{sec:weights-effectiveness}
+
+In this section, we discuss the impact of discarding the attribute label as a source of possible relevant terms on the ranking performance. Then we evaluate the weights from Section~\ref{sec:weights} developed for the MF model.
+The Table~\ref{tab:mf-effect} reports the MAP scores of BM25MF and PL2MF combined with each weight individually and using the normalization parameters values from the Table~\ref{tab:norm-param}. Apart from the row ``Without Attribute Label'', all runs consider the attribute label as an additional value as in the previous experiments.
+
+\subsubsection{\emph{The Impact of Attribute Label}}
+\label{sec:with-att}
+
+In this section, we investigate the consequence of not considering the attribute label as a source of relevant terms.
+The Table~\ref{tab:mf-effect} reports under the \emph{BM25MF} and \emph{PL2MF} methods the results of considering or not the attribute label as an additional value.
+We can see that removing the attribute label (\emph{Without Attribute Label} row) lowers the performance of the ranking with a statistical significance on INEX09 with BM25MF and PL2MF, and on SS11 with PL2MF only. This shows that the attribute labels can be a source of possible relevant terms.
+
+\subsubsection{\emph{The Query Coverage Weight}}
+\label{sec:qc-weight-effect}
+
+In order to evaluate the benefit of the QC weight, we first analyse its effect separately when applied as an entity, an attribute or a value-specific weight. Then we study the consequence of applying it on all nodes at the same time (\emph{All} row). The Table~\ref{tab:mf-effect} reports the results under the \emph{BM25MF + QC} and \emph{PL2MF + QC} methods. QC improves the retrieval performance when applied on the attribute node, with a statistical significance on SS10 and SS11.
+
+\subsubsection{\emph{The Value Coverage Weight}}
+\label{sec:vc-weight-effect}
+
+The evaluation of the VC weight investigates its efficiency with and without the function (\ref{eq:vc-norm}). The results are reported in Table~\ref{tab:mf-effect} under the \emph{BM25MF + VC} and \emph{PL2MF + VC} methods. We provide for each dataset the best performing $B$ and $\alpha$ parameters. We can observe that VC with the function (\ref{eq:vc-norm}) improves slightly the retrieval performance on SS10 and SS11. The reason is that, without this function, VC assigns a low weight to long values even if they have occurrences of all query terms.
+
+\subsubsection{\emph{The Attribute and Entity Labels Weights}}
+\label{sec:ael-weight-effect}
+
+We evaluate the AEL weights first by considering the Attribute and the Entity Label weights separately, then both at the same time. The Table~\ref{tab:mf-effect} reports the results of applying such query-independent weights under the \emph{BM25MF + AEL} and \emph{PL2MF + AEL} methods.
+We note that the Attribute Label weight gives significant benefits to the ranking in SS10 and SS11, while it decreases the ranking performance in INEX09. This indicates that carefully defined weights for important and non-important attributes can contribute significantly to the effectiveness of the approach. We note also that the same can be seen with the Entity Label weight applied alone. The reason is similar to the Attribute Label weight.
+Except in INEX09, using both weights at the same time increases the performance of MF ranking functions noticeably.
+
+\subsubsection{\emph{The Combination of Weights}}
+\label{sec:combi-weight-effect}
+
+In this section, we investigate the retrieval performance when all four weights are used together. We report the results in Table~\ref{tab:mf-effect} under the methods  \emph{BM25MF + AC + VC + AEL} and \emph{PL2MF + AC + VC + AEL}, with the weights configuration
+\begin{inparaenum}[(1)]
+    \item QC applied on the attribute node;
+    \item VC with dataset-specific $B$ and $\alpha$ parameters; and
+    \item AEL weights.
+\end{inparaenum}
+The weights applied on a same node are combined by the multiplication of each weight value on that node, i.e., either $b_a$ (resp., $c_a$) or $b_v$ (resp., $c_v$) weight values.
+The attribute label being considered as a value, and the entity label being an additional attribute, we apply also the QC weight on those two labels in this experiment.
+On INEX09 their combination decreases slightly the performance for PL2MF. On SS10 and SS11, although the QC and VC weights applied separately do not improve the effectiveness of the MF ranking functions by much, their combination with AEL increases the retrieval performance by at least $30\%$ on SS10 and SS11.
+
+\input{05-ranking/figures/experiments/weights-cmp}

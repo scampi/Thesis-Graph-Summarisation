@@ -1,0 +1,104 @@
+\begin{tikzpicture}[->,>=stealth',node distance=5cm]
+\node (data) {
+\begin{tabular}{|lll|}
+\hdashline
+\multicolumn{1}{:c}{$u$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c:}{$v$} \\
+\hdashline
+\hline
+\texttt{e1} & \texttt{a} & \texttt{Person} \\
+\hline
+\texttt{e1} & \texttt{name} & \texttt{Alice} \\
+\hline
+\texttt{e1} & \texttt{author} & \texttt{e2} \\
+\hline
+\texttt{e2} & \texttt{a} & \texttt{Document} \\
+\hline
+\texttt{e3} & \texttt{a} & \texttt{Person} \\
+\hline
+\texttt{e3} & \texttt{name} &  \texttt{Bob} \\
+\hline
+\end{tabular}
+};
+
+\node[right of = data,xshift=2cm] (edesc) {
+\begin{tabular}{|lll|}
+\hdashline
+\multicolumn{1}{:c}{$u$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c:}{$v$} \\
+\hdashline
+\hline
+\texttt{e1} & \texttt{a} & \texttt{Person} \\
+\texttt{e1} & \texttt{name} & \texttt{Alice} \\
+\texttt{e1} & \texttt{author} & \texttt{e2} \\
+\hline
+\texttt{e2} & \texttt{a} & \texttt{Document} \\
+\hline
+\texttt{e3} & \texttt{a} & \texttt{Person} \\
+\texttt{e3} & \texttt{name} &  \texttt{Bob} \\
+\hline
+\end{tabular}
+};
+
+\node[below of = edesc] (gsv) {
+\begin{tabular}{|l|lll|}
+\hdashline
+\multicolumn{1}{:c}{$u_\mathcal{V}$} & \multicolumn{1}{:c}{$u$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c:}{$v$} \\
+\hdashline
+\hline
+\texttt{\multirow{3}{*}{h1}} & \texttt{e1} & \texttt{a} & \texttt{Person} \\
+& \texttt{e1} & \texttt{name} & \texttt{Alice} \\
+& \texttt{e1} & \texttt{author} & \texttt{e2} \\
+\hline
+\texttt{h2} & \texttt{e2} & \texttt{a} & \texttt{Document} \\
+\hline
+\texttt{\multirow{2}{*}{h1}} & \texttt{e3} & \texttt{a} & \texttt{Person} \\
+& \texttt{e3} & \texttt{name} &  \texttt{Bob} \\
+\hline
+\end{tabular}
+};
+
+\node[below of = data] (join2) {
+\begin{tabular}{|l|lll|l|}
+\hdashline
+\multicolumn{1}{:c}{$u_\mathcal{V}$} & \multicolumn{1}{:c}{$u$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c:}{$v$} & \multicolumn{1}{:c:}{$v_\mathcal{V}$} \\
+\hdashline
+\hline
+\texttt{h1} & \texttt{e1} & \texttt{a} & \texttt{Person} & \\
+\hline
+\texttt{h1} & \texttt{e1} & \texttt{name} & \texttt{Alice} & \texttt{$\varnothing$} \\
+\hline
+\texttt{h1} & \texttt{e1} & \texttt{author} & \texttt{e2} & \texttt{h2} \\
+\hline
+\texttt{h2} & \texttt{e2} & \texttt{a} & \texttt{Document} & \\
+\hline
+\texttt{h1} & \texttt{e3} & \texttt{a} & \texttt{Person} & \\
+\hline
+\texttt{h1} & \texttt{e3} & \texttt{name} &  \texttt{Bob} & \texttt{$\varnothing$} \\
+\hline
+\end{tabular}
+};
+
+\node at ($ (edesc) + (-2,2.25) $) {\hyperref[step-ed]{Step 1}};
+\node at ($ (gsv) + (-2.5,2.25) $) {\hyperref[step-hn]{Step 2}};
+\node at ($ (join2) + (-2.8,2.3) $) {\hyperref[step-he]{Step 3}};
+
+%  \coordinate (p1x) at ($ (join2) + (-3.6,2) $);
+%  \coordinate (p1y) at ($ (join2) + (3.6,-2) $);
+%  \draw[rounded corners,dotted]  (p1x) node[yshift=.3cm] {\hyperref[step-he]{Step 3}} rectangle (p1y);
+%  
+%  \coordinate (p2x) at ($ (edesc) + (-2.8,1.95) $);
+%  \coordinate (p2y) at ($ (edesc) + (2.8,-1.95) $);
+%  \draw[rounded corners,dotted]  (p2x) node[yshift=.3cm] {\hyperref[step-ed]{Step 1}} rectangle (p2y);
+%  
+%  \coordinate (p3x) at ($ (gsv) + (-3.3,1.95) $);
+%  \coordinate (p3y) at ($ (gsv) + (3.3,-1.95) $);
+%  \draw[rounded corners,dotted]  (p3x) node[yshift=.3cm] {\hyperref[step-hn]{Step 2}} rectangle (p3y);
+
+\path
+(data) edge (edesc)
+(data) edge (join2)
+(edesc) edge (gsv)
+% (gsv) edge[bend right=15] (join1sym)
+% (join1) edge (join2sym)
+(gsv) edge (join2)
+;
+\end{tikzpicture}

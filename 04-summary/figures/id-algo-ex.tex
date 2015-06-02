@@ -1,0 +1,84 @@
+\begin{tikzpicture}[->,>=stealth',node distance=6.5cm]
+\node (data) {
+\begin{tabular}{|l|lll|}
+\hdashline
+\multicolumn{1}{:c}{$\mathcal{L}^D$} & \multicolumn{1}{:c}{$u$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c:}{$v$} \\
+\hdashline
+\hline
+A & \texttt{e1} & \texttt{a} & \texttt{Person} \\
+\hline
+A & \texttt{e2} & \texttt{a} & \texttt{Student} \\
+\hline
+A & \texttt{e1} & \texttt{knows} & \texttt{e2} \\
+\hline
+B & \texttt{e2} & \texttt{a} & \texttt{Person} \\
+\hline
+B & \texttt{e1} & \texttt{supervises} & \texttt{e2} \\
+\hline
+\end{tabular}
+};
+
+\node[right of = data,xshift=2cm] (edesc) {
+\begin{tabular}{|l|lll|}
+\hdashline
+\multicolumn{1}{:c}{$\mathcal{L}^D$} & \multicolumn{1}{:c}{$u$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c:}{$v$} \\
+\hdashline
+\hline
+A & \texttt{e1} & \texttt{a} & \texttt{Person} \\
+A & \texttt{e1} & \texttt{knows} & \texttt{e2} \\
+B & \texttt{e1} & \texttt{supervises} & \texttt{e2} \\
+\hline
+A & \texttt{e2} & \texttt{a} & \texttt{Student} \\
+B & \texttt{e2} & \texttt{a} & \texttt{Person} \\
+\hline
+\end{tabular}
+};
+
+\node[below of = edesc,yshift=1.5cm] (gsv) {
+\begin{tabular}{|l|l|lll|}
+\hdashline
+\multicolumn{1}{:c}{$u_\mathcal{V}$} & \multicolumn{1}{:c}{$\mathcal{L}^D$} & \multicolumn{1}{:c}{$u$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c:}{$v$} \\
+\hdashline
+\hline
+\multirow{3}{*}{\texttt{h1}} & A & \texttt{e1} & \texttt{a} & \texttt{Person} \\
+& A & \texttt{e1} & \texttt{knows} & \texttt{e2} \\
+& B & \texttt{e1} & \texttt{supervises} & \texttt{e2} \\
+\hline
+\texttt{h1} & B & \texttt{e2} & \texttt{a} & \texttt{Person} \\
+\hline
+\multirow{2}{*}{\texttt{h2}} & A & \texttt{e2} & \texttt{a} & \texttt{Student} \\
+& B & \texttt{e2} & \texttt{a} & \texttt{Person} \\
+\hline
+\end{tabular}
+};
+
+\node[below of = data,yshift=1.5cm] (join2) {
+\begin{tabular}{|l|l|lll|l|}
+\hdashline
+\multicolumn{1}{:c}{$\mathcal{L}^D$} & \multicolumn{1}{:c}{$u_\mathcal{V}$} & \multicolumn{1}{:c}{$u$} & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c:}{$v$} & \multicolumn{1}{:c:}{$v_\mathcal{V}$} \\
+\hdashline
+\hline
+A & \texttt{h1} & \texttt{e1} & \texttt{a} & \texttt{Person} & \\
+\hline
+A & \texttt{h2} & \texttt{e2} & \texttt{a} & \texttt{Student} &  \\
+\hline
+A & \texttt{h1} & \texttt{e1} & \texttt{knows} & \texttt{e2} & \texttt{h2} \\
+\hline
+B & \texttt{h1} & \texttt{e2} & \texttt{a} & \texttt{Person} &  \\
+\hline
+B & \texttt{h1} & \texttt{e1} & \texttt{supervises} & \texttt{e2} & \texttt{h1} \\
+\hline
+\end{tabular}
+};
+
+\node at ($ (edesc) + (-2.3,1.9) $) {\hyperref[step-ed]{Step 1}};
+\node at ($ (gsv) + (-2.8,2.25) $) {\hyperref[step-hn]{Step 2}};
+\node at ($ (join2) + (-3.25,2) $) {\hyperref[step-he]{Step 3}};
+
+\path
+(data) edge (edesc)
+(data) edge (join2)
+(edesc) edge (gsv)
+(gsv) edge (join2)
+;
+\end{tikzpicture}

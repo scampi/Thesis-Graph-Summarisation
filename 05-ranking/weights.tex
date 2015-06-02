@@ -1,0 +1,62 @@
+\section{Weights}
+\label{sec:weights}
+
+In this section, we introduce several weights for the MF model. We first present two query-dependent weights: 
+\begin{inparaenum}[(1)]
+  \item the \emph{Query Coverage} weight which indicates how well the query terms are covered by an entity, an attribute or a value; and
+  \item the \emph{Value Coverage} weight which indicates how well a value node is covered by a query.
+\end{inparaenum}
+Next, we describe the \emph{Attribute and Entity Labels} query-independent weights.
+
+\subsection{The Query Coverage Weight}
+\label{sec:kw-factor}
+
+The purpose of the Query Coverage (QC) weight is to lower the importance given to an entity, an attribute or a value with respect to the number of query terms it covers. This weight is combined with the ranking function using $\alpha_e$, $\alpha_a$ and $\alpha_v$. For example, given a query composed of three terms, if a value contains only occurrences of one query term, this value will then weight less than a value containing occurrences of more than one query term.
+
+This weight integrates the IDF weight of query terms so that the coverage takes into account the importance of the terms it covers. For example, if two entities have occurrences of one of the three query terms, the coverage would then be $\frac{1}{3}$ for both. Thanks to the IDF weights, the entity with the more important term will have a higher coverage weight than the other one.
+
+The query coverage weight is computed as:
+$$
+QC = \frac{\sum_{t\in X \cap q}{\omega_t^2}}{\sum_{t\in q}{\omega_t^2}}
+$$
+where $X$ is either a value, an attribute set or the entity and $q$ is the query.
+
+\subsection{The Value Coverage Weight}
+\label{sec:coverage}
+
+The Value Coverage (VC) weight reflects the proportion of terms in a value node matching the query, i.e., how much a query covers a value node. We assume that more the query terms match a large portion of the value node, the more this value node is a precise description of the query. This weight is integrated into the MF ranking function using $\alpha_v$.
+
+The value coverage is defined as the quotient of the query terms frequencies in the value over the \emph{value length}: %
+$$
+c' = \frac{\sum_{t\in v \cap q}{f_{t,e,v}}}{l_V}
+$$
+
+We remark that this definition disadvantages longer values over shorter ones: given a query with two terms, a small value with occurrences of one term would receive a higher weight than a larger value with the two terms occurring, because of the \emph{value length} division.
+
+In order to have a better control over the effect of VC, we developed the function $c_\alpha(c')$ which
+\begin{inparaenum}[(1)]
+  \item imposes a fixed lower bound to prevent short values receiving a higher weight than long ones; and
+  \item increases as a power function to ensure a high coverage weight only when $c'$ is close to 1.
+\end{inparaenum}
+\begin{equation}
+\label{eq:vc-norm}
+c_\alpha(c') = \frac{\alpha}{1+(\alpha-1)\times c'^B}
+\end{equation}
+where $\alpha \in \; ]0,1[$ is a parameter that sets the lower bound of VC, and $B$ is a parameter that controls the effect of the coverage on the value. The higher $B$ is, the higher the coverage needs to be for the value node to receive a weight higher than $\alpha$.
+
+\subsection{The Attribute and Entity Labels Weights}
+\label{sec:att-subj-w}
+
+The Attribute and Entity Labels (AEL) weights balance the importance of an entity or an attribute depending on its label. This weight is integrated into the ranking function using $\alpha_a$.
+The weight value is defined empirically. Comparing the label to a regular expression, the weight is equal to:
+
+\begin{itemize}
+    \item $2$ if the label matches ``$.\star[label\,\vert\,name\,\vert\,title\,\vert\,sameas]\$$'';
+    \item $0.5$ if the label matches ``$.\star[seealso\,\vert\,wikilinks]\$$'';
+    \item $0.1$ if the label matches ``\url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}\_$[0-9]+\$$''; and
+    \label{it:rdf:bag}
+    \item $1$ otherwise.
+\end{itemize}
+For instance, if an attribute label is \url{http://xmlns.com/foaf/0.1/name} then a weight of $2$ is assigned.
+
+The regular expression (\ref{it:rdf:bag}) matches an attribute URI defining items of a collection in RDF\footnote{RDF Container: \url{http://www.w3.org/TR/rdf-schema/\#ch\_container}}. It is assigned a low weight of $0.1$ to reduce the importance of terms occurring in each item of the collection. The entity label is treated as an additional attribute of the entity and is assigned a weight of $2$.

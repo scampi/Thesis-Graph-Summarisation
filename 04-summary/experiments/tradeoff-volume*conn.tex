@@ -1,0 +1,27 @@
+\begin{tikzpicture}
+\begin{axis}[
+  scatter/classes={
+        a={mark=square},%
+        b={mark=star},%
+        c={mark=oplus},%
+        d={mark=o},%
+        e={mark=triangle},%
+        f={mark=pentagon}
+  },
+  ylabel=$Connectivity \; (P1)$,
+  xlabel=$Volume \; Ratio \; (\%)$,
+  mark options={scale=2},
+  legend style={at={(0.25,0.9)}}
+]
+\addplot[scatter,only marks,scatter src=explicit symbolic]
+coordinates {
+ (6.6441, 0.14856667) [a] %0.1301) [a]
+ (6.5291, 0.2356) [b] %0.2057) [b]
+ (57.4105, 0.2736) [c] %0.2664) [c]
+ (65.8846, 0.4238) [d] %0.4221) [d]
+ (69.0500, 0.51803333) [e] %0.5169) [e]
+ (77.2328, 0.64733333) [f] %0.6598) [f]
+};
+\legend{$R_{st}$, $R_{t}$, $R_{a}$, $R_{at}$, $R_{ioa}$, $R_{ioat}$}
+\end{axis}
+\end{tikzpicture}

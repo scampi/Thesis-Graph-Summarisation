@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+\node (a) at (0,0) {*};
+\node (labela) at (0,-1) {a};
+\node (b) at (-1.5,-1) {*};
+\node (labelb) at (-2,-2) {b};
+\node (c) at (-1,-2) {c};
+\node (d) at (1,-1) {*};
+\node (labeld) at (1,-2) {d};
+\node (e) at (0,-2) {*};
+\node (labele) at (-.5,-3) {e};
+\node (f) at (2,-2) {f};
+\node (g) at (.5,-3) {g};
+
+\draw (a) -- (labela);
+\draw (a) -- (b) -- (c);
+\draw (b) -- (labelb);
+\draw (d) -- (labeld);
+\draw (e) -- (labele);
+\draw (a) -- (d) -- (e) -- (g);
+\draw (a) -- (d) -- (f);
+\end{tikzpicture}

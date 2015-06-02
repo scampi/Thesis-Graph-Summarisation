@@ -1,0 +1,10 @@
+\begin{tikzpicture}[->,>=stealth',node distance=3cm]
+\node[draw, circle] (a) {$N_1$};
+\node[draw, circle, above right of = a,yshift=-.25cm] (b) {John};
+\node[draw, circle, below right of = a,yshift=.25cm] (c) {Connor};
+
+\path[every node/.style={font=\footnotesize}]
+(a) edge node[fill=white] {firstName} (b)
+(a) edge node[fill=white] {lastName} (c)
+;
+\end{tikzpicture}

@@ -1,0 +1,17 @@
+\begin{tikzpicture}[>=latex]
+\node (T) [draw,thick,rectangle, inner sep=0pt] {
+\begin{tabular}{l|l}
+- City & - capital \\
+- Country & - label \\
+- Person & - name \\
+- Place & - title \\
+\hline
+\multicolumn{2}{c}{$N_0$, $\cdots$, $N_7$}
+\end{tabular}
+};
+\draw [loop, distance=2cm,->] (T) to node [fill=white] {location} (T);
+\draw [loop, distance=1cm,->] (T) to node [fill=white] {author} (T);
+\draw [loop below, distance=1cm,->] (T) to node {creator} (T);
+\draw [loop right, distance=1cm,->] (T) to node {lives} (T);
+\draw [loop left, distance=1cm,->] (T) to node {works} (T);
+\end{tikzpicture}

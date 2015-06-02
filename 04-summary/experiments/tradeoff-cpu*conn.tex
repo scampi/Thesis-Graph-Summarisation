@@ -1,0 +1,34 @@
+\begin{tikzpicture}
+\begin{axis}[
+  scatter/classes={
+        a={mark=square},%
+        b={mark=star},%
+        c={mark=oplus},%
+        d={mark=o},%
+        e={mark=triangle},%
+        f={mark=pentagon}
+  },
+  ylabel=$Connectivity \; (P1)$,
+  xlabel=$CPU \; (ms)$,
+  mark options={scale=2},
+  legend style={at={(0.25,0.9)}}
+]
+\addplot[scatter,only marks,scatter src=explicit symbolic]
+coordinates {
+% (24844125.1190, 0.1301) [a]
+% (24669863.0952, 0.2057) [b]
+% (24277682.3810, 0.2664) [c]
+% (28968841.4286, 0.4221) [d]
+% (22053489.7619, 0.5169) [e]
+% (22386809.1667, 0.6598) [f]
+ (20384066, 0.14856667) [a]
+ (17949001, 0.2356) [b]
+ (20892062, 0.2736) [c]
+ (20885921, 0.4238) [d]
+ (20934061, 0.51803333) [e]
+ (20561815, 0.64733333) [f]
+};
+\legend{$R_{st}$, $R_{t}$, $R_{a}$, $R_{at}$,
+ $R_{ioa}$, $R_{ioat}$}
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,38 @@
+\begin{tikzpicture}[->,>=stealth',node distance=4cm,every node/.style={font=\small\ttfamily}]
+%Bisim
+\node[draw,circle] (b0) {$H^b_0$};
+
+\node[draw,circle,right of = b0,xshift=-.65cm] (b1) {$H^b_2$};
+\node[draw,circle,right of = b0,xshift=.45cm] (b2) {$H^b_1$};
+
+\node[draw,circle,above right of = b2,xshift=.4cm,yshift=0cm] (b3) {$H^b_3$};
+
+\node[draw,circle,below right of = b1,xshift=1.5cm,yshift=1cm] (b4) {$H^b_4$};
+\node[draw,circle,below of = b4,yshift=2.85cm] (b5) {$H^b_5$};
+
+\node[draw,circle,below right of = b3,xshift=.5cm,yshift=0cm] (b7) {$H^b_7$};
+\node[draw,circle,above right of = b4,xshift=1.6cm,yshift=-1cm] (b6) {$H^b_6$};
+
+%Types
+\node[draw,circle,dashed,ultra thick,minimum size=1.55cm,label={90:$\mathfrak{U}^t$}] (t0) {};
+\node[draw,circle,dashed,ultra thick,minimum size=2.55cm,label={90:$\mathbf{H^t_1}$},right of = t0,xshift=-.15cm] (t1){};
+\node[draw,circle,dashed,ultra thick,minimum size=1.55cm,label={90:$\mathbf{H^t_2}$},above right of = t1,xshift=1cm,yshift=0cm] (t2){};
+\node[draw,circle,dashed,ultra thick,minimum size=2.55cm,label={90:$\mathbf{H^t_3}$},below right of = t1,yshift=.5cm,xshift=1cm] (t3){};
+\node[draw,circle,dashed,ultra thick,minimum size=2.55cm,label={90:$\mathbf{H^t_4}$},right of = t1,xshift=3.65cm] (t4){};
+
+\path
+(t0) edge[dashed,ultra thick,bend left=50] node[above] {creator} (t1)
+(t0) edge[dashed,ultra thick,bend right=50] node[below] {author} (t1)
+(t1) edge[dashed,ultra thick] node[fill=white] {lives} (t2)
+(t1) edge[dashed,ultra thick] node[fill=white] {works} (t3)
+(t2) edge[dashed,ultra thick] node[fill=white] {location} (t4)
+(t3) edge[dashed,ultra thick] node[fill=white] {location} (t4)
+
+(b0) edge[dotted,thick,gray] node[below,black,fill=white] {\emph{creator}} (b1)
+(b1) edge[dotted,thick,gray,bend right=50] node[black,fill=white] {\emph{works}} (b5)
+(b2) edge[dotted,thick,gray,bend right] node[black,fill=white] {\emph{works}} (b5)
+(b3) edge[dotted,thick,gray,bend right] node[black,fill=white] {\emph{location}} (b7)
+(b4) edge[dotted,thick,gray,bend left] node[black,fill=white] {\emph{location}} (b7)
+(b5) edge[dotted,thick,gray,bend right] node[black,fill=white] {\emph{location}} (b6)
+;
+\end{tikzpicture}

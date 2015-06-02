@@ -1,0 +1,27 @@
+\chapter{Query-Dependent Ranking of the Graph Summary}
+\label{chap:summary-ranking}
+
+Graph summarisation is used for extracting the graph schema of graph-shaped data. However, the size of the summary can still be an obstacle towards an effective browsing of the data. Yu and Yagadish propose in~\cite{yu:2006:schema-summarization} to ``summarise'' an \emph{existing} database schema by showing only the \emph{important} parts. This gives a succinct overview of the database, and allows a user to focus only on what is relevant to his information need. Given a graph-shaped query, we propose in this chapter to rank subgraphs of a summary using the \emph{BM25MF} model so to return only the most relevant ones for this query.
+
+\section{Related Works}
+\label{chap:summary-ranking:relworks}
+
+In real-world database, the schema is highly complex with thousands of tables and connections. This stands as an obstacle for people to grasp what the database has to offer. In the end, formulating a query becomes a tedious task of diving into the schema to find relevant elements to one's information need.
+
+The summary, as it takes the equivalent place of a schema for graphs, is faced with the same difficulty. In~\cite{yu:2006:schema-summarization} Yu et al. propose as a solution to ``collapse'' elements of the schema into more \emph{important} ones. The importance of an element is measured with a PageRank-like approach. The authors argue as well that the importance metric needs to be balanced with another that considers the schema \emph{coverage}. Indeed, a schema is best summarised by showing important elements that cover all the schema. This work proposes then an approach that is independent of the actual information need of a user. Instead, we investigate in this chapter an approach for finding important elements by \emph{ranking} subgraphs of the summary that were matched by a user-defined query.
+
+\section{Model}
+\label{chap:summary-ranking:model}
+
+In this chapter, we investigate how to rank subgraphs of the summary using the BM25MF ranking model. However, BM25MF is a ranking model for tree-shaped data. Therefore, we need to transform the subgraphs into trees. In effect, we only need to ensure that the subgraph is a \emph{rooted}, \emph{directed acyclic graph} (DAG). In this section, we present our graph transformation approach. Then, we describe how to apply BM25MF for ranking graph data, and more specifically subgraphs of the summary.
+
+\subsection{Rooted Directed Acyclic Graph}
+
+\subsection{Ranking of a Summary's Sub-graph}
+
+\section{Evaluation}
+\label{chap:summary-ranking:evaluation}
+
+\section{Discussion}
+\label{chap:summary-ranking:discuss}
+

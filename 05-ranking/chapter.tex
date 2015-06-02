@@ -1,0 +1,8 @@
+\chapter{Tree Ranking}
+\label{chap:tree-ranking}
+
+The Web of Data can be seen as an encyclopaedia spanning over the entire Web. It contains rich information about concrete and abstract things covering a variety of domains, e.g., people, organisations, companies, media such as music or films, geographical places of interest. In Web Data, each of these is referred to as an \emph{entity} to which is associated structured data, e.g., the name of a person or the description of a country.
+
+The amount of entities on the Web that are associated with a structured description has reached a state where the search for specific entities can only be handled with systems such as web search engines. These systems are based on the Information Retrieval (IR) paradigm. Moreover, entities present a high structural heterogeneity which cannot be handled by traditional relational databases. Indeed, entities from a same domain can have a completely different set of descriptive attributes, or use attributes that don't reflect the data the best. In this chapter, we investigate the ranking of entities for IR search engines.
+
+Current IR engines are not adapted to the structural heterogeneity of entities. In web search engines, field-based ranking models are popular for the ranking of structured documents such as HTML pages. However, fields need to be known a priori and the fact that a same entity can have multiple values for a same attribute is not considered. We introduce in this chapter an extension to field-based ranking models which addresses these shortcomings and that fits to arbitrarily-shaped entities.

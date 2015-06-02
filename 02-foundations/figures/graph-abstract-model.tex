@@ -1,0 +1,44 @@
+\begin{tikzpicture}[->,>=stealth',node distance=2cm]
+\node[draw,circle] (d1) {D1};
+\node[draw,circle,right of = d1,xshift=2cm] (d2) {D2};
+
+\node[below of = d1,yshift=.5cm,xshift=-1.5cm] (ls) {};
+\node[below of = d2,yshift=.5cm,xshift=2.2cm] (le) {};
+
+\node[draw,circle,below of = d1,yshift=-1cm] (e11) {};
+\node[draw,circle,below right of = e11,yshift=.5cm] (e12) {};
+\node[draw,circle,below left of = e11,xshift=1cm] (e13) {};
+
+\node[draw,circle,below of = d2,yshift=-1cm] (e21) {};
+\node[draw,circle,below right of = e21] (e22) {};
+\node[draw,circle,below left of = e21,xshift=1cm,yshift=.2cm] (e23) {};
+
+\node[text width=3.56cm,inner sep=0pt,below of = d1,yshift=-1.75cm,xshift=.25cm] (d1it) {};
+\draw[dashed,thick] (d1it) ellipse (1.75cm and 1.1cm);
+
+\node[text width=3.56cm,inner sep=0pt,below of = d2,yshift=-1.75cm,xshift=.5cm] (d2it) {};
+\draw[dashed,thick] (d2it) ellipse (1.75cm and 1.1cm);
+
+\path[every node/.style={fill=white,font=\footnotesize}]
+(d1)	edge[bend left] node {p1} (d2)
+(d2)	edge node {p2} (d1)
+		edge[bend left] node {p3} (d1)
+
+(ls) edge[-,very thick,dashed] (le)
+
+(e11)	edge (e13)
+(e12)	edge (e11)
+
+(e21)	edge (e22)
+			edge[bend right] node {p1}  (e11)
+(e23) edge (e22)
+(e22)	edge[bend left] node[near end] {p2} (e12)
+			edge[bend left] node {p3} (e13)
+
+(d1.west) edge[-,dotted] (d1it.west)
+(d1.east) edge[-,dotted] (d1it.east)
+
+(d2.west) edge[-,dotted] (d2it.west)
+(d2.east) edge[-,dotted] (d2it.east)
+;
+\end{tikzpicture}

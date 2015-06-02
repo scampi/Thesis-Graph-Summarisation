@@ -1,0 +1,16 @@
+\section{Related Work}
+\label{sec:searching:relwork}
+
+The Web of Data consists of a wide range of heterogeneous datasets, where the schema and the ontology can vary from one to the other. To overcome this diversity of attributes, different approaches for defining the fields of an entity have been proposed.
+
+From a RDF perspective, the authors consider in \cite{Perez-Aguera:2010:UBS} five weighted fields to represent the structure of an entity: literals (textual values), keywords extracted from the root's label, i.e., the subject URI, keywords extracted from the incoming links, entity's types and keywords extracted from object URIs. Compared to the BM25F and PL2F approaches defined in \ref{sec:ranking-wod}, this approach is not able to grasp the rich structure of the data since attributes are completely discarded.
+
+The BM25F and PL2F approaches we use in our experiments are similar in nature to the BM25F adaptation proposed in \cite{blanco:2011:iswc}, where the authors consider one field per attribute in the data collection and can assign a different weight to each attribute. However, they restrict their approach to attributes with literal values, discarding those with URI values. In contrast to \cite{blanco:2011:iswc}, we consider both attributes with literal and URI values. URIs in a RDF graph carry relevant keywords, with regards to
+\begin{inparaenum}[(1)]
+	\item the entity in general when considering the subject URI;
+	\item the attribute when considering the predicate URI; and
+	\item the related entity when considering the object URI.
+\end{inparaenum}
+%We also consider in our approach the entity and the attribute labels, i.e., the predicate URIs, using special entity attributes. This aspect is discussed in the Section~\ref{sec:with-att}.
+
+However, all these approaches are an adaptation of the field-based ranking model in which multiple values associated to a same attribute are aggregated into a single value. This simplification of the underlying data model is inadequate for structured data. Therefore, we propose an extension of field-based ranking models in Section~\ref{chap:tree-ranking:mf-model} to take into consideration multi-valued attributes and show that our model can be effectively applied to different ranking frameworks.

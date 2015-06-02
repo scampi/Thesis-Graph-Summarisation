@@ -1,0 +1,17 @@
+\begin{tikzpicture}[->,>=stealth',node distance=3cm]
+\node[draw,circle] (a) {ex:1};
+\node[draw,right of = a] (b) {Country};
+\node[draw,above right of = a] (c) {Ireland};
+
+\node[draw,circle,below right of = a] (d) {ex:2};
+\node[draw,right of = d,xshift=1cm] (e) {United Kingdom};
+\node[draw,below right of = d] (f) {64.1 M};
+
+\path[every node/.style={fill=white,font=\footnotesize}]
+(a) edge node {is\_a} (b)
+(a) edge node {label} (c)
+(a) edge node {neighbour} (d)
+(d) edge node {label} (e)
+(d) edge node {population} (f)
+;
+\end{tikzpicture}

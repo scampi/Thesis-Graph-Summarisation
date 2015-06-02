@@ -1,0 +1,33 @@
+\begin{tikzpicture}[->,node distance=2cm,>=stealth']
+\node[draw,circle] (a0) {$a_0$};
+\node[draw,circle,above of = a0] (a1) {$a_1$};
+\node[draw,circle,below left of = a0] (a2) {$a_2$};
+\node[draw,circle, below right of = a0] (a3) {$a_3$};
+
+\path[every node/.style={fill=white,font=\footnotesize}]
+(a0) edge node {$\alpha$} (a1)
+(a2) edge node {$\alpha$} (a0)
+(a3) edge node {$\alpha$} (a0)
+;
+
+\node[draw,circle,right of = a0,xshift=1cm] (b0) {$b_0$};
+\node[draw,circle,above left of = b0] (b1) {$b_1$};
+\node[draw,circle,above right of = b0] (b2) {$b_2$};
+\node[draw,circle, below of = b0] (b3) {$b_3$};
+
+\path[every node/.style={fill=white,font=\footnotesize}]
+(b0) edge node {$\alpha$} (b1)
+(b0) edge node {$\alpha$} (b2)
+(b3) edge node {$\alpha$} (b0)
+;
+
+% summary
+\node[dashed,draw,circle,right of = b0,xshift=1cm] (s0) {$s_0$};
+\node[dashed,draw,circle,above of = s0] (s1) {$s_1$};
+\node[dashed,draw,circle, below of = s0] (s2) {$s_2$};
+
+\path[every node/.style={fill=white,font=\footnotesize}]
+(s0) edge[dashed] node {$\alpha$} (s1)
+(s2) edge[dashed] node {$\alpha$} (s0)
+;
+\end{tikzpicture}

@@ -1,0 +1,17 @@
+\begin{tikzpicture}[->,node/.style={draw,circle},leaf/.style={draw,rounded corners},node distance=2.2cm]
+
+\node[node] (node) {SNode};
+\node[leaf,below right of = node,xshift=1.5cm] (card) {xsd:int};
+\node[below of = node] (type) {.};
+\node[leaf,below left of = type,xshift=-1.5cm] (typelabel) {xsd:anyURI};
+\node[leaf,below right of = type,xshift=1.5cm] (torigin) {xsd:anyURI};
+\node[leaf,below of = type] (ttype) {xsd:anyURI};
+
+\path[every node/.style={font=\small\ttfamily,fill=white}]
+(node)	edge node {statistic} (card)
+			edge node {feature} (type)
+(type)	edge node {label} (typelabel)
+			edge node {origin} (torigin)
+			edge node {type} (ttype)
+;
+\end{tikzpicture}

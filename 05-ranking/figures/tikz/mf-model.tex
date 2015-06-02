@@ -1,0 +1,29 @@
+\begin{tikzpicture}
+\node (a) at (-.25,0) {*};
+\node (labela) at (-.25,-1) {a};
+\node (b) at (-1.5,-1) {*};
+\node (labelb) at (-2,-2) {b};
+\node (c) at (-1,-2) {c};
+\node (d) at (1,-1) {*};
+\node (labeld) at (1,-2) {d};
+\node (e) at (0,-2) {*};
+\node (labele) at (-.5,-3) {e};
+\node (f) at (2,-2) {f};
+\node (g) at (.5,-3) {g};
+
+\draw (a) -- (labela);
+\draw (a) -- (b) -- (c);
+\draw (b) -- (labelb);
+\draw (d) -- (labeld);
+\draw (e) -- (labele);
+\draw (a) -- (d) -- (e) -- (g);
+\draw (a) -- (d) -- (f);
+
+\draw [red, dashed] (-2.2,-2.2) rectangle (-1.8,-1.8);
+\draw (-1.2,-2.2) rectangle (-.8,-1.8);
+\draw [red, dashed] (-.45,-1.2) rectangle (-.05,-.8);
+\draw [red, dashed] (.8,-2.2) rectangle (1.2,-1.8);
+\draw (1.8,-2.2) rectangle (2.2,-1.8);
+\draw [red, dashed] (-.7,-3.2) rectangle (-.3,-2.8);
+\draw (.3,-3.2) rectangle (.7,-2.8);
+\end{tikzpicture}
