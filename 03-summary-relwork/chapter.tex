@@ -224,7 +224,20 @@ Among the possible OLAP operations, \emph{rollup} and \emph{drill-down} control 
 
 Chen et. al propose in \cite{chen:icdm:2008} two OLAP frameworks \emph{I-OLAP} and \emph{T-OLAP} for analysing graphs. The I-OLAP aggregation is aimed at summarising various graphs representing a same entity. It is then a merge of the graphs that keeps the entity layer, while we rather consider the summarisation of the graph's structure which is a different view on the graph. The T-OLAP framework, which is further investigated in \cite{qu:dasfaa:2011}, modifies the \emph{topology} of the graph. T-OLAP maps nodes into sumnodes according to their attributes' value, and computes a statistic for the sumnode using an aggregate function, e.g., \emph{count}. Compared to our graph summarisation, the authors consider the attributes' value while we do not require those.\\
 
-Zhao et. al \cite{zhao:sigmod:2011}.
+Zhao et. al \cite{zhao:sigmod:2011} present a framework for analysing multi-dimensional graphs. Rooted in the OLAP domain, the framework retains the relationships between nodes, information which is normally discarded in traditional OLAP. The work presents the summary as the output of a query over the graph, which aggregates nodes sharing a fixed set of attributes' value.
+
+The proposed framework considers a graph with a fixed set of attributes. However, we consider a graph which vocabulary and structure is heterogeneous. Therefore, it is unlikely the graph can be effectively collapsed over a pre-defined set of labels; instead we propose a model that can handle the heterogeneity of the graph.
+
+The summary in \cite{zhao:sigmod:2011} is defined based on an equivalence relation; two nodes of the graph are equivalent if they share the same attributes' value. The equivalence relation forms classes, which stand for the sumnodes of the summary; two sumnodes are connected if any node they contain are connected in the graph. We propose instead a framework based on graph homomorphism which is more expressive in the definition of the summary. Figure~\ref{fig:graph-cube} depicts the summarisation of a graph as per \cite{zhao:sigmod:2011}; it presents three sumnodes $S_1$, $S_2$, and $S_3$, in which nodes of the graph they are associated with are represented as a cross. Every node in a sumnode is equivalent to one another; however, this does not affect the connectivity between the sumnodes as $S_2$ and $S_3$ are linked although only two of their nodes out of five actually are. In our framework, conditions affecting the connectivity in the summary can be defined explicitly if needed. Furthermore, the graph homomorphism is also a more natural definition of the summary, since homomorphism is an operation that retain the structure of the graph.
+
+\begin{figure}
+	\centering
+	\resizebox{.5\textwidth}{!}{
+		\input{03-summary-relwork/figures/graph-cube}
+	}
+	\caption{Graph summarisation as in \cite{zhao:sigmod:2011}}
+	\label{fig:graph-cube}
+\end{figure}
 
 \begin{itemize}
 \item Colazzo et al. \cite{colazzo:www:2014} describe a framework for using OLAP over RDF data, leveraging the rich structure of such graphs. Each cube is built based on SPARQL queries which define supernodes and superedges. This analytical framework is flexible enough to accommodate various kinds of analysis, since the aggregate function is also based on a SPARQL query. Although the analysis of the data is done through its cubes by a user, the computation of a cube is always done over the original data. The need of writing SPARQL queries suggests that a user possesses some knowledge about the structure of the graph. This work is orthogonal to the one proposed in this thesis: our approach highlights the graph structure, thanks to which a deeper analysis of the graph can be done.
