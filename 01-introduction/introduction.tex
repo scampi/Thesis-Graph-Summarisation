@@ -4,7 +4,7 @@
 Since the advent of the Internet, people and companies exchange information on the Web. There is now an abundance of information about various domains such as science, commerce, leisure, etc. Although the Web browsed by Humans mainly contains unstructured data such as text, a significant amount of structured data exists.
 
 \begin{itemize}
-\item hyperlinks from a web page to an other in order to point to additional or related information;
+\item hyperlinks from a web page to another in order to point to additional or related information;
 \item structural information encoded into the HTML pages using \texttt{table} or \texttt{list} tags for instance;
 \item metadata encoded into web pages that provides some meaning about their content.
 \end{itemize}
@@ -19,7 +19,7 @@ The inter-connected data is at the ``scale of the Web'', consisting of thousands
 
 The data exploration endeavour ultimately requires some knowledge about the \emph{structure} of the (graph) data. There is a need to know what attributes a piece of information contains along with their semantics, so to enable one to search for relevant data. Such knowledge about the structure requires techniques for \emph{managing} the data. In Section~\ref{chap:introduction:data-mgmt}, we present two data management approaches that are suited to different kinds of data.
 
-The data exploration endeavour is challenged by the scale, heterogeneity, and quality of the data itself. The Web of Data is composed of at least a thousand\footnote{Datahub portal: \url{http://datahub.io/dataset?tags=lod}} of datasets, spanning over a variety of topics. Web Data presents a structure that changes from a dataset to the other, evolving over time. The amount of information about a topic varies from data sources, some being more complete in one aspect and less in an other. To overcome these challenges, there is a need for \emph{ranking} the data. This calls for a novel ranking mechanism that leverage the rich structured information of the Web Data; we ponder this in Section~\ref{chap:introduction:ranking}.\\
+The data exploration endeavour is challenged by the scale, heterogeneity, and quality of the data itself. The Web of Data is composed of at least a thousand\footnote{Datahub portal: \url{http://datahub.io/dataset?tags=lod}} of datasets, spanning over a variety of topics. Web Data presents a structure that changes from a dataset to the other, evolving over time. The amount of information about a topic varies from data sources, some being more complete in one aspect and less in another. To overcome these challenges, there is a need for \emph{ranking} the data. This calls for a novel ranking mechanism that leverage the rich structured information of the Web Data; we ponder this in Section~\ref{chap:introduction:ranking}.\\
 
 Throughout this thesis, we present methodologies designed at shedding light on the structure of the Web Data. We propose methods that take into account the shifting nature of the Web Data. We develop then an approach which highlights the ``skeleton'' (structure) of datasets. We leverage the rich structure of the Web of Data in a novel ranking model for (semi-)structured data. We finally present how these techniques can be combined for a more effective exploration of datasets.
 
@@ -115,7 +115,7 @@ In the Web of Data, the existence of a central place where the schema of data so
 \section{Ranking of Web Data}
 \label{chap:introduction:ranking}
 
-With the growth of the Web in the early days of The Internet, the use of web search engines to sift through the mass of documents marked a significant milestone in the interaction of people with regards to data. Then, the ability of search engines not only to retrieve but also to \emph{rank} the data by relevance to a query marked an other milestone: the possibility to find a needle in the haystack.
+With the growth of the Web in the early days of The Internet, the use of web search engines to sift through the mass of documents marked a significant milestone in the interaction of people with regards to data. Then, the ability of search engines not only to retrieve but also to \emph{rank} the data by relevance to a query marked another milestone: the possibility to find a needle in the haystack.
 
 Traditionally, the documents ranked contain mostly textual information, with little structure that can be leveraged by a ranking algorithm. Web documents contain HTML markup for display purposes, but those can be cues for the importance of a piece of text within the document. Web Data instead is structured beyond what can be extrapolated from the markup cues. Therefore, this calls for a novel ranking mechanism that supports this rich structure.
 

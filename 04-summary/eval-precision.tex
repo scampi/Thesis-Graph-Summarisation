@@ -5,8 +5,8 @@ In this section, we evaluate the trade-off between the performance of an impleme
 In this evaluation, we consider the following statements:
 \begin{itemize}
 	\item $G=\left\langle V, A, l_V \right\rangle$ is a graph;
-	\item the bisimulation summary of $G$ is $\mathcal{G}_{fbt} = \left\langle \mathcal{V}_{fbt}, \mathcal{A}_{fbt}, l_{\mathcal{V}_{fbt}} \right\rangle$ according to the summarisation relation $R_{fbt}$;
-	\item $\mathcal{G} = \left\langle \mathcal{V}, \mathcal{A}, l_{\mathcal{V}} \right\rangle$ is a summary of $G$ according to the summarisation relation $R$; and
+	\item the bisimulation summary of $G$ is $\mathcal{S}_{fbt} = \left\langle \mathcal{V}_{fbt}, \mathcal{A}_{fbt}, l_{\mathcal{V}_{fbt}} \right\rangle$ according to the summarisation relation $R_{fbt}$;
+	\item $\mathcal{S} = \left\langle \mathcal{V}, \mathcal{A}, l_{\mathcal{V}} \right\rangle$ is a summary of $G$ according to the summarisation relation $R$; and
 	\item there exists a relation $S \subseteq \mathcal{V}_{fbt} \times \mathcal{V}$ such that $R_{fbt} \sqsubseteq R$.
 \end{itemize}
 
@@ -17,7 +17,7 @@ We describe in this section the design of the evaluation. We first present the e
 
 \subsubsection{Environment}
 
-The bisimulation summary $\mathcal{G}_{fbt}$ is the most precise summary of the data graph, since all incoming and outgoing (and combination of) paths in the summary do exist in the data graph $G$. In this evaluation, we use the $R_{fb}$ as the \emph{gold standard} summary of a data graph, which ensures that all outgoing paths do exist. The presented summarisation relations have been implemented using the Hadoop\footnote{Hadoop: \url{http://hadoop.apache.org/}} MapReduce framework. Our Hadoop cluster is composed of 10 machines.
+The bisimulation summary $\mathcal{S}_{fbt}$ is the most precise summary of the data graph, since all incoming and outgoing (and combination of) paths in the summary do exist in the data graph $G$. In this evaluation, we use the $R_{fb}$ as the \emph{gold standard} summary of a data graph, which ensures that all outgoing paths do exist. The presented summarisation relations have been implemented using the Hadoop\footnote{Hadoop: \url{http://hadoop.apache.org/}} MapReduce framework. Our Hadoop cluster is composed of 10 machines.
 
 \subsubsection{Evaluation Dimensions}
 
@@ -26,10 +26,10 @@ We present in this section three dimensions we use for evaluating a summary, i.e
 \begin{quotation}
 \item[\emph{Summary volume.}]
 
-We measure the amount of data from the gold standard summary that is compressed into the evaluated summary. To this end, we compare the volume of the summary against the volume of the gold standard. We report this comparison as the ratio  $\mathcal{G}:\mathcal{G}_{fb}$ of the former to the later.
+We measure the amount of data from the gold standard summary that is compressed into the evaluated summary. To this end, we compare the volume of the summary against the volume of the gold standard. We report this comparison as the ratio  $\mathcal{S}:\mathcal{S}_{fb}$ of the former to the later.
 
 $$
-\mathcal{G}:\mathcal{G}_{fb} = \frac{\vert \mathcal{V} \vert + \vert \mathcal{A} \vert}{\vert \mathcal{V}_{fb} \vert + \vert \mathcal{A}_{fb} \vert}
+\mathcal{S}:\mathcal{S}_{fb} = \frac{\vert \mathcal{V} \vert + \vert \mathcal{A} \vert}{\vert \mathcal{V}_{fb} \vert + \vert \mathcal{A}_{fb} \vert}
 $$
 
 \item[\emph{Algorithm performance.}]
@@ -65,9 +65,9 @@ $$
 
 We use in this evaluation several datasets of various complexity. We list in the Table~\ref{tab:datasets} the datasets along with some descriptive statistics. The datasets are grouped according to their complexity into four categories, i.e., \emph{Low}, \emph{Medium}, \emph{High}, and \emph{Very High}. We determined the complexity with regards to the volume of a graph and the number of unique types and attributes it possesses.
 
-For each dataset, we present two aspects, i.e., the \emph{schema} and the \emph{structure} of the data graph. With regards to the schema complexity, we report the number of unique edge labels $\vert \mathcal{L}^A \vert$ and the number of unique types $\vert \mathcal{L}^T \vert$ of the data graph. With regards to the structure complexity, we report the size and order of $G$ and  $\mathcal{G}_{fb}$. The order values omit the number of sink nodes, i.e., nodes without outgoing edges which includes literal nodes in the RDF data model.
+For each dataset, we present two aspects, i.e., the \emph{schema} and the \emph{structure} of the data graph. With regards to the schema complexity, we report the number of unique edge labels $\vert \mathcal{L}^A \vert$ and the number of unique types $\vert \mathcal{L}^T \vert$ of the data graph. With regards to the structure complexity, we report the size and order of $G$ and  $\mathcal{S}_{fb}$. The order values omit the number of sink nodes, i.e., nodes without outgoing edges which includes literal nodes in the RDF data model.
 
-The $\mathcal{G}_{fb}:G$ column reports the volume ratio of $\mathcal{G}_{fb}$ to $G$ as a percentage, where the volume is the sum of the size and order of a graph. We remark that the volume of the summary $\mathcal{G}_{fb}$ is significantly smaller than the volume of the data graph. This emphasize the performance benefits of using a summary instead of the data graph itself in an application. We note that the bigger the volume ratio, the more complex the data graph is to summarise from a structural point of view. Although the datasets \texttt{bnb} and \texttt{wb} have a similar volume, the volume ratio of the summary on \texttt{bnb} is greater than for \textbf{wb}, i.e., $1.17\%$ to $0.01\%$. This shows that the structure of \texttt{bnb} is more heterogeneous than that of \texttt{wb}.
+The $\mathcal{S}_{fb}:G$ column reports the volume ratio of $\mathcal{S}_{fb}$ to $G$ as a percentage, where the volume is the sum of the size and order of a graph. We remark that the volume of the summary $\mathcal{S}_{fb}$ is significantly smaller than the volume of the data graph. This emphasize the performance benefits of using a summary instead of the data graph itself in an application. We note that the bigger the volume ratio, the more complex the data graph is to summarise from a structural point of view. Although the datasets \texttt{bnb} and \texttt{wb} have a similar volume, the volume ratio of the summary on \texttt{bnb} is greater than for \textbf{wb}, i.e., $1.17\%$ to $0.01\%$. This shows that the structure of \texttt{bnb} is more heterogeneous than that of \texttt{wb}.
 
 \input{04-summary/experiments/datasets}
 
@@ -79,16 +79,16 @@ We note the mean of measurements in a category as $\mu_{L}$, $\mu_{M}$, $\mu_{H}
 
 \subsubsection{Graph Summary Volume}
 
-The Table~\ref{tab:volume-ratio} reports the volume ratio between the summary $\mathcal{G}$ and the gold standard summary $\mathcal{G}_{fb}$. We report also the mean $\mu$ for each category of datasets complexity.
+The Table~\ref{tab:volume-ratio} reports the volume ratio between the summary $\mathcal{S}$ and the gold standard summary $\mathcal{S}_{fb}$. We report also the mean $\mu$ for each category of datasets complexity.
 
 The summaries based only on the type information, i.e., $R_{st}$ and $R_t$, exhibit a higher compression compared to the gold standard. With regards to the gold standard volume, the volume ratio is under $5\%$ on the \emph{Low} and \emph{Medium} datasets and at most half on the more complex datasets. On average, we note that the volume of a summary with $R_{st}$ is slightly higher than with $R_t$. The reason is that a node of the data graph can be mapped to several sumnodes with the \emph{Single Type} summary $R_{st}$, which leads to an increase of the size of the summary.
 
-The attribute feature appears to be a better feature for summarising a graph than type. Indeed, the volume ratio of $\mathcal{G}_a$ and $\mathcal{G}_{ioa}$ remains stable with \emph{Medium} ($42.51$ and $51.45$, resp.) and \emph{High} ($47.99$ and $66.13$, resp.) datasets. However, this is not the case with the $\mathcal{G}_{st}$ and $\mathcal{G}_t$ summaries. 
+The attribute feature appears to be a better feature for summarising a graph than type. Indeed, the volume ratio of $\mathcal{S}_a$ and $\mathcal{S}_{ioa}$ remains stable with \emph{Medium} ($42.51$ and $51.45$, resp.) and \emph{High} ($47.99$ and $66.13$, resp.) datasets. However, this is not the case with the $\mathcal{S}_{st}$ and $\mathcal{S}_t$ summaries. 
 
 We can observe a correlation between the volume ratio and the size of $\mathcal{L}^T$.
-We note that the \emph{Attributes} summarisation $R_a$ actually achieves the lowest ratio on the \texttt{dbpedia} dataset. This shows that the use of attributes in \texttt{dbpedia} is homogeneous across types. The volume ratio of the \emph{IO Attributes} summary $\mathcal{G}_{ioa}$ is on average on par with the ratio of the \emph{Attributes} summary $\mathcal{G}_a$, indicating a certain homogeneity of incoming edges in the data graph.
+We note that the \emph{Attributes} summarisation $R_a$ actually achieves the lowest ratio on the \texttt{dbpedia} dataset. This shows that the use of attributes in \texttt{dbpedia} is homogeneous across types. The volume ratio of the \emph{IO Attributes} summary $\mathcal{S}_{ioa}$ is on average on par with the ratio of the \emph{Attributes} summary $\mathcal{S}_a$, indicating a certain homogeneity of incoming edges in the data graph.
 
-By using both type and attribute information as with the \emph{Attributes \& Types} summarisation relation $R_{at}$, we remark that this can lead to a significant increase of the summary volume. Indeed, the combination of the features on \texttt{b3kat} and \texttt{lobid} exhibits a much higher ratio than when taken separately, e.g., $55.87$ and $84.06$ respectively with $\mathcal{G}_{at}$, against $27.43$ and $49.83$ with $\mathcal{G}_a$. We can conclude that a sparse usage of attributes with a type creates an explosion of combinations. In general, the type feature is less stable than the attribute feature.
+By using both type and attribute information as with the \emph{Attributes \& Types} summarisation relation $R_{at}$, we remark that this can lead to a significant increase of the summary volume. Indeed, the combination of the features on \texttt{b3kat} and \texttt{lobid} exhibits a much higher ratio than when taken separately, e.g., $55.87$ and $84.06$ respectively with $\mathcal{S}_{at}$, against $27.43$ and $49.83$ with $\mathcal{S}_a$. We can conclude that a sparse usage of attributes with a type creates an explosion of combinations. In general, the type feature is less stable than the attribute feature.
 
 \begin{table}
 	\centering

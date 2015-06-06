@@ -1,10 +1,10 @@
 \usetikzlibrary{arrows}
 
 \begin{tikzpicture}[->,>=stealth',node distance=4cm]
-\node [draw,circle] (n0) {$H_0$};
+\node [draw,circle] (n0) {$S_0$};
 % \node (n0) [draw,thick,rectangle,inner sep=0] {
 % \begin{tabular}{l}
-% \multicolumn{1}{c}{$H_0$} \\
+% \multicolumn{1}{c}{$S_0$} \\
 % \hline
 % \\
 % \hline
@@ -12,10 +12,10 @@
 % \end{tabular}
 % };
 
-\node [draw,circle,right of = n0] (n1) {$H_1$};
+\node [draw,circle,right of = n0] (n1) {$S_1$};
 % \node (n1) [draw,thick,rectangle,inner sep=0,right of = n0] {
 % \begin{tabular}{l}
-% \multicolumn{1}{c}{$H_1$} \\
+% \multicolumn{1}{c}{$S_1$} \\
 % \hline
 % - Person \\
 % \hline
@@ -24,10 +24,10 @@
 % };
 
 \node [draw,circle,above of = n1] (person) {Person};
-\node [draw,circle,right of = n1] (n2) {$H_2$};
+\node [draw,circle,right of = n1] (n2) {$S_2$};
 % \node (n2) [draw,thick,rectangle,inner sep=0,right of = n1] {
 % \begin{tabular}{l}
-% \multicolumn{1}{c}{$H_2$} \\
+% \multicolumn{1}{c}{$S_2$} \\
 % \hline
 % - City \\
 % \hline
@@ -36,10 +36,10 @@
 % };
 
 \node [draw,circle,right of = n2] (place) {Place};
-\node [draw,circle,above of = place] (n3) {$H_3$};
+\node [draw,circle,above of = place] (n3) {$S_3$};
 % \node (n3) [draw,thick,rectangle,inner sep=0,above right of = n2] {
 % \begin{tabular}{l}
-% \multicolumn{1}{c}{$H_3$} \\
+% \multicolumn{1}{c}{$S_3$} \\
 % \hline
 % - Place \\
 % - Country \\
@@ -49,10 +49,10 @@
 % };
 
 \node [draw,circle,above of = n2] (city) {City};
-\node [draw,circle,below of = place] (n4) {$H_4$};
+\node [draw,circle,below of = place] (n4) {$S_4$};
 % \node (n4) [draw,thick,rectangle,inner sep=0,below right of = n2] {
 % \begin{tabular}{l}
-% \multicolumn{1}{c}{$H_4$} \\
+% \multicolumn{1}{c}{$S_4$} \\
 % \hline
 % - Place \\
 % - Country \\

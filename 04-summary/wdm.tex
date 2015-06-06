@@ -155,7 +155,7 @@ A graph schema is \emph{valid} with regards to the entity graph if there exists 
 \subsection{Representation of Graph Summaries}
 \label{chap03:summary-rdf}
 
-In this section, we present a RDF model for describing a graph summary. This allows the summary $\mathcal{G}$ to be queried as any other RDF graph, ultimately to be used in conjunction with the entity graph $G$.
+In this section, we present a RDF model for describing a graph summary. This allows the summary $\mathcal{S}$ to be queried as any other RDF graph, ultimately to be used in conjunction with the entity graph $G$.
 
 Viewing the graph summary as a RDF graph requires the creation of URIs for identifying sumnodes and sumedges. A URI for a sumnode can be created based on the features the summarisation relation is based on, e.g., on the type information for the \emph{Types} summary $R_t$. The sumedge $(x, \alpha, y) \in \mathcal{A}$ URI can be created by considering the source $x$ and target $y$ sumnodes, as well as the attribute $\alpha$.
 
@@ -227,7 +227,7 @@ Depending on the use of the graph summary, a subset of the presented vocabulary 
 
 In this level of reification, we use every vocabulary terms presented in the previous section. We note nonetheless that the \emph{origin} predicate is optional, since it is not needed in the case of summarising a single dataset.
 
-Due to the RDF reification of the summary, we remark the existence of a edge case which might cause the summary to be larger than the original. Indeed, if the summarisation relation is a \emph{one-to-one} mapping from the graph $G$ to the summary $\mathcal{G}$, the number of RDF statements used to describe the summary might be greater than for the original graph. A single statement in $G$ requires six statements for describing the corresponding sumedge, i.e., the fives depicted in the Figure~\ref{fig:rdf-edge} plus one for the type attribute. In addition to those six statements, we must also account for the statements describing the adjacent sumnodes. Depending on the application of the graph summary, the full description of the graph summary can be excessive. The Table~\ref{tab:reification-edge-case-full} reports the \emph{Types} summarisation of a simple graph for which the summarisation has a one-to-one mapping. We can see that the full reification of the summary is considerably larger than the original graph.
+Due to the RDF reification of the summary, we remark the existence of a edge case which might cause the summary to be larger than the original. Indeed, if the summarisation relation is a \emph{one-to-one} mapping from the graph $G$ to the summary $\mathcal{S}$, the number of RDF statements used to describe the summary might be greater than for the original graph. A single statement in $G$ requires six statements for describing the corresponding sumedge, i.e., the fives depicted in the Figure~\ref{fig:rdf-edge} plus one for the type attribute. In addition to those six statements, we must also account for the statements describing the adjacent sumnodes. Depending on the application of the graph summary, the full description of the graph summary can be excessive. The Table~\ref{tab:reification-edge-case-full} reports the \emph{Types} summarisation of a simple graph for which the summarisation has a one-to-one mapping. We can see that the full reification of the summary is considerably larger than the original graph.
 
 \minisec{Lite Reification}
 
@@ -240,7 +240,7 @@ For this reification, we don't retain information such as provenance or statisti
 		\resizebox{\textwidth}{!}{
 			\begin{tabular}{lllc@{\s}lll}
 				\toprule
-				\multicolumn{3}{c}{$G$} & \phantom{a} & \multicolumn{3}{c}{$\mathcal{G}_t$} \\
+				\multicolumn{3}{c}{$G$} & \phantom{a} & \multicolumn{3}{c}{$\mathcal{S}_t$} \\
 				\cmidrule{1-3} \cmidrule{5-7}
 				\multirow{6}{*}{p1} & \multirow{6}{*}{\gls{atype}} & \multirow{6}{*}{Person} & \multirow{6}{*}{\phantom{a}} & t1 & $a$ & SNode \\
 				& & & & t1 & statistic & 1 \\
@@ -274,7 +274,7 @@ For this reification, we don't retain information such as provenance or statisti
 		\resizebox{\textwidth}{!}{
 			\begin{tabular}{lllc@{\s}lll}
 				\toprule
-				\multicolumn{3}{c}{$G$} & \phantom{a} & \multicolumn{3}{c}{$\mathcal{G}_t$} \\
+				\multicolumn{3}{c}{$G$} & \phantom{a} & \multicolumn{3}{c}{$\mathcal{S}_t$} \\
 				\cmidrule{1-3} \cmidrule{5-7}
 				p1 & \gls{atype} & Person & \phantom{a} & t1 & \gls{atype} & Person \\
 				p1 & author & d1 & \phantom{a} & t1 & author & t2 \\
@@ -285,7 +285,7 @@ For this reification, we don't retain information such as provenance or statisti
 		\caption{Lite reification.}
 		\label{tab:reification-edge-case-lite}
 	\end{subfigure}
-	\caption{Full and lite reification of a \emph{Types} summary $R_t$. The summarisation relation $R_t$ has with the example data a one-to-one mapping from the graph $G$ to the summary $\mathcal{G}_t$. The node \emph{p1} is mapped to the sumnode \emph{t1} and \emph{d1} to \emph{t2}.}
+	\caption{Full and lite reification of a \emph{Types} summary $R_t$. The summarisation relation $R_t$ has with the example data a one-to-one mapping from the graph $G$ to the summary $\mathcal{S}_t$. The node \emph{p1} is mapped to the sumnode \emph{t1} and \emph{d1} to \emph{t2}.}
 	\label{tab:reification-edge-case}
 \end{table}
 

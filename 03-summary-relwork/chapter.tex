@@ -16,7 +16,7 @@ Depending on the kind of interaction with the schema, a more or less detailed sc
 
 \section{Dimensions of Graph Summarisation Challenges}
 
-In the computer science literature, we see the graph summarisation technique being employed to face a performance challenge. Some graphs are too large to be processed in a reasonable time or to fit into the main memory. A solution is to substitute that graph with an other that is significantly \emph{smaller}, thus improving the application's performance. Questions that can be raised are
+In the computer science literature, we see the graph summarisation technique being employed to face a performance challenge. Some graphs are too large to be processed in a reasonable time or to fit into the main memory. A solution is to substitute that graph with another that is significantly \emph{smaller}, thus improving the application's performance. Questions that can be raised are
 \begin{inparaenum}[(a)]
 \item in which aspect is the summary smaller than the graph; and
 \item what properties of the graph influence the summary.
@@ -58,7 +58,7 @@ We consider a graph to be heterogeneous when it is not consistent with regards t
 \item its structure; and
 \item its labelling.
 \end{inparaenum}
-Our rationale is that the more heterogeneous a graph is, the more difficult it is to create a \emph{precise} and \emph{concise} description of that graph. For example, we can imagine a dataset describing people in which the attributes are not consistent from a person to an other: for one the phone number is missing, while for an other it is the birth place. The Figure~\ref{fig:graph-hetero} illustrates the two scenari of graph heterogeneity, where we depict possibles graph summarisation with a \textit{dashed} graph.
+Our rationale is that the more heterogeneous a graph is, the more difficult it is to create a \emph{precise} and \emph{concise} description of that graph. For example, we can imagine a dataset describing people in which the attributes are not consistent from a person to another: for one the phone number is missing, while for another it is the birth place. The Figure~\ref{fig:graph-hetero} illustrates the two scenari of graph heterogeneity, where we depict possibles graph summarisation with a \textit{dashed} graph.
 
 \subparagraph{Heterogeneity of the graph structure.}
 
@@ -66,7 +66,7 @@ Figure~\ref{fig:hetero-struct} depicts a graph in which the structure is inconsi
 
 \subparagraph{Heterogeneity of the vocabulary.}
 
-Considering our previous example of the people dataset, a graph can be seen as heterogeneous if it uses different attributes for each entity within. Figure~\ref{fig:hetero-voc} depicts a graph in which this is the case: entities $a_1$, $\cdots$, $a_n$ have a different attribute each. A possible summarisation would be to create an isomorph graph, but then the summarisation purpose that is to substitute the graph with an other more manageable is lost. An other summarisation is depicted on the right as a dashed graph, where two nodes $s_a$ and $s_b$ are linked with all $n$ attributes. Although this reduces the number of nodes to from $2 \times n$ to $2$, we loose the original distribution of the attributes.\\
+Considering our previous example of the people dataset, a graph can be seen as heterogeneous if it uses different attributes for each entity within. Figure~\ref{fig:hetero-voc} depicts a graph in which this is the case: entities $a_1$, $\cdots$, $a_n$ have a different attribute each. A possible summarisation would be to create an isomorph graph, but then the summarisation purpose that is to substitute the graph with another more manageable is lost. An other summarisation is depicted on the right as a dashed graph, where two nodes $s_a$ and $s_b$ are linked with all $n$ attributes. Although this reduces the number of nodes to from $2 \times n$ to $2$, we loose the original distribution of the attributes.\\
 
 In the rest of this chapter, we discuss the graph summarisation literature with regards to the three axes.
 
@@ -105,7 +105,7 @@ Clustering is the process of finding the underlying structure of a dataset by gr
 
 \paragraph{Fundamental vocabulary.}
 
-Given a graph $G = \left\langle V, A, l_V \right\rangle$, the process of graph summarisation creates an other graph, called the \emph{summary} of $G$. Each node of $G$ is mapped to one or more nodes of the summary, which we call as the \emph{sumnodes}. Similarly, edges of the graph $G$ are also mapped to edges in the summary, which we call the \emph{sumedges}. The goal of the graph summarisation is to create a summary where the structure of the original graph $G$ is preserved.
+Given a graph $G = \left\langle V, A, l_V \right\rangle$, the process of graph summarisation creates another graph, called the \emph{summary} of $G$. Each node of $G$ is mapped to one or more nodes of the summary, which we call as the \emph{sumnodes}. Similarly, edges of the graph $G$ are also mapped to edges in the summary, which we call the \emph{sumedges}. The goal of the graph summarisation is to create a summary where the structure of the original graph $G$ is preserved.
 
 \begin{figure}
 	\resizebox{\textwidth}{!}{
@@ -160,7 +160,7 @@ The algorithm requires several passes over the graph in order to fulfil (\ref{rc
 
 The authors extend this work in \cite{zhang:2010:ddg} where a measure for the ``interestingness'' of a graph summary is proposed. The aim of this measure is to quantify how easy it is for a person to visualise and understand the high-level structural characteristics of the graph. In Section~\ref{chap03:sec:quality}, we argue that the interestingness of a summary actually depends on the application it is used for. In that paper, the authors also investigate how to summarise numeric data; while this is an important aspect of graph summarisation in some application, we focus in this thesis on summarising the structure of the graph.\\
 
-Liu et. al \cite{zheng:ipsj:2011} propose a graph summarisation that \emph{approximates} the information in the original graph, i.e., the structure of the graph and the attributes' value associated with a node. The authors aim to construct a summary that is \emph{homogeneous}, i.e., each node mapped to a sumnode of the summary are consistent with one an other. Three criteria that measure different aspect of the summary homogeneity are introduced:
+Liu et. al \cite{zheng:ipsj:2011} propose a graph summarisation that \emph{approximates} the information in the original graph, i.e., the structure of the graph and the attributes' value associated with a node. The authors aim to construct a summary that is \emph{homogeneous}, i.e., each node mapped to a sumnode of the summary are consistent with one another. Three criteria that measure different aspect of the summary homogeneity are introduced:
 \begin{itemize}
 	\item all nodes mapped to the a sumnode have the \emph{same} attributes' value;
 	\item a sumedge $(a,b)$ implies that \emph{all} nodes in the sumnode $a$ are connected to at least on node in $b$; and
@@ -228,7 +228,7 @@ Zhao et. al \cite{zhao:sigmod:2011} present a framework for analysing multi-dime
 
 The proposed framework considers a graph with a fixed set of attributes. However, we consider a graph which vocabulary and structure is heterogeneous. Therefore, it is unlikely the graph can be effectively collapsed over a pre-defined set of labels; instead we propose a model that can handle the heterogeneity of the graph.
 
-The summary in \cite{zhao:sigmod:2011} is defined based on an equivalence relation; two nodes of the graph are equivalent if they share the same attributes' value. The equivalence relation forms classes, which stand for the sumnodes of the summary; two sumnodes are connected if any node they contain are connected in the graph. We propose instead a framework based on graph homomorphism which is more expressive in the definition of the summary. Figure~\ref{fig:graph-cube} depicts the summarisation of a graph as per \cite{zhao:sigmod:2011}; it presents three sumnodes $S_1$, $S_2$, and $S_3$, in which nodes of the graph they are associated with are represented as a cross. Every node in a sumnode is equivalent to one another; however, this does not affect the connectivity between the sumnodes as $S_2$ and $S_3$ are linked although only two of their nodes out of five actually are. In our framework, conditions affecting the connectivity in the summary can be defined explicitly if needed. Furthermore, the graph homomorphism is also a more natural definition of the summary, since homomorphism is an operation that retain the structure of the graph.
+The summary in \cite{zhao:sigmod:2011} is defined based on an equivalence relation; two nodes of the graph are equivalent if they share the same attributes' value. The equivalence relation forms classes, which stand for the sumnodes of the summary; two sumnodes are connected if any node they contain are connected in the graph. We propose instead a framework based on graph homomorphism which is more expressive in the definition of the summary. Figure~\ref{fig:graph-cube} depicts the summarisation of a graph as per \cite{zhao:sigmod:2011}; it presents three sumnodes $S_1$, $S_2$, and $S_3$, in which nodes of the graph they are associated with are represented as a cross. Every node in a sumnode is equivalent to one another; however, this does not affect the connectivity between the sumnodes as $S_2$ and $S_3$ are linked although only two of their nodes out of five actually are. In our framework, conditions affecting the connectivity in the summary can be defined explicitly if needed. Furthermore, the graph homomorphism is also a more natural definition of the summary, since homomorphism is an operation that retain the structure of the graph.\\
 
 \begin{figure}
 	\centering
@@ -240,7 +240,7 @@ The summary in \cite{zhao:sigmod:2011} is defined based on an equivalence relati
 \end{figure}
 
 \begin{itemize}
-\item Colazzo et al. \cite{colazzo:www:2014} describe a framework for using OLAP over RDF data, leveraging the rich structure of such graphs. Each cube is built based on SPARQL queries which define supernodes and superedges. This analytical framework is flexible enough to accommodate various kinds of analysis, since the aggregate function is also based on a SPARQL query. Although the analysis of the data is done through its cubes by a user, the computation of a cube is always done over the original data. The need of writing SPARQL queries suggests that a user possesses some knowledge about the structure of the graph. This work is orthogonal to the one proposed in this thesis: our approach highlights the graph structure, thanks to which a deeper analysis of the graph can be done.
+\item Colazzo et al. \cite{colazzo:www:2014} describe a framework for using OLAP over RDF data, leveraging the rich structure of such graphs. Each cube is built based on SPARQL queries which define sumnodes and sumedges. This analytical framework is flexible enough to accommodate various kinds of analysis, since the aggregate function is also based on a SPARQL query. Although the analysis of the data is done through its cubes by a user, the computation of a cube is always done over the original data. The need of writing SPARQL queries suggests that a user possesses some knowledge about the structure of the graph. This work is orthogonal to the one proposed in this thesis: our approach highlights the graph structure, thanks to which a deeper analysis of the graph can be done.
 \item Zhengkui et al. generalise the concept of OLAP over graphs in \cite{zhengkui:2014:ppg} by proposing an property graph model and allowing to summarise over the edges and/or nodes properties. The approach is implemented over a MapReduce framework. It leverage the lattice graph of the summaries to process several aggregations in a single job. A best execution plan for the series of MapReduce jobs is found using a cost model.
 \item SAP proposes to analyses graphs through user-defined summarisation in \cite{rudolf:2013:slg}.
 \end{itemize}

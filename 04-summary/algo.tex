@@ -30,7 +30,7 @@ On line~5 we retrieve the sumnode of $v$ only if it is not a type, since we cons
 	\DontPrintSemicolon
 	\SetKwFunction{sn}{GetSumnode}
 	\KwIn{A graph $G=\left\langle V, A, l_V \right\rangle$}
-	\KwOut{A summary $\mathcal{G}=\left\langle \mathcal{V}, \mathcal{A}, l_\mathcal{V} \right\rangle$ of $G$}
+	\KwOut{A summary $\mathcal{S}=\left\langle \mathcal{V}, \mathcal{A}, l_\mathcal{V} \right\rangle$ of $G$}
 	\BlankLine
 	\ForEach{$(u, \alpha, v) \in A$}{
 		\tcp{Sumnode of the source node $u$}
@@ -196,7 +196,7 @@ By doing so, we retain the summarisation features from each dataset. This ensure
 	\SetKwProg{Fn}{Function}{:}{end}
 	\SetKwFunction{sn}{GetSumnode\textsubscript{i}}
 	\KwIn{A collection of $n$ graphs: $\forall 0 < i < n\; G_i=\left\langle V_i, A_i, l_{V_i} \right\rangle$. Let $G =\left\langle V, A, l_{V} \right\rangle$ be the union of all graphs, i.e., $A = A_1 \cup \cdots \cup A_n$ and $V = V_1 \cup \cdots \cup V_n$}
-	\KwOut{A sumnode of the summary $\mathcal{G}=\left\langle \mathcal{V}, \mathcal{A}, l_\mathcal{V} \right\rangle$ of $G$}
+	\KwOut{A sumnode of the summary $\mathcal{S}=\left\langle \mathcal{V}, \mathcal{A}, l_\mathcal{V} \right\rangle$ of $G$}
 	\BlankLine
 %	\ForEach{$(u, \alpha, v)_i \in A$}{
 %		\tcp{Sumnode of the source node $u$}
@@ -484,14 +484,14 @@ In comparison, the MapReduce-based one allows the summarisation to scale to much
 
 \subsection{Graph Summary Lattice}
 
-There exists several possible summarisation relations, each resulting in a graph summary that exhibits different properties. In the Section~\ref{chap03:sec:quality}, we discuss the impact of the relation on the \emph{precision} of a graph summary with regards to the original graph. There is no graph summary that fits all use cases, a summary suitable for one might not be for an other. In this section, we describe how various summarisation relations can be ordered into a \emph{lattice}. Thus, we can reuse previous computations where a graph summary can result from an other one, instead from the original graph.
+There exists several possible summarisation relations, each resulting in a graph summary that exhibits different properties. In the Section~\ref{chap03:sec:quality}, we discuss the impact of the relation on the \emph{precision} of a graph summary with regards to the original graph. There is no graph summary that fits all use cases, a summary suitable for one might not be for another. In this section, we describe how various summarisation relations can be ordered into a \emph{lattice}. Thus, we can reuse previous computations where a graph summary can result from another one, instead from the original graph.
 
 A \emph{lattice} is a \emph{partially ordered} set that contains an \emph{infimum} and a \emph{supremum}. The infimum is an element of the set that is ``smaller'', according to the partial order, than all other elements. Conversely, a supremum is an element that is larger than any other element.
 
 For the set of summarisation relations $\mathcal{R}$, we denote with $\sqsubseteq$ the partial order on $\mathcal{R}$. We order the relations based on their definition: two summarisation relations can be ordered if one can be expressed with the other. In this set, the infimum is the identity relation that maps the graph to itself, and the supremum is the relation that maps all nodes to a single sumnode.
 
 \begin{definition}[Partial Order $\sqsubseteq$]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{G}_1 = \left\langle \mathcal{V}_1, \mathcal{A}_1, l_{\mathcal{V}_1} \right\rangle$ be the summary of $G$ according to $R_1 \subseteq V \times \mathcal{V}_1$, and $\mathcal{G}_2 = \left\langle \mathcal{V}_2, \mathcal{A}_2, l_{\mathcal{V}_2} \right\rangle$ be the summary of $G$ according to $R_2 \subseteq V \times \mathcal{V}_2$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S}_1 = \left\langle \mathcal{V}_1, \mathcal{A}_1, l_{\mathcal{V}_1} \right\rangle$ be the summary of $G$ according to $R_1 \subseteq V \times \mathcal{V}_1$, and $\mathcal{S}_2 = \left\langle \mathcal{V}_2, \mathcal{A}_2, l_{\mathcal{V}_2} \right\rangle$ be the summary of $G$ according to $R_2 \subseteq V \times \mathcal{V}_2$.
 
 We say that $R_1$ precedes $R_2$, noted as $R_1 \sqsubseteq R_2$, if there exists a relation $S \subseteq \mathcal{V}_1 \times \mathcal{V}_2$ such that $R_2$ is a \emph{composition} of $R_1$ and $S$:
 $$
@@ -503,9 +503,9 @@ $$
 We demonstrate here that the binary relation $\sqsubseteq$ is a partial order, i.e., that it is reflexive, antisymmetric, and transitive.
 Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and for some set $A$, let $I_A = \left\lbrace (x, x) : x \in A \right\rbrace$ be the identity relation on $A$.
 \begin{description}
-\item[reflexivity:] Let $\mathcal{G} = \left\langle \mathcal{V}, \mathcal{A}, l_{\mathcal{V}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{V}$. We have $R = I_\mathcal{V} \circ R$, therefore $R \sqsubseteq R$.
-\item[antisymmetry:] For $i \in \{1, 2\}$, let $\mathcal{G}_i = \left\langle \mathcal{V}_i, \mathcal{A}_i, l_{\mathcal{V}_i} \right\rangle$ be the summary of $G$ according to $R_i \subseteq V \times \mathcal{V}_i$. If we suppose $R_1 \sqsubseteq R_2 \wedge R_2 \sqsubseteq R_1$, then $\exists S \subseteq \mathcal{V}_1 \times \mathcal{V}_2$ and $\exists T \subseteq \mathcal{V}_2 \times \mathcal{V}_1$ such that $R_2 = S \circ R_1$ and $R_1 = T \circ R_2$. By substitution, we have $R_2 = S \circ T \circ R_2$. Hence, $S \circ T = I_{\mathcal{V}_2}$. Since the identity relation is a bijection, we have a \emph{one-to-one} mapping between $\mathcal{V}_1$ and $\mathcal{V}_2$. Therefore, we have $R_1 = R_2$.
-\item[transitivity:] For $i \in \{1, 2, 3\}$, let $\mathcal{G}_i = \left\langle \mathcal{V}_i, \mathcal{A}_i, l_{\mathcal{V}_i} \right\rangle$ be the summary of $G$ according to $R_i \subseteq V \times \mathcal{V}_i$. If we suppose $R_1 \sqsubseteq R_2 \sqsubseteq R_3$, then $\exists S \subseteq \mathcal{V}_1 \times \mathcal{V}_2$ and $\exists T \subseteq \mathcal{V}_2 \times \mathcal{V}_3$ such that $R_2 = S \circ R_1$ and $R_3 = T \circ R_2$. Let $U \subseteq \mathcal{V}_1 \times \mathcal{V}_3$ be a relation defined as the composition of $S$ and $T$, i.e., $U = T \circ S$. Since the composition operation $\circ$ is associative, we have then $R_3 = U \circ R_1$. Therefore, $R_1 \sqsubseteq R_3$.
+\item[reflexivity:] Let $\mathcal{S} = \left\langle \mathcal{V}, \mathcal{A}, l_{\mathcal{V}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{V}$. We have $R = I_\mathcal{V} \circ R$, therefore $R \sqsubseteq R$.
+\item[antisymmetry:] For $i \in \{1, 2\}$, let $\mathcal{S}_i = \left\langle \mathcal{V}_i, \mathcal{A}_i, l_{\mathcal{V}_i} \right\rangle$ be the summary of $G$ according to $R_i \subseteq V \times \mathcal{V}_i$. If we suppose $R_1 \sqsubseteq R_2 \wedge R_2 \sqsubseteq R_1$, then $\exists S \subseteq \mathcal{V}_1 \times \mathcal{V}_2$ and $\exists T \subseteq \mathcal{V}_2 \times \mathcal{V}_1$ such that $R_2 = S \circ R_1$ and $R_1 = T \circ R_2$. By substitution, we have $R_2 = S \circ T \circ R_2$. Hence, $S \circ T = I_{\mathcal{V}_2}$. Since the identity relation is a bijection, we have a \emph{one-to-one} mapping between $\mathcal{V}_1$ and $\mathcal{V}_2$. Therefore, we have $R_1 = R_2$.
+\item[transitivity:] For $i \in \{1, 2, 3\}$, let $\mathcal{S}_i = \left\langle \mathcal{V}_i, \mathcal{A}_i, l_{\mathcal{V}_i} \right\rangle$ be the summary of $G$ according to $R_i \subseteq V \times \mathcal{V}_i$. If we suppose $R_1 \sqsubseteq R_2 \sqsubseteq R_3$, then $\exists S \subseteq \mathcal{V}_1 \times \mathcal{V}_2$ and $\exists T \subseteq \mathcal{V}_2 \times \mathcal{V}_3$ such that $R_2 = S \circ R_1$ and $R_3 = T \circ R_2$. Let $U \subseteq \mathcal{V}_1 \times \mathcal{V}_3$ be a relation defined as the composition of $S$ and $T$, i.e., $U = T \circ S$. Since the composition operation $\circ$ is associative, we have then $R_3 = U \circ R_1$. Therefore, $R_1 \sqsubseteq R_3$.
 \end{description}
 \end{proof}
 
