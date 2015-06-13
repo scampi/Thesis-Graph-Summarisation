@@ -96,7 +96,7 @@ In the rest of this chapter, we discuss the graph summarisation literature with 
 %% present here the different kinds of approaches
 The concept of graph summarisation has been explored for diverse use cases in the literature. As discussed in Section~\ref{chap03:review:query-optim}, graph summarisation has been used for the purpose of optimising the query evaluation by outlining what paths exist in the graph and creating indices over the summary. In Section~\ref{chap03:review:graph-exploration}, we present some research where it has been employed also for aiding a user in exploring an unknown graph. In Section~\ref{chap03:review:query-profiling}, a summary of the graph is used for profiling the data, i.e., gathering some statistics about the graph so to analyse it with regards to upstream applications such as data integration. Graph summarisation is also used for analysing the \emph{content} of the graph by computing aggregates, which research is discussed in Section~\ref{chap03:review:data-analytics}.
 
-Figure~\ref{fig:timeline} depicts a timeline of the literature presented in this chapter. The main use case of each work is indicated with a color and shape-coded arrow and reflect the sections outlined in the previous paragraph. From the timeline, we can see that graph summarisation was at first used for optimising query evaluation through indices; a new direction later appeared where the summary is used for analysing and exploring a graph. This new direction might be linked with the emergence of Web Data, since users generally interact with graphs which structure is (partially) unknown.
+Figure~\ref{fig:timeline} depicts a time-line of the literature presented in this chapter. The main use case of each work is indicated with a colour and shape-coded arrow and reflect the sections outlined in the previous paragraph. From the time-line, we can see that graph summarisation was at first used for optimising query evaluation through indices; a new direction later appeared where the summary is used for analysing and exploring a graph. This new direction might be linked with the emergence of Web Data, since users generally interact with graphs which structure is (partially) unknown.
 
 \paragraph{Graph clustering versus graph summarisation.}
 
@@ -115,6 +115,7 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, the process of graph s
 			\entry{1999}{The index proposed in \cite{Milo:1999:ISP:645503.656266} allows to summarize specific paths.}{red, dashed}
 			\entry{2002}{In the same spirit of \cite{Milo:1999:ISP:645503.656266}, the summary index is created given a query \cite{kaushik:de:2002,kaushik:2002:cib}.}{red, dashed}
 			\entry{2003}{The summarisation approach in \cite{chen:2003:dia} adapts itself to the query load.}{red, dashed}
+			\entry{2006}{\cite{polyzotis:2006:xsx}}{red, dashed}
 			\entry{2008}{Tian et. al \cite{tian:sigmod:2008,zhang:2010:ddg} present a summarisation approach that bridges to OLAP (Online analytical processing) with drilldown/rollup operations.}{blue}
 			\entry{2008}{Navlakha et. al \cite{navlakha:2008:gsb} propose a summarisation approach based on Information Theory, where the end result is a summary and a set of corrections. This allows to recreate the original graph from the summary with a bounded error.}{decorate with=diamond, paint=black, decoration={shape evenly spread=8}}
 			\entry{2008}{\cite{chen:icdm:2008}.}{green, very  thick,  dotted}
@@ -136,7 +137,7 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, the process of graph s
 			\legend{black}{Large-scale Computation}
 		\end{timeline}
 	}
-	\caption{Timeline of the research on graph summarisation}
+	\caption{Time-line of the research on graph summarisation}
 	\label{fig:timeline}
 \end{figure}
 
@@ -235,39 +236,44 @@ The summary in \cite{zhao:sigmod:2011} is defined based on an equivalence relati
 	\resizebox{.5\textwidth}{!}{
 		\input{03-summary-relwork/figures/graph-cube}
 	}
-	\caption{Graph summarisation as in \cite{zhao:sigmod:2011}}
+	\caption{Graph summarisation based on equivalence relation as in \cite{zhao:sigmod:2011}}
 	\label{fig:graph-cube}
 \end{figure}
 
-\begin{itemize}
-\item Colazzo et al. \cite{colazzo:www:2014} describe a framework for using OLAP over RDF data, leveraging the rich structure of such graphs. Each cube is built based on SPARQL queries which define sumnodes and sumedges. This analytical framework is flexible enough to accommodate various kinds of analysis, since the aggregate function is also based on a SPARQL query. Although the analysis of the data is done through its cubes by a user, the computation of a cube is always done over the original data. The need of writing SPARQL queries suggests that a user possesses some knowledge about the structure of the graph. This work is orthogonal to the one proposed in this thesis: our approach highlights the graph structure, thanks to which a deeper analysis of the graph can be done.
-\item Zhengkui et al. generalise the concept of OLAP over graphs in \cite{zhengkui:2014:ppg} by proposing an property graph model and allowing to summarise over the edges and/or nodes properties. The approach is implemented over a MapReduce framework. It leverage the lattice graph of the summaries to process several aggregations in a single job. A best execution plan for the series of MapReduce jobs is found using a cost model.
-\item SAP proposes to analyses graphs through user-defined summarisation in \cite{rudolf:2013:slg}.
-\end{itemize}
+Colazzo et al. \cite{colazzo:www:2014} describe a framework for using OLAP over RDF data. Each cube represents a summary and is built based on SPARQL queries which define sumnodes and sumedges. This analytical framework is flexible enough to accommodate various kinds of analysis, since the aggregate function is also based on a SPARQL query. Although the analysis of the data is done through its cubes by a user, the computation of a cube is always done over the original data. The need of writing SPARQL queries suggests that a user possesses some knowledge about the structure of the graph. This work is orthogonal to the one proposed in this thesis: our approach highlights the graph structure, thanks to which a deeper analysis of the graph can be done.\\
+
+Wang et al. generalise the concept of OLAP over graphs in \cite{zhengkui:2014:ppg} by proposing a property graph model and allowing to summarise over the properties associated with edges and/or nodes; a property graph model is a graph where a node and an edge is associated with a list of property-value pairs. This approach focuses on summarising the graph based on the values of a pre-defined set of attributes; instead, we consider graphs that are heterogeneous and also possibly multi-valued attributes, for which our graph summarisation framework is more adapted.\\
+
+Rudolf et al. \cite{rudolf:2013:slg} propose a framework for analysing graphs through \emph{templates}. The graph is summarised given user-defined graph \emph{patterns}, which are then matched over the graph. An aggregation function is finally applied over the set of matched sub-graphs, e.g., a \emph{count} function. This approach requires the user to have some knowledge about the structure of the graph for performing the summarisation; instead, our framework does not assume any prior knowledge.
 
 \section{Query Optimisation}
 \label{chap03:review:query-optim}
 
-\begin{itemize}
-\item DataGuides \cite{goldman1997dataguides} is the first work to improve query execution through the use of an index on the summary of the structure of the graph. However, the DataGuides construction algorithm is computationally expensive. Also, in presence of data with a complex structure, the size of the summary can be as large as the data graph, or even larger. This issue is discussed in \cite{goldman1999approximate}, where some constraints of DataGuides are relaxed, e.g., the existence of a path in the data graph.
-\item \cite{Milo:1999:ISP:645503.656266} extends the work on DataGuides, using the notion of bisimulation to build a structure index. The authors propose to reduce further the size of a summary by defining the type of query to answer. However, it assumes some knowledge about the structure of the data graph in order to specify the query type. Also, any change in the query specification requires to rebuild the summary.
-\item In \cite{kaushik:de:2002} the definition of bisimulation on a graph is simplified by limiting the length of a path to $k$ hops. In \cite{kaushik:2002:cib} the authors create an index of paths expressions, based on a summary that has been build for a pre-defined query expression.
-\item In \cite{chen:2003:dia}, the authors vary the maximum length of a path per node, depending on the query load of the system.
-\item The authors of \cite{Tran:2012:kde} uses a similar approach to \cite{kaushik:2002:cib} for the purpose of improving the partitioning of RDF data and the execution of queries. Tran et al. partition the data into groups having a similar structure in order to reduce communication load and the number of joins.
-\item Rondiato et al. present in \cite{riondato:2014:gsq} a graph summarisation approach that bridges to graph clustering. The summarisation is expressed as an optimisation, where an error function is to be minimised. The error function is expressed as the distance between the adjacency matrices of the graph and its summary. The number of nodes in the summary is set as a parameter to the algorithm.
-\end{itemize}
+DataGuides \cite{goldman1997dataguides} is the first work to improve the query execution through the use of an index on the summary of the structure of the graph. The summary is built with the requirement that every path in the summary is \emph{unique}; this would allow to spend less time searching through each different path. In the presence of a graph with a complex structure, the size of the summary can be as large as the graph, or even larger. This issue is discussed in \cite{goldman1999approximate}, where some constraints of DataGuides are relaxed, e.g., the existence of a path in the data graph.\\
 
-\section{Summarisation for Graph Schema Rendering}
+While DataGuides relies on the notion of automata for the creation of the summary, converting a graph that is a non-deterministic finite automaton to a deterministic finite automaton, several works leverage the notion of bisimulation~\cite{park:1981:cai} used in concurrency systems. To put in a nutshell, some constraints of the bisimulation are changed so to reduce the size of the summary, or to better adapt it to a specific application. The size of a summary is then balanced against the level of details it stores.
 
-\section{Graph Summarisation Quality}
+Milo et. al \cite{Milo:1999:ISP:645503.656266} extend the work on DataGuides, using the notion of bisimulation to build an index of the graph's structure. The authors propose to reduce further the size of a summary by defining the shape of query to answer. However, it assumes some knowledge about the structure of the graph in order to define the shape of the query.
 
-The index creation in \cite{konrath:jws:2012} is a stream-based approach. The authors investigate then the impact of the window size on the quality of the created index. However, the authors do not investigate the quality with regards to the structure of the data graph summarised by the index.
+The constraints of the bisimulation relation are relaxed so to achieve a smaller summary. Kaushik et. al \cite{kaushik:de:2002} propose a graph summarisation approach where the bisimulation is simplified by limiting the length of a path to $k$ hops. In parallel, Kaushik et. al \cite{kaushik:2002:cib} create an index of paths expressions, based on a summary that has been built for a pre-defined query expression.
+Chen et. al \cite{chen:2003:dia} propose instead to vary the maximum length of a path per node, depending on the query load of the system. Polyzotis et. al \cite{polyzotis:2006:xsx} propose a system that relies on the notion of bisimulation for estimating cardinalities necessary during query evaluation.
+
+Tran et. al \cite{Tran:2012:kde} use a similar approach to \cite{kaushik:2002:cib} for improving the partitions of RDF data and the execution of queries. The data is partitioned into groups that have a similar structure so to reduce the communication load during query evaluation and the number of joins.
+
+Riondato et al. \cite{riondato:2014:gsq} present a graph summarisation approach that bridges to graph clustering. The summarisation is expressed as an optimisation problem, where an error function is to be minimised. The function measure the error for reconstructing the graph from the summary. This function is expressed as the matrix distance between the adjacency matrices of the graph and its summary. The number of nodes in the summary is set as a parameter to the algorithm, which can be difficult for the user to decide which value to choose.\\
+
+We propose in this thesis a generic graph summarisation framework in which the summarisation is defined based on various features of the graph, e.g., attributes. No a priori knowledge about the graph is required, neither is it necessary to specify the number of sumnodes to reach. The features used for defining the summarisation can be tuned so to achieve a smaller summary, sacrificing as little as possible the amount of details recorded about the graph.
+
+\section{Graph Schema Creation via Graph Summarisation}
 
 \section{Large-scale Computation}
 \label{chap03:review:large-scale-comp}
 
-In order to deal with large graphs, distributed implementations of graph summarisation has been researched.
-Liu et al. in \cite{liu:cikm:2014} present a graph summarisation approach based the \emph{Message Passing} paradigm: the algorithm iteratively merges nodes of the graph until a predefined number of nodes are left. Various solutions for selecting which nodes to merge are discussed, a method based on \emph{Locality Sensitive Hashing} is introduced. The merge process introduces errors with regards to the original graph, i.e., either missing or additional edges.
+In order to deal with large graphs, distributed implementations of graph summarisation have been researched.\\
+
+Liu et al. \cite{liu:cikm:2014} present a graph summarisation approach based on the \emph{Message Passing} paradigm: the algorithm iteratively merges nodes of the graph until a predefined number of nodes are left; the merged nodes constitute then the sumnodes of the summary. Various solutions for selecting which nodes to merge are discussed, and a method based on \emph{Locality Sensitive Hashing} is introduced. The merge process introduces errors with regards to the original graph, i.e., either missing or additional edges.
+
+Zhengkui et al. \cite{zhengkui:2014:ppg} present an approach implemented over a MapReduce framework. It leverage the lattice graph of the summaries to process several aggregations in a single job. A best execution plan for the series of MapReduce jobs is found using a cost model.
 
 \subsection{Summary}
 
@@ -276,4 +282,6 @@ Liu et al. in \cite{liu:cikm:2014} present a graph summarisation approach based 
 \item need to know the final number of sumnodes
 \item graph summarisation approaches that consider attributes' value: T-OLAP in \cite{chen:icdm:2008}, SPAN in \cite{tian:sigmod:2008}. This is not mandatory in our framework.
 \item our graph summarisation framework is flexible in the summary construction, since it is based on graph homomorphism and the definition of the relation is left to the user.
+\item multi-valued attributes is not taken into account by the presented approaches.
+\item graph summarisation can be used as a step stone for several applications, e.g., it is the basis for applying OLAP operations over a graph.
 \end{itemize}
