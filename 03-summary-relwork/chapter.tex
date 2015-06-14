@@ -204,7 +204,13 @@ The labelling scheme proposed in \cite{khatchadourian:2010:eswc} of sumnodes and
 The authors discuss the summarisation of \emph{inter-linked} datasets through the use of specific labelled edges, i.e., \emph{owl:sameAs} edges. Instead, we consider in this scenario the context of the graphs, which we detail in Section~\ref{chap03:summary:impl:inter-datasets}.\\
 
 Navlakha et. al \cite{navlakha:2008:gsb} propose a graph summarisation approach based on Information Theory. The result of the approach is the creation of two data structures, i.e., the summary graph and a set of corrections. The set of corrections allows to rebuild the original graph by correcting any error in the summary graph, e.g., a sumedge exists in the summary that links two \emph{disconnected} nodes in the original graph. The algorithm is based on the minimum description length \cite{grunwald:2007:mdl} principle which aims to minimise the cost of the summary representation of the graph, i.e., the sum of the summary's size and of the corrections' set size.
-The size of the summary can be further reduced by allowing some errors; there is then a trade-off between the precision and the size of the summary. In contrary, we do not attempt to rebuild the original graph from the summary and so we focus on summarising the structure of the graph.
+The size of the summary can be further reduced by allowing some errors; there is then a trade-off between the precision and the size of the summary. In contrary, we do not attempt to rebuild the original graph from the summary and so we focus on summarising the structure of the graph.\\
+
+Liu et al. \cite{liu:cikm:2014} present a graph summarisation approach based on the \emph{Message Passing} paradigm. The algorithm iteratively merges nodes of the graph until a predefined number of nodes are left; the merged nodes constitute then the sumnodes of the summary. Various solutions for selecting which nodes to merge are discussed, and a method based on \emph{Locality Sensitive Hashing} \cite{gionis:1999:ssh} is introduced so to improve the merging process.
+
+A sumedge, i.e., an edge in the summary, indicates in this approach that all nodes that are mapped to the adjacent sumnodes are connected to each other as well. A subset $A \subset V$ of nodes in the graph are mapped to a sumnode $a$ and similarly, a subset $B \subset V$ of nodes are mapped to a sumnode $b$; then, if the sumedge $(a,\alpha,b)$ exists in the summary, then this means in this approach that every node in $A$ is also connected to a node in $B$. In order to reduce the size of the summary, this requirement can be relaxed when merging: the merge that incurs the less error is chosen.
+
+In comparison, our framework simplifies the graph summarisation process thanks to its summary definition. Since it is based on graph homomorphism, we know exactly to which sumnode a node of the graph is mapped to; therefore, our graph summarisation is not an iterative process, hence simplifying the overall execution.
 
 %\begin{itemize}
 %\item A system for the discovery of datasets is proposed in \cite{khatchadourian:2010:eswc}.
@@ -242,7 +248,9 @@ The summary in \cite{zhao:sigmod:2011} is defined based on an equivalence relati
 
 Colazzo et al. \cite{colazzo:www:2014} describe a framework for using OLAP over RDF data. Each cube represents a summary and is built based on SPARQL queries which define sumnodes and sumedges. This analytical framework is flexible enough to accommodate various kinds of analysis, since the aggregate function is also based on a SPARQL query. Although the analysis of the data is done through its cubes by a user, the computation of a cube is always done over the original data. The need of writing SPARQL queries suggests that a user possesses some knowledge about the structure of the graph. This work is orthogonal to the one proposed in this thesis: our approach highlights the graph structure, thanks to which a deeper analysis of the graph can be done.\\
 
-Wang et al. generalise the concept of OLAP over graphs in \cite{zhengkui:2014:ppg} by proposing a property graph model and allowing to summarise over the properties associated with edges and/or nodes; a property graph model is a graph where a node and an edge is associated with a list of property-value pairs. This approach focuses on summarising the graph based on the values of a pre-defined set of attributes; instead, we consider graphs that are heterogeneous and also possibly multi-valued attributes, for which our graph summarisation framework is more adapted.\\
+Wang et al. generalise the concept of OLAP over graphs in \cite{zhengkui:2014:ppg} by proposing a property graph model and allowing to summarise over the properties associated with edges and/or nodes; a property graph model is a graph where a node and an edge is associated with a list of property-value pairs. This approach focuses on summarising the graph based on the values of a pre-defined set of attributes; instead, we consider graphs that are heterogeneous and also possibly multi-valued attributes, for which our graph summarisation framework is more adapted.
+
+The generalised graph OLAP approach \cite{zhengkui:2014:ppg} is implemented over a MapReduce \cite{dean:2008:msd} framework. It leverage the lattice graph of all the possible summaries in order to generate several summaries in a single task in the MapReduce framework. A best execution plan for the series of MapReduce jobs is found using a cost model. In this thesis, we show how the lattice graph can also be used for the purpose of evaluating the precision of a summary in Section~\ref{chap03:sec:quality}.\\
 
 Rudolf et al. \cite{rudolf:2013:slg} propose a framework for analysing graphs through \emph{templates}. The graph is summarised given user-defined graph \emph{patterns}, which are then matched over the graph. An aggregation function is finally applied over the set of matched sub-graphs, e.g., a \emph{count} function. This approach requires the user to have some knowledge about the structure of the graph for performing the summarisation; instead, our framework does not assume any prior knowledge.
 
@@ -264,24 +272,28 @@ Riondato et al. \cite{riondato:2014:gsq} present a graph summarisation approach 
 
 We propose in this thesis a generic graph summarisation framework in which the summarisation is defined based on various features of the graph, e.g., attributes. No a priori knowledge about the graph is required, neither is it necessary to specify the number of sumnodes to reach. The features used for defining the summarisation can be tuned so to achieve a smaller summary, sacrificing as little as possible the amount of details recorded about the graph.
 
-\section{Graph Schema Creation via Graph Summarisation}
-
-\section{Large-scale Computation}
-\label{chap03:review:large-scale-comp}
-
-In order to deal with large graphs, distributed implementations of graph summarisation have been researched.\\
-
-Liu et al. \cite{liu:cikm:2014} present a graph summarisation approach based on the \emph{Message Passing} paradigm: the algorithm iteratively merges nodes of the graph until a predefined number of nodes are left; the merged nodes constitute then the sumnodes of the summary. Various solutions for selecting which nodes to merge are discussed, and a method based on \emph{Locality Sensitive Hashing} is introduced. The merge process introduces errors with regards to the original graph, i.e., either missing or additional edges.
-
-Zhengkui et al. \cite{zhengkui:2014:ppg} present an approach implemented over a MapReduce framework. It leverage the lattice graph of the summaries to process several aggregations in a single job. A best execution plan for the series of MapReduce jobs is found using a cost model.
+%\section{Graph Schema Creation via Graph Summarisation}
+%
+%\section{Large-scale Computation}
+%\label{chap03:review:large-scale-comp}
 
 \subsection{Summary}
 
-\begin{itemize}
-\item algorithms with iterations
-\item need to know the final number of sumnodes
-\item graph summarisation approaches that consider attributes' value: T-OLAP in \cite{chen:icdm:2008}, SPAN in \cite{tian:sigmod:2008}. This is not mandatory in our framework.
-\item our graph summarisation framework is flexible in the summary construction, since it is based on graph homomorphism and the definition of the relation is left to the user.
-\item multi-valued attributes is not taken into account by the presented approaches.
-\item graph summarisation can be used as a step stone for several applications, e.g., it is the basis for applying OLAP operations over a graph.
-\end{itemize}
+In this Chapter, we reviewed the literature related to graph summarisation and compared it with our framework that we present in Chapter~\ref{chap:summary}. We outline in this section the core differences between our and the presented approaches to graph summarisation.
+
+\begin{labeling}{\textbf{Expressiveness.}}
+	\item[\textbf{Expressiveness.}] The presented graph summarisation algorithms are designed for specific applications, and can then be difficult to port. We present a flexible and expressive graph summarisation based on graph \emph{homomorphism}.
+	
+	The definition of the summarisation simply needs the user's specification of how a node in the graph is mapped to a sumnode. The mapping is simply based on \emph{features} of a node. In addition, since our summarisation is based on homomorphism, the mapping process of a sumnode to a node is deterministic; there is no need to specify properties of the summary in advance, e.g., the number of sumnodes.
+	\item[\textbf{Performance.}] Graph summarisation algorithms require to visit each edge of the graph at least once. In order to improve the quality of the summary, some approaches \cite{zheng:ipsj:2011} perform several iterations over the graph. Iterations are necessary when the summarisation of a node also depends on nodes that are not directly connected to it, and so there is a need to traverse the graph. The larger is the graph, the more expensive it is to iterate over the graph. While such algorithms can be expressed in our framework, it is not an necessity in order to summarise a graph.
+	\item[\textbf{Generic.}] We present a generic graph summarisation approach that can be used as a base in a variety of applications. For example, a summary is core to drill-down/rollup operations in OLAP over graphs.
+\end{labeling}
+
+%\begin{itemize}
+%\item algorithms with iterations
+%\item need to know the final number of sumnodes
+%\item graph summarisation approaches that consider attributes' value: T-OLAP in \cite{chen:icdm:2008}, SPAN in \cite{tian:sigmod:2008}. This is not mandatory in our framework.
+%\item our graph summarisation framework is flexible in the summary construction, since it is based on graph homomorphism and the definition of the relation is left to the user.
+%\item multi-valued attributes is not taken into account by the presented approaches.
+%\item graph summarisation can be used as a step stone for several applications, e.g., it is the basis for applying OLAP operations over a graph.
+%\end{itemize}
