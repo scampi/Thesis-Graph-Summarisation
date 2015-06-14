@@ -109,33 +109,7 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, the process of graph s
 
 \begin{figure}
 	\resizebox{\textwidth}{!}{
-		\begin{timeline}{1997}{2014}{1cm}{2cm}{16cm}{\textheight}
-			\entry{1997}{DataGuides improves the query execution thanks to an index of the summary \cite{goldman1997dataguides}.}{red, dashed}
-			\entry{1999}{Approximation of DataGuides \cite{goldman1999approximate}.}{red, dashed}
-			\entry{1999}{The index proposed in \cite{Milo:1999:ISP:645503.656266} allows to summarize specific paths.}{red, dashed}
-			\entry{2002}{In the same spirit of \cite{Milo:1999:ISP:645503.656266}, the summary index is created given a query \cite{kaushik:de:2002,kaushik:2002:cib}.}{red, dashed}
-			\entry{2003}{The summarisation approach in \cite{chen:2003:dia} adapts itself to the query load.}{red, dashed}
-			\entry{2006}{\cite{polyzotis:2006:xsx}}{red, dashed}
-			\entry{2008}{Tian et. al \cite{tian:sigmod:2008,zhang:2010:ddg} present a summarisation approach that bridges to OLAP (Online analytical processing) with drilldown/rollup operations.}{blue}
-			\entry{2008}{Navlakha et. al \cite{navlakha:2008:gsb} propose a summarisation approach based on Information Theory, where the end result is a summary and a set of corrections. This allows to recreate the original graph from the summary with a bounded error.}{decorate with=diamond, paint=black, decoration={shape evenly spread=8}}
-			\entry{2008}{\cite{chen:icdm:2008}.}{green, very  thick,  dotted}
-			\entry{2010}{\cite{khatchadourian:2010:eswc}.}{decorate with=diamond, paint=black, decoration={shape evenly spread=8}}
-			\entry{2011}{\cite{zheng:ipsj:2011}}{blue}
-			\entry{2011}{\cite{qu:dasfaa:2011}}{green, very  thick,  dotted}
-			\entry{2011}{\cite{zhao:sigmod:2011}.}{green, very  thick,  dotted}
-			\entry{2012}{Tran et. al \cite{Tran:2012:kde} group similarly structured graphs together so to decrease the communication cost of join operations.}{red, dashed}
-			\entry{2012}{Konrath et. al \cite{konrath:jws:2012} suggest a dataset from its structure in which a SPARQL query is more likely to yield results.}{blue}
-			\entry{2012}{A distributed graph summarisation approach based on ``message passing'' \cite{liu:cikm:2014}}{black}
-			\entry{2013}{\cite{rudolf:2013:slg}.}{green, very  thick,  dotted}
-			\entry{2014}{Riondato et. al \cite{riondato:2014:gsq} present an approach which minimises error in reconstructing the graph from summary.}{red, dashed}
-			\entry{2014}{\cite{colazzo:www:2014}.}{green, very  thick,  dotted}
-			\entry{2014}{\cite{zhengkui:2014:ppg}.}{green, very  thick,  dotted}
-			\legend{red, dashed}{Query Optimisation}
-			\legend{blue}{Graph Exploration}
-			\legend{decorate with=diamond, paint=black, decoration={shape evenly spread=2}}{Data Profiling}
-			\legend{green, very  thick,  dotted}{Data Analytics}
-			\legend{black}{Large-scale Computation}
-		\end{timeline}
+		\input{03-summary-relwork/figures/timeline}
 	}
 	\caption{Time-line of the research on graph summarisation}
 	\label{fig:timeline}
@@ -197,6 +171,8 @@ We note that the third layer which is the most detailed one is based on \emph{bi
 \section{Data Profiling}
 \label{chap03:review:query-profiling}
 
+A graph summarisation algorithm can be used for providing insights into a graph by accumulating some statistics during the summary construction process.\\
+
 Khatchadourian et. al \cite{khatchadourian:2010:eswc} describe the graph's structure along with statistics thanks to summaries. The proposed summary is built using the bisimulation equivalence, which is described in Section~\ref{chap:summary:bisim}. The presented approach is tailored towards RDF graphs; instead, we present a graph summarisation framework that is independent of the graph modelling.
 
 The authors consider a node-only labelled directed graph: each label in our graph model presented in Section~\ref{sec:gdm:formal-model} forms a node. We use instead the same graph model for both the original graph and for the summary graph, thus simplifying the framework.
@@ -256,6 +232,8 @@ Rudolf et al. \cite{rudolf:2013:slg} propose a framework for analysing graphs th
 
 \section{Query Optimisation}
 \label{chap03:review:query-optim}
+
+The purpose of the graph summarisation is to create a graph that share the same structure as the original, but is significantly smaller. Hence, that summary can be used in place of the original in order to improve the speed of query optimisation.\\
 
 DataGuides \cite{goldman1997dataguides} is the first work to improve the query execution through the use of an index on the summary of the structure of the graph. The summary is built with the requirement that every path in the summary is \emph{unique}; this would allow to spend less time searching through each different path. In the presence of a graph with a complex structure, the size of the summary can be as large as the graph, or even larger. This issue is discussed in \cite{goldman1999approximate}, where some constraints of DataGuides are relaxed, e.g., the existence of a path in the data graph.\\
 

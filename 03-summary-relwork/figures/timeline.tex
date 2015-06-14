@@ -1,0 +1,64 @@
+\begin{tikzpicture}[timespan={}]
+% timespan={Day} -> now we have days as reference
+% timespan={}    -> no label is displayed for the timespan
+% default timespan is 'Week'
+
+\timeline[custom interval=true]{1997,...,2014}
+% \timeline[custom interval=true]{3,...,9} -> i.e., from Day 3 to Day 9
+% \timeline{8} -> i.e., from Week 1 to Week 8
+
+% put here the phases
+\begin{phases}
+\phase{between year=1 and 10 in 0,above line,phase color=blue}{10cm}
+\phase{between year=16 and 16 in 0,above line,phase color=blue}{1cm}
+\phase{between year=18 and 18 in 0,above line,phase color=blue}{1cm}
+
+\phase{between year=12 and 12 in 0.5,above line,phase color=red}{1cm}
+\phase{between year=15 and 16 in 0.5,above line,phase color=red}{2cm}
+
+\phase{between year=12 and 14 in 0.9,below line,phase color=green}{3cm}
+
+\phase{between year=12 and 12 in 0.7,below line,phase color=brown!10!black}{1cm}
+\phase{between year=15 and 15 in 0.7,below line,phase color=brown!10!black}{1cm}
+\phase{between year=17 and 18 in 0.7,below line,phase color=brown!10!black}{2cm}
+\end{phases}
+
+% put here the milestones
+\addmilestone{at=phase-1.90,direction=90:1cm,text={Query Optimisation},text options={above}}
+
+\addmilestone{at=phase-4.90,direction=120:1cm,text={Graph Exploration},text options={above}}
+
+\addmilestone{at=phase-6.-40,direction=-40:1cm,text={Data Profiling},text options={below}}
+
+\addmilestone{at=phase-7.-90,direction=-140:1cm,text={Data Analytics},text options={below}}
+
+\end{tikzpicture}
+
+
+%		\begin{timeline}{1997}{2014}{1cm}{2cm}{16cm}{\textheight}
+%			\entry{1997}{DataGuides improves the query execution thanks to an index of the summary \cite{goldman1997dataguides}.}{red, dashed}
+%			\entry{1999}{Approximation of DataGuides \cite{goldman1999approximate}.}{red, dashed}
+%			\entry{1999}{The index proposed in \cite{Milo:1999:ISP:645503.656266} allows to summarize specific paths.}{red, dashed}
+%			\entry{2002}{In the same spirit of \cite{Milo:1999:ISP:645503.656266}, the summary index is created given a query \cite{kaushik:de:2002,kaushik:2002:cib}.}{red, dashed}
+%			\entry{2003}{The summarisation approach in \cite{chen:2003:dia} adapts itself to the query load.}{red, dashed}
+%			\entry{2006}{\cite{polyzotis:2006:xsx}}{red, dashed}
+%			\entry{2008}{Tian et. al \cite{tian:sigmod:2008,zhang:2010:ddg} present a summarisation approach that bridges to OLAP (Online analytical processing) with drilldown/rollup operations.}{blue}
+%			\entry{2008}{Navlakha et. al \cite{navlakha:2008:gsb} propose a summarisation approach based on Information Theory, where the end result is a summary and a set of corrections. This allows to recreate the original graph from the summary with a bounded error.}{decorate with=diamond, paint=black, decoration={shape evenly spread=8}}
+%			\entry{2008}{\cite{chen:icdm:2008}.}{green, very  thick,  dotted}
+%			\entry{2010}{\cite{khatchadourian:2010:eswc}.}{decorate with=diamond, paint=black, decoration={shape evenly spread=8}}
+%			\entry{2011}{\cite{zheng:ipsj:2011}}{blue}
+%			\entry{2011}{\cite{qu:dasfaa:2011}}{green, very  thick,  dotted}
+%			\entry{2011}{\cite{zhao:sigmod:2011}.}{green, very  thick,  dotted}
+%			\entry{2012}{Tran et. al \cite{Tran:2012:kde} group similarly structured graphs together so to decrease the communication cost of join operations.}{red, dashed}
+%			\entry{2012}{Konrath et. al \cite{konrath:jws:2012} suggest a dataset from its structure in which a SPARQL query is more likely to yield results.}{blue}
+%			\entry{2012}{A distributed graph summarisation approach based on ``message passing'' \cite{liu:cikm:2014}}{black}
+%			\entry{2013}{\cite{rudolf:2013:slg}.}{green, very  thick,  dotted}
+%			\entry{2014}{Riondato et. al \cite{riondato:2014:gsq} present an approach which minimises error in reconstructing the graph from summary.}{red, dashed}
+%			\entry{2014}{\cite{colazzo:www:2014}.}{green, very  thick,  dotted}
+%			\entry{2014}{\cite{zhengkui:2014:ppg}.}{green, very  thick,  dotted}
+%			\legend{red, dashed}{Query Optimisation}
+%			\legend{blue}{Graph Exploration}
+%			\legend{decorate with=diamond, paint=black, decoration={shape evenly spread=2}}{Data Profiling}
+%			\legend{green, very  thick,  dotted}{Data Analytics}
+%			\legend{black}{Large-scale Computation}
+%		\end{timeline}
