@@ -5,9 +5,9 @@ In this section, we evaluate the trade-off between the performance of an impleme
 In this evaluation, we consider the following statements:
 \begin{itemize}
 	\item $G=\left\langle V, A, l_V \right\rangle$ is a graph;
-	\item the bisimulation summary of $G$ is $\mathcal{S}_{fbt} = \left\langle \mathcal{V}_{fbt}, \mathcal{A}_{fbt}, l_{\mathcal{V}_{fbt}} \right\rangle$ according to the summarisation relation $R_{fbt}$;
-	\item $\mathcal{S} = \left\langle \mathcal{V}, \mathcal{A}, l_{\mathcal{V}} \right\rangle$ is a summary of $G$ according to the summarisation relation $R$; and
-	\item there exists a relation $S \subseteq \mathcal{V}_{fbt} \times \mathcal{V}$ such that $R_{fbt} \sqsubseteq R$.
+	\item the bisimulation summary of $G$ is $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ according to the summarisation relation $R_{fbt}$;
+	\item $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ is a summary of $G$ according to the summarisation relation $R$; and
+	\item there exists a relation $S \subseteq \mathcal{W}_{fbt} \times \mathcal{W}$ such that $R_{fbt} \sqsubseteq R$.
 \end{itemize}
 
 \subsection{Design}
@@ -29,7 +29,7 @@ We present in this section three dimensions we use for evaluating a summary, i.e
 We measure the amount of data from the gold standard summary that is compressed into the evaluated summary. To this end, we compare the volume of the summary against the volume of the gold standard. We report this comparison as the ratio  $\mathcal{S}:\mathcal{S}_{fb}$ of the former to the later.
 
 $$
-\mathcal{S}:\mathcal{S}_{fb} = \frac{\vert \mathcal{V} \vert + \vert \mathcal{A} \vert}{\vert \mathcal{V}_{fb} \vert + \vert \mathcal{A}_{fb} \vert}
+\mathcal{S}:\mathcal{S}_{fb} = \frac{\vert \mathcal{W} \vert + \vert \mathcal{B} \vert}{\vert \mathcal{W}_{fb} \vert + \vert \mathcal{B}_{fb} \vert}
 $$
 
 \item[\emph{Algorithm performance.}]
@@ -46,17 +46,17 @@ We evaluate the computational performance of a summarisation relation by analysi
 With regards to all three classification of errors, we evaluate the precision of a summary thanks to the true and false positive edges set $TP(x)$ and $FP(x)$.
 We report the precision using two measures, i.e., $P1$ and $P2$.
 
-The measure $P1$ reflects the average number of true positive edges from a randomly selected node in the inferred graph $\mathfrak{G}(R)$. From right to left, we sum the edge precisions $Prec(R, x)$ of a node $x\in \mathcal{V}_{fbt}$, which we average by the number of nodes within $C(c)$. Finally, we average over the total number of nodes within the bisimulation summary.
+The measure $P1$ reflects the average number of true positive edges from a randomly selected node in the inferred graph $\mathfrak{G}(R)$. From right to left, we sum the edge precisions $Prec(R, x)$ of a node $x\in \mathcal{W}_{fbt}$, which we average by the number of nodes within $C(c)$. Finally, we average over the total number of nodes within the bisimulation summary.
 $$
 \begin{aligned}
-P1 = & \frac{1}{\vert \mathcal{V}_{fbt} \vert} \times \sum_{c \in \mathcal{V}}{\frac{1}{\vert C(c) \vert} \times \sum_{x \in C(c)}{Prec(R, x)}} \\
-\text{where}\; C(c) = & \left\lbrace x \in \mathcal{V}_{fbt} \mid (x, c) \in S \right\rbrace
+P1 = & \frac{1}{\vert \mathcal{W}_{fbt} \vert} \times \sum_{c \in \mathcal{W}}{\frac{1}{\vert C(c) \vert} \times \sum_{x \in C(c)}{Prec(R, x)}} \\
+\text{where}\; C(c) = & \left\lbrace x \in \mathcal{W}_{fbt} \mid (x, c) \in S \right\rbrace
 \end{aligned}
 $$
 
 The measure $P2$ reflects the overall chance for a randomly selected edge in the inferred graph $\mathfrak{G}(R)$ of being a true positive.
 $$
-P2 = \frac{\sum_{x \in \mathcal{V}_{fbt}}{TP(x)}}{\sum_{x \in \mathcal{V}_{fbt}}{TP(x) + FP(x)}}
+P2 = \frac{\sum_{x \in \mathcal{W}_{fbt}}{TP(x)}}{\sum_{x \in \mathcal{W}_{fbt}}{TP(x) + FP(x)}}
 $$
 \end{quotation}
 
@@ -145,7 +145,7 @@ Incoming attributes do not increase much the type precision, since the type prec
 
 \input{04-summary/experiments/schema-precision}
 
-In conclusion, we can see that a combination of both type and attribute features is necessary to achieve a good precision. The results show that taking incoming attributes as a feature of the summarisation relation is important for the connectivity precision, but not for the schema.
+In conclusion, we observe that a combination of both type and attribute features is necessary to achieve a good precision. The results show that taking incoming attributes as a feature of the summarisation relation is important for the connectivity precision, but not for the schema.
 
 However, there is place for improvement for overall connectivity precision especially on certain datasets. We observe that the precision $P2$ leads to very low precision values which is caused by a few summary nodes with a high out-degree. This indicates that the model of $P2$ is not appropriate for measuring the precision of a summary in terms of connectivity and schema.
 

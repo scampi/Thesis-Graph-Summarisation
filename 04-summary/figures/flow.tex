@@ -11,15 +11,15 @@
 
 \node [draw,circle,label={-90:\emph{No Target Sink}},right of = parse2] (filter) {Filter};
 
-\node[draw,circle,right of = edesc] (gsv) {$\mathcal{V}$};
+\node[draw,circle,right of = edesc] (gsv) {$\mathcal{W}$};
 
 \node[draw,circle,below of = gsv,label={-90:\emph{Target Node}},yshift=-.5cm] (joinsub) {{\huge $\Join$}};
 \node[draw,circle,right of = joinsub,label={-90:\emph{Source Node}}] (joinobj) {{\huge $\Join$}};
 
-\node[draw,circle,right of = joinobj] (relagg) {$\mathcal{A}$};
+\node[draw,circle,right of = joinobj] (relagg) {$\mathcal{B}$};
 \node [right of = joinobj,label={[label distance=.1cm]10:\scriptsize{GB}}] {};
 
-\node[draw,circle,right of = gsv] (attagg) {$\mathcal{A}$};
+\node[draw,circle,right of = gsv] (attagg) {$\mathcal{B}$};
 \node [right of = gsv,label={[label distance=.1cm]10:\scriptsize{GB}}] {};
 
 \node[draw,circle,right of = attagg] (attrdf) {RDF};

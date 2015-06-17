@@ -66,7 +66,7 @@ In the following we formally define a graph and introduce concepts used in the r
 	A \emph{graph} $G$ is a tuple $G = \left\langle V, A, l_V \right\rangle$ where $l_V : V \mapsto \mathcal{L}$ is a node-labelling function.
 \end{definition}
 
-We introduce below some vocabulary terms used throughout the thesis.
+We introduce below vocabulary terms used throughout the thesis.
 
 \begin{labeling}{\textbf{Attribute}}
 	\item[\textbf{Edge}] An edge labelled $\alpha$ from the node $x$ to the node $y$ is written as $\left(x, \alpha, y\right)$. We say that $x$ is the \emph{source}, and $y$ is the \emph{target}.
@@ -99,22 +99,14 @@ We introduce below some vocabulary terms used throughout the thesis.
 
 In a graph, attributes provide a semantic layer: for example, we can expect that the value of the edge labelled ``name'' represents a textual identification of the node $N_1$. Among attributes we refer as \emph{type attributes} those that define a type to which the node belongs to, e.g., the edge labelled $a$ in Figure~\ref{fig:graph} assigns the type \emph{Person} to the node $N_1$.
 
-An arbitrary set of attributes may represent the type information: in RDF graphs, we use the attribute \emph{rdf:type}\footnote{RDF type attribute: \url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#type}}. We abstract from the actual type attribute used in a dataset and denote with \gls{atype} an element of the type attributes set.
+The \emph{type} of a node can be assigned by certain attributes; in RDF graphs, we use the attribute \emph{rdf:type}\footnote{RDF type attribute: \url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#type}}. Then, the target node that is linked to by such an attribute defines the type of the source node. We define $T$ as the set of such \emph{type attributes}, and we refer to an element of that set as $\tau$, in order to abstract from the actual type attribute used.
 
-\begin{definition}[Type Attribute \gls{atype}]
-Let $t \in \mathcal{L}$ be an attribute. Let $l_t : \mathcal{L} \mapsto \{0, 1\}$ be an indicator function that is:
-$$
-l_t(\alpha \in \mathcal{L}) = \left\{
-	\begin{aligned}
-		1 & \mbox{ if } \alpha \mbox{ is a type attribute}\\
-		0 & \mbox{ otherwise.}
-	\end{aligned}
-\right.
-$$
-We call $\alpha \in \mathcal{L}$ a type attribute, denoted with $\tau$, if $l_t(\alpha) = 1$.
+\begin{definition}[Type Attributes Set $T$]
+Let $T \subset \mathcal{L}$ be a subset of labels.
+We define $T$ as the set of type attributes, and we call $\gls{atype} \in T$ a type attribute.
 \end{definition}
 
-For a given node $x \in V$, we consider $types(x)$ as the set of values for which the attribute is a type attribute. More formally, let $types(x\in V) = \left\lbrace l_V(c) \mid \exists c \in V, \exists (x, \gls{atype}, c) \in A \right\rbrace$ be the set of type values. For instance, we have $types\left(N_6\right) = \left\{ \text{Country}, \text{Place} \right\}$ in Figure~\ref{fig:graph} as the set of type values for the node $N_6$.
+For a given node $x \in V$, we consider $types(x)$ as the set of values for which the attribute is a type attribute. More formally, let $types(x\in V) = \left\lbrace l_V(c) \mid \exists c \in V (x, \gls{atype}, c) \in A \wedge \gls{atype} \in T \right\rbrace$ be the set of type values. For instance, we have $types\left(N_6\right) = \left\{ \text{Country}, \text{Place} \right\}$ in Figure~\ref{fig:graph} as the set of type values for the node $N_6$.
 
 \subsection{Entity description}
 

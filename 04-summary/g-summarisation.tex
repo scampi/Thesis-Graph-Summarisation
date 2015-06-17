@@ -5,16 +5,42 @@ Web Data contains a large amount of structured data spanning over many different
 
 In order to make sense of this deluge of data, summarisation techniques are available for different levels of the data. For example, all the information related to an entity can be summarised so to highlight the important parts. In this section, we are interested in the summarisation of the \emph{structure} of graphs. In the context of Web Data, the structure of a graph is defined by the use of predicates and classes.
 
-We present first a model for graph summarisation. Then, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data. Finally, we describe how inter-linked datasets can be summarised.
+We present first a model for graph summarisation. Then, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data in many cases. Finally, we describe how inter-linked datasets can be summarised.
 
 \cite{Milner:1989:CC:534666} introduces the concept of bisimulation to define equivalent processes in concurrent systems. The relational coarsest partition \cite{Paige:1987:TPR:37185.37186} is generally the algorithm used for computing a bisimulation on a graph.
 
 \subsection{Model}
 
-We call a graph $\mathcal{S}$ that is \emph{homomorphic} to a graph $G$ the \emph{summary} of $G$ \cite{campinas:2012:dexa}.
-A graph is homomorph to another one if there exists a mapping of nodes that matches \emph{edges} from the first to the second graph. This ensures that the structure of the first graph is kept.
+In this section, we present a formal model of graph summarisation.
 
-The Figure~\ref{fig:homomorphism} depicts two graphs, where there exists a summarisation relation $R$ that maps nodes of the right graph to nodes of the left graph. The edges of the right graph are kept in the left graph. Indeed, there is an edge from nodes $2$ and $3$ to $1$, and as well there is an edge between their mapped nodes, $a$ and $b$ respectively.\\
+\paragraph{Properties of a Summary.}
+
+Graph summarisation is an operation over the graph that abstracts from its content, in order to highlights its structure. From a structural point of view, traversing a graph or its summary is equivalent. The summary of a graph exhibits the following properties:
+\begin{enumerate}
+	\item a path in the graph exists also in the summary;
+	\label{sprop-path}
+	\item both the graph and its summary share the same vocabulary; and
+	\label{sprop-voc}
+	\item a graph may conform to several summaries.
+	\label{sprop-not-uniq}
+\end{enumerate}
+These properties of a summary are fulfilled by defining the graph summarisation as a graph \emph{homomorphism}.
+
+\paragraph{Graph homomorphism.}
+
+A graph is homomorph to another one if there exists a mapping of nodes that matches \emph{edges} from the first to the second graph. This ensures that the structure of the first graph is kept.
+The Figure~\ref{fig:homomorphism} depicts two graphs, where there exists a relation $R$ that maps nodes of the left graph to nodes of the right graph. The edges of the left graph are also kept in the right graph. Indeed, there is an edge from nodes $2$ and $3$ to $1$, and as well there is an edge between their mapped nodes, $a$ and $b$ respectively.
+
+\begin{definition}[Graph Homomorphism]
+	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{W}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be two graphs. Let $R \subseteq V \times \mathcal{W}$ be a binary relation.
+	In the context of the binary relation, $G$ is homomorphic to $\mathcal{S}$ if every edge in $G$ is \emph{mapped} to an edge in $\mathcal{S}$:
+	$$
+	\forall (u, \alpha, v) \in A\;\; \forall (x, y) \in \mathcal{W}\;\; (u, x) \in R \wedge (v, y) \in R \implies (x, \alpha, y) \in \mathcal{B}
+	$$
+	We say that $G$ is homomorphic to $\mathcal{S}$.
+\end{definition}
+
+A graph homomorphism is defined by a many-to-many binary relation $R$ from the nodes $V$ to the nodes $\mathcal{W}$, and that for every edge in $A$ there is a corresponding edge in $\mathcal{B}$. Whenever two nodes in the graph $G$ are linked by a predicate $\alpha$, then so are their corresponding nodes in the graph $\mathcal{S}$.\\
 
 \begin{figure}
 	\centering
@@ -23,42 +49,40 @@ The Figure~\ref{fig:homomorphism} depicts two graphs, where there exists a summa
 	\label{fig:homomorphism}
 \end{figure}
 
+\paragraph{Graph summary.}
+
+We call a graph $\mathcal{S}$ for which a graph $G$ is \emph{homomorphic} to --- the \emph{summary} of $G$ \cite{campinas:2012:dexa}. Indeed, the summary being homomorph to $G$ retain by definition the paths in the graph described in the property~(\ref{sprop-path}). Both graph share the set of labels $\mathcal{L}$, thus meeting the property~(\ref{sprop-voc}) of a summary.
+
+\begin{definition}[Graph Summary]
+	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{W}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be two graphs. Both graphs share the same set of labels $\mathcal{L}$. Let $R \subseteq V \times \mathcal{W}$ be a binary relation, and we call $R$ the \emph{summarisation relation}.
+	If $G$ is homomorphic to $\mathcal{S}$ then the graph $\mathcal{S}$ is a summary of $G$.
+\end{definition}
+
 \begin{remark}
 From this point on, we shall differentiate between the nodes and edges of $G$ from those of $\mathcal{S}$ by calling a node of the summary a \emph{sumnode}, and an edge a \emph{sumedge}. Unless stated explicitly, the terms node and edge refer to the components of the entity graph $G$.
 \end{remark}
 
-A graph homomorphism is defined by a many-to-many relation from the nodes $V$ to the sumnodes $\mathcal{V}$, and that for every edge in there is a corresponding sumedge. The set of sumedges $\mathcal{A}$ are derived from the edges $A$ of the graph $G$. Whenever two nodes are linked by a predicate $\alpha$, then so are their sumnodes.
-
-\begin{definition}[Graph Summary]
-Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{V}, \mathcal{A}, l_\mathcal{V} \right\rangle$ be two graphs. Let $R \subseteq V \times \mathcal{V}$ be a relation from $V$ to $\mathcal{V}$.
-$\mathcal{S}$ is a summary of $G$ if it is homomorphic to $G$:
-$$
-(u, \alpha, v) \in A \implies \left(R(u), \alpha, R(v)\right) \in \mathcal{A}
-$$
-We call $R$ the \emph{summarisation relation}.
-\end{definition}
-
-\begin{remark}
-Since the summarisation relation $R$ is a binary relation, we use the shorthand $R(u)$ to say that there exists a node $x \in \mathcal{V}$ such that $(u, x) \in R$, with $x = R(u)$.
-\end{remark}
+%\begin{remark}
+%Since the summarisation relation $R$ is a binary relation, we use the shorthand $R(u)$ to say that there exists a node $x \in \mathcal{W}$ such that $(u, x) \in R$, with $x = R(u)$.
+%\end{remark}
 
 %\begin{definition}[Graph Summary]
-%Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and $R \subseteq V \times \mathcal{V}$ be a summarisation relation. The graph summary $\mathcal{S}=\left\langle \mathcal{V}, \mathcal{A}, l_\mathcal{V} \right\rangle$ of $G$ is defined as:
+%Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and $R \subseteq V \times \mathcal{W}$ be a summarisation relation. The graph summary $\mathcal{S}=\left\langle \mathcal{W}, \mathcal{B}, l_\mathcal{W} \right\rangle$ of $G$ is defined as:
 %\begin{enumerate}
-%\item $\mathcal{V} = \left\lbrace y \mid (u,y) \in R \right\rbrace$;
-%\item $\mathcal{A} \subseteq \left\lbrace \left(x, \alpha, y\right) \mid \exists (u,x) \in R \wedge \exists (v,y) \in R, \alpha \in \mathcal{L}^A \right\rbrace$.
+%\item $\mathcal{W} = \left\lbrace y \mid (u,y) \in R \right\rbrace$;
+%\item $\mathcal{B} \subseteq \left\lbrace \left(x, \alpha, y\right) \mid \exists (u,x) \in R \wedge \exists (v,y) \in R, \alpha \in \mathcal{L}^A \right\rbrace$.
 %\end{enumerate}
-%$l_\mathcal{V} : \mathcal{V} \mapsto \mathcal{L}_\mathcal{V}$ is a sumnode labelling function.
+%$l_\mathcal{W} : \mathcal{W} \mapsto \mathcal{L}_\mathcal{W}$ is a sumnode labelling function.
 %\end{definition}
 
-\paragraph{Notation.}
-
-We use the symbol $\leftrightsquigarrow$ to express that a node of an entity graph $G$ is mapped to a sumnode of a summary $\mathcal{S}$ based on some features of the node.
-The Figure~\ref{fig:classes-summary} depicts a summary of the graph in the Figure~\ref{fig:graph} where the relation $R_t$ considers the set of types co-occurring in the graph. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $N_1$ and $N_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. The summarisation relation $R_t$ is defined as:
-$$
-R_t = \left\lbrace (u, x) \in V \times \mathcal{V} \mid x \leftrightsquigarrow types(u) \right\rbrace
-$$
-\todo{review the definition of this notation. This may warrant a new definition.}
+%\paragraph{Definition of a summary.}
+%
+%We use the symbol $\leftrightsquigarrow$ to express that a node of an entity graph $G$ is mapped to a sumnode of a summary $\mathcal{S}$ based on some features of the node.
+%The Figure~\ref{fig:classes-summary} depicts a summary of the graph in the Figure~\ref{fig:graph} where the relation $R_t$ considers the set of types co-occurring in the graph. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $N_1$ and $N_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. The summarisation relation $R_t$ is defined as:
+%$$
+%R_t = \left\lbrace (u, x) \in V \times \mathcal{W} \mid x \leftrightsquigarrow types(u) \right\rbrace
+%$$
+%\todo{review the definition of this notation. This may warrant a new definition.}
 
 %The $\sim_t$-equivalence class ${[N_1]}^{\sim_t}$ contains the nodes $\left\lbrace N_1, N_2 \right\rbrace$ of $G$, since both connect to $Person$ via the type attribute.
 %The concepts \emph{path}, \emph{type}, and \emph{attribute} introduced in the Section~\ref{sec:data-graph} hold for a summary.
@@ -85,10 +109,10 @@ The purpose of a summary is to highlight the \emph{structure} of the graph, whic
 	\quad
 	\begin{minipage}[h]{.25\textwidth}
 		\centering
-		\caption*{$R_t\left(V, \mathcal{V}\right)$}
+		\caption*{$R_t\left(V, \mathcal{W}\right)$}
 		\begin{tabular}{lc@{\hs}l}
 			\toprule
-			$V$ & \phantom{a} & $\mathcal{V}$ \\
+			$V$ & \phantom{a} & $\mathcal{W}$ \\
 			\cmidrule{1-1} \cmidrule{3-3}
 			$N_0$ & \phantom{a} & $\mathfrak{U}$ \\
 			$N_1$, $N_2$ & \phantom{a} & $S_1$ \\
@@ -117,11 +141,11 @@ The purpose of a summary is to highlight the \emph{structure} of the graph, whic
 A graph summary $\mathcal{S}$ is said \emph{precise} if every path in $\mathcal{S}$ does exist in the original graph $G$. The inverse is true by definition of the summary since it is homomorphic to $G$. However, a summary can have paths that are not present in $G$, as depicted in the Figure~\ref{fig:homomorphism}. We remark that while the structure of the graph at the source of the node mapping is kept in the second, the inverse can be false. Indeed, the figure depicts a loop on the $b$ node; although there is an edge from $1$ to $4$, there is no edge in the opposite direction. A precise summary does not present such a case. In Section~\ref{chap03:sec:quality} we study the precision of an \emph{approximate} graph summary.
 
 \begin{definition}[Precise Graph Summary]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and $\mathcal{S} = \left\langle \mathcal{V}, \mathcal{A}, l_{\mathcal{V}} \right\rangle$ be the summary of $G$ according to the summarisation relation $R \subseteq V \times \mathcal{V}$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to the summarisation relation $R \subseteq V \times \mathcal{W}$.
 We say that the summary $\mathcal{S}$ is \emph{precise} if every path in the summary $\mathcal{S}$ exists in the graph $G$
 \begin{flalign*}
 \forall n > 0\; (\alpha_1, \cdots, \alpha_n) \in \mathcal{L}^A& \\
-(x_1, \cdots, x_{n+1}) \in \mathcal{V}:&\; \forall 1 \leq i \leq n\; (x_i, \alpha_i, x_{i+1}) \in \mathcal{A} \\
+(x_1, \cdots, x_{n+1}) \in \mathcal{W}:&\; \forall 1 \leq i \leq n\; (x_i, \alpha_i, x_{i+1}) \in \mathcal{B} \\
 \implies \exists (u_1, \cdots, u_{n+1}) \in V:&\; \forall 1 \leq i \leq n\; (u_i, \alpha_i, u_{i+1}) \in A\; \text{with}\; (u_i, x_i) \in R
 \end{flalign*}
 \end{definition}
@@ -196,7 +220,7 @@ $$
 Since the bisimulation is an equivalence relation, we can create equivalence classes defined as $[x] = \left\lbrace x \in V \mid y \in V,\; x \sim y \right\rbrace$, which are the set of nodes that are bisimilar. An equivalence class is then exactly a sumnode of the summary. The summarisation relation is in this case a one-to-one mapping of the equivalence class to the sumnode.
 
 \begin{definition}[Bisimulation Summary]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph. We call $\mathcal{S}_{fbt} = \left\langle \mathcal{V}_{fbt}, \mathcal{A}_{fbt}, l_{\mathcal{V}_{fbt}} \right\rangle$ the bisimulation summary of $G$ according to the summarisation relation $R_{fbt} \subseteq V \times \mathcal{V}_{fbt}$ where $R_{fbt} = \left\lbrace \left( u, x \right) \in V \times \mathcal{V}_{fbt} \mid x \leftrightsquigarrow [u] \right\rbrace$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph. We call $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ the bisimulation summary of $G$ according to the summarisation relation $R_{fbt} \subseteq V \times \mathcal{W}_{fbt}$ where $R_{fbt} = \left\lbrace \left( u, x \right) \in V \times \mathcal{W}_{fbt} \mid x \leftrightsquigarrow [u] \right\rbrace$.
 \end{definition}
 
 \begin{remark}
@@ -218,10 +242,10 @@ In order to compute this summary, the algorithm proposed in \cite{Paige:1987:TPR
 	\quad
 	\begin{minipage}[h]{.2\textwidth}
 		\centering
-		\caption*{$R_{fbt}\left(V, \mathcal{V}\right)$}
+		\caption*{$R_{fbt}\left(V, \mathcal{W}\right)$}
 		\begin{tabular}{lc@{\hs}l}
 			\toprule
-			$V$ & \phantom{a} & $\mathcal{V}$ \\
+			$V$ & \phantom{a} & $\mathcal{W}$ \\
 			\cmidrule{1-1} \cmidrule{3-3}
 			$N_0$ & \phantom{a} & $S_0$ \\
 			$N_1$ & \phantom{a} & $S_1$ \\
@@ -257,7 +281,7 @@ We created in~\cite{campinas:2011:eos} a dataset based on Sindice\footnote{\url{
 %For example, one ontology (\url{http://purl.org/dc/terms/}) is used in more than 150 million documents and another one (\url{http://www.w3.org/2006/vcard/ns\#}) is used in more than 64 millions documents.
 
 This investigation has showed that most ontologies (99\%) are used only once. However, the distribution tail is sparse, suggesting that a few ontologies are used in a large proportion of documents.
-This result strengthens our belief that it is not a viable option for a graph summary to retain every path and combinations of paths that occur in an entity graph.
+This result strengthens our belief that it is not a viable option in many cases for a graph summary to retain every path and combinations of paths that occur in an entity graph.
 
 \begin{figure}
 	\centering
@@ -286,7 +310,10 @@ We report in Table~\ref{tab:sumrel} the relations along with the name of the sum
 
 We define $R_{st}$ as the summarisation relation that maps a node according to its type. Formally:
 $$
-R_{st} = \left\lbrace (u, x) \in V \times \mathcal{V}_{st} \mid \exists (u,\gls{atype},t) \in A : x \leftrightsquigarrow t \right\rbrace
+\begin{aligned}
+R_{st} = \{ (u, x) \in V \times \mathcal{W}_{st} \mid &\; \exists (v,y) \in V \times \mathcal{W}_{st} \\
+ & (u,\gls{atype},v) \in A \wedge (x,\gls{atype},y) \wedge l_V(v) = l_\mathcal{W}(y) \}
+\end{aligned}
 $$
 The nodes $N_4$, $N_5$, $N_6$, and $N_7$ in the Figure~\ref{fig:graph} are mapped to a same sumnode since they all have \emph{Place} as a type. The $R_{st}$ relation may map a node to multiple sumnodes since an entity may have several types. For instance, the nodes $N_6$ and $N_7$ are also mapped to another sumnode since they both share the type \emph{Country}.
 
@@ -294,15 +321,15 @@ The nodes $N_4$, $N_5$, $N_6$, and $N_7$ in the Figure~\ref{fig:graph} are mappe
 
 We define $R_t$ the relation that maps a node based on its set of types. Formally:
 $$
-R_t = \left\lbrace (u, x) \in V \times \mathcal{V}_t \mid x \leftrightsquigarrow types(u) \right\rbrace
+R_t = \left\lbrace (u, x) \in V \times \mathcal{W}_t \mid types(u) = types(x) \right\rbrace
 $$
-The Figure~\ref{fig:classes-summary} depicts the $R_a$ summary of the graph in in the Figure~\ref{fig:graph}. The nodes $N_6$ and $N_7$ are mapped to the sumnode $S_4$ because they are both associated with the types \emph{Place} and \emph{Country}. It differs from $R_{st}$ since it considers the types of a node as \emph{set} rather than individually. Indeed, the node $N_6$ is mapped to two sumnodes under the relation $R_{st}$.
+The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in in the Figure~\ref{fig:graph}. The nodes $N_6$ and $N_7$ are mapped to the sumnode $S_4$ because they are both associated with the types \emph{Place} and \emph{Country}. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $N_1$ and $N_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. It differs from $R_{st}$ since it considers the types of a node as \emph{set} rather than individually. Indeed, the node $N_6$ is mapped to two sumnodes under the relation $R_{st}$.
 
 \item[$R_a$ \textbf{relation.}]
 
 We define $R_a$ the relation that maps a node based on its set of predicates. Formally:
 $$
-R_a = \left\lbrace (u, x) \in V \times \mathcal{V}_a \mid x \leftrightsquigarrow attributes(u) \right\rbrace
+R_a = \left\lbrace (u, x) \in V \times \mathcal{W}_a \mid attributes(u) = attributes(x) \right\rbrace
 $$
 The nodes $N_3$, $N_4$, and $N_5$ are $\sim_a$-equivalent because they share the same set of attributes, i.e., $\left\lbrace label, location, type \right\rbrace$. The graph in Figure~\ref{fig:attributes-summary} is the $\sim_a$-summary of the data graph in Figure~\ref{fig:graph}.
 
@@ -316,11 +343,11 @@ The nodes $N_3$, $N_4$, and $N_5$ are $\sim_a$-equivalent because they share the
 	\quad
 	\begin{minipage}[h]{.2\textwidth}
 		\centering
-		\caption*{$R_a\left(V, \mathcal{V}\right)$}
+		\caption*{$R_a\left(V, \mathcal{W}\right)$}
 		\resizebox{\textwidth}{!}{
 		\begin{tabular}{lc@{\hs}l}
 			\toprule
-			$V$ & \phantom{a} & $\mathcal{V}$ \\
+			$V$ & \phantom{a} & $\mathcal{W}$ \\
 			\cmidrule{1-1} \cmidrule{3-3}
 			$N_0$ & \phantom{a} & $S_0$ \\
 			$N_1$, $N_2$ & \phantom{a} & $S_1$ \\
@@ -338,39 +365,52 @@ The nodes $N_3$, $N_4$, and $N_5$ are $\sim_a$-equivalent because they share the
 
 We define $R_{at}$ as the relation that maps a node based on its set of types and attributes. Formally:
 $$
-R_{at} = \left\lbrace (u, x) \in V \times \mathcal{V}_{at} \mid x \leftrightsquigarrow types(u) \cup attributes(u) \right\rbrace
+\begin{aligned}
+R_{at} = \{ (u, x) \in V \times \mathcal{W}_{at} \mid &\; types(u) = types(x) \\
+& \wedge attributes(u) = attributes(x) \}
+\end{aligned}
 $$
 The nodes $N_1$ and $N_2$ are mapped to mapped to a same sumnode by $R_{at}$ because they are associated with the same type, i.e., \emph{Person}, and they have the same attributes, i.e., $\left\lbrace lives, name, type, works \right\rbrace$.
 
 \item[$R_{ioa}$ \textbf{relation.}]
 
 We define $R_{ioa}$ the relation based on the set of incoming and outgoing attributes; that is:
-\begin{equation*}
-R_{ioa} = \left\lbrace (u, x) \in V \times \mathcal{V}_{ioa} \mid x \leftrightsquigarrow attributes(u) \cup attributes^{-1}(u) \right\rbrace
-\end{equation*}
+$$
+\begin{aligned}
+R_{ioa} =
+\{
+(u, x) \in V \times \mathcal{W}_{ioa} \mid &\; attributes(u) = attributes(x) \\
+& \wedge attributes^{-1}(u) = attributes^{-1}(x)
+\}
+\end{aligned}
+$$
 All three nodes $N_3$, $N_4$, and $N_5$ map to the same sumnode by the relation $R_a$. However with $R_{ioa}$, each is assigned to a separate sumnode, since all three have different incoming set of attributes, i.e., $\left\lbrace lives \right\rbrace$, $\left\lbrace works \right\rbrace$, and $\varnothing$, respectively.
 
 \item[$R_{ia}$ \textbf{relation.}]
 
 We define $R_{ia}$ as the relation based on the set of incoming attributes; that is:
 \begin{equation*}
-R_{ia} = \left\lbrace (u, x) \in V \times \mathcal{V}_{ia} \mid x \leftrightsquigarrow attributes^{-1}(u) \right\rbrace
+R_{ia} = \left\lbrace (u, x) \in V \times \mathcal{W}_{ia} \mid attributes^{-1}(u) = attributes^{-1}(x) \right\rbrace
 \end{equation*}
 
 \item[$R_{iat}$ \textbf{relation.}]
 
 We define $R_{iat}$ as the relation based on the set of types and incoming attributes; that is:
-\begin{equation*}
-R_{iat} = \left\lbrace (u, x) \in V \times \mathcal{V}_{iat} \mid x \leftrightsquigarrow types(u) \cup attributes^{-1}(u) \right\rbrace
-\end{equation*}
+$$
+\begin{aligned}
+R_{iat} = \{ (u, x) \in V \times \mathcal{W}_{iat} \mid &\; types(u) = types(x) \\
+& \wedge attributes^{-1}(u) = attributes^{-1}(x) \}
+\end{aligned}
+$$
 
 \item[$R_{ioat}$ \textbf{relation.}]
 
 The relation $R_{ioat}$ maps a node based on the set of types, and the incoming and outgoing attributes sets. Formally, it is defined as:
 $$
 \begin{aligned}
-R_{ioat} = \{ & (u, x) \in V \times \mathcal{V}_{ioat} \mid \\
-& x \leftrightsquigarrow types(u) \cup attributes(u) \cup attributes^{-1}(u) \}
+R_{ioat} = \{ (u, x) \in V \times \mathcal{W}_{ioat} \mid &\; types(u) = types(x) \\
+& \wedge attributes(u) = attributes(x) \\
+& \wedge attributes^{-1}(u) = attributes^{-1}(x) \}
 \end{aligned}
 $$
 Although the nodes $N_1$ and $N_2$ are mapped to a same sumnode with $R_{at}$, that is not the case with the relation $R_{ioat}$, because only the node $N_2$ has the incoming attribute $creator$.
@@ -385,12 +425,12 @@ Although the nodes $N_1$ and $N_2$ are mapped to a same sumnode with $R_{at}$, t
 	\toprule
 	 & \phantom{a} & \multicolumn{1}{c}{Notation} & \phantom{a} & \multicolumn{1}{c}{Summarisation Relation} \\
 	\cmidrule{3-3} \cmidrule{5-5}
-	\emph{Single Type} & \phantom{a} & $\mathcal{S}_{st} = \left\langle \mathcal{V}_{st}, \mathcal{A}_{st}, l_{\mathcal{V}_{st}} \right\rangle$ & \phantom{a} & $R_{st} = \left\lbrace (u, x) \in V \times \mathcal{V}_{st} \mid \exists (u, \gls{atype}, t) \in A : x \leftrightsquigarrow t \right\rbrace$ \\
-	\emph{Types} & \phantom{a} & $\mathcal{S}_t = \left\langle \mathcal{V}_t, \mathcal{A}_t, l_{\mathcal{V}_t} \right\rangle$ & \phantom{a} & $R_t = \left\lbrace (u, x) \in V \times \mathcal{V}_t \mid x \leftrightsquigarrow types(u) \right\rbrace$ \\
-	\emph{Attributes} & \phantom{a} & $\mathcal{S}_a = \left\langle \mathcal{V}_a, \mathcal{A}_a, l_{\mathcal{V}_a} \right\rangle$ & \phantom{a} & $R_a = \left\lbrace (u, x) \in V \times \mathcal{V}_a \mid x \leftrightsquigarrow attributes(u) \right\rbrace$ \\
-	\emph{Attributes \& Types} & \phantom{a} & $\mathcal{S}_{at} = \left\langle \mathcal{V}_{at}, \mathcal{A}_{at}, l_{\mathcal{V}_{at}} \right\rangle$ & \phantom{a} & $R_{at} = \left\lbrace (u, x) \in V \times \mathcal{V}_{at} \mid x \leftrightsquigarrow types(u) \cup attributes(u) \right\rbrace$ \\
-	\emph{IO Attributes} & \phantom{a} & $\mathcal{S}_{ioa} = \left\langle \mathcal{V}_{ioa}, \mathcal{A}_{ioa}, l_{\mathcal{V}_{ioa}} \right\rangle$ & \phantom{a} & $R_{ioa} = \left\lbrace (u, x) \in V \times \mathcal{V}_{ioa} \mid x \leftrightsquigarrow attributes(u) \cup attributes^{-1}(u) \right\rbrace$ \\
-	\emph{IO Attributes \& Types} & \phantom{a} & $\mathcal{S}_{ioat} = \left\langle \mathcal{V}_{ioat}, \mathcal{A}_{ioat}, l_{\mathcal{V}_{ioat}} \right\rangle$ & \phantom{a} & $R_{ioat} = \left\lbrace (u, x) \in V \times \mathcal{V}_{ioat} \mid x \leftrightsquigarrow types(u) \cup attributes(u) \cup attributes^{-1}(u) \right\rbrace$ \\
+	\emph{Single Type} & \phantom{a} & $\mathcal{S}_{st} = \left\langle \mathcal{W}_{st}, \mathcal{B}_{st}, l_{\mathcal{W}_{st}} \right\rangle$ & \phantom{a} & $R_{st} = \left\lbrace (u, x) \in V \times \mathcal{W}_{st} \mid \exists (u, \gls{atype}, t) \in A : x \leftrightsquigarrow t \right\rbrace$ \\
+	\emph{Types} & \phantom{a} & $\mathcal{S}_t = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ & \phantom{a} & $R_t = \left\lbrace (u, x) \in V \times \mathcal{W}_t \mid x \leftrightsquigarrow types(u) \right\rbrace$ \\
+	\emph{Attributes} & \phantom{a} & $\mathcal{S}_a = \left\langle \mathcal{W}_a, \mathcal{B}_a, l_{\mathcal{W}_a} \right\rangle$ & \phantom{a} & $R_a = \left\lbrace (u, x) \in V \times \mathcal{W}_a \mid x \leftrightsquigarrow attributes(u) \right\rbrace$ \\
+	\emph{Attributes \& Types} & \phantom{a} & $\mathcal{S}_{at} = \left\langle \mathcal{W}_{at}, \mathcal{B}_{at}, l_{\mathcal{W}_{at}} \right\rangle$ & \phantom{a} & $R_{at} = \left\lbrace (u, x) \in V \times \mathcal{W}_{at} \mid x \leftrightsquigarrow types(u) \cup attributes(u) \right\rbrace$ \\
+	\emph{IO Attributes} & \phantom{a} & $\mathcal{S}_{ioa} = \left\langle \mathcal{W}_{ioa}, \mathcal{B}_{ioa}, l_{\mathcal{W}_{ioa}} \right\rangle$ & \phantom{a} & $R_{ioa} = \left\lbrace (u, x) \in V \times \mathcal{W}_{ioa} \mid x \leftrightsquigarrow attributes(u) \cup attributes^{-1}(u) \right\rbrace$ \\
+	\emph{IO Attributes \& Types} & \phantom{a} & $\mathcal{S}_{ioat} = \left\langle \mathcal{W}_{ioat}, \mathcal{B}_{ioat}, l_{\mathcal{W}_{ioat}} \right\rangle$ & \phantom{a} & $R_{ioat} = \left\lbrace (u, x) \in V \times \mathcal{W}_{ioat} \mid x \leftrightsquigarrow types(u) \cup attributes(u) \cup attributes^{-1}(u) \right\rbrace$ \\
 	\bottomrule
 	\end{tabular}}
 	\caption{Summarisation relations}

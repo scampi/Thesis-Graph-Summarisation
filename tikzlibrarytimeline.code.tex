@@ -6,7 +6,7 @@
 %
 % Timeline TikZ library version 0.3a - 19/07/2014
 
-\usetikzlibrary{backgrounds,calc,shapes.geometric}
+\usetikzlibrary{backgrounds,calc,shapes.geometric,patterns}
 
 \pgfkeys{/tikz/.cd,
   timespan/.store in=\timespan,
@@ -50,7 +50,7 @@
   phase appearance/.style={
   	trapezium,
     opacity=0.3,
-    minimum height=1cm,
+    minimum height=\involvdegree,
     fill=\phasecol
   },
   above line/.style={% new style for having the trapezium above the timeline

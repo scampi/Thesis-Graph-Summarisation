@@ -5,7 +5,7 @@ The quality of a summary depends on the summarisation relation used, which we di
 
 \subsection{Summary Volume}
 
-A summary is smaller if its size $\vert \mathcal{A} \vert$ and its order $\vert \mathcal{V} \vert$ are inferior to the size $\vert A \vert$ and the order $\vert V \vert$ of the data graph.
+A summary is smaller if its size $\vert \mathcal{B} \vert$ and its order $\vert \mathcal{W} \vert$ are inferior to the size $\vert A \vert$ and the order $\vert V \vert$ of the data graph.
 
 Apart from $R_{st}$, the presented summarisation relations in Section~\ref{sec:approximate} create a summary which is always smaller or equal to the data graph, since there is a one-to-one mapping from the data graph to the summary.
 
@@ -38,12 +38,12 @@ According to the partial ordering relation $\sqsubseteq$, a $\mathcal{S}_{fbt}$ 
 We define the set $Err(R)$ as the set of inferred edges that are erroneous, i.e., the edges that do exist in a summary, but not in the original graph. Since the summary $\mathcal{S}_{fbt}$ is the most precise with regards to the structure of the original graph, we use the summary $\mathcal{S}_{fbt}$ instead of the original graph $G$ to define the set $Err(R)$.
 
 \begin{definition}[Summary Error $Err(R)$]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{V}, \mathcal{A}, l_{\mathcal{V}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{V}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{V}_{fbt}, \mathcal{A}_{fbt}, l_{\mathcal{V}_{fbt}} \right\rangle$ the bisimulation summary generated with the relation $R_{fbt}$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ the bisimulation summary generated with the relation $R_{fbt}$.
 The set $Err(R)$ is the set of edges between nodes of $\mathcal{S}_{fbt}$ that are inferred from $\mathcal{S}$ as per the $\sqsubseteq$ relation.
 \begin{equation*}
 \begin{split}
-Err(R) = \{ & (u, \alpha, v) \in \mathcal{V}_{fbt} \times \mathcal{L}^A \times \mathcal{V}_{fbt} \mid \exists (x, y) \in V^2 :\\
- & (R(x), \alpha, R(y)) \in \mathcal{A} \wedge (R_{fbt}(x), \alpha, R_{fbt}(y)) \not \in \mathcal{A}_{fbt} \}
+Err(R) = \{ & (u, \alpha, v) \in \mathcal{W}_{fbt} \times \mathcal{L}^A \times \mathcal{W}_{fbt} \mid \exists (x, y) \in V^2 :\\
+ & (R(x), \alpha, R(y)) \in \mathcal{B} \wedge (R_{fbt}(x), \alpha, R_{fbt}(y)) \not \in \mathcal{B}_{fbt} \}
 \end{split}
 \end{equation*}
 \end{definition}
@@ -55,15 +55,15 @@ We note that $Err(R)$ is equal to all possible combinations of nodes pair on $G$
 We introduce the graph $\mathfrak{G}(R)$ as the graph $\mathcal{S}_{fbt}$ that is \emph{augmented} with inferred edges from the $Err(R)$ set. This graph is used for computing the set of true and false positive edges in Section~\ref{sec:edge-precision}.
 
 \begin{definition}[Inferred Graph]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{V}, \mathcal{A}, l_{\mathcal{V}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{V}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{V}_{fbt}, \mathcal{A}_{fbt}, l_{\mathcal{V}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$ such that $R_{fbt} \sqsubseteq R$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$ such that $R_{fbt} \sqsubseteq R$.
 
-We call the \emph{inferred graph} $\mathfrak{G}(R) = \left\langle \mathcal{V}_{fbt}, \mathfrak{A}, l_{\mathcal{V}_{fbt}} \right\rangle$ the graph which nodes and edges are those of the bisimulation summary $\mathcal{S}_{fbt}$, augmented with the edges in $Err(R)$, i.e., $\mathfrak{A} = \mathcal{A}_{fbt} \cup Err(R)$.
+We call the \emph{inferred graph} $\mathfrak{G}(R) = \left\langle \mathcal{W}_{fbt}, \mathfrak{A}, l_{\mathcal{W}_{fbt}} \right\rangle$ the graph which nodes and edges are those of the bisimulation summary $\mathcal{S}_{fbt}$, augmented with the edges in $Err(R)$, i.e., $\mathfrak{A} = \mathcal{B}_{fbt} \cup Err(R)$.
 \end{definition}
 
 The Figure~\ref{fig:accuracy} depicts the inferred graph $\mathfrak{G}(R_t)$ according to the \emph{Types} summary $\mathcal{S}_t$ in Figure~\ref{fig:classes-summary}.
 Sink nodes are omitted for clarity. The bisimulation summary $\mathcal{S}_{fbt}$ is depicted with solid lines, and the \emph{Types} summary $\mathcal{S}_t$ with dashed lines. Edges from the $Err(R_t)$ set are represented with grey dotted arrows.
 
-Given that $R_{fbt} \sqsubseteq R_t$, the nodes $H^b_1$ and $H^b_2$ are mapped to the node $H^t_1$. Similarly, the nodes $H^b_4$ and $H^b_5$ are mapped to the node $H^t_3$. Since the edge $(H^t_1, works, H^t_3) \in \mathcal{A}_t$ exists, the edges labelled $works$ can then be inferred from the nodes $H^b_1$ and $H^b_2$ to $H^b_5$. Edges from the $Err(R_t)$ set cause the nodes $H^b_1$, $H^b_5$, and $H^b_6$ to be connected. This generates the path $works.location.capital$ that exists in the \emph{Types} summary, but not in the bisimulation summary, and by extension, in the original graph $G$.
+Given that $R_{fbt} \sqsubseteq R_t$, the nodes $H^b_1$ and $H^b_2$ are mapped to the node $H^t_1$. Similarly, the nodes $H^b_4$ and $H^b_5$ are mapped to the node $H^t_3$. Since the edge $(H^t_1, works, H^t_3) \in \mathcal{B}_t$ exists, the edges labelled $works$ can then be inferred from the nodes $H^b_1$ and $H^b_2$ to $H^b_5$. Edges from the $Err(R_t)$ set cause the nodes $H^b_1$, $H^b_5$, and $H^b_6$ to be connected. This generates the path $works.location.capital$ that exists in the \emph{Types} summary, but not in the bisimulation summary, and by extension, in the original graph $G$.
 
 \begin{figure}
 	\centering
@@ -107,12 +107,12 @@ $$
 \subsection{Edge Precision}
 \label{sec:edge-precision}
 
-A person looking at the inferred graph $\mathfrak{G}(R)$ can follow edges of the $\mathcal{A}_{fbt}$ set from the bisimulation summary $\mathcal{S}_{fbt}$, but also from the $Err(R)$ set. The former edges are \emph{true positive} edges, while the latter are \emph{false positive} edges. We define $Prec(R, x)$ the \emph{edge precision} of a node $x \in \mathcal{V}_{fbt}$ with regards to a summarisation relation $R$ as the proportion of the true positives over all the positive edges.
+A person looking at the inferred graph $\mathfrak{G}(R)$ can follow edges of the $\mathcal{B}_{fbt}$ set from the bisimulation summary $\mathcal{S}_{fbt}$, but also from the $Err(R)$ set. The former edges are \emph{true positive} edges, while the latter are \emph{false positive} edges. We define $Prec(R, x)$ the \emph{edge precision} of a node $x \in \mathcal{W}_{fbt}$ with regards to a summarisation relation $R$ as the proportion of the true positives over all the positive edges.
 
 $$
 \begin{aligned}
-TP(x \in \mathcal{V}_{fbt}) = & \{ (\alpha, y) \in \mathcal{L}^A \times \mathcal{V}_{fbt} \mid (x, \alpha, y) \in \mathcal{A}_{fbt} \} \\
-FP(x \in \mathcal{V}_{fbt}) = & \{ (\alpha, y) \in \mathcal{L}^A \times \mathcal{V}_{fbt} \mid (x, \alpha, y) \in Err(R) \} \\
+TP(x \in \mathcal{W}_{fbt}) = & \{ (\alpha, y) \in \mathcal{L}^A \times \mathcal{W}_{fbt} \mid (x, \alpha, y) \in \mathcal{B}_{fbt} \} \\
+FP(x \in \mathcal{W}_{fbt}) = & \{ (\alpha, y) \in \mathcal{L}^A \times \mathcal{W}_{fbt} \mid (x, \alpha, y) \in Err(R) \} \\
 Prec(R, x) = & \frac{\vert TP(x) \vert}{\vert TP(x) \bigcup FP(x) \vert}
 \end{aligned}
 $$
