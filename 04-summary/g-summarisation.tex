@@ -99,6 +99,7 @@ Depending on the definition of the summarisation relation $R$ some nodes of the 
 
 The purpose of a summary is to highlight the \emph{structure} of the graph, which is defined by the properties and types. Content information does not pertain the structure of the data, but only individual entities. Therefore, we abstract the summary from the content by mapping content nodes to a ``sink'' sumnode that we label as $\varnothing$. For example, the node labelled $Ireland$ in the Figure~\ref{fig:graph} is mapped to $\varnothing$. In RDF graphs, literals are mapped to the sink sumnode.
 
+
 \begin{figure}
 	\centering
 	\begin{minipage}{.7\textwidth}
@@ -138,32 +139,52 @@ The purpose of a summary is to highlight the \emph{structure} of the graph, whic
 
 \subsection{Precise Graph Summary}
 
-A graph summary $\mathcal{S}$ is said \emph{precise} if every path in $\mathcal{S}$ does exist in the original graph $G$. The inverse is true by definition of the summary since it is homomorphic to $G$. However, a summary can have paths that are not present in $G$, as depicted in the Figure~\ref{fig:homomorphism}. We remark that while the structure of the graph at the source of the node mapping is kept in the second, the inverse can be false. Indeed, the figure depicts a loop on the $b$ node; although there is an edge from $1$ to $4$, there is no edge in the opposite direction. A precise summary does not present such a case. In Section~\ref{chap03:sec:quality} we study the precision of an \emph{approximate} graph summary.
+The purpose of a summary is to mirror the structure of the graph while being significantly smaller. Therefore, the summary can substitute the graph and improve the performance of applications. How well the summary mirrors the graph is then of high importance. From a structural perspective, a summary is precise if it is undiscernable from the original graph.
+
+Although the structure of the graph is preserved in the summary by definition of graph homomorphism, the structure of the summary may not exactly reflect the structure of the graph. Indeed, a summary may have paths that are not present in the original graph $G$, as depicted in the Figure~\ref{fig:homomorphism}.
+
+Indeed, we remark that although the structure of the graph $G$ is kept in the summary, the inverse may not hold true. The Figure~\ref{fig:homomorphism} depicts a loop on the $b$ node; although there is an edge from $1$ to $4$, there is no edge in the opposite direction.\\
+%In Section~\ref{chap03:sec:quality} we study the precision of an \emph{approximate} graph summary.
+
+A summary is built from a graph based on a summarisation relation that maps each node of that graph to a sumnode, i.e., a node of the summary. An edge $(u, \alpha, v) \in A$ is mapped to a sumedge by definition of the graph homomorphism. Several paths in the graph may be mapped to a same path on the summary. We introduce the \emph{summary path instance} as the set of nodes in the graph which mappings form a path in the summary. For example, if we consider the summary in Figure~\ref{fig:classes-summary} built with the summarisation relation $R_t$, the set $\{N_1, N_3, N_6\}$ in an instance of the path $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in that summary; indeed, we have $(N_1, S_1) \in R_t$, $(N_3, S_2) \in R_t$, and $(N_6, S_4) \in R_t$.
+
+\begin{definition}[Summary Path Instance]
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to the summarisation relation $R \subseteq V \times \mathcal{W}$.
+
+Let $p = (x_1, \alpha_1, x_2) \in \mathcal{B} \wedge \cdots \wedge (x_n, \alpha_n, x_{n+1}) \in \mathcal{B}$ be a path in the summary $\mathcal{S}$ with $(x_1, \cdots, x_{n+1}) \in \mathcal{W}^{n+1}$.
+We call the set $\{ u_1, \cdots, u_{n+1} \}$ an instance of the summary path $p$ if each node $u_i \in V$ is mapped to a sumnode $x_i$ of $p$, i.e.,:
+$$
+\forall i \in \left[1, n\right] \; (u_i, x_i) \in R
+$$
+\end{definition}
+
+In the previous example, we remark that the summary path instance $\{N_1, N_3, N_6\}$ given for $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in Figure~\ref{fig:classes-summary} is not the only one. Indeed, there are three more instances possible, i.e., $\{N_1, N_3, N_7\}$, $\{N_2, N_3, N_6\}$, and $\{N_2, N_3, N_7\}$. However, two out of those four do not form a path in the graph in Figure~\ref{fig:graph}, i.e., the sets $\{N_1, N_3, N_7\}$ and $\{N_2, N_3, N_7\}$. We call a summary \emph{precise} if there is no such case.
 
 \begin{definition}[Precise Graph Summary]
 Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to the summarisation relation $R \subseteq V \times \mathcal{W}$.
-We say that the summary $\mathcal{S}$ is \emph{precise} if every path in the summary $\mathcal{S}$ exists in the graph $G$
-\begin{flalign*}
-\forall n > 0\; (\alpha_1, \cdots, \alpha_n) \in \mathcal{L}^A& \\
-(x_1, \cdots, x_{n+1}) \in \mathcal{W}:&\; \forall 1 \leq i \leq n\; (x_i, \alpha_i, x_{i+1}) \in \mathcal{B} \\
-\implies \exists (u_1, \cdots, u_{n+1}) \in V:&\; \forall 1 \leq i \leq n\; (u_i, \alpha_i, u_{i+1}) \in A\; \text{with}\; (u_i, x_i) \in R
-\end{flalign*}
+We say that the summary $\mathcal{S}$ is \emph{precise} if each summary path instance forms a path that does exist in the graph $G$.
 \end{definition}
-
-The first point of the definition ensures that any inference about the graph structure from a summary is correct. The second point relates to the \emph{completeness} of a summary, i.e., that all the structural information of a graph is retained.
 
 \subsubsection{Bisimulation}
 \label{chap:summary:bisim}
 
-The bisimulation~\cite{park:1981:cai} is a notion of concurrency that studies the equality of processes. It can be seen as a weaker formulation of graph isomorphism in that it defines many-to-one mappings. A bisimulation is an \emph{equivalence} relation on $V$ that relates two nodes of the graph if
-\begin{inparaenum}[(a)]
-	\item they have the same outgoing paths; and
-	\item there is also a bisimulation relation between their adjacent nodes.
-\end{inparaenum}
-Two nodes are said \emph{bisimilar} if there is a bisimulation relation between the two. Sink nodes are always bisimilar.
+The bisimulation~\cite{park:1981:cai} is a notion of concurrency that studies the equality of processes.
+%It can be seen as a weaker formulation of graph isomorphism in that it defines many-to-one mappings.
+A bisimulation is a binary relation on $V$ that relates two nodes of the graph if itself and its inverse are \emph{simulations}.
+
+If we consider two nodes $(u, v) \in V$, a simulation $R$ is a relation that states that for every edge $(u, \alpha, x) \in A$, there exists an edge $(v,\alpha, y) \in A$ such that there is also a simulation between the nodes $x$ and $y$. Intuitively, $(u,v) \in R$ communicates that the node $v$ can \emph{substitute} the node $u$ since all the outgoing paths from $u$ match those from $v$. A bisimulation is stronger as it states that the relation must be \emph{symmetric} as well, thus ensuring that either node may substitute the other.
+
+Figure~\ref{fig:bisimulation} depicts the simulation relation $R$ between nodes $E_0$ and $E'_0$ such that $(E_0, E'_0) \in R$; this illustrates that:
+\begin{enumerate}
+	\item for every outgoing edge from $E_0$, there is also such an edge from $E'_0$; and
+	\item there is a simulation between the nodes thus reached $E_i$ and $E'_i$, i.e., $(E_i, E'_i) \in R$.
+\end{enumerate}
+If for the node $E'_0$ the previous two points hold as well, then the binary relation $R$ is actually a \emph{bisimulation}.
+%Two nodes are said \emph{bisimilar} if there is a bisimulation relation between the two.
+%Sink nodes are always bisimilar.
 
 \begin{definition}[Bisimulation]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph and $\sim \subseteq V \times V$ an equivalence relation on $V$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph and $\sim \subseteq V \times V$ a binary relation on $V$.
 The relation $\sim$ is a bisimulation if $\forall (x,y) \in\; \sim$:
 \begin{equation*}
 \forall (x, \alpha, x') \in A\; \exists (y, \alpha, y') \in A \wedge (x',y') \in\; \sim
@@ -179,6 +200,15 @@ The converse must hold as well, i.e.:
 \begin{remark}
 Two nodes $(u, v) \in V^2$ are said \emph{bisimilar} if $(u, v) \in \sim$.
 \end{remark}
+
+\begin{figure}
+	\centering
+	\resizebox{.5\textwidth}{!}{
+		\includegraphics{04-summary/figures/bisimulation}
+	}
+	\caption{Simulation relation}
+	\label{fig:bisimulation}	
+\end{figure}
 
 The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same. Kaushik et al.~\cite{kaushik:2002:cib} propose the \emph{forward-and-backward} (f\&b)-bisimulation which extends the definition by considering incoming edges in addition to the outgoing ones. Since a summary deals with the graph's structure given by the relationships of attributes and types, we introduce the type as an additional requirement.
 
