@@ -260,7 +260,20 @@ $$
 Since the bisimulation is an equivalence relation, we can create equivalence classes defined as $[x] = \left\lbrace x \in V \mid y \in V,\; x \sim y \right\rbrace$; a class is the set of nodes that are bisimilar. An equivalence class is then exactly a sumnode of the summary. The summarisation relation is in this case a one-to-one mapping of the equivalence class to the sumnode.
 
 \begin{definition}[Bisimulation Summary]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph. We call $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ the bisimulation summary of $G$ according to the summarisation relation $R_{fbt} \subseteq V \times \mathcal{W}_{fbt}$ where $R_{fbt} = \left\lbrace \left( u, x \right) \in V \times \mathcal{W}_{fbt} \mid x \leftrightsquigarrow [u] \right\rbrace$.
+Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be two graphs. Let $\approx_t \subseteq V \times V$ be a fbt-bisimulation relation.
+
+The set of nodes $\mathcal{W}_{fbt}$ contains as many elements as there are equivalence classes as per the fbt-bisimulation relation:
+$$
+\lvert \mathcal{W}_{fbt} \rvert = \lvert \left\lbrace [x] \mid \exists y \in V\; x \approx_t y \right\rbrace \rvert
+$$
+
+We call $\mathcal{S}_{fbt}$ the bisimulation summary of $G$ according to the summarisation relation $R_{fbt} \subseteq V \times \mathcal{W}_{fbt}$ defined as a one-to-one mapping between the set of equivalence classes and the set $\mathcal{W}_{fbt}$:
+$$
+\begin{aligned}
+R_{fbt} = \{ \left( u, x \right) \in V \times \mathcal{W}_{fbt} \mid & \forall v \in [u]\; \left( v, x \right) \in V \times \mathcal{W}_{fbt} \\
+& \wedge \exists w \not \in [u]\; \exists y \in \mathcal{W}_{fbt} (w, y) \in V \times \mathcal{W}_{fbt} \wedge x \neq y \}
+\end{aligned}
+$$
 \end{definition}
 
 \begin{remark}
