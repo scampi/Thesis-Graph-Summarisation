@@ -1,0 +1,47 @@
+\begin{tikzpicture}[>=stealth',->,node distance=2.5cm]
+%% graph
+\node[draw,circle] (a) {a};
+\node[draw,circle,above left of = a,xshift=.5cm] (aage) {42};
+\node[draw,circle,above right of = a,xshift=-.5cm] (aname) {John};
+
+\node[draw,circle,below of = a] (b) {b};
+\node[draw,circle,above left of = b,xshift=.5cm] (bage) {33};
+\node[draw,circle,above right of = b,xshift=-.5cm] (bname) {Alice};
+
+\coordinate (gx) at ($ (aage) + (-.75,.75) $);
+\coordinate (gy) at ($ (bname) + (.95,-2.4) $);
+\draw[rounded corners,dashed]  (gx) node[yshift=.3cm,xshift=1cm] {Graph $G$} rectangle (gy);
+
+\path[every node/.style={fill=white,font=\footnotesize}]
+(b) edge node {knows} (a)
+(a) edge node {age} (aage)
+(a) edge node {name} (aname)
+(b) edge node {age} (bage)
+(b) edge node {name} (bname)
+;
+
+%% summary
+\node[draw,circle,right of = a,xshift=4.5cm,yshift=-1cm] (s) {$S_1$};
+\node[draw,circle,above left of = s,xshift=.5cm] (sage) {$S_2$};
+\node[draw,circle,above right of = s,xshift=-.5cm] (sname) {$S_3$};
+
+\coordinate (sx) at ($ (sage) + (-.75,.75) $);
+\coordinate (sy) at ($ (sname) + (.95,-3.5) $);
+\draw[rounded corners,dashed]  (sx) node[yshift=.3cm,xshift=1.4cm] {Summary $\mathcal{S}$} rectangle (sy);
+
+\path[every node/.style={font=\footnotesize}]
+(s) edge[loop below] node {knows} (s)
+(s) edge node[fill=white] {age} (sage)
+(s) edge node[fill=white] {name} (sname)
+;
+
+\path[every node/.style={fill=white,font=\footnotesize},dotted]
+(aage) edge[near end,bend right=10] node {$R$} (sage)
+(bage) edge[bend left=10] node[near end] {$R$} (sage)
+(aname) edge[near start,bend left=7] node {$R$} (sname)
+(bname) edge node[near start] {$R$} (sname)
+(a) edge[bend left=5] node {$R$} (s)
+(b) edge node {$R$} (s)
+;
+
+\end{tikzpicture}

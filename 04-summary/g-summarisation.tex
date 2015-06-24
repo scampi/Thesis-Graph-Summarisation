@@ -51,10 +51,16 @@ A graph homomorphism is defined by a many-to-many binary relation $R$ from the n
 
 \paragraph{Graph summary.}
 
+A graph and its summary do not share the same set of nodes. The nodes of the summary are taken from a set that is distinct from the set of nodes in the graph. We refer to that set as the \emph{source material}.
+
+\begin{definition}[Source Material]
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph. We call source material the set $\mathcal{Z}$ such that $\mathcal{Z} \cap V = \emptyset$.
+\end{definition}
+
 We call a graph $\mathcal{S}$ for which a graph $G$ is \emph{homomorphic} to --- the \emph{summary} of $G$ \cite{campinas:2012:dexa}. Indeed, the summary being homomorph to $G$ retain by definition the paths in the graph described in the property~(\ref{sprop-path}). Both graph share the set of labels $\mathcal{L}$, thus meeting the property~(\ref{sprop-voc}) of a summary.
 
 \begin{definition}[Graph Summary]
-Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{W}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be two graphs such that their set of nodes are distinct, i.e., $V \cap \mathcal{W} = \emptyset$. Both graphs share the same set of labels $\mathcal{L}$. Let $R \subseteq V \times \mathcal{W}$ be a binary relation, and we call $R$ the \emph{summarisation relation}.
+Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{W}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be two graphs such that $\mathcal{W} \subseteq \mathcal{Z}$. Both graphs share the same set of labels $\mathcal{L}$. Let $R \subseteq V \times \mathcal{W}$ be a binary relation, and we call $R$ the \emph{summarisation relation}.
 If $G$ is homomorphic to $\mathcal{S}$ then the graph $\mathcal{S}$ is a summary of $G$.
 \end{definition}
 
@@ -101,13 +107,36 @@ Figure~\ref{fig:basic-summary} depicts a possible summary for a graph. The dotte
 %Let $\sim$ be an equivalence relation and $G^\sim = \left\langle V^\sim, A^\sim, l_V^\sim \right\rangle$ be the $\sim$-summary of $G$, where $l_V^\sim$ be a $\sim$-equivalence class labelling function. The nodes $V^\sim$ are the $\sim$-equivalence classes on nodes of $G$ such that $V^\sim=\left\lbrace [x]^\sim : x \in V \right\rbrace$, with $[x]^\sim=\left\lbrace y \in V : y \sim x \right\rbrace$ the $\sim$-equivalence class of $x$. For every edge $x \overset{\alpha}{\rightarrow} y$ of $G$, there is an edge $[x]^\sim \overset{\alpha}{\rightarrow} [y]^\sim$ in $G^\sim$.
 %\end{definition}
 
-\paragraph{Partial relation.}
+\paragraph{Undefined sumnode.}
 
-Depending on the definition of the summarisation relation $R$ some nodes of the graph do not have any mapping because they miss required features. For example, the node $N_0$ in Figure~\ref{fig:graph} does not have a $type$ edge; it has then no mapping for the previous relation $R_t$ that considers the set of types of a node as depicted in the Figure~\ref{fig:classes-summary}. As such, the relation $R$ is a \emph{partial relation}, where only a subset $V' \subseteq V$ has mappings; for the rest, it is \emph{undefined}. In the graph summary, we represent the set of undefined mappings with a sumnode labelled $\mathfrak{U}$.
+Depending on the definition of the summarisation relation $R$ some nodes of the graph do not have any mapping because they miss required features. For example, the node $N_0$ in Figure~\ref{fig:graph} does not have a $type$ edge; it has then no mapping for a summarisation relation that considers the type of a node as depicted in the Figure~\ref{fig:classes-summary}.
+We map such node of the graph to a sumnode that we say to be \emph{undefined} for the summarisation relation, and we label it as $\mathfrak{U}$.
 
-\paragraph{Content abstraction.}
+\begin{definition}[Undefined Sumnode $\mathfrak{U}$]
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph and $\mathcal{S}=\left\langle \mathcal{W} \cup \{ \mathfrak{U} \}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be its summary according to the summarisation relation $R \subseteq V \times \mathcal{W}$.
+Let $Q \subseteq V \times \{ \mathfrak{U} \}$ be a binary relation.
+We define the sumnode labelled $\mathfrak{U}$ as the sumnode to which are mapped the nodes of $V$ that do not have an image in $\mathcal{W}$ as per the summarisation relation $R$:
+$$
+(u, \mathfrak{U}) \in Q \implies \not \exists x \in \mathcal{W}\; (u, x) \in R
+$$
+\end{definition}
 
-The purpose of a summary is to highlight the \emph{structure} of the graph, which is defined by the properties and types. Content information does not pertain the structure of the data, but only individual entities. Therefore, we abstract the summary from the content by mapping content nodes to a ``sink'' sumnode that we label as $\varnothing$. For example, the node labelled $Ireland$ in the Figure~\ref{fig:graph} is mapped to $\varnothing$. In RDF graphs, literals are mapped to the sink sumnode.
+\paragraph{Sink sumnode: content abstraction.}
+
+The purpose of a summary is to highlight the \emph{structure} of the graph, which is defined by the properties and types. Content information does not pertain to the structure of the data, but only to individual entities. Therefore, we abstract the summary from the content by mapping content nodes to a \emph{sink} sumnode that we label as $\varnothing$. For example, the node labelled $Ireland$ in the Figure~\ref{fig:graph} is mapped to $\varnothing$. Also, we note the nodes $S_2$ and $S_3$ in Figure~\ref{fig:basic-summary} are sink sumnodes.
+
+\begin{definition}[Sink Sumnode $\varnothing$]
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph and $\mathcal{S}=\left\langle \mathcal{W} \cup \{ \varnothing \}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be its summary according to the summarisation relation $R \subseteq V \times \mathcal{W}$.
+Let $P \subseteq V \times \{ \varnothing \}$ be a binary relation.
+We define the sink sumnode labelled $\varnothing$ as the sumnode to which all sink nodes in $G$ are mapped to:
+$$
+\forall \alpha \in \mathcal{L}\; u \in V \not \exists v \in V\; (u, \alpha, v) \not \in A \implies (u, \varnothing) \in P
+$$
+\end{definition}
+
+\begin{remark}
+In RDF graphs, literals are mapped to the sink sumnode.
+\end{remark}
 
 
 \begin{figure}
@@ -262,7 +291,7 @@ Since the bisimulation is an equivalence relation, we can create equivalence cla
 \begin{definition}[Bisimulation Summary]
 Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be two graphs. Let $\approx_t \subseteq V \times V$ be a fbt-bisimulation relation.
 
-The set of nodes $\mathcal{W}_{fbt}$ contains as many elements as there are equivalence classes as per the fbt-bisimulation relation:
+The set of nodes $\mathcal{W}_{fbt} \subseteq \mathcal{Z}$ contains as many elements as there are equivalence classes as per the fbt-bisimulation relation:
 $$
 \lvert \mathcal{W}_{fbt} \rvert = \lvert \left\lbrace [x] \mid \exists y \in V\; x \approx_t y \right\rbrace \rvert
 $$
