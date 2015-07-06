@@ -53,15 +53,12 @@ A graph homomorphism is defined by a many-to-many binary relation $R$ from the n
 
 A graph and its summary do not share the same set of nodes. The nodes of the summary are taken from a set that is distinct from the set of nodes in the graph. We refer to that set as the \emph{source material}.
 
-\begin{definition}[Source Material]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph. We call source material the set $\mathcal{Z}$ such that $\mathcal{Z} \cap V = \emptyset$.
-\end{definition}
-
 We call a graph $\mathcal{S}$ for which a graph $G$ is \emph{homomorphic} to --- the \emph{summary} of $G$ \cite{campinas:2012:dexa}. Indeed, the summary being homomorph to $G$ retain by definition the paths in the graph described in the property~(\ref{sprop-path}). Both graph share the set of labels $\mathcal{L}$, thus meeting the property~(\ref{sprop-voc}) of a summary.
 
 \begin{definition}[Graph Summary]
-Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{W}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be two graphs such that $\mathcal{W} \subseteq \mathcal{Z}$. Both graphs share the same set of labels $\mathcal{L}$. Let $R \subseteq V \times \mathcal{W}$ be a binary relation, and we call $R$ the \emph{summarisation relation}.
-If $G$ is homomorphic to $\mathcal{S}$ then the graph $\mathcal{S}$ is a summary of $G$.
+Let $V \subseteq \mathcal{Z}$ and $\mathcal{W} \subseteq \mathcal{Z}$ be two sets of nodes such that $V \cap \mathcal{W} = \varnothing$ where $\mathcal{Z}$ is the set of source material, and let $\mathcal{L}$ be a set of labels.
+Additionally, let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{W}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be two graphs where $l_V$ and $l_\mathcal{W}$ are two labelling functions such that $l_V : V \mapsto \mathcal{L}$ and $l_\mathcal{W} : \mathcal{W} \mapsto \mathcal{L}$. Let $R \subseteq V \times \mathcal{W}$ be a binary relation, and we call $R$ the \emph{summarisation relation}.
+If $G$ is homomorphic to $\mathcal{S}$ with respect to $R$ then we call the graph $\mathcal{S}$ a summary of $G$ with respect to $R$.
 \end{definition}
 
 \begin{remark}
@@ -110,7 +107,7 @@ Figure~\ref{fig:basic-summary} depicts a possible summary for a graph. The dotte
 \paragraph{Undefined sumnode.}
 
 Depending on the definition of the summarisation relation $R$ some nodes of the graph do not have any mapping because they miss required features. For example, the node $N_0$ in Figure~\ref{fig:graph} does not have a $type$ edge; it has then no mapping for a summarisation relation that considers the type of a node as depicted in the Figure~\ref{fig:classes-summary}.
-We map such node of the graph to a sumnode that we say to be \emph{undefined} for the summarisation relation, and we label it as $\mathfrak{U}$.
+We map such a node of the graph to a sumnode that we say to be \emph{undefined} for the summarisation relation, and we label it as $\mathfrak{U}$.
 
 \begin{definition}[Undefined Sumnode $\mathfrak{U}$]
 Let $G=\left\langle V, A, l_V \right\rangle$ be a graph and $\mathcal{S}=\left\langle \mathcal{W} \cup \{ \mathfrak{U} \}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be its summary according to the summarisation relation $R \subseteq V \times \mathcal{W}$.
@@ -300,7 +297,7 @@ We call $\mathcal{S}_{fbt}$ the bisimulation summary of $G$ according to the sum
 $$
 \begin{aligned}
 R_{fbt} = \{ \left( u, x \right) \in V \times \mathcal{W}_{fbt} \mid & \forall v \in [u]\; \left( v, x \right) \in V \times \mathcal{W}_{fbt} \\
-& \wedge \exists w \not \in [u]\; \exists y \in \mathcal{W}_{fbt} (w, y) \in V \times \mathcal{W}_{fbt} \wedge x \neq y \}
+& \wedge \forall y \in \mathcal{W}_{fbt}\; x \neq y\; (v, y) \not \in V \times \mathcal{W}_{fbt} \}
 \end{aligned}
 $$
 \end{definition}
@@ -348,13 +345,13 @@ In order to compute this summary, the algorithm proposed in \cite{Paige:1987:TPR
 \label{sec:approximate}
 
 %A graph summary is built so that it describes the structure of the graph, providing similar benefits as a relational schema does for a database, which we discuss in Section~\ref{chap03:sec:gschema}.
-In general, we find in Web Data a heterogeneous use of vocabularies, where several different ontologies can be used within the same dataset, in ways that might not have been intended for. Web Data presents a complex graph structure that varies greatly from dataset to dataset.
+In general, we find in Web Data a heterogeneous use of vocabularies, where several different ontologies can be used within the same dataset, in ways that might not have been intended for. A reasonable explanation is that each person has own way of modelling data, thus making it difficult to fit a pre-defined ontology. Web Data presents a complex graph structure that varies greatly from dataset to dataset.
 
 In addition, Web Data is composed of user-created content which quality is not assessed, e.g., use of an appropriate ontology, typographic errors when editing, incorrect description of an entity, etc. This quality issue, combined with the heterogeneity of the graph, is an obstacle towards the generation of a precise summary. Indeed, attempting to record every single path would require a summary so large that its benefits would be nullified. Therefore, we present in this section \emph{approximate} graph summaries.
 
 \subsubsection{Heterogeneous Graph Structure}
 
-We investigate the direction of \emph{approximate} summarisation for the creation of a graph summary. DataGuides~\cite{goldman1997dataguides} were proposed to index the structure of data following the OEM model.
+We investigate the direction of \emph{approximate} summarisation for the creation of a graph summary. DataGuides~\cite{goldman1997dataguides} were proposed to index the structure of data following the OEM~\cite{papakonstantinou:1995:oea} data model.
 %A requirement of the approach is that every path in the DataGuide appears in the original graph as well.
 The creation of a DataGuide is equivalent to the conversion of a non-deterministic finite automaton to a deterministic finite automaton.
 Due to heterogeneous structure of the data, the size of a DataGuide grows exponentially, becoming larger than the original data as noted by Goldman et al.~\cite{goldman1999approximate}.
@@ -385,7 +382,7 @@ A graph summary can be constructed based on various features of the data. We pre
 	\item the type URI; and
 	\item the direction of links, i.e., incoming or outgoing.
 \end{itemize}
-We report in Table~\ref{tab:sumrel} the relations along with the name of the summary that it generates.
+We report in Table~\ref{tab:sumrel} a summary of the presented relations along with the name of the summary that a relation generates.
 
 \begin{labeling}{$R_{ioat}$ \textbf{relation.}}
 \item[$R_{st}$ \textbf{relation.}]
@@ -398,6 +395,23 @@ R_{st} = \{ (u, x) \in V \times \mathcal{W}_{st} \mid &\; \exists (v,y) \in V \t
 \end{aligned}
 $$
 The nodes $N_4$, $N_5$, $N_6$, and $N_7$ in the Figure~\ref{fig:graph} are mapped to a same sumnode since they all have \emph{Place} as a type. The $R_{st}$ relation may map a node to multiple sumnodes since an entity may have several types. For instance, the nodes $N_6$ and $N_7$ are also mapped to another sumnode since they both share the type \emph{Country}.
+
+\begin{definition}[Single-Type Summary]
+Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{st} = \left\langle \mathcal{W}_{st}, \mathcal{B}_{st}, l_{\mathcal{W}_{st}} \right\rangle$ be two graphs.
+
+The set of nodes $\mathcal{W}_{st}$ is a subset of the source material, i.e., $\mathcal{W}_{st} \subseteq \mathcal{Z}$, and it contains as many elements as there are types in the graph:
+$$
+\lvert \mathcal{W}_{st} \rvert = \lvert \left\lbrace l_V(c) \mid \exists (u, \gls{atype}, c) \in A \wedge \gls{atype} \in T \right\rbrace \rvert
+$$
+
+We call $\mathcal{S}_{st}$ the single-type summary of $G$ according to the summarisation relation $R_{st} \subseteq V \times \mathcal{W}_{st}$ defined as:
+$$
+\begin{aligned}
+R_{st} = \{ (u, x) \in V \times \mathcal{W}_{st} \mid &\; \exists (v, y) \in V \times \mathcal{W}_{st} \\
+	& (u,\gls{atype},v) \in A \wedge (x,\gls{atype},y) \wedge l_V(v) = l_\mathcal{W_{st}}(y) \wedge \gls{atype} \in T \}
+\end{aligned}
+$$
+\end{definition}
 
 \item[$R_t$ \textbf{relation.}]
 
@@ -507,7 +521,7 @@ Although the nodes $N_1$ and $N_2$ are mapped to a same sumnode with $R_{at}$, t
 	\toprule
 	 & \phantom{a} & \multicolumn{1}{c}{Notation} & \phantom{a} & \multicolumn{1}{c}{Summarisation Relation} \\
 	\cmidrule{3-3} \cmidrule{5-5}
-	\emph{Single Type} & \phantom{a} & $\mathcal{S}_{st} = \left\langle \mathcal{W}_{st}, \mathcal{B}_{st}, l_{\mathcal{W}_{st}} \right\rangle$ & \phantom{a} & $R_{st} = \left\lbrace (u, x) \in V \times \mathcal{W}_{st} \mid \exists (u, \gls{atype}, t) \in A : x \leftrightsquigarrow t \right\rbrace$ \\
+	\emph{Single-Type} & \phantom{a} & $\mathcal{S}_{st} = \left\langle \mathcal{W}_{st}, \mathcal{B}_{st}, l_{\mathcal{W}_{st}} \right\rangle$ & \phantom{a} & $R_{st} = \left\lbrace (u, x) \in V \times \mathcal{W}_{st} \mid \exists (u, \gls{atype}, t) \in A : x \leftrightsquigarrow t \right\rbrace$ \\
 	\emph{Types} & \phantom{a} & $\mathcal{S}_t = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ & \phantom{a} & $R_t = \left\lbrace (u, x) \in V \times \mathcal{W}_t \mid x \leftrightsquigarrow types(u) \right\rbrace$ \\
 	\emph{Attributes} & \phantom{a} & $\mathcal{S}_a = \left\langle \mathcal{W}_a, \mathcal{B}_a, l_{\mathcal{W}_a} \right\rangle$ & \phantom{a} & $R_a = \left\lbrace (u, x) \in V \times \mathcal{W}_a \mid x \leftrightsquigarrow attributes(u) \right\rbrace$ \\
 	\emph{Attributes \& Types} & \phantom{a} & $\mathcal{S}_{at} = \left\langle \mathcal{W}_{at}, \mathcal{B}_{at}, l_{\mathcal{W}_{at}} \right\rangle$ & \phantom{a} & $R_{at} = \left\lbrace (u, x) \in V \times \mathcal{W}_{at} \mid x \leftrightsquigarrow types(u) \cup attributes(u) \right\rbrace$ \\

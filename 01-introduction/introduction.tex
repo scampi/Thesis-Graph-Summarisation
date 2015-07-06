@@ -13,7 +13,7 @@ The Semantic Web vision is to enrich this data with machine-readable semantic in
 
 The Semantic Web movement amplified the growth of, now semantically enriched, information on the Web. The Linking Open Data\footnote{\url{http://www.w3.org/wiki/SweoIG/TaskForces/CommunityProjects/LinkingOpenData}} (LOD) project is a successful example, which provides a collection of inter-linked datasets about diverse domains.
 
-A core point of the Semantic Web is the use of ``Uniform resource identifiers'' (URIs) for denoting things, e.g., objects, people, places. \ldots. This allows to uniquely name something and describe it, so that it may be reused in other places. Once the data is described using URIs, and also that existing URIs are reused, we reach a state where the data published on the Web is \emph{inter-connected}. The data thus forms a ``graph'', with nodes being the things, and the edges being the kind of relationship between two things.
+A core point of the Semantic Web is the use of ``Uniform resource identifiers'' (URIs) for denoting things, e.g., objects, people, places, \ldots. This allows to uniquely name something and describe it, so that it may be reused in other places. Once the data is described using URIs, and also that existing URIs are reused, we reach a state where the data published on the Web is \emph{inter-connected}. The data thus forms a ``graph'', with nodes being the things, and the edges being the kind of relationship between two things.
 
 The inter-connected data is at the ``scale of the Web'', consisting of thousands, if not millions, of different pieces of information about some topics. This scale opens up interesting ways of searching, browsing, exploring the data. In order to account for the variety of data about a subject calls for ``Data Mashup'' as a mean for reading through all different things being said about a specific subject. Also, within the context of a data mashup, one may be more interested in aggregated measures rather than specific details.\\
 
@@ -156,26 +156,27 @@ The ranking of a graph requires a novel way of modelling the data, in which the 
 
 \section{Challenges}
 
+The purpose of the summary is to describe the structure of a graph. Therefore, it can hold the function of a \emph{schema} for that graph.
 A schema is the basis of many algorithms over the data. A schema describes the content thus facilitating users searching for a particular resource. A schema may provide statistical information about the data, which is useful for query optimisation. Schemas help in the integration process of several data sources. As a consequence, a major challenge is to determine what features of the data can be used in order to effectively generate a schema.
 
-Applications may need different information about the data from the schema. Indeed, some errors in the schema can be acceptable for a user exploring the data, but not for a query optimizer. Hence, it is necessary to measure how accurate a schema is with regards to the data.
+Applications may need different information about the data from the summary. Indeed, some errors in the summary can be acceptable for a user exploring the data, but not for a query optimizer. Hence, it is necessary to measure how accurate a summary is with regards to the data.
 
-In the recent years, the amount of data has been growing increasingly. A glimpse of this growth over the years can be visually appreciated\footnote{The Linking Open Data cloud diagram: \url{http://lod-cloud.net/}} through the various diagrams. It is common to see data with millions of entities and billions of statements, to which the ``Open Data'' movement contributed a significant part. However, the ease of sharing data has the downside of that data not following a strict schema, if any. As a consequence, there is a need for techniques that can provide a schema without restraining the ``evolution'' of the data, while at the same time that can scale to large volumes of data.
+In the recent years, the amount of data has been growing increasingly. A glimpse of this growth over the years can be visually appreciated\footnote{The Linking Open Data cloud diagram: \url{http://lod-cloud.net/}} through the various diagrams of the Linking Open Data cloud. It is common to see data with millions of entities and billions of statements, to which the ``Open Data'' movement contributed a significant part. However, the ease of sharing data has the downside of that data not following a strict schema, if any. As a consequence, there is a need for techniques that can provide a structure akin to a schema, e.g., a summary, without restraining the ``evolution'' of the data, while at the same time that can scale to large volumes of data.
 
 \section{Scope of the Research}
 
-The scope of this thesis is to study the extraction of schemas from large scale semi-structured information sources. By semi-structured we refer to data that present some structured but that is not followed strictly by all records in the data set. By large scale we mean data which contain millions of entities with billions of statements describing said entities.
+The scope of this thesis is to study the creation of summaries on large scale semi-structured information sources. By semi-structured we mean data that present some structured but that is not followed strictly by all records in the dataset. By large scale we mean data which contain millions of entities with billions of statements describing said entities.
 
-The main challenge is to present a schema extraction process that is able to cope with the scale of the data, as well as with the variability of the data due to the heterogeneous and loose use of vocabularies. To this end, we investigate graph summarisation approaches which generate schemas via graph homomorphism. Due to the heterogeneity of the data, the generation of \emph{approximate} schemas is the only viable option for many cases.
+The main challenge is to present a summary creation process that is able to cope with the scale of the data, as well as with the variability of the data due to the heterogeneous and loose use of vocabularies. To this end, we investigate graph summarisation approaches which generate summaries via graph homomorphism. Due to the heterogeneity of the data, the generation of \emph{approximate} summaries is the only viable option for a large number of use cases.
 
-Different applications have varying interactivity with respect to the schema. We investigate ranking techniques for retrieving first the parts of the schema an application need. We evaluate how ranking can be used for improving the exploration of data.
+Different applications have varying interactivity with respect to the summary. We investigate ranking techniques for retrieving first the parts of the summary an application need. We evaluate how ranking can be used for improving the exploration of data.
 
 \section{Applications}
 
 Graph summarisation produces a \emph{summary} of the graph's structure, providing information akin to a schema in relational databases. We can then leverage the summary in various ways, of which some are presented in this thesis.
 
 \begin{labeling}{\emph{Browsing of a dataset's structure.}}
-\item[\emph{Querying assistance.}] We use the structural information from a summary in order to assist a user in writing a query. This allows users having little to no knowledge about the data to build meaningful queries.
+\item[\emph{Querying assistance.}] We use the structural information from a summary in order to assist a user in writing a query over the graph. This allows users having little to no knowledge about the data to build meaningful queries.
 
 \item[\emph{Browsing of a dataset's structure.}] The information gathered during the graph summarisation process of a dataset is made available for browsing. This enables a user to learn about the internals of a dataset: its structure, the kind of information it carries, the relationships between concepts, or its connections to other datasets.
 \end{labeling}
