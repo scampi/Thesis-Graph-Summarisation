@@ -1,19 +1,45 @@
 \section{Graph Summary Generation}
 \label{chap:summary:algo}
 
-In this section, we present an algorithm for generating a graph summary. Some optimisations are possible depending on the relation. However, the proposed approach is independent of the summarisation relation used in order to cater for most relations. The algorithm takes a graph in input and outputs a graph summary, which is distinct from the input graph.
-We first present a version of the algorithm for a single dataset and then for a collection of several.
-Next, we describe two implementations of the algorithm, one based on MapReduce~\cite{dean:2004:msd}, and the other on SPARQL.
+In this section, we present an algorithm for generating a graph summary. Some optimisations are possible depending on the relation. However, the proposed approach is independent of the summarisation relation used. The algorithm takes a graph in input and outputs a graph summary, which is distinct from the input graph.
+We first present a version of the algorithm for a single dataset and then for a collection of several in Section~\ref{sec:summary-algos}.
+Next, we describe in Section~\ref{sec:summary-impl} two implementations of the algorithm, one based on MapReduce~\cite{dean:2004:msd}, and the other on SPARQL.
 
-\subsection{Algorithm}
+\subsection{Algorithms}
+\label{sec:summary-algos}
 
-The creation of a graph summary is decomposed into three steps. In a first step, we aggregate all the information about a node needed for the summarisation relation. In a second step, we create a table that associates an entity (a node of $G$) to a sumnode. In a third step, we materialise the sumedges by joining the previous table with the original graph.
+The creation of a graph summary is decomposed into three steps. In a first step, we aggregate all the information about a node needed for the summarisation relation. In a second step, we create a table that associates a node of $G$ to a sumnode. In a third step, we materialise the sumedges by joining the previous table with the original graph.
+
+\begin{labeling}{\textbf{\underline{Step 2:}} \emph{Node to sumnode mapping.}}
+	\item[\textbf{\underline{Step 1:}} \emph{Entity description.}]
+	\phantomsection
+	\label{step-ed}
+	In order to create a graph summary, the basic information we manipulate is an entity. The computation of the entity description \gls{edesc} requires a pass over the edges, with a worst case complexity of $O(\vert A \vert)$. The entity description provides the necessary contextual information needed for the summarisation relation.
+	
+	\item[\textbf{\underline{Step 2:}} \emph{Node to sumnode mapping.}]
+	\phantomsection
+	\label{step-hn}
+	A sumnode unique identifier is defined based on the entity description \gls{edesc}, with regards to the summarisation relation.
+	%This is the core operation of the \texttt{GetSumnode} function, which assigns a sumnode to a node.
+	For example, a unique identifier can be created from the types of an entity for the relation $R_t$.
+	The worst case complexity of this operation is $O(\vert V \vert)$, since we need to visit each node of the graph.
+	
+	\item[\textbf{\underline{Step 3:}} \emph{Sumedge materialisation.}]
+	\phantomsection
+	\label{step-he}
+	We need to join the previous mappings of node to sumnode with the original graph in order to materialise an sumedge. We do this by two joins, i.e., on the source and target nodes. In this step, we need to visit each edge in the graph, so in the worst case it has a $O\left(\vert A \vert\right)$ complexity.
+	
+	\item[\textbf{\underline{Step 4:}} \emph{Statistics gathering.}]
+	\phantomsection
+	\label{step-stats}
+	During the previous steps, it is possible to gather statistics about the graph. In the Step~2, we can keep the count of nodes that are mapped to a sumnode. In the Step~3, we can count the occurrences of an edge between two sumnodes. Such statistics provide insight into the graph structure, complementing the graph summary.
+\end{labeling}
 
 \subsubsection{Graph Summarisation of a Single Dataset}
 
 We present here the graph summarisation algorithm that is aimed at processing a single dataset.
 %The Figure~\ref{fig:gs-algo} depicts the overall algorithm for generating a graph summary.
-The Algorithm~\ref{alg:summary} outlines the flow of the graph summarisation which takes a graph as input and outputs its summary. For each edge of the graph, the algorithm first retrieves the sumnodes corresponding to the source and target nodes thanks to the \texttt{GetSumnode} function. Then, the corresponding sumedge is added to the summary. The lines~2-5 represent the first two steps of the graph summary creation, and the line~7 corresponds to the materialisation of the sumedge.
+The Algorithm~\ref{alg:summary} outlines the flow of the graph summarisation which takes a graph as input and outputs its summary for a given summarisation relation. For each edge of the graph, the algorithm first retrieves the sumnodes corresponding to the source and target nodes thanks to the \texttt{GetSumnode} function. Indeed, since the summary of a graph is unique for a given summarisation relation, the sumnode can be computed deterministically. Then, the corresponding sumedge is added to the summary. The lines~2-5 represent the first two steps of the graph summary creation, and the line~7 corresponds to the materialisation of the sumedge.
 
 \begin{remark}
 On line~5 we retrieve the sumnode of $v$ only if it is not a type, since we consider the type as a feature of the summarisation relation.
@@ -48,33 +74,10 @@ On line~5 we retrieve the sumnode of $v$ only if it is not a type, since we cons
 	\label{alg:summary}
 \end{algorithm}
 
-\begin{labeling}{\textbf{\underline{Step 2:}} \emph{Node to sumnode mapping.}}
-\item[\textbf{\underline{Step 1:}} \emph{Entity description.}]
-\phantomsection
-\label{step-ed}
-In order to create a graph summary, the basic information we manipulate is an entity. The computation of the entity description \gls{edesc} requires a pass over the edges, with a worst case complexity of $O(\vert A \vert)$. The entity description provides the necessary contextual information needed for the summarisation relation.
-
-\item[\textbf{\underline{Step 2:}} \emph{Node to sumnode mapping.}]
-\phantomsection
-\label{step-hn}
-A sumnode unique identifier is defined based on the entity description \gls{edesc}, with regards to the summarisation relation. This is the core operation of the \texttt{GetSumnode} function, which assigns a sumnode to a node. For example, a unique identifier can be created from the types of an entity for the relation $R_t$.
-The worst case complexity of this operation is $O(\vert V \vert)$, since we need to visit each node of the graph.
-
-\item[\textbf{\underline{Step 3:}} \emph{Sumedge materialisation.}]
-\phantomsection
-\label{step-he}
-We need to join the previous mappings of node to sumnode with the original graph in order to materialise an sumedge. We do this by two joins, i.e., on the source and target nodes. In this step, we need to visit each edge in the graph, so in the worst case it has a $O\left(\vert A \vert\right)$ complexity.
-
-\item[\textbf{\underline{Step 4:}} \emph{Statistics gathering.}]
-\phantomsection
-\label{step-stats}
-During the previous steps, it is possible to gather statistics about the graph. In the Step~2, we can keep the count of nodes that are mapped to a sumnode. In the Step~3, we can count the occurrences of an edge between two sumnodes. Such statistics provide insight into the graph structure, complementing the graph summary.
-\end{labeling}
-
 \paragraph{Example.}
 
-In the Figure~\ref{tab:algo-ex}, we depict the \emph{Types} summarisation $R_t$ of a graph describing people and documents. In Step~2 we assign the sumnode \emph{h1} to the nodes (i.e., \emph{:e1} and \emph{:e3}) of type \emph{:Person}, and \emph{h2} to the node (i.e., \emph{:e2}) of type \emph{:Document}. In Step~3, we join the edges of the input graph with the table created in Step~2 in order to retrieve the sumnodes.
-It is possible to gather statistics about the summarisation by, e.g., grouping over the sumnodes and counting the number of rows in a group. The Figure~\ref{fig:algo-ex} depicts the \emph{Types} summary that is outputted in the Figure~\ref{tab:algo-ex}.
+In the Figure~\ref{tab:algo-ex}, we depict the \emph{Types} summarisation $R_t$ of a graph describing people and documents. We group the edges describing a same node in \hyperref[step-ed]{Step 1}. In \hyperref[step-hn]{Step 2} we assign the sumnode \emph{h1} to the nodes (i.e., \emph{:e1} and \emph{:e3}) of type \emph{:Person}, and \emph{h2} to the node (i.e., \emph{:e2}) of type \emph{:Document}. In \hyperref[step-he]{Step 3}, we join the edges of the input graph with the table created in \hyperref[step-hn]{Step 2} in order to retrieve the sumnodes.
+It is possible to gather statistics about the summarisation in \hyperref[step-stats]{Step 4} by, e.g., grouping over the sumnodes and counting the number of rows in a group. The Figure~\ref{fig:algo-ex} depicts the \emph{Types} summary that is outputted in the Figure~\ref{tab:algo-ex}.
 
 \begin{figure}
 	\centering
@@ -101,16 +104,16 @@ It is possible to gather statistics about the summarisation by, e.g., grouping o
 \subsubsection{Graph Summarisation of Inter-Linked Datasets}
 \label{chap03:summary:impl:inter-datasets}
 
-The Web Data is a collection of semi-structured data that hail from a variety of sources. Sources may provide overlapping information and reference each other. In such an environment, questions of trust about the legality of information arise, e.g.,, whether one has the permission to describe some entity (node in the graph). Since the graph summary is built from the data itself, it may report an unexpected structure of the graph in the case of inter-linked datasets, which is discussed in the next paragraph.
+The Web Data is a collection of semi-structured data that hail from a variety of sources. Sources may provide overlapping information and reference each other. In such an environment, questions of trust about the legality of information arise, e.g., whether some description associated to a node in the graph is accurate or not. Since the graph summary is built from (inter-linked) data, it may present a structure of the graph that is not expected for a given dataset. We discuss in the next paragraph challenges presented in summarising inter-lined datasets.
 
-\paragraph{Danger of summarising heterogeneous inter-linked datasets.}
+\paragraph{Challenge in summarising heterogeneous inter-linked datasets.}
 
-The information about an entity can be spread across several datasets. In the Web of Data this happens when a same entity URI is reused across datasets. The \hyperref[step-hn]{Step 2} of the graph summarisation relies on the entity description \gls{edesc} in order to create the corresponding sumnode. Some edges of the description might be erroneous, which would then impact negatively on the summary.
+The information about an entity, e.g., a person, a place, an organisation, \ldots, can be spread across several datasets. In the Web of Data this happens when a same entity URI is reused across datasets. The \hyperref[step-hn]{Step 2} of the graph summarisation relies on the entity description \gls{edesc} in order to create the corresponding sumnode. Some edges of the description might be erroneous, which would then impact negatively on the summary. A solution is to keep track of the \emph{origin} of an edge and act accordingly during the summarisation process.
 
-In Figure~\ref{fig:sum-issue} we depict the summarisation of a graph which edges are spread over the datasets \emph{D1} and \emph{D2}. The former contains the edges $\{ (N_1, a, Person), (N_1, name, John) \}$, while the latter contains $\{ (N_1, a, Fiction), (N_1, title, Rama) \}$. Since the same node $N_1$ is used in \emph{D1} and \emph{D2}, all four edges contribute to the summarisation relation. That node is then mapped to the sumnode $T_1$ according to the \emph{Types} summarisation relation $R_t$.
-Due to the overlap over \emph{D1} and \emph{D2} of $N_1$'s entity description, the sumnode reports that it is of both types \emph{Person} and \emph{Fiction}, as well as both attributes \emph{name} and \emph{title}.
+In Figure~\ref{fig:sum-issue} we depict the summarisation of a graph which edges are spread over the datasets \emph{D1} and \emph{D2}. The former contains the edges $\{ (N_1, a, Person), (N_1, name, John) \}$, while the latter contains $\{ (N_1, a, Book), (N_1, title, Rama) \}$. Since the same node $N_1$ is used in \emph{D1} and \emph{D2}, all four edges contribute to the summarisation relation. That node is then mapped to the sumnode $T_1$ according to the \emph{Types} summarisation relation $R_t$.
+Due to the overlap over \emph{D1} and \emph{D2} of $N_1$'s entity description, the sumnode reports that it is of both types \emph{Person} and \emph{Book}, as well as both attributes \emph{name} and \emph{title}.
 
-Therefore, information about an entity within a dataset can be erroneous, e.g., either the graph in \emph{D1} or in \emph{D2}, which leads to a misleading graph summary.
+Therefore, information about an entity within a dataset can be erroneous since it is unlikely that a same node is typed both a \emph{Person} and a \emph{Book}. It is likely that either the graph in \emph{D1} or in \emph{D2} is incorrect; this leads to a misleading graph summary.
 In order to prevent this issue, we need to differentiate edges within \emph{D1} from those in \emph{D2}.
 
 \begin{figure}
@@ -118,7 +121,7 @@ In order to prevent this issue, we need to differentiate edges within \emph{D1} 
 	\resizebox{.8\textwidth}{!}{
 		\input{04-summary/figures/summary-ild}
 	}
-	\caption{Heterogeneous data source issue with the \emph{Types} summarisation relation $R_t$}
+	\caption{Challenge in summarising heterogeneous data sources with the \emph{Types} summarisation relation $R_t$. The datasets D1 and D2 contain edges that describe a same node labelled $N_1$.}
 	\label{fig:sum-issue}
 \end{figure}
 
@@ -126,10 +129,10 @@ In order to prevent this issue, we need to differentiate edges within \emph{D1} 
 
 In this section, we introduce the concept of \emph{edge authority} which is needed for the summarisation of inter-linked datasets.
 
-\begin{labeling}{\emph{Provenance:}}
-	\item[\emph{Provenance:}] Due to the principle of Linked Data which states that anything can be said about anything, there is a need to know the provenance of an edge. This necessity goes in accordance with the N-Quads\footnote{\url{http://www.w3.org/TR/n-quads/}} serialisation format. The provenance of an edge indicates the dataset it is originally from.
+\begin{labeling}{\emph{Edge Provenance:}}
+	\item[\emph{Edge Provenance:}] Due to the principle of Linked Data which states that anything can be said about anything, there is a need to know the provenance of an edge. This necessity goes in accordance with the N-Quads\footnote{\url{http://www.w3.org/TR/n-quads/}} serialisation format. The provenance of an edge indicates the dataset it is originally from.
 	
-	\item[\emph{Ownership:}] To assess the information given by an edge, we need to know the ownership of an entity (a node) in addition to the edge's provenance. This concept differs from the \emph{provenance} of an edge in the sense that a dataset may contain statements (edges) about an entity, but not necessarily owns that entity.
+	\item[\emph{Node Ownership:}] To assess the information given by an edge, we need to know the ownership of a node in addition to the edge's provenance. This concept differs from the \emph{provenance} of an edge in the sense that a dataset may contain edges about a node, but not necessarily owns that node.
 \end{labeling}
 
 \begin{definition}[Edge Provenance]
@@ -137,7 +140,7 @@ In this section, we introduce the concept of \emph{edge authority} which is need
 \end{definition}
 
 \begin{definition}[Node Ownership]
-	Let $G = \left\langle V, A, l_V \right\rangle$ be a graph and $\gls{D}$ the set of dataset labels. The ownership of a node is the function $\gls{dsource} : V \mapsto \gls{D}$ which maps a node to a dataset label.
+	Let $G = \left\langle V, A, l_V \right\rangle$ be a graph. The ownership of a node is the function $\gls{dsource} : V \mapsto \mathcal{L}$ which maps a node to a dataset label.
 \end{definition}
 
 \begin{remark}
@@ -155,20 +158,21 @@ The authority of an edge combines the concepts of provenance and ownership, in o
 	In RDF, an edge which source node is a blank node has authority implicitly, since it is local to the dataset it originates from.
 \end{remark}
 
-The Figure~\ref{fig:authority} depicts various cases of authority. A dataset is represented by a colour and a line type, i.e., there are three datasets {\bfseries A}, {\bfseries B}, and {\bfseries C} which are dotted red, solid blue, and dashed green, respectively. The edges are coded in the same way, according to its provenance.
+The Figure~\ref{fig:authority} depicts various cases of authority. A dataset is represented by a colour and a line type, i.e., there are three datasets {\bfseries A}, {\bfseries B}, and {\bfseries C} which are dotted red, solid blue, and dashed green, respectively. The provenance of an edge determines its colour and line type. The ownership of a node is determined visually by the dataset it is in. We refer to the graphs in datasets \textbf{A}, \textbf{B}, \textbf{C} as $G_A$, $G_B$, and $G_C$, respectively.\\
 
-The provenance of the nodes $a_1$ and $a_2$ is dataset {\bfseries A}. The ownership of the node $b_1$ is dataset {\bfseries B}. Both edges (dotted and red edges) from $a_1$ to $a_2$ and $b_1$ have \emph{authority} since
+The ownership of the nodes $a_1$ and $a_2$ is dataset {\bfseries A}, and it is dataset {\bfseries B} for the node $b_1$. Both edges $(a_1, \alpha, a_2)$ and $\left(a_1, \beta, b_1 \right)$ have \emph{authority} since
 \begin{inparaenum}[(1)]
-	\item the ownership of the source node is dataset {\bfseries A}, i.e., $\gls{dsource}(a_1) = \textbf{A}$; and
-	\item the provenance of both edges is dataset {\bfseries A}, i.e., $\gls{Glabel}(G_A) = \textbf{A}$ with $G_A$ the graph which dataset label is \textbf{A}.
+	\item the ownership of the source node $a_1$ is the dataset {\bfseries A}, i.e., $\gls{dsource}(a_1) = \textbf{A}$; and
+	\item the provenance of both edges is also dataset {\bfseries A}, i.e., $\gls{Glabel}(G_A) = \textbf{A}$.
 \end{inparaenum}
+Since $\gls{dsource}(a_1) = \gls{Glabel}(G_A)$, both edges aforementioned have authority.\\
 
-The edge (solid and blue edge) from $a_2$ to $b_1$ has \textbf{no} authority, since its provenance is {\bfseries B} although it is about a node of {\bfseries A}. Similarly, the edge (dashed and green edge) from $a_1$ to $b_1$ has no authority either, since its provenance is not equal to the ownership of node $a_1$.
+The edge $\left(a_2, \gamma, b_1\right)$ does not have authority, since its provenance is {\bfseries B} and the ownership of its source node $a_2$ is {\bfseries A}. Similarly, the edge $\left(a_1,\delta,b_1\right)$ does not have authority either, since its provenance (dataset \textbf{C}) is not equal to the ownership of node $a_1$ (dataset \textbf{A}).
 
 \begin{figure}
 	\centering
 	\input{04-summary/figures/authority}
-	\caption{Edge authority. A dataset is represented by a colour and a line type. Edges are coded in the same way, based on the provenance of the edge.}
+	\caption{Edge authority. A dataset is represented by a colour and a line type. The provenance of an edge determines its colour and line type. The ownership of a node is determined visually by the dataset it is in.}
 	\label{fig:authority}
 \end{figure}
 
@@ -183,13 +187,15 @@ In order to summarize a collection of inter-linked datasets, we extend the Algor
 %We augment the edges of the input graphs with their provenance.
 %The Algorithm~\ref{alg:id-summary} modifies the function \texttt{GetSumnode} so to make it aware of the dataset label component.
 The Algorithm~\ref{alg:id-summary} modifies the function \texttt{GetSumnode} so to implement the edge authority.
-We name it as \texttt{GetSumnode\textsubscript{i}} to mark this change.
-We extract the features for the summarisation relation from the edges in the entity description \gls{edesc} depending on two conditions:
-\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
+We name it as \texttt{GetSumnode\textsubscript{i}} to mark this change, where the subscript \emph{i} denotes the dataset label.
+We extract the features for the summarisation relation from the edges in the entity description \gls{edesc} only if one of the following conditions is met:
+\begin{enumerate}
 \item the edge has authority; or
 \item the provenance of the edge is $G_i$.
 \end{enumerate}
-By doing so, we retain the summarisation features from each dataset. This ensures we can summarise a dataset that reuses a node external to it, without corrupting the information about that node. The features which have authority are always used in order to support the case where a dataset reuses a node it didn't provide the necessary summarisation features for (e.g., types).
+By doing so, we retain the summarisation features from each dataset. This ensures we can summarise a dataset that uses a node which ownership is external to it, without corrupting the information about that node.% The features which have authority are always used in order to support the case where a dataset reuses a node it didn't provide the necessary summarisation features for (e.g., types).
+
+The Algorithm~\ref{alg:id-summary} takes a collections graphs from $n$ datasets, and outputs a summary that describes the structure of graphs within and between datasets. This algorithm is the same as the Algorithm~\ref{alg:summary}, but with the redefined \texttt{GetSumnode\textsubscript{i}} function. Given a node $u \in V$, that function considers the edges from its entity description and filters out those that do not have authority (lines~3-4).
 
 \begin{algorithm}
 	\DontPrintSemicolon
@@ -213,7 +219,7 @@ By doing so, we retain the summarisation features from each dataset. This ensure
 %	\BlankLine
 	\tcp{The \sn function considers the features that have authority and those which provenance is $G_i$}
 	\Fn{\sn{$u \in V$}}{
-		\ForEach{$e \in \gls{edesc}(u)$}{
+		\ForEach(\tcp*[h]{For every edge in the entity description of $u$}){$e \in \gls{edesc}(u)$}{
 			\uIf(\tcp*[h]{The edge $e$ has authority}){$\gls{Glabel}(e) = \gls{dsource}(u)$}{
 				\tcp{Extract features for the summarisation relation from $e$}
 			}
@@ -228,12 +234,12 @@ By doing so, we retain the summarisation features from each dataset. This ensure
 
 \subparagraph{Example.}
 
-In Figure~\ref{tab:id-algo-ex} we depict the summarisation of two inter-linked datasets, \textbf{A} and \textbf{B}, where a person in the former is related to a person in the latter. The resulting \emph{Types} summary is depicted on the Figure~\ref{fig:id-algo-ex}, where the edges follows the same representation of the datasets, i.e., those which provenance is \textbf{A} are solid red, and those which provenance is \textbf{B} are dashed blue.
+In Figure~\ref{tab:id-algo-ex} we depict the summarisation $R_t$ of two inter-linked datasets, \textbf{A} and \textbf{B}, where a person in the former is related to a person in the latter. The resulting \emph{Types} summary is depicted on the Figure~\ref{fig:id-algo-ex}, where the edges follows the same representation of the datasets, i.e., those which provenance is \textbf{A} are solid red, and those which provenance is \textbf{B} are dashed blue.
 
-Type features of the node \texttt{e2} are shared between the datasets \textbf{A} and \textbf{B}. Since that node ownership is dataset \textbf{B}, the feature which provenance is \textbf{B} has authority, while the other in \textbf{A} has not. In order to retain the information provided by dataset \textbf{A} on that node without corrupting the rest of the summary, we map the node \texttt{e2} to two sumnodes:
-\begin{itemize}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
-\item to sumnode \texttt{h1} according to the edge $(\texttt{e2}, a, \texttt{Person})$; and
-\item to sumnode \texttt{h2} according to both edges $(\texttt{e2}, a, \texttt{Person})$ and $(\texttt{e2}, a, \texttt{Student})$.
+The type features \emph{Student} and \emph{Person} of the node \texttt{e2} are shared between the datasets \textbf{A} and \textbf{B}, respectively. Since that node ownership is dataset \textbf{B}, the feature which provenance is \textbf{B} has authority, i.e., \emph{Person}, while the other in \textbf{A}, i.e., \emph{Student}, has not. In order to retain the information provided by dataset \textbf{A} about that node without corrupting the information gathered by the summary, we map the node \texttt{e2} according to the provenance information:
+\begin{itemize}
+\item for edges which provenance is \textbf{B}, calling \texttt{GetSumnode\textsubscript{B}($e_2$)} returns the sumnode \texttt{h1}; and
+\item for edges which provenance is \textbf{A}, calling \texttt{GetSumnode\textsubscript{A}($e_2$)} returns the sumnode \texttt{h2}.
 \end{itemize}
 
 \begin{figure}
@@ -243,7 +249,7 @@ Type features of the node \texttt{e2} are shared between the datasets \textbf{A}
 		\resizebox{\textwidth}{!}{
 			\input{04-summary/figures/id-algo-ex}
 		}
-		\caption{The input data is a set of edges, one per row. The column $\mathcal{L}^D$ indicates the provenance of the edge. The columns $u_\mathcal{W}$ and $v_\mathcal{W}$ represents the sumnodes associated with the node $u$ and $v$, respectively. The ownership of \texttt{e1} is A, the dataset B owns \texttt{e2}. The Step~2 assigns the sumnodes according to the function \texttt{GetSumnode\textsubscript{i}} in Algorithm~\ref{alg:id-summary}.}
+		\caption{The input data is a set of edges, one per row. The column ``Prov'' indicates the provenance of the edge. The columns $u_\mathcal{W}$ and $v_\mathcal{W}$ represents the sumnodes associated with the node $u$ and $v$, respectively. The ownership of \texttt{e1} is A, and the dataset B owns \texttt{e2}. The Step~2 assigns the sumnodes according to the function \texttt{GetSumnode\textsubscript{i}} in Algorithm~\ref{alg:id-summary}.}
 		\label{tab:id-algo-ex}
 	\end{subfigure}
 	\quad
@@ -259,6 +265,7 @@ Type features of the node \texttt{e2} are shared between the datasets \textbf{A}
 \end{figure}
 
 \subsection{Implementations}
+\label{sec:summary-impl}
 
 We present in this section two implementations of the graph summarisation, a first one based on SPARQL and then a second based on MapReduce~\cite{dean:2004:msd}. We present only the implementations of the Algorithm~\ref{alg:summary} for the summarisation of a single dataset. We outline below the required operators of the graph summarisation algorithm.
 \begin{labeling}{\textbf{\underline{Step 1:}}}
@@ -344,7 +351,7 @@ We developed the solution using Cascading\footnote{\url{http://www.cascading.org
 
 A Cascading flow is defined as a pipeline of such operators that connects data ``sources'' to ``sinks'' outputs. A flow can be composed of several ``pipes'', which represent a set of operations. The Cascading flow forms a directed acyclic graph, which is then converted into a sequence of MapReduce jobs that can be executed on the cluster.
 
-The Figure~\ref{fig:summary-cascading} depicts the Cascading flow of the graph summarisation. A node represent an operation over the incoming tuples, which if superscripted with \emph{GB} involves an aggregate operation. The triangle-shaped nodes represent points in the flow where the data is written to or read from.
+The Figure~\ref{fig:summary-cascading} depicts the Cascading flow of the graph summarisation. A node represent an operation over the incoming tuples, which if superscripted with \emph{GB} involves an aggregate operation. An aggregate function combines multiple tuples into a single one; the function may be to count the tuples that were aggregated in order to add statistics about the graph to the summary for example. The triangle-shaped nodes represent points in the flow where the data is written to or read from.
 
 \minisec{Dictionaries}
 
@@ -481,50 +488,3 @@ In comparison, the MapReduce-based one allows the summarisation to scale to much
 %	\end{axis} 
 %	\end{tikzpicture}
 %\end{figure}
-
-\subsection{Graph Summary Lattice}
-
-There exists several possible summarisation relations, each resulting in a graph summary that exhibits different properties. In the Section~\ref{chap03:sec:quality}, we discuss the impact of the relation on the \emph{precision} of a graph summary with regards to the original graph. There is no graph summary that fits all use cases, a summary suitable for one might not be for another. In this section, we describe how various summarisation relations can be ordered into a \emph{lattice}. Thus, we can reuse previous computations where a graph summary can result from another one, instead from the original graph.
-
-A \emph{lattice} is a \emph{partially ordered} set that contains an \emph{infimum} and a \emph{supremum}. The infimum is an element of the set that is ``smaller'', according to the partial order, than all other elements. Conversely, a supremum is an element that is larger than any other element.
-
-For the set of summarisation relations $\mathcal{R}$, we denote with $\sqsubseteq$ the partial order on $\mathcal{R}$. We order the relations based on their definition: two summarisation relations can be ordered if one can be expressed with the other. In this set, the infimum is the identity relation that maps the graph to itself, and the supremum is the relation that maps all nodes to a single sumnode.
-
-\begin{definition}[Partial Order $\sqsubseteq$]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S}_1 = \left\langle \mathcal{W}_1, \mathcal{B}_1, l_{\mathcal{W}_1} \right\rangle$ be the summary of $G$ according to $R_1 \subseteq V \times \mathcal{W}_1$, and $\mathcal{S}_2 = \left\langle \mathcal{W}_2, \mathcal{B}_2, l_{\mathcal{W}_2} \right\rangle$ be the summary of $G$ according to $R_2 \subseteq V \times \mathcal{W}_2$.
-
-We say that $R_1$ precedes $R_2$, noted as $R_1 \sqsubseteq R_2$, if there exists a relation $S \subseteq \mathcal{W}_1 \times \mathcal{W}_2$ such that $R_2$ is a \emph{composition} of $R_1$ and $S$:
-$$
-R_2 = S \circ R_1 = \left\lbrace (x, z) \in R_2 \mid \exists y \in \mathcal{W}_1 : (x, y) \in R_1 \wedge (y, z) \in S \right\rbrace 
-$$
-\end{definition}
-
-\begin{proof}
-We demonstrate here that the binary relation $\sqsubseteq$ is a partial order, i.e., that it is reflexive, antisymmetric, and transitive.
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and for some set $A$, let $I_A = \left\lbrace (x, x) : x \in A \right\rbrace$ be the identity relation on $A$.
-\begin{description}
-\item[reflexivity:] Let $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$. We have $R = I_\mathcal{W} \circ R$, therefore $R \sqsubseteq R$.
-\item[antisymmetry:] For $i \in \{1, 2\}$, let $\mathcal{S}_i = \left\langle \mathcal{W}_i, \mathcal{B}_i, l_{\mathcal{W}_i} \right\rangle$ be the summary of $G$ according to $R_i \subseteq V \times \mathcal{W}_i$. If we suppose $R_1 \sqsubseteq R_2 \wedge R_2 \sqsubseteq R_1$, then $\exists S \subseteq \mathcal{W}_1 \times \mathcal{W}_2$ and $\exists T \subseteq \mathcal{W}_2 \times \mathcal{W}_1$ such that $R_2 = S \circ R_1$ and $R_1 = T \circ R_2$. By substitution, we have $R_2 = S \circ T \circ R_2$. Hence, $S \circ T = I_{\mathcal{W}_2}$. Since the identity relation is a bijection, we have a \emph{one-to-one} mapping between $\mathcal{W}_1$ and $\mathcal{W}_2$. Therefore, we have $R_1 = R_2$.
-\item[transitivity:] For $i \in \{1, 2, 3\}$, let $\mathcal{S}_i = \left\langle \mathcal{W}_i, \mathcal{B}_i, l_{\mathcal{W}_i} \right\rangle$ be the summary of $G$ according to $R_i \subseteq V \times \mathcal{W}_i$. If we suppose $R_1 \sqsubseteq R_2 \sqsubseteq R_3$, then $\exists S \subseteq \mathcal{W}_1 \times \mathcal{W}_2$ and $\exists T \subseteq \mathcal{W}_2 \times \mathcal{W}_3$ such that $R_2 = S \circ R_1$ and $R_3 = T \circ R_2$. Let $U \subseteq \mathcal{W}_1 \times \mathcal{W}_3$ be a relation defined as the composition of $S$ and $T$, i.e., $U = T \circ S$. Since the composition operation $\circ$ is associative, we have then $R_3 = U \circ R_1$. Therefore, $R_1 \sqsubseteq R_3$.
-\end{description}
-\end{proof}
-
-The set of summarisation relations $\mathcal{R}$ can then be ordered according to $\sqsubseteq$. The Figure~\ref{fig:lattice} depicts the lattice that is formed by the partial order $\sqsubseteq$ for the relations presented in Section~\ref{sec:approximate}. We can then see that all summaries can be generated from the summary on $R_{ioat}$. In cases where the summary has significantly less edges and nodes than the original graph, this represents an increase of the summarisation performance.
-
-\begin{figure}
-	\centering
-	\input{04-summary/figures/lattice}
-	\caption{Lattice of the summarisation relations set according to the partial order $\sqsubseteq$}
-	\label{fig:lattice}
-\end{figure}
-
-\paragraph{Example.}
-
-The Figure~\ref{fig:rel-order} depicts the sumnodes built from two summarisation relations $R_t$ (dotted lines) and $R_{at}$ (dashed lines) over the graph on Figure~\ref{fig:graph}. The solid lines represent a relation $S \subseteq \mathcal{W}_{at} \times \mathcal{W}_t$, with which we have the order $R_{at} \sqsubseteq R_t$ between the two relations. With the $R_{at}$ relation, the nodes $N_6$ and $N_7$ belong to different sumnodes, while they belong to the same with the $R_t$ relation. The same $R_t$ summary is built from the original graph and from the $R_{at}$ summary. The partial order allows then to leverage pre-computed summaries in order to generate a new one.
-
-\begin{figure}
-	\centering
-	\input{04-summary/figures/relations-order}
-	\caption{Sumnodes of summarisation relations $R_t$ and $R_{at}$ for the graph in Figure~\ref{fig:graph}. The dashed lines represent the $R_{at}$ relation, the dotted lines the $R_t$ relation, and the solid lines the relation derived from the partial order $\sqsubseteq$, i.e., $R_{at} \sqsubseteq R_t$. The nodes with superscript $t$ belong to the summary built from $R_t$, while the nodes with superscript $at$ belong to the summary built from $R_{at}$.}
-	\label{fig:rel-order}
-\end{figure}

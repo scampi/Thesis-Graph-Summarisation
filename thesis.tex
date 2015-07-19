@@ -59,15 +59,6 @@
 \newcommand{\hs}{\hspace{0.001in}}
 \newcommand{\s}{\hspace{0.06in}}
 
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{thmtools}
-\declaretheorem[numbered=no,style=remark]{remark}
-\declaretheorem[thmbox=M,numberwithin=section]{definition}
-\renewcommand{\listtheoremname}{List of Definitions}
-\usepackage{mathrsfs}
-
 \usepackage{mdframed}
 \surroundwithmdframed[
 topline=false,%
@@ -225,6 +216,19 @@ linewidth=4pt
 %}
 %\makeatother
 
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\let\proof\relax
+\let\endproof\relax
+\usepackage{thmtools}
+\declaretheorem[qed=$\blacksquare$,numbered=no]{proof}
+\declaretheorem[numbered=no,style=remark]{remark}
+\declaretheorem[thmbox=M,numberwithin=section]{definition}
+\declaretheorem[thmbox=L,numberwithin=section]{theorem}
+\renewcommand{\listtheoremname}{List of Definitions}
+
 \begin{document}
 
 \begin{titlepage}
@@ -297,11 +301,13 @@ linewidth=4pt
 
 \input{04-summary/algo}
 
+\input{04-summary/eval-summary}
+
 %\input{04-summary/updates}
 
-\input{04-summary/precision}
+\input{04-summary-precision/precision}
 
-\input{04-summary/eval-precision}
+\input{04-summary-precision/eval-precision}
 
 %%
 %% tree ranking
