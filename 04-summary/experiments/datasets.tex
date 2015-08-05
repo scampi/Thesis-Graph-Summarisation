@@ -6,7 +6,7 @@
 			\toprule
 			Dataset & \phantom{a} & \multicolumn{2}{c}{Schema} & \phantom{a} & \multicolumn{2}{c}{$G$} & \phantom{a} & \multicolumn{2}{c}{$\mathcal{S}_{fb}$} & \phantom{a} & $\mathcal{S}_{fb}:G$ \\
 			\cmidrule{3-4} \cmidrule{6-7} \cmidrule{9-10} \cmidrule{12-12}
-			 & \phantom{a} & $\vert \mathcal{L}^T \vert$ & $\vert \mathcal{L}^A \vert$ & \phantom{a} & $\vert V \vert$ & $\vert A \vert$ & \phantom{a} & $\vert \mathcal{W}_{fb} \vert$ & $\vert \mathcal{S}_{fb} \vert$ & \phantom{a} &
+			 & \phantom{a} & $\vert \mathcal{L}^T \vert$ & $\vert \mathcal{L}^A \vert$ & \phantom{a} & $\vert V \vert$ & $\vert A \vert$ & \phantom{a} & $\vert \mathcal{W}_{fb} \vert$ & $\vert \mathcal{B}_{fb} \vert$ & \phantom{a} &
 			\\
 			{\bfseries \underline{Very High}} \\
 			\texttt{dbpedia} \cite{dbpedia}
@@ -49,3 +49,178 @@
 	\caption{Descriptive statistics of the datasets. The Schema column reports the number in $G$ of unique edges labels $\vert \mathcal{L}^A \vert$ and of unique types $\vert \mathcal{L}^T \vert$. The column $G$ reports the order and the size of the data graph. The column $\mathcal{S}_{fb}$ reports the order and the size of the summary $\mathcal{S}_{fb}$ of the graph $G$. The $\mathcal{S}_{fb}:G$ column reports as a percentage the volume ratio of $\mathcal{S}_{fb}$ to $G$.}
 	\label{tab:datasets}
 \end{table}
+
+%\pgfplotstableread[col sep=comma,header=true]{
+%	dataset,1,2,3,4,5,6,7
+%	dbpedia,288524,22369,65042837,233051608,6884121,33990765,13.71
+%	twc-logd,450,10060,3398947,67505792,5565,121873,0.18
+%	enipedia,128,267,413520,4463566,1037,21419,0.46
+%	b3kat,20,30,85795956,592778746,782056,3230936,0.59
+%	ecs,24,120,167390,955112,8232,51494,5.32
+%	lobid,19,46,124691274,625941644,51529,746099,0.11
+%	bnb,27,53,12246306,89733453,146956,1046714,1.17
+%	datos,23,143,7412312,58048932,360822,2504262,4.38
+%	gnd,22,35,962930,7940373,9664,88875,1.11
+%	eures,18,49,288862,4146421,2205,37052,0.89
+%	europeana,5,58,5559452,40773834,4792,72125,0.17
+%	wb,4,174,11210832,84345613,293,6987,0.01
+%	cordis,7,63,729780,7101623,2245,36783,0.50
+%	ny-times,2,38,22662,345888,65,794,0.23
+%}\data
+%
+%\begin{figure}
+%	\centering
+%	\begin{subfigure}{\textwidth}
+%		\centering
+%		\resizebox{\textwidth}{!}{
+%			\begin{tikzpicture}
+%			\begin{axis}[
+%			ybar,
+%			symbolic x coords={dbpedia, twc-logd, enipedia, b3kat, ecs, lobid, bnb, datos, gnd, eures, europeana, wb, cordis, ny-times},
+%			enlargelimits=0.15,
+%			x=2cm,
+%			bar width=0.3cm,
+%			xtick=data,
+%			]
+%			
+%			\addplot table [y=1, x=dataset] {\data};
+%			legend($\vert \mathcal{L}^T \vert$ )
+%			
+%			\end{axis}
+%			\end{tikzpicture}
+%		}
+%	\end{subfigure}
+%	\quad
+%	\begin{subfigure}{\textwidth}
+%		\centering
+%		\resizebox{\textwidth}{!}{
+%			\begin{tikzpicture}
+%			\begin{axis}[
+%			ybar,
+%			symbolic x coords={dbpedia, twc-logd, enipedia, b3kat, ecs, lobid, bnb, datos, gnd, eures, europeana, wb, cordis, ny-times},
+%			enlargelimits=0.15,
+%			x=2cm,
+%			bar width=0.3cm,
+%			xtick=data,
+%			]
+%			
+%			\addplot table [y=2, x=dataset] {\data};
+%			legend( $\vert \mathcal{L}^A \vert$ )
+%			
+%			\end{axis}
+%			\end{tikzpicture}
+%		}
+%	\end{subfigure}
+%	\quad
+%	\begin{subfigure}{\textwidth}
+%		\centering
+%		\resizebox{\textwidth}{!}{
+%			\begin{tikzpicture}
+%			\begin{axis}[
+%			ybar,
+%			symbolic x coords={dbpedia, twc-logd, enipedia, b3kat, ecs, lobid, bnb, datos, gnd, eures, europeana, wb, cordis, ny-times},
+%			enlargelimits=0.15,
+%			x=2cm,
+%			bar width=0.3cm,
+%			xtick=data,
+%			]
+%			
+%			\addplot table [y=3, x=dataset] {\data};
+%			legend( $\vert V \vert$ )
+%			
+%			%			\legend{$\vert \mathcal{L}^T \vert$ , $\vert \mathcal{L}^A \vert$ , $\vert V \vert$ , $\vert A \vert$ , $\vert \mathcal{W}_{fb} \vert$ , $\vert \mathcal{B}_{fb} \vert$ , $\mathcal{S}_{fb}:G$}
+%			\end{axis}
+%			\end{tikzpicture}
+%		}
+%	\end{subfigure}
+%	\quad
+%	\begin{subfigure}{\textwidth}
+%		\centering
+%		\resizebox{\textwidth}{!}{
+%			\begin{tikzpicture}
+%			\begin{axis}[
+%			ybar,
+%			symbolic x coords={dbpedia, twc-logd, enipedia, b3kat, ecs, lobid, bnb, datos, gnd, eures, europeana, wb, cordis, ny-times},
+%			enlargelimits=0.15,
+%			x=2cm,
+%			bar width=0.3cm,
+%			xtick=data,
+%			]
+%			
+%			\addplot table [y=4, x=dataset] {\data};
+%			legend( $\vert A \vert$ )
+%			
+%			%			\legend{$\vert \mathcal{L}^T \vert$ , $\vert \mathcal{L}^A \vert$ , $\vert V \vert$ , $\vert A \vert$ , $\vert \mathcal{W}_{fb} \vert$ , $\vert \mathcal{B}_{fb} \vert$ , $\mathcal{S}_{fb}:G$}
+%			\end{axis}
+%			\end{tikzpicture}
+%		}
+%	\end{subfigure}
+%	\quad
+%	\begin{subfigure}{\textwidth}
+%		\centering
+%		\resizebox{\textwidth}{!}{
+%			\begin{tikzpicture}
+%			\begin{axis}[
+%			ybar,
+%			symbolic x coords={dbpedia, twc-logd, enipedia, b3kat, ecs, lobid, bnb, datos, gnd, eures, europeana, wb, cordis, ny-times},
+%			enlargelimits=0.15,
+%			x=2cm,
+%			bar width=0.3cm,
+%			xtick=data,
+%			]
+%			
+%			\addplot table [y=5, x=dataset] {\data};
+%			legend( $\vert \mathcal{W}_{fb} \vert$ )
+%			
+%			%			\legend{$\vert \mathcal{L}^T \vert$ , $\vert \mathcal{L}^A \vert$ , $\vert V \vert$ , $\vert A \vert$ , $\vert \mathcal{W}_{fb} \vert$ , $\vert \mathcal{B}_{fb} \vert$ , $\mathcal{S}_{fb}:G$}
+%			\end{axis}
+%			\end{tikzpicture}
+%		}
+%	\end{subfigure}
+%	\quad
+%	\begin{subfigure}{\textwidth}
+%		\centering
+%		\resizebox{\textwidth}{!}{
+%			\begin{tikzpicture}
+%			\begin{axis}[
+%			ybar,
+%			symbolic x coords={dbpedia, twc-logd, enipedia, b3kat, ecs, lobid, bnb, datos, gnd, eures, europeana, wb, cordis, ny-times},
+%			enlargelimits=0.15,
+%			x=2cm,
+%			bar width=0.3cm,
+%			xtick=data,
+%			]
+%			
+%			\addplot table [y=6, x=dataset] {\data};
+%			legend( $\vert \mathcal{B}_{fb} \vert$ )
+%			
+%			%			\legend{$\vert \mathcal{L}^T \vert$ , $\vert \mathcal{L}^A \vert$ , $\vert V \vert$ , $\vert A \vert$ , $\vert \mathcal{W}_{fb} \vert$ , $\vert \mathcal{B}_{fb} \vert$ , $\mathcal{S}_{fb}:G$}
+%			\end{axis}
+%			\end{tikzpicture}
+%		}
+%	\end{subfigure}
+%	\quad
+%	\begin{subfigure}{\textwidth}
+%		\centering
+%		\resizebox{\textwidth}{!}{
+%			\begin{tikzpicture}
+%			\begin{axis}[
+%			ybar,
+%			symbolic x coords={dbpedia, twc-logd, enipedia, b3kat, ecs, lobid, bnb, datos, gnd, eures, europeana, wb, cordis, ny-times},
+%			enlargelimits=0.15,
+%			x=2cm,
+%			bar width=0.3cm,
+%			xtick=data,
+%			]
+%			
+%			\addplot table [y=7, x=dataset] {\data};
+%			legend( $\mathcal{S}_{fb}:G$)
+%			
+%			%			\legend{$\vert \mathcal{L}^T \vert$ , $\vert \mathcal{L}^A \vert$ , $\vert V \vert$ , $\vert A \vert$ , $\vert \mathcal{W}_{fb} \vert$ , $\vert \mathcal{B}_{fb} \vert$ , $\mathcal{S}_{fb}:G$}
+%			\end{axis}
+%			\end{tikzpicture}
+%		}
+%	\end{subfigure}
+%	\caption{Volume ratio of the graph summaries}
+%	\label{fig:datasets-bar}
+%\end{figure}

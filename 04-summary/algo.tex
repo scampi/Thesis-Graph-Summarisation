@@ -1,14 +1,14 @@
 \section{Graph Summary Generation}
 \label{chap:summary:algo}
 
-In this section, we present an algorithm for generating a graph summary. Some optimisations are possible depending on the relation. However, the proposed approach is independent of the summarisation relation used. The algorithm takes a graph in input and outputs a graph summary, which is distinct from the input graph.
-We first present a version of the algorithm for a single dataset and then for a collection of several in Section~\ref{sec:summary-algos}.
+In this section, we present an algorithm for generating a graph summary. Some optimisations are possible depending on the relation. However, the proposed approach is independent of the summarisation relation used. The algorithm takes a graph as input and outputs a graph summary, which is distinct from the input graph.
+We first present a version of the algorithm for a single dataset and then for a collection of several datasets in Section~\ref{sec:summary-algos}.
 Next, we describe in Section~\ref{sec:summary-impl} two implementations of the algorithm, one based on MapReduce~\cite{dean:2004:msd}, and the other on SPARQL.
 
 \subsection{Algorithms}
 \label{sec:summary-algos}
 
-The creation of a graph summary is decomposed into three steps. In a first step, we aggregate all the information about a node needed for the summarisation relation. In a second step, we create a table that associates a node of $G$ to a sumnode. In a third step, we materialise the sumedges by joining the previous table with the original graph.
+The creation of a graph summary is decomposed into four steps. These steps are common to both versions of the algorithm, i.e., the graph summarisation of a single dataset and of a collection of datasets. In a first step, we aggregate all the information about a node needed for the summarisation relation. In a second step, we create a table that associates a node of $G$ to a sumnode. In a third step, we materialise the sumedges by joining the previous table with the original graph. The fourth step is optional and consists in gathering statistics about the summarised graph.
 
 \begin{labeling}{\textbf{\underline{Step 2:}} \emph{Node to sumnode mapping.}}
 	\item[\textbf{\underline{Step 1:}} \emph{Entity description.}]
@@ -27,19 +27,25 @@ The creation of a graph summary is decomposed into three steps. In a first step,
 	\item[\textbf{\underline{Step 3:}} \emph{Sumedge materialisation.}]
 	\phantomsection
 	\label{step-he}
-	We need to join the previous mappings of node to sumnode with the original graph in order to materialise an sumedge. We do this by two joins, i.e., on the source and target nodes. In this step, we need to visit each edge in the graph, so in the worst case it has a $O\left(\vert A \vert\right)$ complexity.
+	We need to join the previous mapping of a node to its sumnode with the original graph in order to materialise an sumedge. We do this by two joins, i.e., on the source and target nodes. In this step, we need to visit each edge in the graph, so in the worst case it has a $O\left(\vert A \vert\right)$ complexity.
 	
 	\item[\textbf{\underline{Step 4:}} \emph{Statistics gathering.}]
 	\phantomsection
 	\label{step-stats}
-	During the previous steps, it is possible to gather statistics about the graph. In the Step~2, we can keep the count of nodes that are mapped to a sumnode. In the Step~3, we can count the occurrences of an edge between two sumnodes. Such statistics provide insight into the graph structure, complementing the graph summary.
+	During the previous steps, it is possible to gather statistics about the graph. This step is optional, since depending on the application in which the summary is used statistics might be unnecessary. However, gathering statistics comes at no cost, since we can re-use computations of the previous steps. Indeed in Step~2, we can keep the count of nodes that are mapped to a sumnode. In addition in Step~3, we can count the occurrences of an edge between two sumnodes. Such statistics provide insight into the graph structure, complementing the graph summary.
 \end{labeling}
 
 \subsubsection{Graph Summarisation of a Single Dataset}
+\label{sec:alg-single-ds}
 
 We present here the graph summarisation algorithm that is aimed at processing a single dataset.
 %The Figure~\ref{fig:gs-algo} depicts the overall algorithm for generating a graph summary.
-The Algorithm~\ref{alg:summary} outlines the flow of the graph summarisation which takes a graph as input and outputs its summary for a given summarisation relation. For each edge of the graph, the algorithm first retrieves the sumnodes corresponding to the source and target nodes thanks to the \texttt{GetSumnode} function. Indeed, since the summary of a graph is unique for a given summarisation relation, the sumnode can be computed deterministically. Then, the corresponding sumedge is added to the summary. The lines~2-5 represent the first two steps of the graph summary creation, and the line~7 corresponds to the materialisation of the sumedge.
+The Algorithm~\ref{alg:summary} outlines the flow of the graph summarisation which takes a graph as input and outputs its summary for a given summarisation relation.
+
+The summarisation relation is first materialised into a table where each row report two elements: a node and its corresponding sumnode as per the summarisation relation.
+For each edge of the graph, the algorithm first retrieves the sumnodes corresponding to the source and target nodes thanks to the \texttt{GetSumnode} function. This function performs a lookup on the previous materialised table. We note that since the summary of a graph is unique for a given summarisation relation, the sumnode can be retrieved deterministically.
+
+Then, the corresponding sumedge is added to the summary. The lines~2-5 represent the first two steps of the graph summary creation, and the line~7 corresponds to the materialisation of the sumedge.
 
 \begin{remark}
 On line~5 we retrieve the sumnode of $v$ only if it is not a type, since we consider the type as a feature of the summarisation relation.
@@ -76,8 +82,8 @@ On line~5 we retrieve the sumnode of $v$ only if it is not a type, since we cons
 
 \paragraph{Example.}
 
-In the Figure~\ref{tab:algo-ex}, we depict the \emph{Types} summarisation $R_t$ of a graph describing people and documents. We group the edges describing a same node in \hyperref[step-ed]{Step 1}. In \hyperref[step-hn]{Step 2} we assign the sumnode \emph{h1} to the nodes (i.e., \emph{:e1} and \emph{:e3}) of type \emph{:Person}, and \emph{h2} to the node (i.e., \emph{:e2}) of type \emph{:Document}. In \hyperref[step-he]{Step 3}, we join the edges of the input graph with the table created in \hyperref[step-hn]{Step 2} in order to retrieve the sumnodes.
-It is possible to gather statistics about the summarisation in \hyperref[step-stats]{Step 4} by, e.g., grouping over the sumnodes and counting the number of rows in a group. The Figure~\ref{fig:algo-ex} depicts the \emph{Types} summary that is outputted in the Figure~\ref{tab:algo-ex}.
+In the Figure~\ref{tab:algo-ex}, we depict the \emph{Types} summarisation $R_t$ of a graph showing people and documents. We group the edges describing a same node in \hyperref[step-ed]{Step 1}. In \hyperref[step-hn]{Step 2} we assign the sumnode \emph{h1} to the nodes (i.e., \emph{:e1} and \emph{:e3}) of type \emph{:Person}, and \emph{h2} to the node (i.e., \emph{:e2}) of type \emph{:Document}. In \hyperref[step-he]{Step 3}, we join the edges of the input graph with the table created in \hyperref[step-hn]{Step 2} in order to retrieve the sumnodes.
+It is possible to gather statistics about the summarisation in \hyperref[step-stats]{Step 4} by, e.g., grouping over the sumnodes and counting the number of rows in a group. Figure~\ref{fig:algo-ex} depicts the \emph{Types} summary that is the output of the algorithm which execution is depicted in Figure~\ref{tab:algo-ex}.
 
 \begin{figure}
 	\centering
@@ -267,7 +273,7 @@ The type features \emph{Student} and \emph{Person} of the node \texttt{e2} are s
 \subsection{Implementations}
 \label{sec:summary-impl}
 
-We present in this section two implementations of the graph summarisation, a first one based on SPARQL and then a second based on MapReduce~\cite{dean:2004:msd}. We present only the implementations of the Algorithm~\ref{alg:summary} for the summarisation of a single dataset. We outline below the required operators of the graph summarisation algorithm.
+We present in this section two implementations of the graph summarisation, a first one based on SPARQL and then a second based on MapReduce~\cite{dean:2004:msd}. We present only the implementations of the Algorithm~\ref{alg:summary} for the summarisation of a single dataset, since they can be easily extended to the Algorithm~\ref{alg:id-summary}. We outline below the required operators of the graph summarisation algorithm.
 \begin{labeling}{\textbf{\underline{Step 1:}}}
 \item[\textbf{\underline{Step 1:}}] In this step, we need a \emph{group} operator in order to build the entity description \gls{edesc}.
 \item[\textbf{\underline{Step 2:}}] In this step we create the sumnode associated to a node according to its entity description. Therefore, we need a \emph{projection} operator in order to extract the features of the summarisation relation. We note that a feature can be multi-valued, which needs to be taken into account as well. The creation of the sumnode from the extracted features requires an \emph{object invention}~\cite{hull:1989:usi} operator.

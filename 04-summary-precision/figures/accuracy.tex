@@ -1,26 +1,26 @@
 \begin{tikzpicture}[->,>=stealth',node distance=4cm,every node/.style={font=\small\ttfamily}]
 %Bisim
-\node[draw,circle] (b0) {$H^b_0$};
+\node[draw,circle] (b0) {$S^{fbt}_0$};
 
-\node[draw,circle,right of = b0,xshift=-.65cm] (b1) {$H^b_2$};
-\node[draw,circle,right of = b0,xshift=.45cm] (b2) {$H^b_1$};
+\node[draw,circle,right of = b0,xshift=-.65cm] (b1) {$S^{fbt}_2$};
+\node[draw,circle,right of = b0,xshift=.45cm] (b2) {$S^{fbt}_1$};
 
-\node[draw,circle,above right of = b2,xshift=.4cm,yshift=0cm] (b3) {$H^b_3$};
+\node[draw,circle,above right of = b2,xshift=.4cm,yshift=0cm] (b3) {$S^{fbt}_3$};
 
-\node[draw,circle,below right of = b1,xshift=1.5cm,yshift=1cm] (b4) {$H^b_4$};
-\node[draw,circle,below of = b4,yshift=2.85cm] (b5) {$H^b_5$};
+\node[draw,circle,below right of = b1,xshift=1.5cm,yshift=1cm] (b4) {$S^{fbt}_4$};
+\node[draw,circle,below of = b4,yshift=2.85cm] (b5) {$S^{fbt}_5$};
 
-\node[draw,circle,below right of = b3,xshift=.5cm,yshift=0cm] (b7) {$H^b_7$};
-\node[draw,circle,above right of = b4,xshift=1.6cm,yshift=-1cm] (b6) {$H^b_6$};
+\node[draw,circle,below right of = b3,xshift=.5cm,yshift=0cm] (b7) {$S^{fbt}_7$};
+\node[draw,circle,above right of = b4,xshift=1.6cm,yshift=-1cm] (b6) {$S^{fbt}_6$};
 
 %Types
 \node[draw,circle,dashed,ultra thick,minimum size=1.55cm,label={90:$\mathfrak{U}^t$}] (t0) {};
-\node[draw,circle,dashed,ultra thick,minimum size=2.55cm,label={90:$\mathbf{H^t_1}$},right of = t0,xshift=-.15cm] (t1){};
-\node[draw,circle,dashed,ultra thick,minimum size=1.55cm,label={90:$\mathbf{H^t_2}$},above right of = t1,xshift=1cm,yshift=0cm] (t2){};
-\node[draw,circle,dashed,ultra thick,minimum size=2.55cm,label={90:$\mathbf{H^t_3}$},below right of = t1,yshift=.5cm,xshift=1cm] (t3){};
-\node[draw,circle,dashed,ultra thick,minimum size=2.55cm,label={90:$\mathbf{H^t_4}$},right of = t1,xshift=3.65cm] (t4){};
+\node[draw,circle,dashed,ultra thick,minimum size=2.55cm,label={90:$\mathbf{S^t_1}$},right of = t0,xshift=-.15cm] (t1){};
+\node[draw,circle,dashed,ultra thick,minimum size=1.55cm,label={90:$\mathbf{S^t_2}$},above right of = t1,xshift=1cm,yshift=0cm] (t2){};
+\node[draw,circle,dashed,ultra thick,minimum size=2.55cm,label={90:$\mathbf{S^t_3}$},below right of = t1,yshift=.5cm,xshift=1cm] (t3){};
+\node[draw,circle,dashed,ultra thick,minimum size=2.55cm,label={90:$\mathbf{S^t_4}$},right of = t1,xshift=3.65cm] (t4){};
 
-\path
+\path[every node/.style={font=\footnotesize}]
 (t0) edge[dashed,ultra thick,bend left=50] node[above] {creator} (t1)
 (t0) edge[dashed,ultra thick,bend right=50] node[below] {author} (t1)
 (t1) edge[dashed,ultra thick] node[fill=white] {lives} (t2)

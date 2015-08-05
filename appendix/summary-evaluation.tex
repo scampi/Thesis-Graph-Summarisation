@@ -1,0 +1,25 @@
+\chapter{Data Tables of the Graph Summarisation Evaluation}
+
+\begin{table}
+	\centering
+	\ra{1.2}
+	\input{04-summary/experiments/results-volume-ratio}
+	\caption{Volume ratio comparison. For each category of dataset complexity, we report the mean $\mu$ of the volume ratio.}
+	\label{tab:volume-ratio}
+\end{table}
+
+\begin{table}
+	\centering
+	\ra{1.2}
+	\resizebox{\textwidth}{!}{
+		\input{04-summary/experiments/cpu-time}
+	}
+	\caption{Performance comparison. We report the CPU time in $ms$ of the \emph{edges} step in the graph summarisation computation. For each category of dataset complexity, we report the mean $\mu$ of the CPU time.% Due to an error in the computation, we don't report the times for $\sim_{at}$.
+	}
+	\label{tab:cpu-time}
+\end{table}
+
+
+\input{04-summary/experiments/link-precision}
+
+\input{04-summary/experiments/schema-precision}

@@ -1,4 +1,8 @@
-\documentclass[12pt,chapterprefix]{scrbook}
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_GB
+\documentclass[12pt,chapterprefix=true]{scrbook}
+
+\usepackage{xcolor}
 
 \usepackage{tgheros}
 \usepackage[T1]{fontenc}
@@ -45,8 +49,9 @@
 \pgfplotsset{compat=1.10}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning,shapes.geometric,calc,arrows.meta,fadings,decorations.markings,decorations.shapes}
-\usetikzlibrary{timeline}
+\usetikzlibrary{timeline,patterns}
 
+\usepackage{tkz-kiviat}
 \usepackage{minted}
 
 %\usepackage{realboxes}
@@ -229,6 +234,12 @@ linewidth=4pt
 \declaretheorem[thmbox=L,numberwithin=section]{theorem}
 \renewcommand{\listtheoremname}{List of Definitions}
 
+\usepackage{tocstyle}
+\renewcommand*{\addchaptertocentry}[2]{%
+	\addtocentrydefault{chapter}{\chaptername\nobreakspace #1}{#2}%
+}
+\usetocstyle{KOMAlike}
+
 \begin{document}
 
 \begin{titlepage}
@@ -301,7 +312,7 @@ linewidth=4pt
 
 \input{04-summary/algo}
 
-\input{04-summary/eval-summary}
+%\input{04-summary/eval-summary}
 
 %\input{04-summary/updates}
 
@@ -343,5 +354,12 @@ linewidth=4pt
 
 \cleardoubleoddpage
 \printglossaries
+
+% http://tex.stackexchange.com/questions/62271/add-chapter-appendix-prefix-in-table-of-contents-of-scrbook-with-correct-appendi
+\cleardoubleoddpage
+\appendix
+%\let\chaptername\appendixname
+\renewcommand{\chaptermark}[1]{\markboth{Appendix\ \thechapter.\ #1}{}}
+\input{appendix/summary-evaluation}
 
 \end{document}

@@ -2,7 +2,7 @@
 \label{sec:summary:eval}
 
 In this section, we evaluate the performance of computing a graph summary, as well as its size.
-For this evaluation, we assume the following:
+For this evaluation, we use the following:
 \begin{itemize}
 	\item $G=\left\langle V, A, l_V \right\rangle$ is a graph;
 	\item the bisimulation summary of $G$ is $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ according to the summarisation relation $R_{fbt}$; and
@@ -16,12 +16,12 @@ We describe in this section the design of the evaluation. We first present the e
 
 \subsubsection{Environment}
 
-The bisimulation summary $\mathcal{S}_{fbt}$ is the most precise summary of the data graph, since all incoming and outgoing (and combination of) paths in the summary do exist in the data graph $G$. In this evaluation, we use the $R_{fb}$ summarisation relation as the \emph{gold standard} summary of a data graph, which ensures that all outgoing paths do exist. The presented summarisation relations have been implemented using the Hadoop\footnote{Hadoop: \url{http://hadoop.apache.org/}} MapReduce framework.
+The bisimulation summary $\mathcal{S}_{fbt}$ is the most precise summary of the data graph, since all incoming and outgoing (and combination of) paths in the summary do exist in the data graph $G$. In this evaluation, we use the forward bisimulation $R_{fb}$ summarisation relation presented in Section~\ref{chap:summary:bisim} as the \emph{gold standard} summary of a data graph. This gold standard summary ensures that all outgoing paths do exist. The presented summarisation relations have been implemented using the Hadoop\footnote{Hadoop: \url{http://hadoop.apache.org/}} MapReduce framework.
 % Our Hadoop cluster is composed of 10 machines.
 
 \subsubsection{Evaluation Dimensions}
 
-We present in this section three dimensions we use for evaluating a summary, i.e., the \emph{volume} and the \emph{performance} of the relation.
+We present in this section two dimensions we use for evaluating a summary, i.e., the \emph{volume} and the \emph{performance} of the relation.
 
 \begin{quotation}
 	\item[\emph{Summary volume.}]
@@ -39,7 +39,7 @@ We present in this section three dimensions we use for evaluating a summary, i.e
 	%\item a \emph{mapping} step, where we assign a node of the data graph to its $\sim$-equivalence class; and
 	%\item a \emph{edges} step, where we compute the edges of $G^\sim$.
 	%\end{inparaenum}
-	We evaluate the computational performance of a summarisation relation by analysing the CPU time\footnote{The accumulated CPU time as reported with the \texttt{CPU\_MILLISECONDS} counter of Hadoop.} on the \hyperref[step-he]{Step 3} of the graph summary computation, as described in Section~\ref{chap03:algo:edge-materialisation} for the MapReduce case. We do not report on the \hyperref[step-hn]{Step 2} because the evaluated summarisation relations have the same complexity, achieving similar times on this step.
+	We evaluate the computational performance of a summarisation relation by analysing the CPU time\footnote{The accumulated CPU time as reported with the \texttt{CPU\_MILLISECONDS} counter of Hadoop.} on the \hyperref[step-he]{Step 3} of the graph summary computation, as described in Section~\ref{chap03:algo:edge-materialisation} for the MapReduce case. We do not report on the performance of the \hyperref[step-hn]{Step 2} because the evaluated summarisation relations have the same complexity, achieving similar times on this step.
 \end{quotation}
 
 \subsection{Datasets}
@@ -71,13 +71,63 @@ We note that the \emph{Attributes} summarisation $R_a$ actually achieves the low
 
 By using both type and attribute information as with the \emph{Attributes \& Types} summarisation relation $R_{at}$, we remark that this can lead to a significant increase of the summary volume. Indeed, the combination of the features on \texttt{b3kat} and \texttt{lobid} exhibits a much higher ratio than when taken separately, e.g., $55.87$ and $84.06$ respectively with $\mathcal{S}_{at}$, against $27.43$ and $49.83$ with $\mathcal{S}_a$. We can conclude that a sparse usage of attributes with a type creates an explosion of combinations. In general, the type feature is less stable than the attribute feature.
 
-\begin{table}
+\begin{figure}
 	\centering
-	\ra{1.2}
-	\input{04-summary/experiments/results-volume-ratio}
-	\caption{Volume ratio comparison. For each category of dataset complexity, we report the mean $\mu$ of the volume ratio.}
-	\label{tab:volume-ratio}
-\end{table}
+	\resizebox{\textwidth}{!}{
+		\begin{tikzpicture}
+		\begin{axis}[
+		ybar,
+		symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
+		enlargelimits=0.15,
+		ylabel={Volume Ratio},
+		x=2cm,
+		bar width=0.3cm,
+		xtick=data,
+		legend style={at={(0.5,-0.15)},
+			anchor=north,legend columns=-1},
+		]
+		\addplot coordinates {
+			($\mathcal{S}_{st}$,1.89)
+			($\mathcal{S}_{t}$,1.77)
+			($\mathcal{S}_{a}$,81.73)
+			($\mathcal{S}_{at}$,81.74)
+			($\mathcal{S}_{ioa}$,89.57)
+			($\mathcal{S}_{ioat}$,89.57)
+		};
+		
+		\addplot coordinates {
+			($\mathcal{S}_{st}$,0.23)
+			($\mathcal{S}_{t}$,0.22)
+			($\mathcal{S}_{a}$,42.51)
+			($\mathcal{S}_{at}$,53.37)
+			($\mathcal{S}_{ioa}$,51.45)
+			($\mathcal{S}_{ioat}$,62.68)
+		};
+		
+		\addplot coordinates {
+			($\mathcal{S}_{st}$, 17.81)
+			($\mathcal{S}_{t}$,17.60)
+			($\mathcal{S}_{a}$,47.99)
+			($\mathcal{S}_{at}$,62.55)
+			($\mathcal{S}_{ioa}$,66.13)
+			($\mathcal{S}_{ioat}$,79.45)
+		};
+
+		\addplot coordinates {
+			($\mathcal{S}_{st}$, 45.00)
+			($\mathcal{S}_{t}$,51.81)
+			($\mathcal{S}_{a}$,4.71)
+			($\mathcal{S}_{at}$,59.10)
+			($\mathcal{S}_{ioa}$,6.41)
+			($\mathcal{S}_{ioat}$,60.56)
+		};
+		\legend{$\mu_L$,$\mu_M$,$\mu_H$,$\mu_{VH}$}
+		\end{axis}
+		\end{tikzpicture}
+	}
+	\caption{Volume ratio of the graph summaries}
+	\label{fig:vol-ration-bar}
+\end{figure}
 
 \subsubsection{Performance of the Summarisation Relation}
 
@@ -88,13 +138,61 @@ The $R_{st}$ and $R_t$ summarisation relations may have undefined mappings due t
 On the \emph{Medium}, \emph{High}, and \emph{Very High} datasets, the time taken by the $R_{st}$ summarisation on the \hyperref[step-he]{Step 3} of the graph summary computation is higher than $R_t$. This highlights the property of the $R_{st}$ summarisation of being a many-to-many binary relation. As a consequence, we need to compute all the possible combinations of edges between the sumnodes.
 We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not imply a higher runtime when compared to $R_{a}$ and $R_{at}$.
 
-\begin{table}
+\begin{figure}
 	\centering
-	\ra{1.2}
 	\resizebox{\textwidth}{!}{
-		\input{04-summary/experiments/cpu-time}
+		\begin{tikzpicture}
+		\begin{axis}[
+		ybar,
+		symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
+		enlargelimits=0.15,
+		ylabel={CPU Time (ms)},
+		x=2cm,
+		bar width=0.3cm,
+		xtick=data,
+		legend style={at={(0.5,-0.15)},
+			anchor=north,legend columns=-1},
+		]
+		\addplot coordinates {
+			($\mathcal{S}_{st}$, 5181727)
+			($\mathcal{S}_{t}$, 5140988)
+			($\mathcal{S}_{a}$, 5208950)
+			($\mathcal{S}_{at}$, 5227250)
+			($\mathcal{S}_{ioa}$, 5254718)
+			($\mathcal{S}_{ioat}$, 5212401)
+		};
+		
+		\addplot coordinates {
+			($\mathcal{S}_{st}$, 51724125)
+			($\mathcal{S}_{t}$, 45942442)
+			($\mathcal{S}_{a}$, 53505035)
+			($\mathcal{S}_{at}$, 53487935)
+			($\mathcal{S}_{ioa}$, 53557640)
+			($\mathcal{S}_{ioat}$, 52440249)
+		};
+		
+		\addplot coordinates {
+			($\mathcal{S}_{st}$, 4246345)
+			($\mathcal{S}_{t}$, 2763572)
+			($\mathcal{S}_{a}$, 3962202)
+			($\mathcal{S}_{at}$, 3942577)
+			($\mathcal{S}_{ioa}$, 3989825)
+			($\mathcal{S}_{ioat}$, 4032795)
+		};
+
+		\addplot coordinates {
+			($\mathcal{S}_{st}$, 77643685)
+			($\mathcal{S}_{t}$, 52608760)
+			($\mathcal{S}_{a}$, 99839325)
+			($\mathcal{S}_{at}$, 104255540)
+			($\mathcal{S}_{ioa}$, 102540080)
+			($\mathcal{S}_{ioat}$, 105685365)
+		};
+		
+		\legend{$\mu_L$,$\mu_M$,$\mu_H$,$\mu_{VH}$}
+		\end{axis}
+		\end{tikzpicture}
 	}
-	\caption{Performance comparison. We report the CPU time in $ms$ of the \emph{edges} step in the graph summarisation computation. For each category of dataset complexity, we report the mean $\mu$ of the CPU time.% Due to an error in the computation, we don't report the times for $\sim_{at}$.
-	}
-	\label{tab:cpu-time}
-\end{table}
+	\caption{Performance comparison of the graph summaries}
+	\label{fig:cpu-time-bar}
+\end{figure}

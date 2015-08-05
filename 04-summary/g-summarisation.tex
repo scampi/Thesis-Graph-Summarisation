@@ -175,7 +175,7 @@ A summary is built from a graph based on a summarisation relation that maps each
 Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to the summarisation relation $R \subseteq V \times \mathcal{W}$.
 
 Let $p = (x_1, \alpha_1, x_2) \in \mathcal{B} \wedge \cdots \wedge (x_n, \alpha_n, x_{n+1}) \in \mathcal{B}$ be a path in the summary $\mathcal{S}$ with $(x_1, \cdots, x_{n+1}) \in \mathcal{W}^{n+1}$.
-We call the set $\{ u_1, \cdots, u_{n+1} \}$ an instance of the summary path $p$ if each node $u_i \in V$ is mapped to a sumnode $x_i$ of $p$, i.e.,:
+We call the set $\{ u_1, \cdots, u_{n+1} \}$ an instance of the summary path $p$ if each node $u_i \in V$ is mapped to a sumnode $x_i$ of $p$ by the relation $R$, i.e.,:
 $$
 \forall i \in \left[1, n\right] \; (u_i, x_i) \in R
 $$
@@ -275,7 +275,8 @@ $$
 \end{enumerate}
 \end{definition}
 
-\subsubsection{Bisimulation Summary Construction}
+\subsubsection{Bisimulation Summary}
+\label{sec:bisim-summary}
 
 Since the bisimulation is an equivalence relation, we can create equivalence classes defined as $[x] = \left\lbrace x \in V \mid y \in V,\; x \sim y \right\rbrace$; a class is the set of nodes that are bisimilar. An equivalence class is then exactly a sumnode of the summary. The summarisation relation is in this case a one-to-one mapping of the equivalence class to the sumnode.
 
