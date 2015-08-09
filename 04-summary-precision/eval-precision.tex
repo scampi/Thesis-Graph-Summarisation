@@ -1,7 +1,7 @@
 \section{Evaluation}
 \label{sec:eval}
 
-In this section, we evaluate the trade-off between the performance of an implementation of a summarisation relation, the volume, and the precision of the graph summary.
+In this section, we evaluate the trade-off between the performance of an implementation of a summarisation relation, the compression ratio, and the precision of the graph summary.
 In this evaluation, we consider the following:
 \begin{itemize}
 	\item we want to summarise a graph $G=\left\langle V, A, l_V \right\rangle$;
@@ -22,27 +22,23 @@ The bisimulation summary $\mathcal{S}_{fbt}$ is the most precise summary of the 
 
 \subsubsection{Evaluation Dimensions}
 
-We present in this section three dimensions we use for evaluating a summary, i.e., the \emph{volume}, the \emph{performance} of the relation, and the \emph{precision}.
+We present in this section three dimensions we use for evaluating a summary, i.e., the summary \emph{compression}, the computational \emph{performance} of the summarisation relation, and the \emph{precision} of the summary.
 
 \begin{quotation}
-	\item[\emph{Summary volume.}]
+	\item[\emph{Summary compression.}]
 
+	A summary is smaller if its size $\vert \mathcal{B} \vert$ (number of sumedges) and its order $\vert \mathcal{W} \vert$ (number of sumnodes) are inferior to the size $\vert A \vert$ and the order $\vert V \vert$ of the graph it was created from.
+	
+	Apart from the single-type summary $R_{st}$, the presented summarisation relations in Section~\ref{sec:approximate} create a summary which is always smaller or equal to the graph, since there is a one-to-one mapping from the data graph to the summary.
+	
+	The single-type summarisation relation $R_{st}$ may assign several sumnode to a same node $u \in V$ when the set of types is greater than one, i.e., when $\vert types(u) \vert > 1$. The order of a single-type summary $\mathcal{S}_{st} = \left\langle \mathcal{W}_{st}, \mathcal{B}_{st}, l_{\mathcal{W}_{st}} \right\rangle$ is at most equal to the number of types in the graph, i.e., $\vert \mathcal{W}_{st} \vert = \vert \{ l_{\mathcal{W}_{st}}(c) \mid \forall (u, c) \in V^2_{st}\; (u, \gls{atype}, c) \in \mathcal{B}_{st} \wedge \gls{atype} in T \} \vert$. However, in the worst case, its size can equal $\vert \mathcal{B}_{st} \vert = \vert \mathcal{W}_{st} \vert ^d$, with $d$ being the diameter\footnote{The diameter $d$ of a graph $G$ is the maximum distance between any two nodes of the graph. The distance between two nodes is the number of edges in the shortest path that connects the two.} of the original graph. Indeed, every node of the graph can be associated with every types. Therefore when applying the single-type summarisation relation $R_{st}$ over such a graph, we need for each path in $G$ to create an edge to each type for every node of the path. Figure~\ref{fig:single-type-summary-size} depicts the size of the single-type summary in the worst case scenario, where all nodes are both of types $A$ and $B$.
+	
+	The summary is sensitive to heterogeneous data graph. Indeed, there can be as many sumnodes in an attributes summary $\mathcal{S}_a = \left\langle \mathcal{W}_{a}, \mathcal{B}_{a}, l_{\mathcal{W}_{a}} \right\rangle$ as there is elements in the attribute power-set minus the empty set, i.e., $\vert \mathcal{W}_a \vert = \vert \mathbb{P} \left( \{ \alpha \mid \forall (u, v) \in \mathcal{W}_a\; (u, \alpha, v) \in \mathcal{W}_a \} \right) \vert - 1$. Such an order of the summary can be expected for any summarisation relation based on the set of attributes, i.e., the summarisation relations $R_{at}$, $R_{ioa}$, $R_{ioat}$, and $R_{fbt}$.\\
 
-%	A summary is smaller if its size $\vert \mathcal{B} \vert$ and its order $\vert \mathcal{W} \vert$ are inferior to the size $\vert A \vert$ and the order $\vert V \vert$ of the data graph.
-%	
-%	Apart from $R_{st}$, the presented summarisation relations in Section~\ref{sec:approximate} create a summary which is always smaller or equal to the data graph, since there is a one-to-one mapping from the data graph to the summary.
-%	
-%	The $R_{st}$ relation may assign several equivalence classes to a node $u \in V$, i.e., when $\vert types(u) \vert > 1$. The order of a summary built from $R_{st}$ is at most equal to $\vert V_{st} \vert = \vert \mathcal{L}^T \vert$. However, in the worst case, its size can equal $\vert A_{st} \vert = \vert \mathcal{L}^T \vert ^d$, with $d$ being the diameter\footnote{The diameter $d$ of a graph $G$ is the maximum distance between any two nodes of the graph. The distance between two nodes is the number of edges in the shortest path that connects the two.} of the data graph. Indeed, every node of the data graph can be associated with all the types, i.e., $\forall u \in V, types(u) = \mathcal{L}^C$. Therefore when applying the relation $R_{st}$ over such a graph, we need for each path in $G$ to create an edge to each type for every node of the path.
-%	
-%	The summary is sensitive to heterogeneous data graph. Indeed, there can be a node in a $\mathcal{S}_a$ summary for each element of the attribute powerset minus the empty set, i.e., $\vert V^{\sim_a} \vert = 2^{\vert \mathcal{L}^A \vert} - 1$. Such an order of the summary can be expected for any relation based on the set of attributes, i.e., the relations $R_{at}$, $R_{ioa}$, $R_{ioat}$, and $R_{fbt}$.
-%	
-%	We note that reducing the volume of a summary comes with a price, that of reduced precision of the summary, which we discuss in the next section.
-
-
-	We measure the amount of data from the gold standard summary that is compressed into the evaluated summary. To this end, we compare the volume of the summary against the volume of the gold standard. We report this comparison as the ratio  $\mathcal{S}:\mathcal{S}_{fb}$ of the former to the later.
+	We measure the amount of information from a given graph $G_1 = \left\langle V_1, A_1, l_{V_1} \right\rangle$ that is compressed into another graph $G_2 = \left\langle V_2, A_2, l_{V_2} \right\rangle$. To this end, we compare the size and order of $G_2$ against the size and order of $G_1$. We report this comparison as the ratio $G_2:G_1$:
 	
 	$$
-	\mathcal{S}:\mathcal{S}_{fb} = \frac{\vert \mathcal{W} \vert + \vert \mathcal{B} \vert}{\vert \mathcal{W}_{fb} \vert + \vert \mathcal{B}_{fb} \vert}
+	G_2:G_1 = \frac{\vert V_2 \vert + \vert A_2 \vert}{\vert V_1 \vert + \vert A_1 \vert}
 	$$
 	
 	\item[\emph{Algorithm performance.}]
@@ -53,486 +49,134 @@ We present in this section three dimensions we use for evaluating a summary, i.e
 	%\item a \emph{edges} step, where we compute the edges of $G^\sim$.
 	%\end{inparaenum}
 	We evaluate the computational performance of a summarisation relation by analysing the CPU time\footnote{The accumulated CPU time as reported with the \texttt{CPU\_MILLISECONDS} counter of Hadoop.} on the \hyperref[step-he]{Step 3} of the graph summary computation, as described in Section~\ref{chap03:algo:edge-materialisation} for the MapReduce case. We do not report on the \hyperref[step-hn]{Step 2} because the evaluated summarisation relations have the same complexity, achieving similar times on this step.
-	
+
 	\item[\emph{Summary precision.}]
-	
-	With regards to all three classification of errors, we evaluate the precision of a summary thanks to the true and false positive edges set $TP(x)$ and $FP(x)$.
+
+	With regards to all three classification of errors, we evaluate the precision of a summary thanks to the true and false positive sumedges set $TP(x)$ and $FP(x)$.
 	We report the precision using two measures, i.e., $P1$ and $P2$.
-	
-	The measure $P1$ reflects the average number of true positive edges from a randomly selected node in the inferred graph $\mathcal{I}(R)$. From right to left, we sum the edge precisions $Prec(R, x)$ of a node $x\in \mathcal{W}_{fbt}$, which we average by the number of nodes within $C(c)$. Finally, we average over the total number of nodes within the bisimulation summary.
+
+	The measure $P1$ reflects the average number of true positive sumedges from a randomly selected node in the inferred graph $\mathcal{I}(R)$. In the equation below of $P1$, from right to left, we sum the sumedge precisions $Prec(R, x)$ of a node $x\in \mathcal{W}_{fbt}$, which we average by the number of nodes within $C(c)$. Given that there exists a relation $S \subseteq \mathcal{W}_{fbt} \times \mathcal{W}$ such that $R_{fbt} \sqsubseteq R$, the expression $C(c)$ is the set of sumnodes in $\mathcal{W}_{fbt}$ that are mapped to the sumnode $c \in \mathcal{W}$ as per the relation $S$. Finally, we average over the total number of nodes within the bisimulation summary.
 	$$
 	\begin{aligned}
 	P1 = & \frac{1}{\vert \mathcal{W}_{fbt} \vert} \times \sum_{c \in \mathcal{W}}{\frac{1}{\vert C(c) \vert} \times \sum_{x \in C(c)}{Prec(R, x)}} \\
 	\text{where}\; C(c) = & \left\lbrace x \in \mathcal{W}_{fbt} \mid (x, c) \in S \right\rbrace
 	\end{aligned}
 	$$
-	
-	The measure $P2$ reflects the overall chance for a randomly selected edge in the inferred graph $\mathcal{I}(R)$ of being a true positive.
+
+	The measure $P2$ reflects the overall chance to randomly select a true positive sumedge in the inferred graph $\mathcal{I}(R)$:
 	$$
 	P2 = \frac{\sum_{x \in \mathcal{W}_{fbt}}{TP(x)}}{\sum_{x \in \mathcal{W}_{fbt}}{TP(x) + FP(x)}}
 	$$
 \end{quotation}
 
+\begin{figure}
+	\centering
+	\resizebox{.8\textwidth}{!}{
+		\input{04-summary-precision/figures/single-type-summary-size}
+	}
+	\caption{Size of the single-type summary $\mathcal{S}_{st}$}
+	\label{fig:single-type-summary-size}
+\end{figure}
 \subsection{Datasets}
 \label{sec:eval:datasets}
 
-We use in this evaluation several datasets of various complexity. We list in the Table~\ref{tab:datasets} the datasets along with some descriptive statistics. The datasets are grouped according to their complexity into four categories, i.e., \emph{Low}, \emph{Medium}, \emph{High}, and \emph{Very High}. We determined the complexity with regards to the volume of a graph and the number of unique types and attributes it possesses.
+We use in this evaluation several datasets of various complexity. We list in the Table~\ref{tab:datasets} the datasets along with some descriptive statistics. The datasets are grouped according to their complexity into four categories, i.e., \emph{Low}, \emph{Medium}, \emph{High}, and \emph{Very High}. We determine the complexity with regards to the number of nodes and edges in a graph, as well as with the number of unique types and attributes it possesses.
 
-For each dataset, we present two aspects, i.e., the \emph{schema} and the \emph{structure} of the data graph. With regards to the schema complexity, we report the number of unique edge labels $\vert \mathcal{L}^A \vert$ and the number of unique types $\vert \mathcal{L}^T \vert$ of the data graph. With regards to the structure complexity, we report the size and order of $G$ and  $\mathcal{S}_{fb}$. The order values omit the number of sink nodes, i.e., nodes without outgoing edges which includes literal nodes in the RDF data model.
+For each dataset, we present two aspects, i.e., the \emph{schema} and the \emph{structure} of the data graph. With regards to the schema complexity, we report the number of unique edge labels and types of the data graph. With regards to the structure complexity, we report the size and order of $G$ and  $\mathcal{S}_{fb}$. The order values omit the number of sink nodes, i.e., nodes without outgoing edges which includes literal nodes in the RDF data model.
 
-The $\mathcal{S}_{fb}:G$ column reports the volume ratio of $\mathcal{S}_{fb}$ to $G$ as a percentage, where the volume is the sum of the size and order of a graph. We remark that the volume of the summary $\mathcal{S}_{fb}$ is significantly smaller than the volume of the data graph. This emphasize the performance benefits of using a summary instead of the data graph itself in an application. We note that the bigger the volume ratio, the more complex the data graph is to summarise from a structural point of view. Although the datasets \texttt{bnb} and \texttt{wb} have a similar volume, the volume ratio of the summary on \texttt{bnb} is greater than for \textbf{wb}, i.e., $1.17\%$ to $0.01\%$. This shows that the structure of \texttt{bnb} is more heterogeneous than that of \texttt{wb}.
+The $G:\mathcal{S}_{fb}$ column reports the compression ratio of the graph $G$ when the bisimulation summarisation is used. We remark that the size and order of the bisimulation summary $\mathcal{S}_{fb}$ is significantly smaller than of the data graph. This emphasize the performance benefits of using a summary instead of the data graph itself in an application. We note the lower the compression ratio, the more complex the graph is to summarise. Although the datasets \texttt{bnb} and \texttt{wb} have a similar size and order, the compression ratio of the summary on \texttt{bnb} is greater than for \texttt{wb}, i.e., $85.43$ to $13125.89$. This shows that the dataset \texttt{bnb} has a more heterogeneous structure than that of \texttt{wb}.
 
 \input{04-summary/experiments/datasets}
 
 \subsection{Results}
 \label{sec:eval:results}
 
-We evaluate and compare in this section the different graph summary algorithm according to the volume, the computational complexity, and the precision. Then, we discuss the trade-offs with respect to these three dimensions.
-We note the mean of measurements in a category as $\mu_{L}$, $\mu_{M}$, $\mu_{H}$, and $\mu_{VH}$, respectively.
+We evaluate and compare in this section the different graph summarisation relations according to the compression ratio, the computational complexity, and the precision of the generated summary. Then, we discuss the trade-offs with respect to these three dimensions.
+We note the mean of measurements in a category, i.e., \emph{Low}, \emph{Medium}, \emph{High}, and \emph{Very High}, as $\mu_{L}$, $\mu_{M}$, $\mu_{H}$, and $\mu_{VH}$, respectively.
 
-\subsubsection{Graph Summary Volume}
+\subsubsection{Summary Compression}
 
-The Table~\ref{tab:volume-ratio} reports the volume ratio between the summary $\mathcal{S}$ and the gold standard summary $\mathcal{S}_{fb}$. We report also the mean $\mu$ for each category of datasets complexity.
+We depict in Figure~\ref{fig:vol-ration-bar} the average compression ratio in a log scale in each category of complexity for every summarisation relation. The raw data is reported in Table~\ref{tab:volume-ratio}, in the Appendix section.
+	
+The summaries based only on the type information, i.e., the single-type summary $\mathcal{S}_{st}$ and the types summary $\mathcal{S}_t$, exhibit a higher compression compared to that of the gold standard, i.e., $G:\mathcal{S}_{fbt}$. The compression ratio is twice as much on the \emph{Low} and \emph{Medium} datasets and slightly higher on the more complex datasets. On average, the types $\mathcal{S}_t$ and  single-type $\mathcal{S}_{st}$ summaries present a similar compression ratio.
+%we note that the compression ratio of a  is higher than with the types summary $\mathcal{S}_t$.% The reason is that a node of the data graph can be mapped to several sumnodes with the \emph{Single-Type} summary $R_{st}$, which leads to an increase of the size of the summary.
 
-The summaries based only on the type information, i.e., $R_{st}$ and $R_t$, exhibit a higher compression compared to the gold standard. With regards to the gold standard volume, the volume ratio is under $5\%$ on the \emph{Low} and \emph{Medium} datasets and at most half on the more complex datasets. On average, we note that the volume of a summary with $R_{st}$ is slightly higher than with $R_t$. The reason is that a node of the data graph can be mapped to several sumnodes with the \emph{Single-Type} summary $R_{st}$, which leads to an increase of the size of the summary.
+The attribute feature appears to be a better feature for summarising a graph than type. Indeed, the compression ratio of the attributes  $\mathcal{S}_a$ and IO attributes $\mathcal{S}_{ioa}$ summaries remain stable across the dataset categories. However, this is not the case with the summaries based only on the type, i.e., the $\mathcal{S}_{st}$ and $\mathcal{S}_t$ summaries.
+% $\mathcal{S}_a$ and $\mathcal{S}_{ioa}$ remains stable with \emph{Medium} ($42.51$ and $51.45$, resp.) and \emph{High} ($47.99$ and $66.13$, resp.) datasets. However, this is not the case with the $\mathcal{S}_{st}$ and $\mathcal{S}_t$ summaries. 
 
-The attribute feature appears to be a better feature for summarising a graph than type. Indeed, the volume ratio of $\mathcal{S}_a$ and $\mathcal{S}_{ioa}$ remains stable with \emph{Medium} ($42.51$ and $51.45$, resp.) and \emph{High} ($47.99$ and $66.13$, resp.) datasets. However, this is not the case with the $\mathcal{S}_{st}$ and $\mathcal{S}_t$ summaries. 
+We can observe a correlation between the compression ratio and the number of types.
+We note that the \emph{Attributes} summarisation $R_a$ actually achieves the lowest ratio on the \emph{very high} dataset. This shows that the use of attributes in \texttt{dbpedia} is homogeneous across types. The compression ratio of the \emph{IO Attributes} summary $\mathcal{S}_{ioa}$ is on average on par with the ratio of the \emph{Attributes} summary $\mathcal{S}_a$, indicating a certain homogeneity of incoming edges in the data graph.
 
-We can observe a correlation between the volume ratio and the size of $\mathcal{L}^T$.
-We note that the \emph{Attributes} summarisation $R_a$ actually achieves the lowest ratio on the \texttt{dbpedia} dataset. This shows that the use of attributes in \texttt{dbpedia} is homogeneous across types. The volume ratio of the \emph{IO Attributes} summary $\mathcal{S}_{ioa}$ is on average on par with the ratio of the \emph{Attributes} summary $\mathcal{S}_a$, indicating a certain homogeneity of incoming edges in the data graph.
+By using both type and attribute information as with the \emph{Attributes \& Types} summarisation relation $R_{at}$, we remark that this can lead to a significant decrease of the summary's compression, as we can see on the \emph{Medium} and \emph{High} categories.
+Indeed, the combination of the features on the \emph{High} datasets exhibits a much higher ratio than when taken separately.%, e.g., $55.87$ and $84.06$ respectively with $\mathcal{S}_{at}$, against $27.43$ and $49.83$ with $\mathcal{S}_a$.
+We can conclude that a sparse usage of attributes with a type creates an explosion of combinations. In general, the type feature is less stable than the attribute feature.
 
-By using both type and attribute information as with the \emph{Attributes \& Types} summarisation relation $R_{at}$, we remark that this can lead to a significant increase of the summary volume. Indeed, the combination of the features on \texttt{b3kat} and \texttt{lobid} exhibits a much higher ratio than when taken separately, e.g., $55.87$ and $84.06$ respectively with $\mathcal{S}_{at}$, against $27.43$ and $49.83$ with $\mathcal{S}_a$. We can conclude that a sparse usage of attributes with a type creates an explosion of combinations. In general, the type feature is less stable than the attribute feature.
-
-\begin{figure}
-	\centering
-	\resizebox{\textwidth}{!}{
-		\begin{tikzpicture}
-		\begin{axis}[
-		ybar,
-		symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
-		enlargelimits=0.15,
-		ylabel={Volume Ratio},
-		x=2cm,
-		bar width=0.3cm,
-		xtick=data,
-		legend style={at={(0.5,-0.15)},
-			anchor=north,legend columns=-1},
-		]
-		\addplot coordinates {
-			($\mathcal{S}_{st}$,1.89)
-			($\mathcal{S}_{t}$,1.77)
-			($\mathcal{S}_{a}$,81.73)
-			($\mathcal{S}_{at}$,81.74)
-			($\mathcal{S}_{ioa}$,89.57)
-			($\mathcal{S}_{ioat}$,89.57)
-		};
-		
-		\addplot coordinates {
-			($\mathcal{S}_{st}$,0.23)
-			($\mathcal{S}_{t}$,0.22)
-			($\mathcal{S}_{a}$,42.51)
-			($\mathcal{S}_{at}$,53.37)
-			($\mathcal{S}_{ioa}$,51.45)
-			($\mathcal{S}_{ioat}$,62.68)
-		};
-		
-		\addplot coordinates {
-			($\mathcal{S}_{st}$, 17.81)
-			($\mathcal{S}_{t}$,17.60)
-			($\mathcal{S}_{a}$,47.99)
-			($\mathcal{S}_{at}$,62.55)
-			($\mathcal{S}_{ioa}$,66.13)
-			($\mathcal{S}_{ioat}$,79.45)
-		};
-		
-		\addplot coordinates {
-			($\mathcal{S}_{st}$, 45.00)
-			($\mathcal{S}_{t}$,51.81)
-			($\mathcal{S}_{a}$,4.71)
-			($\mathcal{S}_{at}$,59.10)
-			($\mathcal{S}_{ioa}$,6.41)
-			($\mathcal{S}_{ioat}$,60.56)
-		};
-		\legend{$\mu_L$,$\mu_M$,$\mu_H$,$\mu_{VH}$}
-		\end{axis}
-		\end{tikzpicture}
-	}
-	\caption{Volume ratio of the graph summaries}
-	\label{fig:vol-ration-bar}
-\end{figure}
+\input{04-summary-precision/exps/compression-ratio}
 
 \subsubsection{Performance of the Summarisation Relation}
 
-The Table~\ref{tab:cpu-time} reports the CPU time in $ms$ of the \emph{edges} step in the graph summarisation computation. The reported times are the average of two runs of an algorithm for a certain dataset.
+Figure~\ref{fig:cpu-time-bar} depicts the average CPU time in $ms$ for each category of complexity. This time accounts for the \hyperref[step-he]{Step~3} (Section~\ref{chap03:algo:edge-materialisation}) in the graph summarisation computation.
+For each dataset which raw data is reported in Table~\ref{tab:cpu-time}, the times are the average of two runs of a summarisation relation.
 
-The $R_{st}$ and $R_t$ summarisation relations may have undefined mappings due to missing type statements for some entities. For performance reason reason, the node $\mathfrak{U}$ are filtered from the resulting summary. Therefore, reported run times in Table~\ref{tab:cpu-time} from $R_{st}$ and $R_t$ cannot be compared to others.
+The single-type $R_{st}$ and types $R_t$ summarisation relations can have an undefined sumnode (Section~\ref{sec:undefined-sumnode}) due to some nodes having no type information. For performance reason, the undefined sumnode $\mathfrak{U}$ is filtered from the resulting summary. Therefore, reported run times in Table~\ref{tab:cpu-time} from $R_{st}$ and $R_t$ cannot be compared to others.
 
-On the \emph{Medium}, \emph{High}, and \emph{Very High} datasets, the time taken by the $R_{st}$ summarisation on the \hyperref[step-he]{Step 3} of the graph summary computation is higher than $R_t$. This highlights the property of the $R_{st}$ summarisation of being a many-to-many binary relation. As a consequence, we need to compute all the possible combinations of edges between the sumnodes.
+On the \emph{Medium}, \emph{High}, and \emph{Very High} datasets, the time taken by the $R_{st}$ summarisation on the \hyperref[step-he]{Step~3} of the graph summary computation is higher than $R_t$. This highlights the property of the $R_{st}$ summarisation of being a many-to-many binary relation rather than a many-to-one, i.e., it can assign a node to several sumnodes. As a consequence, we need to compute all the possible combinations of edges between the sumnodes.
 We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not imply a higher runtime when compared to $R_{a}$ and $R_{at}$.
 
-\begin{figure}
-	\centering
-	\resizebox{\textwidth}{!}{
-		\begin{tikzpicture}
-		\begin{axis}[
-		ybar,
-		symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
-		enlargelimits=0.15,
-		ylabel={CPU Time (ms)},
-		x=2cm,
-		bar width=0.3cm,
-		xtick=data,
-		legend style={at={(0.5,-0.15)},
-			anchor=north,legend columns=-1},
-		]
-		\addplot coordinates {
-			($\mathcal{S}_{st}$, 5181727)
-			($\mathcal{S}_{t}$, 5140988)
-			($\mathcal{S}_{a}$, 5208950)
-			($\mathcal{S}_{at}$, 5227250)
-			($\mathcal{S}_{ioa}$, 5254718)
-			($\mathcal{S}_{ioat}$, 5212401)
-		};
-		
-		\addplot coordinates {
-			($\mathcal{S}_{st}$, 51724125)
-			($\mathcal{S}_{t}$, 45942442)
-			($\mathcal{S}_{a}$, 53505035)
-			($\mathcal{S}_{at}$, 53487935)
-			($\mathcal{S}_{ioa}$, 53557640)
-			($\mathcal{S}_{ioat}$, 52440249)
-		};
-		
-		\addplot coordinates {
-			($\mathcal{S}_{st}$, 4246345)
-			($\mathcal{S}_{t}$, 2763572)
-			($\mathcal{S}_{a}$, 3962202)
-			($\mathcal{S}_{at}$, 3942577)
-			($\mathcal{S}_{ioa}$, 3989825)
-			($\mathcal{S}_{ioat}$, 4032795)
-		};
-		
-		\addplot coordinates {
-			($\mathcal{S}_{st}$, 77643685)
-			($\mathcal{S}_{t}$, 52608760)
-			($\mathcal{S}_{a}$, 99839325)
-			($\mathcal{S}_{at}$, 104255540)
-			($\mathcal{S}_{ioa}$, 102540080)
-			($\mathcal{S}_{ioat}$, 105685365)
-		};
-		
-		\legend{$\mu_L$,$\mu_M$,$\mu_H$,$\mu_{VH}$}
-		\end{axis}
-		\end{tikzpicture}
-	}
-	\caption{Performance comparison of the graph summaries}
-	\label{fig:cpu-time-bar}
-\end{figure}
+\input{04-summary-precision/exps/cpu-time}
 
 \subsubsection{Graph Summary Precision}
 
-We discuss in this section the precision of a summary with regards to the connectivity first, then to the type and attribute next. We do not report the precision in any error classification for the \texttt{dbpedia} dataset. The reason is we were unable to evaluate the precision on it due to performance issues. While the performance evaluation did not account for the sumnode $\mathfrak{U}$ of undefined mappings, we do consider it for the precision evaluation.
+We discuss in this section the precision of a summary with regards to the connectivity first, then to the type and attribute next. We do not report the precision in any error classification for the \texttt{dbpedia} dataset (Very High category). The reason is we were unable to evaluate the precision on it due to performance issues. While the performance evaluation did not account for the undefined sumnode $\mathfrak{U}$, we do consider it for the precision evaluation.
 
 \minisec{Connectivity Precision}
 
-The Table~\ref{tab:precision-conn} reports the connectivity precision results $P1$ and $P2$. For each category of dataset complexity, we report the mean $\mu$ of the connectivity precision.
+Figure~\ref{fig:link-precision-bar} depicts the average connectivity precision for $P1$ and $P2$ over three categories of complexity, i.e., \emph{Low}, \emph{Medium}, and \emph{High}. The raw results for each dataset are reported in Table~\ref{tab:precision-conn} of the Appendix section; for each category of dataset complexity, we report as well the mean $\mu$ of the connectivity precision.\\
 
-The summarisation relations based only on the type feature, i.e., $R_{st}$ and $R_t$, provide a low connectivity precision. Indeed, they show on average a connectivity precision of $25\%$ according to $P1$, i.e., $\mu_H=0.2414$.
+We discuss first the connectivity error with regards to the precision $P1$ plotted on Figure~\ref{fig:err-conn-p1}.
+The summarisation relations based only on the type feature, i.e., $R_{st}$ and $R_t$, provide a low connectivity precision. Indeed, they show on average a connectivity precision of $25\%$ according to $P1$, i.e., $\mu_H=0.2414$ for the types summarisation relation $R_t$.
 
-Summarisation based on the attribute feature only provide also a low precision on \emph{Medium} and \emph{High} categories. On the \emph{Low} category, the attribute feature exhibits a better precision than the type feature, i.e., $\mu_L=0.5579$ against $\mu_H=0.3617$. However, when the type and attribute features are combined in $R_{at}$, it provides a significant increase of the precision. According to $P1$, we reach on average a $50\%$ connectivity precision ($0.5124$) on the \emph{High} category for $R_{at}$, and at least $20\%$ on \emph{Medium}.
+Summarisation based on the attribute feature only, i.e., the attributes summarisation relation $R_a$ , provide also a low precision on \emph{Medium} and \emph{High} categories. On the \emph{Low} category, the attribute feature exhibits a better precision than the type feature, i.e., $\mu_L=0.5579$ for $R_a$ against $\mu_H=0.3617$ for $R_{st}$. However, when the type and attribute features are combined in the attributes \$ types summarisation relation $R_{at}$, this provides a significant increase of the precision across all three categories. According to $P1$, we reach on average a $50\%$ connectivity precision ($0.5124$) on the \emph{High} category for $R_{at}$, and at least $20\%$ on \emph{Medium}.
 
-We remark that the incoming attribute in $R_{ioa}$ is an important feature that increases the precision. The $R_{ioa}$ summarisation provides a precision of $30\%$ on the \emph{Medium} up to $50\%$ on \emph{High}, whereas $R_a$ reaches $15\%$ on \emph{Medium} and $10\%$ on \emph{High}. Overall, we can achieve a good average connectivity precision with $R_{ioat}$ according to $P1$. However, the overall precision $P2$ is very low on the datasets of \emph{Medium} and \emph{High} complexities. This suggests that few nodes of the summary have a high out-degree, creating a combinatorial explosion of false positive edges. This will be investigated in future work.
+We remark that the incoming attribute in the IO attributes summarisation relation $R_{ioa}$ is an important feature that increases the precision. The $R_{ioa}$ summarisation provides a precision of $30\%$ on the \emph{Medium} up to $50\%$ on \emph{High}, whereas $R_a$ reaches $15\%$ on \emph{Medium} and $10\%$ on \emph{High}. Overall, we can achieve a good average connectivity precision with $R_{ioat}$ according to $P1$ when we add the type feature.\\
 
-\begin{figure}
-	\centering
-	\begin{subfigure}{.8\textwidth}
-		\centering
-		\resizebox{\textwidth}{!}{
-			\begin{tikzpicture}
-			\begin{axis}[
-			ybar,
-			symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
-			enlargelimits=0.15,
-			ylabel={Connectivity Precision $P1$},
-			x=2cm,
-			bar width=0.3cm,
-			xtick=data,
-			legend style={at={(0.5,-0.15)},
-				anchor=north,legend columns=-1},
-			]
-			\addplot coordinates {
-				($\mathcal{S}_{st}$, 0.3617)
-				($\mathcal{S}_{t}$, 0.3464)
-				($\mathcal{S}_{a}$, 0.5579)
-				($\mathcal{S}_{at}$, 0.5579)
-				($\mathcal{S}_{ioa}$, 0.7328)
-				($\mathcal{S}_{ioat}$, 0.7328)
-			};
-			
-			\addplot coordinates {
-				($\mathcal{S}_{st}$, 0.0757)
-				($\mathcal{S}_{t}$, 0.1190)
-				($\mathcal{S}_{a}$, 0.1591)
-				($\mathcal{S}_{at}$, 0.2011)
-				($\mathcal{S}_{ioa}$, 0.3123)
-				($\mathcal{S}_{ioat}$, 0.3311)
-			};
-			
-			\addplot coordinates {
-				($\mathcal{S}_{st}$, 0.0083)
-				($\mathcal{S}_{t}$, 0.2414)
-				($\mathcal{S}_{a}$, 0.1038)
-				($\mathcal{S}_{at}$, 0.5124)
-				($\mathcal{S}_{ioa}$, 0.5090)
-				($\mathcal{S}_{ioat}$, 0.8781)
-			};
-			\legend{$\mu_L$,$\mu_M$,$\mu_H$}
-			\end{axis}
-			\end{tikzpicture}
-		}
-		\caption{Precision $P1$}
-	\end{subfigure}
-	\quad
-	\begin{subfigure}{.8\textwidth}
-		\centering
-		\resizebox{\textwidth}{!}{
-			\begin{tikzpicture}
-			\begin{axis}[
-			ybar,
-			symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
-			enlargelimits=0.15,
-			ylabel={Connectivity Precision $P2$},
-			x=2cm,
-			bar width=0.3cm,
-			xtick=data,
-			legend style={at={(0.5,-0.15)},
-				anchor=north,legend columns=-1},
-			]
-			\addplot coordinates {
-				($\mathcal{S}_{st}$, 0.0428)
-				($\mathcal{S}_{t}$, 0.1328)
-				($\mathcal{S}_{a}$, 0.4896)
-				($\mathcal{S}_{at}$, 0.4896)
-				($\mathcal{S}_{ioa}$, 0.6080)
-				($\mathcal{S}_{ioat}$, 0.6080)
-			};
-			
-			\addplot coordinates {
-				($\mathcal{S}_{st}$, 0.0003)
-				($\mathcal{S}_{t}$, 0.0002)
-				($\mathcal{S}_{a}$, 0.0181)
-				($\mathcal{S}_{at}$, 0.0352)
-				($\mathcal{S}_{ioa}$, 0.0660)
-				($\mathcal{S}_{ioat}$, 0.0701)
-			};
-			
-			\addplot coordinates {
-				($\mathcal{S}_{st}$, 0.0004)
-				($\mathcal{S}_{t}$, 0.0024)
-				($\mathcal{S}_{a}$, 0.0229)
-				($\mathcal{S}_{at}$, 0.0640)
-				($\mathcal{S}_{ioa}$, 0.0808)
-				($\mathcal{S}_{ioat}$, 0.0896)
-			};
-			\legend{$\mu_L$,$\mu_M$,$\mu_H$}
-			\end{axis}
-			\end{tikzpicture}
-		}
-		\caption{Precision $P2$}
-	\end{subfigure}
-	\caption{Connectivity precision bar chart}
-	\label{fig:link-precision-bar}
-\end{figure}
+We remark that the overall precision $P2$ is very low on the datasets of \emph{Medium} and \emph{High} complexities. This suggests that few nodes of the summary have a high out-degree, creating a combinatorial explosion of false positive edges. This will be investigated in future work.
+
+\input{04-summary-precision/exps/connectivity-precision}
 
 \minisec{Schema Precision}
 
-The Table~\ref{tab:precision-schema} reports the means $\mu$ for a category of dataset complexity of the type and attribute precisions results $P1$ and $P2$, i.e., regarding the schema of the summary.
+Figure~\ref{fig:schema-precision-bar} depicts the average type and attribute precisions over the categories of complexity.
+In red we represent the attribute schema error, and in blue the type schema error. Bars with north east lines pattern depict $\mu_{L}$, with dotted pattern $\mu_{M}$, and with north west lines $\mu_{H}$.
+The raw data is reported in Table~\ref{tab:precision-schema} of the Appendix section.
 
-The summarisation $R_{st}$ and $R_t$ based on the type feature provide an attribute precision above at least $60\%$ for $P1$ ($\mu_M=0.5927$ for $\sim_{st}$).
+The summarisation relations $R_{st}$ and $R_t$ based on the type feature provide an attribute precision above at least $60\%$ for $P1$ ($\mu_M=0.5927$ for $\sim_{st}$).
 On the contrary, the attribute feature reports a good type precision, reaching on average at least $90\%$ for $R_a$, i.e., $P1=0.9222$ on the \emph{Medium} datasets.
 
-Incoming attributes do not increase much the type precision, since the type precision of $R_a$ stays on par with $R_{ioa}$. The $R_{at}$ relation provides a perfect summarisation of the graph schema. Again, the significant differences between $P1$ and $P2$ suggests one more time that few nodes of the summary contains a high out-degree, creating a combinatorial explosion of false positive edges.\\
+Incoming attributes do not increase much the type precision, since the type precision of $R_a$ stays on par with $R_{ioa}$. The $R_{at}$ relation provides a perfect summarisation of the graph schema. Again, the significant differences between $P1$ and $P2$ suggests one more time that few nodes of the summary contains a high out-degree, creating a combinatorial explosion of false positive edges.
+
+\input{04-summary-precision/exps/schema-precision}
+
+\minisec{Discussion}
 
 In conclusion, we observe that a combination of both type and attribute features is necessary to achieve a good precision. The results show that taking incoming attributes as a feature of the summarisation relation is important for the connectivity precision, but not for the schema.
 
 However, there is place for improvement for overall connectivity precision especially on certain datasets. We observe that the precision $P2$ leads to very low precision values which is caused by a few summary nodes with a high out-degree. This indicates that the model of $P2$ is not appropriate for measuring the precision of a summary in terms of connectivity and schema.
 
-\begin{figure}
-	\centering
-	\begin{subfigure}{.8\textwidth}
-		\centering
-		\resizebox{\textwidth}{!}{
-			\begin{tikzpicture}
-			\pgfplotsset{
-				grid=major,
-				xmajorgrids=false,
-				ybar stacked, ymin=0, ymax=2, xtick=data,
-				symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
-				enlargelimits=0.2,
-				ylabel={Schema Precision $P1$},
-				x=2cm,
-				xtick=data
-			}
-			\begin{axis}[bar shift=-16pt]
-			\addplot[postaction={pattern=north east lines}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{st}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.9999)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.9999)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-			
-			\addplot[postaction={pattern=north east lines}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{st}$, 0.7586)
-				($\mathcal{S}_{t}$, 0.7529)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-
-			\end{axis}
-			\begin{axis}
-			
-			\addplot[postaction={pattern=dots}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{st}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.9222)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.9415)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-			
-			\addplot[postaction={pattern=dots}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{st}$, 0.5927)
-				($\mathcal{S}_{t}$, 0.6607)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-
-			\end{axis}
-			\begin{axis}[bar shift=16pt]
-			
-			\addplot[postaction={pattern=north west lines}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{st}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.9675)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.9760)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-			
-			\addplot[postaction={pattern=north west lines}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{st}$, 0.7826)
-				($\mathcal{S}_{t}$, 0.9446)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-
-			\end{axis}
-			\end{tikzpicture}
-		}
-		\caption{Precision $P1$}
-	\end{subfigure}
-	\quad
-	\begin{subfigure}{.8\textwidth}
-		\centering
-		\resizebox{\textwidth}{!}{
-			\begin{tikzpicture}
-			\pgfplotsset{
-				grid=major,
-				xmajorgrids=false,
-				ybar stacked, ymin=0, ymax=2, xtick=data,
-				symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
-				enlargelimits=0.2,
-				ylabel={Schema Precision $P2$},
-				x=2cm,
-				xtick=data
-			}
-			\begin{axis}[bar shift=-16pt]
-			
-			\addplot[postaction={pattern=north east lines}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{st}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.9995)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.9999)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-			
-			\addplot[postaction={pattern=north east lines}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{st}$, 0.5217)
-				($\mathcal{S}_{t}$, 0.4968)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-
-			\end{axis}
-			\begin{axis}
-			
-			\addplot[postaction={pattern=dots}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{st}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.7136)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.7753)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-			
-			\addplot[postaction={pattern=dots}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{st}$, 0.2798)
-				($\mathcal{S}_{t}$, 0.2925)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-
-			\end{axis}
-			\begin{axis}[bar shift=16pt]
-			
-			\addplot[postaction={pattern=north west lines}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{st}$, 1.0000)    
-				($\mathcal{S}_{t}$, 1.0000)     
-				($\mathcal{S}_{a}$, 0.1424)     
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.2151)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-			
-			\addplot[postaction={pattern=north west lines}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{st}$, 0.0843)
-				($\mathcal{S}_{t}$, 0.2398)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
-			};
-
-			\end{axis}
-			\end{tikzpicture}
-		}
-		\caption{Precision $P2$}
-	\end{subfigure}
-	\caption{Schema precision bar chart. In red we show the attribute schema error, and in blue the type schema error. Bars with north east lines pattern depict $\mu_{L}$, with dotted pattern $\mu_{M}$, and with north west lines $\mu_{H}$.}
-	\label{fig:schema-precision-bar}
-\end{figure}
-
 \subsubsection{Trade-Offs}
 
-We report in Figure~\ref{fig:trade-conn-volume} the trade-off between the average connectivity precision and the average volume ratio across all datasets among all the relations. We can distinguish two groups of relations, the type-based summarisations, i.e., $R_t$ and $R_{st}$, and the attribute-based ones.
-The type-based relations provide the best volume ratio, but also the worst precision. In the attribute group, the volume ratio among relations is close to each others, but their precision differs greatly, with $R_{ioat}$ ahead. This suggests that in terms of trade-off between connectivity precision and volume, $R_{ioat}$ is the best candidate.
+We report in Figure~\ref{fig:trade-conn-volume} the trade-off between the average connectivity precision and the average compression ratio across all datasets among all the relations. We can distinguish two groups of relations, the type-based summarisation relations, i.e., the types $R_t$ and the single-type $R_{st}$ summarisation relation, and the attribute-based ones, i.e., the attributes relation $R_a$, the attributes \& types relation $R_{at}$, the IO attributes relation $R_{ioa}$, and the IO attributes \& types relation $R_{ioat}$.\\
 
-We report in Figure~\ref{fig:trade-schema-volume} the trade-off between the average schema precision and the average volume ratio across all datasets among all the relations. Again we can distinguish the same two groups. However, in the attribute group, the precision does not differ too much among the candidates, each one being either equal or very close to $1$. In the type group, the \emph{Types} summarisation relation $R_t$ provides a quite reasonable precision for a very small volume ratio. This suggests that if the precision is primordial, the \emph{Attributes \& Types} relation $R_{at}$ is the best candidate, providing a perfect schema precision for the smallest volume. However, if volume is primordial instead and that some imperfection can be tolerated, then the \emph{Types} summarisation relation $R_t$ is the best candidate.
+The type-based relations provide the best compression ratio, but also the worst precision. In the attribute group, the compression ratio among relations is close to each others, but their precision differs greatly, with $R_{ioat}$ ahead.
 
-We report in Figure~\ref{fig:trade-conn-cpu} (resp., \ref{fig:trade-schema-cpu}) the trade-off between the average connectivity precision (resp., average schema precision) and the average CPU time across all datasets among all the summarisation relations. Among the attribute-based algorithms $R_a$, $R_{at}$, $R_{ioa}$ and $R_{ioat}$, the latter is the one that achieves the best runtime with the highest precision. Among the type-based algorithms, the \emph{Types} summarisation $R_t$ achieves a lower runtime and a higher precision than the \emph{Single-Type} relation $R_{st}$.
+This suggests that in terms of trade-off between connectivity precision and compression ratio, $R_{ioat}$ is the best candidate.\\
+
+We report in Figure~\ref{fig:trade-schema-volume} the trade-off between the average schema precision and the average compression ratio across all datasets among all the relations. Again we can distinguish the same two groups. However, in the attribute group, the precision does not differ as much among the candidates, each one being either equal or very close to $1$. In the type group, the \emph{Types} summarisation relation $R_t$ provides a reasonable precision for a good compression ratio.
+
+This suggests that if the precision is primordial, the \emph{Attributes \& Types} relation $R_{at}$ is the best candidate, providing a perfect schema precision for the best compression ratio. However, if the compression is primordial instead and that some imperfection can be tolerated, then the \emph{Types} summarisation relation $R_t$ is the best candidate.\\
+
+We report in Figure~\ref{fig:trade-conn-cpu} (respectively, \ref{fig:trade-schema-cpu}) the trade-off between the average connectivity precision (respectively, average schema precision) and the average CPU time across all datasets among all the summarisation relations. Among the attribute-based algorithms $R_a$, $R_{at}$, $R_{ioa}$ and $R_{ioat}$, the latter is the one that achieves the best runtime with the highest precision. Among the type-based algorithms, the \emph{Types} summarisation $R_t$ achieves a lower runtime and a higher precision than the \emph{Single-Type} relation $R_{st}$.
+
 If the schema precision is primordial and a low connectivity precision can be tolerated, the \emph{Types} summarisation $R_t$ is the best candidate as it provides a high schema precision, with the best CPU time. On the contrary, if the connectivity is primordial, the summarisation relation $R_{ioat}$ is the best candidate, but this at the cost of a longer runtime.
 
 \begin{figure}
@@ -541,7 +185,7 @@ If the schema precision is primordial and a low connectivity precision can be to
 		\resizebox{\textwidth}{!}{
 			\input{04-summary/experiments/tradeoff-volume*conn}
 		}
-		\caption{Connectivity precision versus volume ratio.}
+		\caption{Connectivity precision versus compression ratio.}
 		\label{fig:trade-conn-volume}
 	\end{subfigure}
 	\qquad
@@ -549,7 +193,7 @@ If the schema precision is primordial and a low connectivity precision can be to
 		\resizebox{\textwidth}{!}{
 			\input{04-summary/experiments/tradeoff-volume*schema}
 		}
-		\caption{Schema precision versus volume ratio.}
+		\caption{Schema precision versus compression ratio.}
 		\label{fig:trade-schema-volume}
 	\end{subfigure}
 	\qquad%

@@ -1,0 +1,30 @@
+\begin{tikzpicture}[->,>=stealth',node distance=2cm]
+\node[draw,circle] (u) {$u$};
+\node[draw,circle,right of = u] (v) {$v$};
+
+\node[draw,circle,right of = v,xshift=.5cm] (su) {$\mathcal{s}_a$};
+\node[draw,circle,right of = su,xshift=.5cm] (sv) {$\mathcal{s}_b$};
+\node[draw,circle,above right of = u,xshift=-.4cm] (a) {$A$};
+\node[draw,circle,below right of = u,xshift=-.4cm] (b) {$B$};
+
+\node[draw,circle,above of = su] (sa) {$A$};
+\node[draw,circle,below of = sv] (sb) {$B$};
+
+\path[every node/.style={fill=white,font=\footnotesize}]
+(u) edge node {$\alpha$} (v)
+(u) edge node {$\gls{atype}$} (a)
+(u) edge node {$\gls{atype}$} (b)
+(v) edge node {$\gls{atype}$} (a)
+(v) edge node {$\gls{atype}$} (b)
+
+(u) edge[dotted,-,bend right] node[near end] {$R_{st}$} (su)
+(v) edge[dotted,-,bend left] node[near start] {$R_{st}$} (sv)
+
+(su) edge[loop below] node {$\alpha$} (su)
+(sv) edge[loop above] node {$\alpha$} (sv)
+(su) edge[bend right = 15] node {$\alpha$} (sv)
+(sv) edge[bend right = 15] node {$\alpha$} (su)
+(su) edge node {$\gls{atype}$} (sa)
+(sv) edge node {$\gls{atype}$} (sb)
+;
+\end{tikzpicture}

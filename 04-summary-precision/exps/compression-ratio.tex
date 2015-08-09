@@ -1,0 +1,121 @@
+\begin{figure}
+	\centering
+	\resizebox{\textwidth}{!}{
+		\begin{tikzpicture}
+		\begin{axis}[
+		ybar,
+		symbolic x coords={$G:\mathcal{S}_{fbt}$,$G:\mathcal{S}_{st}$,$G:\mathcal{S}_{t}$,$G:\mathcal{S}_{a}$,$G:\mathcal{S}_{at}$,$G:\mathcal{S}_{ioa}$,$G:\mathcal{S}_{ioat}$},
+		enlargelimits=0.15,
+		ylabel={Compression Ratio},
+		x=2cm,
+		bar width=0.3cm,
+		xtick=data,
+		ymode = log,
+		ymajorgrids = true,
+		legend style={at={(0.5,-0.15)},
+			anchor=north,legend columns=-1},
+		]
+		\addplot coordinates {
+			($G:\mathcal{S}_{fbt}$, 3589.49)
+			($G:\mathcal{S}_{st}$, 294067.89)
+			($G:\mathcal{S}_{t}$, 313917.10)
+			($G:\mathcal{S}_{a}$, 3999.70)
+			($G:\mathcal{S}_{at}$, 3999.69)
+			($G:\mathcal{S}_{ioa}$, 3654.78)
+			($G:\mathcal{S}_{ioat}$, 3654.77)
+		};
+		
+		\addplot coordinates {
+			($G:\mathcal{S}_{fbt}$, 205.80)
+			($G:\mathcal{S}_{st}$, 361299.27)
+			($G:\mathcal{S}_{t}$, 141978.05)
+			($G:\mathcal{S}_{a}$, 490.00)
+			($G:\mathcal{S}_{at}$, 326.39)
+			($G:\mathcal{S}_{ioa}$, 407.85)
+			($G:\mathcal{S}_{ioat}$, 283.95)
+		};
+		
+		\addplot coordinates {
+			($G:\mathcal{S}_{fbt}$, 386.79)
+			($G:\mathcal{S}_{st}$, 2103.26)
+			($G:\mathcal{S}_{t}$, 2128.70)
+			($G:\mathcal{S}_{a}$, 959.60)
+			($G:\mathcal{S}_{at}$, 710.87)
+			($G:\mathcal{S}_{ioa}$, 717.87)
+			($G:\mathcal{S}_{ioat}$, 572.57)
+		};
+		
+		\addplot coordinates {
+			($G:\mathcal{S}_{fbt}$, 7.29)
+			($G:\mathcal{S}_{st}$, 16.21)
+			($G:\mathcal{S}_{t}$, 14.08)
+			($G:\mathcal{S}_{a}$, 154.86)
+			($G:\mathcal{S}_{at}$, 12.34)
+			($G:\mathcal{S}_{ioa}$, 113.75)
+			($G:\mathcal{S}_{ioat}$, 12.04)
+		};
+		\legend{$\mu_L$,$\mu_M$,$\mu_H$,$\mu_{VH}$}
+		\end{axis}
+		\end{tikzpicture}
+	}
+	\caption{Compression ratio $G:\mathcal{S}$ of graph summaries. The ratio axis is reported in logarithmic scale.}
+	\label{fig:vol-ration-bar}
+\end{figure}
+
+%\begin{figure}
+%	\centering
+%	\resizebox{\textwidth}{!}{
+%		\begin{tikzpicture}
+%		\begin{axis}[
+%		ybar,
+%		symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
+%		enlargelimits=0.15,
+%		ylabel={Compression Ratio},
+%		x=2cm,
+%		bar width=0.3cm,
+%		xtick=data,
+%		legend style={at={(0.5,-0.15)},
+%			anchor=north,legend columns=-1},
+%		]
+%		\addplot coordinates {
+%			($\mathcal{S}_{st}$,1.89)
+%			($\mathcal{S}_{t}$,1.77)
+%			($\mathcal{S}_{a}$,81.73)
+%			($\mathcal{S}_{at}$,81.74)
+%			($\mathcal{S}_{ioa}$,89.57)
+%			($\mathcal{S}_{ioat}$,89.57)
+%		};
+%		
+%		\addplot coordinates {
+%			($\mathcal{S}_{st}$,0.23)
+%			($\mathcal{S}_{t}$,0.22)
+%			($\mathcal{S}_{a}$,42.51)
+%			($\mathcal{S}_{at}$,53.37)
+%			($\mathcal{S}_{ioa}$,51.45)
+%			($\mathcal{S}_{ioat}$,62.68)
+%		};
+%		
+%		\addplot coordinates {
+%			($\mathcal{S}_{st}$, 17.81)
+%			($\mathcal{S}_{t}$,17.60)
+%			($\mathcal{S}_{a}$,47.99)
+%			($\mathcal{S}_{at}$,62.55)
+%			($\mathcal{S}_{ioa}$,66.13)
+%			($\mathcal{S}_{ioat}$,79.45)
+%		};
+%		
+%		\addplot coordinates {
+%			($\mathcal{S}_{st}$, 45.00)
+%			($\mathcal{S}_{t}$,51.81)
+%			($\mathcal{S}_{a}$,4.71)
+%			($\mathcal{S}_{at}$,59.10)
+%			($\mathcal{S}_{ioa}$,6.41)
+%			($\mathcal{S}_{ioat}$,60.56)
+%		};
+%		\legend{$\mu_L$,$\mu_M$,$\mu_H$,$\mu_{VH}$}
+%		\end{axis}
+%		\end{tikzpicture}
+%	}
+%	\caption{Compression ratio of graph summaries}
+%	\label{fig:vol-ration-bar}
+%\end{figure}

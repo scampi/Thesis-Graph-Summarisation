@@ -1,29 +1,26 @@
 %
-\begin{tabular}{lc@{\hs}rrrrrr}
+\begin{tabular}{lc@{\hs}rrc@{\hs}rrc@{\hs}rrc@{\hs}rrc@{\hs}rrc@{\hs}rr}
 \toprule
-Dataset & \phantom{a} & \multicolumn{6}{c}{$\mathcal{S}:\mathcal{S}_{fb}$ (in \%)} \\
-\cmidrule{3-8}
- & \phantom{a} & $\mathcal{S}_{st}$ & $\mathcal{S}_{t}$ & $\mathcal{S}_{a}$ & $\mathcal{S}_{at}$ & $\mathcal{S}_{ioa}$ & $\mathcal{S}_{ioat}$ \\
-\texttt{dbpedia} & \phantom{a} & 45.00 & 51.81 & 4.71 & 59.10 & 6.41 & 60.56 \\
+Dataset & \phantom{a} & $\vert \mathcal{W}_{st}\vert$ & $\vert\mathcal{B}_{st}\vert$ & \phantom{a} & $\vert\mathcal{W}_{t}\vert$ & $\vert\mathcal{B}_{t}\vert$ & \phantom{a} & $\vert\mathcal{W}_{a}\vert$ & $\vert\mathcal{B}_{a}\vert$ & \phantom{a} & $\vert\mathcal{W}_{at}\vert$ & $\vert\mathcal{B}_{at}\vert$ & \phantom{a} & $\vert\mathcal{W}_{ioa}\vert$ & $\vert\mathcal{B}_{ioa}\vert$ & \phantom{a} & $\vert\mathcal{W}_{ioat}\vert$ & $\vert\mathcal{B}_{ioat}\vert$ \\
+\cmidrule{3-4} \cmidrule{6-7} \cmidrule{9-10} \cmidrule{12-13} \cmidrule{15-16} \cmidrule{18-19}
+
+\texttt{dbpedia} & \phantom{a} & \numprint{288524} & \numprint{18104329} & \phantom{a} & \numprint{1450687} & \numprint{19725084} & \phantom{a} & \numprint{21825} & \numprint{1903078} & \phantom{a} & \numprint{1728460} & \numprint{22430463} & \phantom{a} & \numprint{55296} & \numprint{2565315} & \phantom{a} & \numprint{1782403} & \numprint{22971692} \\
 \midrule
-\texttt{twc-logd} & \phantom{a} & 24.27 & 23.99 & 35.69 & 48.96 & 47.13 & 60.13 \\
-\texttt{enipedia} & \phantom{a} & 11.35 & 11.20 & 60.28 & 76.14 & 85.14 & 98.76 \\
-$\mu_H$ & \phantom{a} & \emph{17.81} & \emph{17.60} & \emph{47.99} & \emph{62.55} & \emph{66.13} & \emph{79.45} \\
+\texttt{twc-log} & \phantom{a} & \numprint{450} & \numprint{30480} & \phantom{a} & \numprint{1199} & \numprint{29377} & \phantom{a} & \numprint{1309} & \numprint{44174} & \phantom{a} & \numprint{2285} & \numprint{60104} & \phantom{a} & \numprint{1805} & \numprint{58251} & \phantom{a} & \numprint{2726} & \numprint{73908} \\
+\texttt{enipedia} & \phantom{a} & \numprint{128} & \numprint{2420} & \phantom{a} & \numprint{163} & \numprint{2353} & \phantom{a} & \numprint{536} & \numprint{13001} & \phantom{a} & \numprint{755} & \numprint{16343} & \phantom{a} & \numprint{810} & \numprint{18308} & \phantom{a} & \numprint{1008} & \numprint{21170} \\
 \midrule
-\texttt{b3kat} & \phantom{a} & 0.02 & 0.13 & 27.43 & 55.87 & 27.99 & 56.49 \\
-\texttt{ecs} & \phantom{a} & 0.90 & 0.55 & 23.78 & 31.73 & 29.22 & 37.22 \\
-\texttt{lobid} & \phantom{a} & 0.09 & 0.26 & 49.83 & 84.06 & 63.32 & 97.92 \\
-\texttt{bnb} & \phantom{a} & 0.03 & 0.03 & 19.95 & 20.67 & 20.53 & 21.26 \\
-\texttt{datos} & \phantom{a} & 0.02 & 0.01 & 44.59 & 44.60 & 44.74 & 44.76 \\
-\texttt{gnd} & \phantom{a} & 0.32 & 0.32 & 36.37 & 40.91 & 78.41 & 85.12 \\
-\texttt{eures} & \phantom{a} & 0.27 & 0.20 & 95.62 & 95.71 & 95.93 & 95.98 \\
-$\mu_M$ & \phantom{a} & \emph{0.23} & \emph{0.22} & \emph{42.51} & \emph{53.37} & \emph{51.45} & \emph{62.68} \\
+\texttt{b3kat} & \phantom{a} & \numprint{20} & \numprint{716} & \phantom{a} & \numprint{233} & \numprint{5064} & \phantom{a} & \numprint{72835} & \numprint{1028049} & \phantom{a} & \numprint{154260} & \numprint{2087985} & \phantom{a} & \numprint{74553} & \numprint{1048702} & \phantom{a} & \numprint{156150} & \numprint{2110836} \\
+\texttt{ecs} & \phantom{a} & \numprint{24} & \numprint{511} & \phantom{a} & \numprint{19} & \numprint{311} & \phantom{a} & \numprint{812} & \numprint{13391} & \phantom{a} & \numprint{1142} & \numprint{17809} & \phantom{a} & \numprint{1305} & \numprint{16147} & \phantom{a} & \numprint{1639} & \numprint{20592} \\
+\texttt{lobid} & \phantom{a} & \numprint{19} & \numprint{679} & \phantom{a} & \numprint{86} & \numprint{1971} & \phantom{a} & \numprint{21874} & \numprint{375576} & \phantom{a} & \numprint{38852} & \numprint{631660} & \phantom{a} & \numprint{28335} & \numprint{476704} & \phantom{a} & \numprint{45587} & \numprint{735451} \\
+\texttt{bnb} & \phantom{a} & \numprint{27} & \numprint{297} & \phantom{a} & \numprint{46} & \numprint{365} & \phantom{a} & \numprint{14214} & \numprint{223979} & \phantom{a} & \numprint{15052} & \numprint{231727} & \phantom{a} & \numprint{14730} & \numprint{230299} & \phantom{a} & \numprint{15607} & \numprint{238173} \\
+\texttt{datos} & \phantom{a} & \numprint{23} & \numprint{428} & \phantom{a} & \numprint{25} & \numprint{372} & \phantom{a} & \numprint{76995} & \numprint{1200563} & \phantom{a} & \numprint{77050} & \numprint{1200914} & \phantom{a} & \numprint{77616} & \numprint{1204300} & \phantom{a} & \numprint{77666} & \numprint{1204626} \\
+\texttt{gnd} & \phantom{a} & \numprint{22} & \numprint{293} & \phantom{a} & \numprint{22} & \numprint{293} & \phantom{a} & \numprint{3120} & \numprint{32718} & \phantom{a} & \numprint{3603} & \numprint{36713} & \phantom{a} & \numprint{6889} & \numprint{70378} & \phantom{a} & \numprint{7611} & \numprint{76263} \\
+\texttt{eures} & \phantom{a} & \numprint{18} & \numprint{89} & \phantom{a} & \numprint{18} & \numprint{61} & \phantom{a} & \numprint{2009} & \numprint{35529} & \phantom{a} & \numprint{2022} & \numprint{35552} & \phantom{a} & \numprint{2037} & \numprint{35622} & \phantom{a} & \numprint{2045} & \numprint{35634} \\
 \midrule
-\texttt{europeana} & \phantom{a} & 0.09 & 0.09 & 72.57 & 72.57 & 72.57 & 72.57 \\
-\texttt{wb} & \phantom{a} & 3.02 & 2.55 & 91.09 & 91.09 & 100.00 & 100.00 \\
-\texttt{cordis} & \phantom{a} & 0.25 & 0.25 & 77.13 & 77.15 & 85.71 & 85.72 \\
-\texttt{ny-times} & \phantom{a} & 4.19 & 4.19 & 86.15 & 86.15 & 100.00 & 100.00 \\
-$\mu_L$ & \phantom{a} & \emph{1.89} & \emph{1.77} & \emph{81.73} & \emph{81.74} & \emph{89.57} & \emph{89.57} \\
+\texttt{europeana} & \phantom{a} & \numprint{5} & \numprint{66} & \phantom{a} & \numprint{5} & \numprint{66} & \phantom{a} & \numprint{3466} & \numprint{52353} & \phantom{a} & \numprint{3466} & \numprint{52353} & \phantom{a} & \numprint{3466} & \numprint{52353} & \phantom{a} & \numprint{3466} & \numprint{52353} \\
+\texttt{wb} & \phantom{a} & \numprint{4} & \numprint{216} & \phantom{a} & \numprint{3} & \numprint{183} & \phantom{a} & \numprint{271} & \numprint{6360} & \phantom{a} & \numprint{271} & \numprint{6360} & \phantom{a} & \numprint{293} & \numprint{6987} & \phantom{a} & \numprint{293} & \numprint{6987} \\
+\texttt{cordis} & \phantom{a} & \numprint{7} & \numprint{92} & \phantom{a} & \numprint{7} & \numprint{92} & \phantom{a} & \numprint{1497} & \numprint{28607} & \phantom{a} & \numprint{1500} & \numprint{28610} & \phantom{a} & \numprint{1725} & \numprint{31727} & \phantom{a} & \numprint{1726} & \numprint{31728} \\
+\texttt{ny-times} & \phantom{a} & \numprint{2} & \numprint{34} & \phantom{a} & \numprint{2} & \numprint{34} & \phantom{a} & \numprint{57} & \numprint{683} & \phantom{a} & \numprint{57} & \numprint{683} & \phantom{a} & \numprint{65} & \numprint{794} & \phantom{a} & \numprint{65} & \numprint{794} \\
 \bottomrule
 \end{tabular}%
 %

@@ -1,54 +1,106 @@
 \begin{table}
-	\centering
-	\ra{1.2}
-	\resizebox{\textwidth}{!}{
-		\begin{tabular}{lc@{\hs}rrc@{\hs}rrc@{\hs}rrc@{\hs}r}
-			\toprule
-			Dataset & \phantom{a} & \multicolumn{2}{c}{Schema} & \phantom{a} & \multicolumn{2}{c}{$G$} & \phantom{a} & \multicolumn{2}{c}{$\mathcal{S}_{fb}$} & \phantom{a} & $\mathcal{S}_{fb}:G$ \\
-			\cmidrule{3-4} \cmidrule{6-7} \cmidrule{9-10} \cmidrule{12-12}
-			 & \phantom{a} & $\vert \mathcal{L}^T \vert$ & $\vert \mathcal{L}^A \vert$ & \phantom{a} & $\vert V \vert$ & $\vert A \vert$ & \phantom{a} & $\vert \mathcal{W}_{fb} \vert$ & $\vert \mathcal{B}_{fb} \vert$ & \phantom{a} &
-			\\
-			{\bfseries \underline{Very High}} \\
-			\texttt{dbpedia} \cite{dbpedia}
-			 & \phantom{a} & \numprint{288524} & \numprint{22369} & \phantom{a} & \numprint{65042837} & \numprint{233051608} & \phantom{a} & \numprint{6884121} & \numprint{33990765} & \phantom{a} & 13.71\% \\
-			\midrule
-			{\bfseries \underline{High}} \\
-			\texttt{twc-logd} \cite{twc-logd}
-			 & \phantom{a} & 450 & \numprint{10060} & \phantom{a} & \numprint{3398947} & \numprint{67505792} & \phantom{a} & \numprint{5565} & \numprint{121873} & \phantom{a} & 0.18\% \\
-			\texttt{enipedia} \cite{enipedia}
-			 & \phantom{a} & 128 & 267 & \phantom{a} & \numprint{413520} & \numprint{4463566} & \phantom{a} & 1037 & \numprint{21419} & \phantom{a} & 0.46\% \\
-			\midrule
-			{\bfseries \underline{Medium}} \\
-			\texttt{b3kat} \cite{b3kat}
-			 & \phantom{a} & 20 & 30 & \phantom{a} & \numprint{85795956} & \numprint{592778746} & \phantom{a} & \numprint{782056} & \numprint{3230936} & \phantom{a} & 0.59\% \\
-			\texttt{ecs} \cite{ecs}
-			 & \phantom{a} & 24 & 120 & \phantom{a} & \numprint{167390} & \numprint{955112} & \phantom{a} & \numprint{8232} & \numprint{51494} & \phantom{a} & 5.32\% \\
-			\texttt{lobid} \cite{lobid-resources}
-			 & \phantom{a} & 19 & 46 & \phantom{a} & \numprint{124691274} & \numprint{625941644} & \phantom{a} & \numprint{51529} & \numprint{746099} & \phantom{a} & 0.11\% \\
-			\texttt{bnb} \cite{bnb}
-			 & \phantom{a} & 27 & 53 & \phantom{a} & \numprint{12246306} & \numprint{89733453} & \phantom{a} & \numprint{146956} & \numprint{1046714} & \phantom{a} & 1.17\% \\
-			\texttt{datos} \cite{datos}
-			 & \phantom{a} & 23 & 143 & \phantom{a} & \numprint{7412312} & \numprint{58048932} & \phantom{a} & \numprint{360822} & \numprint{2504262} & \phantom{a} & 4.38\% \\
-			\texttt{gnd} \cite{gnd}
-			 & \phantom{a} & 22 & 35 & \phantom{a} & \numprint{962930} & \numprint{7940373} & \phantom{a} & \numprint{9664} & \numprint{88875} & \phantom{a} & 1.11\% \\
-			\texttt{eures} \cite{eures}
-			 & \phantom{a} & 18 & 49 & \phantom{a} & \numprint{288862} & \numprint{4146421} & \phantom{a} & \numprint{2205} & \numprint{37052} & \phantom{a} & 0.89\% \\
-			\midrule
-			{\bfseries \underline{Low}} \\
-			\texttt{europeana} \cite{europeana}
-			 & \phantom{a} & 5 & 58 & \phantom{a} & \numprint{5559452} & \numprint{40773834} & \phantom{a} & \numprint{4792} & \numprint{72125} & \phantom{a} &  0.17\% \\
-			\texttt{wb} \cite{wb}
-			 & \phantom{a} & 4 & 174 & \phantom{a} & \numprint{11210832} & \numprint{84345613} & \phantom{a} & 293 & \numprint{6987} & \phantom{a} & 0.01\% \\
-			\texttt{cordis} \cite{cordis}
-			 & \phantom{a} & 7 & 63 & \phantom{a} & \numprint{729780} & \numprint{7101623} & \phantom{a} & \numprint{2245} & \numprint{36783} & \phantom{a} & 0.50\% \\
-			\texttt{ny-times} \cite{ny-times}
-			 & \phantom{a} & 2 & 38 & \phantom{a} & \numprint{22662} & \numprint{345888} & \phantom{a} & 65 & 794 & \phantom{a} & 0.23\% \\
-			\bottomrule
-		\end{tabular}
-	}
-	\caption{Descriptive statistics of the datasets. The Schema column reports the number in $G$ of unique edges labels $\vert \mathcal{L}^A \vert$ and of unique types $\vert \mathcal{L}^T \vert$. The column $G$ reports the order and the size of the data graph. The column $\mathcal{S}_{fb}$ reports the order and the size of the summary $\mathcal{S}_{fb}$ of the graph $G$. The $\mathcal{S}_{fb}:G$ column reports as a percentage the volume ratio of $\mathcal{S}_{fb}$ to $G$.}
-	\label{tab:datasets}
+  \centering
+  \ra{1.2}
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{lc@{\hs}rrc@{\hs}rrc@{\hs}rrc@{\hs}r}
+      \toprule
+      Dataset & \phantom{a} & \multicolumn{2}{c}{Schema} & \phantom{a} & \multicolumn{2}{c}{$G$} & \phantom{a} & \multicolumn{2}{c}{$\mathcal{S}_{fb}$} & \phantom{a} & $G:\mathcal{S}_{fb}$ \\
+      \cmidrule{3-4} \cmidrule{6-7} \cmidrule{9-10} \cmidrule{12-12}
+      & \phantom{a} & Types & Attributes & \phantom{a} & $\vert V \vert$ & $\vert A \vert$ & \phantom{a} & $\vert \mathcal{W}_{fb} \vert$ & $\vert \mathcal{B}_{fb} \vert$ & \phantom{a} &
+      \\
+      {\bfseries \underline{Very High}} \\
+      \texttt{dbpedia} \cite{dbpedia}
+      & \phantom{a} & \numprint{288524} & \numprint{22369} & \phantom{a} & \numprint{65042837} & \numprint{233051608} & \phantom{a} & \numprint{6884121} & \numprint{33990765} & \phantom{a} & 7.29 \\
+      \midrule
+      {\bfseries \underline{High}} \\
+      \texttt{twc-logd} \cite{twc-logd}
+      & \phantom{a} & 450 & \numprint{10060} & \phantom{a} & \numprint{3398947} & \numprint{67505792} & \phantom{a} & \numprint{5565} & \numprint{121873} & \phantom{a} & 556.39 \\
+      \texttt{enipedia} \cite{enipedia}
+      & \phantom{a} & 128 & 267 & \phantom{a} & \numprint{413520} & \numprint{4463566} & \phantom{a} & 1037 & \numprint{21419} & \phantom{a} & 217.18 \\
+      \midrule
+      {\bfseries \underline{Medium}} \\
+      \texttt{b3kat} \cite{b3kat}
+      & \phantom{a} & 20 & 30 & \phantom{a} & \numprint{85795956} & \numprint{592778746} & \phantom{a} & \numprint{782056} & \numprint{3230936} & \phantom{a} & 169.09 \\
+      \texttt{ecs} \cite{ecs}
+      & \phantom{a} & 24 & 120 & \phantom{a} & \numprint{167390} & \numprint{955112} & \phantom{a} & \numprint{8232} & \numprint{51494} & \phantom{a} & 18.79 \\
+      \texttt{lobid} \cite{lobid-resources}
+      & \phantom{a} & 19 & 46 & \phantom{a} & \numprint{124691274} & \numprint{625941644} & \phantom{a} & \numprint{51529} & \numprint{746099} & \phantom{a} & 941.08 \\
+      \texttt{bnb} \cite{bnb}
+      & \phantom{a} & 27 & 53 & \phantom{a} & \numprint{12246306} & \numprint{89733453} & \phantom{a} & \numprint{146956} & \numprint{1046714} & \phantom{a} & 85.43 \\
+      \texttt{datos} \cite{datos}
+      & \phantom{a} & 23 & 143 & \phantom{a} & \numprint{7412312} & \numprint{58048932} & \phantom{a} & \numprint{360822} & \numprint{2504262} & \phantom{a} & 22.85 \\
+      \texttt{gnd} \cite{gnd}
+      & \phantom{a} & 22 & 35 & \phantom{a} & \numprint{962930} & \numprint{7940373} & \phantom{a} & \numprint{9664} & \numprint{88875} & \phantom{a} & 90.35 \\
+      \texttt{eures} \cite{eures}
+      & \phantom{a} & 18 & 49 & \phantom{a} & \numprint{288862} & \numprint{4146421} & \phantom{a} & \numprint{2205} & \numprint{37052} & \phantom{a} & 112.98 \\
+      \midrule
+      {\bfseries \underline{Low}} \\
+      \texttt{europeana} \cite{europeana}
+      & \phantom{a} & 5 & 58 & \phantom{a} & \numprint{5559452} & \numprint{40773834} & \phantom{a} & \numprint{4792} & \numprint{72125} & \phantom{a} &  602.38 \\
+      \texttt{wb} \cite{wb}
+      & \phantom{a} & 4 & 174 & \phantom{a} & \numprint{11210832} & \numprint{84345613} & \phantom{a} & 293 & \numprint{6987} & \phantom{a} & 13125.89 \\
+      \texttt{cordis} \cite{cordis}
+      & \phantom{a} & 7 & 63 & \phantom{a} & \numprint{729780} & \numprint{7101623} & \phantom{a} & \numprint{2245} & \numprint{36783} & \phantom{a} & 200.66 \\
+      \texttt{ny-times} \cite{ny-times}
+      & \phantom{a} & 2 & 38 & \phantom{a} & \numprint{22662} & \numprint{345888} & \phantom{a} & 65 & 794 & \phantom{a} & 429.05 \\
+      \bottomrule
+    \end{tabular}
+  }
+  \caption{Descriptive statistics of the datasets. The Schema column reports the number in $G$ of unique edges labels and types. The column $G$ reports the order and the size of the data graph. The column $\mathcal{S}_{fb}$ reports the order and the size of the bisimulation summary $\mathcal{S}_{fb}$ of the graph $G$. The $G:\mathcal{S}_{fb}$ column reports the compression ratio of the graph $G$ when the bisimulation summarisation is used.}
+  \label{tab:datasets}
 \end{table}
+
+%\begin{table}
+%	\centering
+%	\ra{1.2}
+%	\resizebox{\textwidth}{!}{
+%		\begin{tabular}{lc@{\hs}rrc@{\hs}rrc@{\hs}rrc@{\hs}r}
+%			\toprule
+%			Dataset & \phantom{a} & \multicolumn{2}{c}{Schema} & \phantom{a} & \multicolumn{2}{c}{$G$} & \phantom{a} & \multicolumn{2}{c}{$\mathcal{S}_{fb}$} & \phantom{a} & $\mathcal{S}_{fb}:G$ \\
+%			\cmidrule{3-4} \cmidrule{6-7} \cmidrule{9-10} \cmidrule{12-12}
+%			& \phantom{a} & Types & Attributes & \phantom{a} & $\vert V \vert$ & $\vert A \vert$ & \phantom{a} & $\vert \mathcal{W}_{fb} \vert$ & $\vert \mathcal{B}_{fb} \vert$ & \phantom{a} &
+%			\\
+%			{\bfseries \underline{Very High}} \\
+%			\texttt{dbpedia} \cite{dbpedia}
+%			& \phantom{a} & \numprint{288524} & \numprint{22369} & \phantom{a} & \numprint{65042837} & \numprint{233051608} & \phantom{a} & \numprint{6884121} & \numprint{33990765} & \phantom{a} & 13.71\% \\
+%			\midrule
+%			{\bfseries \underline{High}} \\
+%			\texttt{twc-logd} \cite{twc-logd}
+%			& \phantom{a} & 450 & \numprint{10060} & \phantom{a} & \numprint{3398947} & \numprint{67505792} & \phantom{a} & \numprint{5565} & \numprint{121873} & \phantom{a} & 0.18\% \\
+%			\texttt{enipedia} \cite{enipedia}
+%			& \phantom{a} & 128 & 267 & \phantom{a} & \numprint{413520} & \numprint{4463566} & \phantom{a} & 1037 & \numprint{21419} & \phantom{a} & 0.46\% \\
+%			\midrule
+%			{\bfseries \underline{Medium}} \\
+%			\texttt{b3kat} \cite{b3kat}
+%			& \phantom{a} & 20 & 30 & \phantom{a} & \numprint{85795956} & \numprint{592778746} & \phantom{a} & \numprint{782056} & \numprint{3230936} & \phantom{a} & 0.59\% \\
+%			\texttt{ecs} \cite{ecs}
+%			& \phantom{a} & 24 & 120 & \phantom{a} & \numprint{167390} & \numprint{955112} & \phantom{a} & \numprint{8232} & \numprint{51494} & \phantom{a} & 5.32\% \\
+%			\texttt{lobid} \cite{lobid-resources}
+%			& \phantom{a} & 19 & 46 & \phantom{a} & \numprint{124691274} & \numprint{625941644} & \phantom{a} & \numprint{51529} & \numprint{746099} & \phantom{a} & 0.11\% \\
+%			\texttt{bnb} \cite{bnb}
+%			& \phantom{a} & 27 & 53 & \phantom{a} & \numprint{12246306} & \numprint{89733453} & \phantom{a} & \numprint{146956} & \numprint{1046714} & \phantom{a} & 1.17\% \\
+%			\texttt{datos} \cite{datos}
+%			& \phantom{a} & 23 & 143 & \phantom{a} & \numprint{7412312} & \numprint{58048932} & \phantom{a} & \numprint{360822} & \numprint{2504262} & \phantom{a} & 4.38\% \\
+%			\texttt{gnd} \cite{gnd}
+%			& \phantom{a} & 22 & 35 & \phantom{a} & \numprint{962930} & \numprint{7940373} & \phantom{a} & \numprint{9664} & \numprint{88875} & \phantom{a} & 1.11\% \\
+%			\texttt{eures} \cite{eures}
+%			& \phantom{a} & 18 & 49 & \phantom{a} & \numprint{288862} & \numprint{4146421} & \phantom{a} & \numprint{2205} & \numprint{37052} & \phantom{a} & 0.89\% \\
+%			\midrule
+%			{\bfseries \underline{Low}} \\
+%			\texttt{europeana} \cite{europeana}
+%			& \phantom{a} & 5 & 58 & \phantom{a} & \numprint{5559452} & \numprint{40773834} & \phantom{a} & \numprint{4792} & \numprint{72125} & \phantom{a} &  0.17\% \\
+%			\texttt{wb} \cite{wb}
+%			& \phantom{a} & 4 & 174 & \phantom{a} & \numprint{11210832} & \numprint{84345613} & \phantom{a} & 293 & \numprint{6987} & \phantom{a} & 0.01\% \\
+%			\texttt{cordis} \cite{cordis}
+%			& \phantom{a} & 7 & 63 & \phantom{a} & \numprint{729780} & \numprint{7101623} & \phantom{a} & \numprint{2245} & \numprint{36783} & \phantom{a} & 0.50\% \\
+%			\texttt{ny-times} \cite{ny-times}
+%			& \phantom{a} & 2 & 38 & \phantom{a} & \numprint{22662} & \numprint{345888} & \phantom{a} & 65 & 794 & \phantom{a} & 0.23\% \\
+%			\bottomrule
+%		\end{tabular}
+%	}
+%	\caption{Descriptive statistics of the datasets. The Schema column reports the number in $G$ of unique edges labels and types. The column $G$ reports the order and the size of the data graph. The column $\mathcal{S}_{fb}$ reports the order and the size of the bisimulation summary $\mathcal{S}_{fb}$ of the graph $G$. The $\mathcal{S}_{fb}:G$ column reports as a percentage the volume ratio of $\mathcal{S}_{fb}$ to $G$.}
+%	\label{tab:datasets}
+%\end{table}
 
 %\pgfplotstableread[col sep=comma,header=true]{
 %	dataset,1,2,3,4,5,6,7
