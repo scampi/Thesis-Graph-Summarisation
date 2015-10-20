@@ -109,6 +109,7 @@ We define $T$ as the set of type attributes, and we call $\gls{atype} \in T$ a t
 For a given node $x \in V$, we consider $types(x)$ as the set of values for which the attribute is a type attribute. More formally, let $types(x\in V) = \left\lbrace l_V(c) \mid \exists c \in V (x, \gls{atype}, c) \in A \wedge \gls{atype} \in T \right\rbrace$ be the set of type values. For instance, we have $types\left(N_6\right) = \left\{ \text{Country}, \text{Place} \right\}$ in Figure~\ref{fig:graph} as the set of type values for the node $N_6$.
 
 \subsection{Entity description}
+\label{sec:entity-description}
 
 The Web Data represents a graph of interconnected \emph{entities}, where an entity may be a person, a place, or an organisation, \ldots. We call an \emph{entity description} the pieces of informations in the graph that are about that entity. For instance, we can consider ``Galway'' to be part of the entity description of $N_3$ in Figure~\ref{fig:graph}, but not ``Rome''.
 

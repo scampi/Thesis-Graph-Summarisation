@@ -7,8 +7,6 @@ In order to make sense of this deluge of data, summarisation techniques are avai
 
 We present first a model for graph summarisation. Then, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data in many cases. Finally, we describe how inter-linked datasets can be summarised.
 
-\cite{Milner:1989:CC:534666} introduces the concept of bisimulation to define equivalent processes in concurrent systems. The relational coarsest partition \cite{Paige:1987:TPR:37185.37186} is generally the algorithm used for computing a bisimulation on a graph.
-
 \subsection{Model}
 
 In this section, we present a formal model of graph summarisation.
@@ -199,6 +197,7 @@ $$
 \subsubsection{Bisimulation}
 \label{chap:summary:bisim}
 
+%\cite{Milner:1989:CC:534666} introduces the concept of bisimulation to define equivalent processes in concurrent systems. The relational coarsest partition \cite{Paige:1987:TPR:37185.37186} is generally the algorithm used for computing a bisimulation on a graph.
 The bisimulation~\cite{park:1981:cai} is a notion of concurrency that studies the equality of processes.
 %It can be seen as a weaker formulation of graph isomorphism in that it defines many-to-one mappings.
 A bisimulation is a binary relation on $V$ that relates two nodes of the graph if itself and its inverse are \emph{simulations}.

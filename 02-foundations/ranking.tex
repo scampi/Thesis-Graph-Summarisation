@@ -57,9 +57,9 @@ The mapping from the field-based document model to the entity model is straightf
 \paragraph{Ranking features.}
 
 The following features are used in the field-based ranking functions:
-\begin{labeling}{\textbf{average attribute length}}
-	\item[\textbf{attribute length}] refers to the number of terms in a value node label. In case of a multi-valued attribute, it refers to the number of terms across all the values associated to the attribute.
-	\item[\textbf{average attribute length}] is equal to the mean of \emph{attribute length} across entities.
+\begin{labeling}{\textbf{average field length}}
+	\item[\textbf{field length}] refers to the number of terms in a value node label. In case of a multi-valued attribute, it refers to the number of terms across all the values associated to the attribute.
+	\item[\textbf{average field length}] is equal to the mean of \emph{field length} across entities.
 \end{labeling}
 
 \paragraph{Normalised term frequency.}
@@ -89,8 +89,8 @@ in which the following notations are used:
 	\item $f_{t,e,a}$ is the frequency of the term $t$ in the attribute $a$ of the entity $e$;
 	\item $\alpha_a$ is a weight of the attribute $a$ and $\alpha_e$ a weight of the entity $e$;
 	\item $b_a$ is the normalization parameter for the attribute $a$ with $b_a \in \left[0,1\right]$;
-	\item $l_{e,a}$ is the \emph{attribute length} of the attribute $a$ in the entity $e$; and
-	\item $l_a$ is the \emph{average attribute length} of the attribute $a$.
+	\item $l_{e,a}$ is the \emph{field length} of the attribute $a$ in the entity $e$; and
+	\item $l_a$ is the \emph{average field length} of the attribute $a$.
 \end{itemize}
 
 The IDF function is defined as

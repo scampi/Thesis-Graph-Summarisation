@@ -46,7 +46,7 @@ In this section, we evaluate and compare the performance of BM25 and PL2 ranking
   tfn=log(f_{t,e})+1
   $,
   where $f_{t,e}$ is the number of occurrences of the term $t$ in the entity $e$.
-  \item[BM25~\cite{robertson:1994:sigir}] considers the document as a simple bag of words. It is a function of the term frequency derived from a two-Poisson model and using an entity-length normalization. The entity length is computed as the sum of the \emph{attribute length} defined in the Section~\ref{sec:ranking-wod}. It defines the Equation (\ref{eq:tfidf-score}) as 
+  \item[BM25~\cite{robertson:1994:sigir}] considers the document as a simple bag of words. It is a function of the term frequency derived from a two-Poisson model and using an entity-length normalization. The entity length is computed as the sum of the \emph{field length} defined in the Section~\ref{sec:ranking-wod}. It defines the Equation (\ref{eq:tfidf-score}) as 
   $
   tfn=\frac{f_{t,e}\times(k_1+1)}{f_{t,e}+k_1\times \left(1+b\times\left(\frac{l_e}{l_{avg}}-1\right)\right)}
   $,

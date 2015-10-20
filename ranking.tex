@@ -40,8 +40,8 @@ In this section, we explain how to adapt two existing field-based ranking framew
 
 The following features are used in the field-based ranking functions:
 \begin{description}[noitemsep,nolistsep]
-  \item[attribute length] refers to the number of terms in a value node label. In case of a multi-valued attribute, it refers to the number of terms across all the values associated to the attribute.
-  \item[average attribute length] is equal to the mean of \emph{attribute length} across entities.
+  \item[field length] refers to the number of terms in a value node label. In case of a multi-valued attribute, it refers to the number of terms across all the values associated to the attribute.
+  \item[average field length] is equal to the mean of \emph{field length} across entities.
 \end{description}
 
 \paragraph{BM25F Ranking Function}
@@ -56,7 +56,7 @@ Using BM25F, an entity $e$ is scored with regard to a query $q$ as follows:
   \sum_{a\in e}{\frac{\alpha_a\times f_{t,e,a}}{1+b_a\times\left(\frac{l_{e,a}}{l_a}-1\right)}}
   \label{eq:bm25f_1}
 \end{eqnarray}
-where $q_t$ is the weight of the query $q$ for the term $t$, i.e., its frequency within the query $q$, $tfn$ is the term frequency normalization function, $\omega_t$ is the Inverse Document Frequency (IDF) function of the term $t$, $k_1$ is the saturation parameter, $f_{t,e,a}$ is the frequency of the term $t$ in the attribute $a$ of the entity $e$, $\alpha_a$ is a weight of the attribute $a$ and $\alpha_e$ a weight of the entity $e$, $b_a$ is the normalization parameter for the attribute $a$ with $b_a \in \left[0,1\right]$, $l_{e,a}$ is the \emph{attribute length} of the attribute $a$ in the entity $e$, $l_a$ is the \emph{average attribute length} of the attribute $a$. The IDF is defined as
+where $q_t$ is the weight of the query $q$ for the term $t$, i.e., its frequency within the query $q$, $tfn$ is the term frequency normalization function, $\omega_t$ is the Inverse Document Frequency (IDF) function of the term $t$, $k_1$ is the saturation parameter, $f_{t,e,a}$ is the frequency of the term $t$ in the attribute $a$ of the entity $e$, $\alpha_a$ is a weight of the attribute $a$ and $\alpha_e$ a weight of the entity $e$, $b_a$ is the normalization parameter for the attribute $a$ with $b_a \in \left[0,1\right]$, $l_{e,a}$ is the \emph{field length} of the attribute $a$ in the entity $e$, $l_a$ is the \emph{average field length} of the attribute $a$. The IDF is defined as
 $
 \omega_t=1+log\left(\frac{N}{N_t+1}\right)
 $,

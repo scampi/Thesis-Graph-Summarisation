@@ -129,8 +129,10 @@ The ranking of a document can be improved by, for example, adding some structura
 
 In the Web of Data, we use URIs to name things, e.g., people, monuments, places, \ldots, which allows one to lookup an URI and learn about it, but also for others to reference that URI in their own dataset. The Web Data takes then the form of a graph, where a node represent a concept and the edge the relationship that links two nodes.
 
-In Web Data, the structure of the graph carries some information about the data. However, most of this information is discarded by the field-based ranking approach due to its bag of words modelling. The Figure~\ref{fig:bow-graph} depicts a  graph about ``Ireland'' and its neighbouring country; the Figure~\ref{fig:bow} is a depiction of its bag of words. We observe that with the bag of words modelling, we lose some semantic that is carried by the structure: the population number is not closely associated with the ``United Kingdom'' anymore.
+In Web Data, the structure of the graph carries some information about the data. However, most of it is discarded by field-based ranking approaches due to the bag of words modelling. The Figure~\ref{fig:bow-graph} depicts a  graph about ``Ireland'' and its neighbouring country; the Figure~\ref{fig:bow} is a depiction of its bag of words. We observe that with the bag of words modelling, we lose some semantic that is carried by the structure: the population number is not closely associated with the ``United Kingdom'' anymore.
+
 The ranking of a graph requires a novel way of modelling the data, in which the ``bag of words'' approach does not discard the structure.
+Hence, we propose the \emph{``MF'' ranking model} that leverage the graph structure in order to better compute the relevance of a graph with regards to a query.
 
 \begin{figure}
 	\centering
