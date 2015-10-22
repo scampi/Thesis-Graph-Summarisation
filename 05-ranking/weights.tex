@@ -6,12 +6,12 @@ In this section, we introduce several weights for the MF model. We first present
   \item the \emph{Query Coverage} weight which indicates how well the query terms are covered by an entity, an attribute or a value; and
   \item the \emph{Value Coverage} weight which indicates how well a value node is covered by a query.
 \end{inparaenum}
-Next, we describe the \emph{Attribute and Entity Labels} query-independent weights.
+Next, we describe the \emph{Attribute} and \emph{Entity Labels} query-independent weights.
 
 \subsection{The Query Coverage Weight}
 \label{sec:kw-factor}
 
-The purpose of the Query Coverage (QC) weight is to lower the importance given to an entity, an attribute or a value with respect to the number of query terms it covers. This weight is combined with the ranking function using $\alpha_e$, $\alpha_a$ and $\alpha_v$. For example, given a query composed of three terms, if a value contains only occurrences of one query term, this value will then weight less than a value containing occurrences of more than one query term.
+The purpose of the Query Coverage (QC) weight is to lower the importance given to an entity, an attribute or a value with respect to the number of query terms it covers. This weight is combined with the ranking function using the parameters $\alpha_e$, $\alpha_a$ and $\alpha_v$. For example, given a query composed of three terms, if a value contains only occurrences of one query term, this value will then weight less than a value containing occurrences of more than one query term.
 
 This weight integrates the IDF weight of query terms so that the coverage takes into account the importance of the terms it covers. For example, if two entities have occurrences of one of the three query terms, the coverage would then be $\frac{1}{3}$ for both. Thanks to the IDF weights, the entity with the more important term will have a higher coverage weight than the other one.
 
@@ -21,10 +21,10 @@ QC = \frac{\sum_{t\in X \cap q}{\omega_t^2}}{\sum_{t\in q}{\omega_t^2}}
 $$
 where $X$ is either a value, an attribute set or the entity and $q$ is the query.
 
-\subsection{The Value Coverage Weight}
+\subsection{The Leaf Coverage Weight}
 \label{sec:coverage}
 
-The Value Coverage (VC) weight reflects the proportion of terms in a value node matching the query, i.e., how much a query covers a value node. We assume that more the query terms match a large portion of the value node, the more this value node is a precise description of the query. This weight is integrated into the MF ranking function using $\alpha_v$.
+The Leaf Coverage (VC) weight reflects the proportion of terms in a value matching the query, i.e., how much it is covered by the query. We assume that the more query terms match a large portion of the node, the more this node is a ``precise'' description of the query. This weight is integrated into the MF ranking function using the parameter $\alpha_v$.
 
 The value coverage is defined as the quotient of the query terms frequencies in the value over the \emph{value length}: %
 $$
