@@ -1,0 +1,147 @@
+\begin{figure}
+	\centering
+	\begin{subfigure}{.47\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+			\begin{tikzpicture}
+			\begin{axis}[
+			ybar,
+			symbolic x coords={TF-IDF,BM25,BM25F,BM25MF},
+			enlargelimits=0.15,
+			ylabel={MAP},
+			x=2cm,
+			bar width=0.3cm,
+			xtick=data,
+			ymajorgrids = true,
+			legend style={at={(0.5,-0.15)}, anchor=north,legend columns=-1},
+			legend entries={INEX09,SS10,SS11}
+			]
+			% These plots are here only to the set the style
+			\addplot[blue, fill=blue!20, bar shift=-0.45cm] coordinates {
+				(TF-IDF, 0.04)
+				(BM25, 0.04)
+				(BM25F, 0.04)
+				(BM25MF, 0.04)
+			};
+			\addplot[red, fill=red!20, bar shift=0cm] coordinates {
+				(TF-IDF, 0.04)
+				(BM25, 0.04)
+				(BM25F, 0.04)
+				(BM25MF, 0.04)
+			};
+			\addplot[brown, fill=brown!20, bar shift=0.45cm] coordinates {
+				(TF-IDF, 0.04)
+				(BM25, 0.04)
+				(BM25F, 0.04)
+				(BM25MF, 0.04)
+			};
+			
+			% INEX09
+			\addplot[blue, fill=blue!20, bar shift=-0.45cm] coordinates {
+				(BM25MF, 0.1593)
+			};
+			\addplot[blue, fill=blue!20, postaction={pattern=dots}, bar shift=-0.45cm] coordinates {
+				(TF-IDF, 0.1246)
+				(BM25, 0.1330)
+				(BM25F, 0.1489)
+			};
+			% SS10
+			\addplot[red, fill=red!20, bar shift=0cm] coordinates {
+				(BM25, 0.1350)
+				(BM25MF, 0.1303)
+			};
+			\addplot[red, fill=red!20, postaction={pattern=dots}, bar shift=0cm] coordinates {
+				(TF-IDF, 0.0581)
+				(BM25F, 0.1100)
+			};
+			% SS11
+			\addplot[brown, fill=brown!20, bar shift=0.45cm] coordinates {
+				(BM25MF, 0.1811)
+			};
+			\addplot[brown, fill=brown!20, postaction={pattern=dots}, bar shift=0.45cm] coordinates {
+				(TF-IDF, 0.0655)
+				(BM25F, 0.1401)
+			};
+			\addplot[brown, fill=brown!20, postaction={pattern=grid}, bar shift=0.45cm] coordinates {
+				(BM25, 0.1625)
+			};
+			\end{axis}
+			\end{tikzpicture}
+		}
+		\caption{BM25MF}
+		\label{fig:bm25mf-field-cmp-bar}
+	\end{subfigure}
+	\quad
+	\begin{subfigure}{.47\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+			\begin{tikzpicture}
+			\begin{axis}[
+				ybar,
+				symbolic x coords={TF-IDF,PL2,PL2F,PL2MF},
+				enlargelimits=0.15,
+				ylabel={MAP},
+				x=2cm,
+				bar width=0.3cm,
+				xtick=data,
+				ymajorgrids = true,
+				legend style={at={(0.5,-0.15)}, anchor=north,legend columns=-1},
+				legend entries={INEX09,SS10,SS11}
+			]
+			% These plots are here only to the set the style
+			\addplot[blue, fill=blue!20, bar shift=-0.45cm] coordinates {
+				(TF-IDF, 0.04)
+				(PL2, 0.04)
+				(PL2F, 0.04)
+				(PL2MF, 0.04)
+			};
+			\addplot[red, fill=red!20, bar shift=0cm] coordinates {
+				(TF-IDF, 0.04)
+				(PL2, 0.04)
+				(PL2F, 0.04)
+				(PL2MF, 0.04)
+			};
+			\addplot[brown, fill=brown!20, bar shift=0.45cm] coordinates {
+				(TF-IDF, 0.04)
+				(PL2, 0.04)
+				(PL2F, 0.04)
+				(PL2MF, 0.04)
+			};
+			
+			% INEX09
+			\addplot[blue, fill=blue!20, bar shift=-0.45cm] coordinates {
+				(PL2F, 0.1514)
+				(PL2MF, 0.1525)
+			};
+			\addplot[blue, fill=blue!20, postaction={pattern=dots}, bar shift=-0.45cm] coordinates {
+				(TF-IDF, 0.1246)
+				(PL2, 0.1331)
+			};
+			% SS10
+			\addplot[red, fill=red!20, bar shift=0cm] coordinates {
+				(PL2, 0.1289)
+				(PL2MF, 0.1232)
+			};
+			\addplot[red, fill=red!20, postaction={pattern=dots}, bar shift=0cm] coordinates {
+				(TF-IDF, 0.0581)
+				(PL2F, 0.1023)
+			};
+			% SS11
+			\addplot[brown, fill=brown!20, bar shift=0.45cm] coordinates {
+				(PL2MF, 0.1797)
+			};
+			\addplot[brown, fill=brown!20, postaction={pattern=dots}, bar shift=0.45cm] coordinates {
+				(TF-IDF, 0.0655)
+				(PL2F, 0.1264)
+			};
+			\addplot[brown, fill=brown!20, postaction={pattern=grid}, bar shift=0.45cm] coordinates {
+				(PL2, 0.1614)
+			};
+			\end{axis}
+			\end{tikzpicture}
+		}
+		\caption{PL2MF}
+		\label{fig:pl2mf-field-cmp-bar}
+	\end{subfigure}
+	\caption{Comparison of state-of-the-art candidates against the MF generalizations. On the Y axis is reported the Mean Average Precision of PL2MF and BM25MF and the other state-of-the-art candidates. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a grid pattern is at level $0.10$ instead.}
+\end{figure}

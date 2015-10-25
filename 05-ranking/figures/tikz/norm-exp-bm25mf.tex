@@ -1,14 +1,13 @@
-\begin{figure}
-\centering
 \begin{subfigure}[b]{.3\textwidth}
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tikzpicture}
-\begin{axis}[
-xlabel=$b_a$,
-ylabel=$MAP$,
-% y label style={rotate=-90}
-]
+	\renewcommand\thesubfigure{\alph{subfigure}1}
+	\centering
+	\resizebox{\textwidth}{!}{
+	\begin{tikzpicture}
+	\begin{axis}[
+	xlabel=$b_a$,
+	ylabel=$MAP$,
+	% y label style={rotate=-90}
+	]
 
 %%%%%%%%%%%
 %% x = b_v, y = b_a
@@ -92,30 +91,32 @@ ylabel=$MAP$,
 \end{subfigure}
 \quad%
 \begin{subfigure}[b]{.3\textwidth}
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tikzpicture}
-\begin{axis}[
-  legend entries={
-    [teal]$BM25F$,
-	[blue]$b_v = 0.0$,
- 	[olive]$b_v = 0.1$,
-  	[gray]$b_v = 0.2$,
-  	[orange]$b_v = 0.3$,
-	[purple]$b_v = 0.4$,
- 	[brown]$b_v = 0.5$,
-  	[pink]$b_v = 0.6$,
-  	[yellow]$b_v = 0.7$,
-	[black]$b_v = 0.8$,
- 	[green]$b_v = 0.9$,
- 	[red]$b_v = 1.0$
-  },
-  legend columns=3,
-legend style={at={(0.5,1.4)},anchor=north},
- xlabel=$b_a$,
-ylabel=$MAP$,
-% y label style={rotate=-90},
-]
+	\addtocounter{subfigure}{-1}
+	\renewcommand\thesubfigure{\alph{subfigure}2}
+	\centering
+	\resizebox{\textwidth}{!}{
+	\begin{tikzpicture}
+	\begin{axis}[
+	  legend entries={
+	    [teal]$BM25F$,
+		[blue]$b_v = 0.0$,
+	 	[olive]$b_v = 0.1$,
+	  	[gray]$b_v = 0.2$,
+	  	[orange]$b_v = 0.3$,
+		[purple]$b_v = 0.4$,
+	 	[brown]$b_v = 0.5$,
+	  	[pink]$b_v = 0.6$,
+	  	[yellow]$b_v = 0.7$,
+		[black]$b_v = 0.8$,
+	 	[green]$b_v = 0.9$,
+	 	[red]$b_v = 1.0$
+	  },
+	  legend columns=3,
+      legend style={at={(0.5,1.4)},anchor=north},
+	  xlabel=$b_a$,
+	  ylabel=$MAP$,
+	  % y label style={rotate=-90},
+	]
 
 %%%%%%%%%%%
 %% x = c_v, y = c_a
@@ -199,14 +200,16 @@ ylabel=$MAP$,
 \end{subfigure}
 \quad%
 \begin{subfigure}[b]{.3\textwidth}
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tikzpicture}
-\begin{axis}[
- xlabel=$b_a$,
-ylabel=$MAP$,
-% y label style={rotate=-90},
-]
+	\addtocounter{subfigure}{-1}
+	\renewcommand\thesubfigure{\alph{subfigure}3}
+	\centering
+	\resizebox{\textwidth}{!}{
+	\begin{tikzpicture}
+	\begin{axis}[
+		xlabel=$b_a$,
+		ylabel=$MAP$,
+		% y label style={rotate=-90},
+	]
 
 %%%%%%%%%%%
 %% x = b_v, y = b_a
@@ -289,6 +292,3 @@ ylabel=$MAP$,
 \end{tikzpicture}}
 \caption{SS11}
 \end{subfigure}
-\caption{Experiment with the BM25MF normalization parameters. The figures report the MAP values of the respective datasets, where a curve plots a fixed $b_v$ value with $b_a$ varying from $0$ to $1$ with a precision step of $0.1$.}
-\label{fig:bm25mf-norm}
-\end{figure}

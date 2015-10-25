@@ -1,0 +1,35 @@
+\begin{table}
+	\centering
+	\ra{0.5}
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{lc@{\hs}llrcllrc@{\hs}llrcllrc@{\hs}llrcllr}
+			\toprule
+	    & \phantom{a} & \multicolumn{7}{c}{INEX09}
+	    & \phantom{a} & \multicolumn{7}{c}{SS10}
+	    & \phantom{a} & \multicolumn{7}{c}{SS11} \\
+	    \cmidrule{3-9} \cmidrule{11-17} \cmidrule{19-25}
+			BM25MF & \phantom{a} & $b_a$ & $=$ & $0.00$ & \phantom{a} & $b_v$ & $=$ & $0.75$
+	      & \phantom{a} & $b_a$ & $=$ & $0.58$ & \phantom{a} & $b_v$ & $=$ & $0.75$
+	      & \phantom{a} & $b_a$ & $=$ & $0.58$ & \phantom{a} & $b_v$ & $=$ & $0.75$ \\
+			BM25 & \phantom{a} & $b$ & $=$ & $0.20$ & \multicolumn{4}{c}{\phantom{a}}
+	    & \phantom{a} & $b$ & $=$ & $0.20$ & \multicolumn{4}{c}{\phantom{a}}
+	    & \phantom{a} & $b$ & $=$ & $0.20$ & \multicolumn{4}{c}{\phantom{a}} \\
+			BM25F & \phantom{a} & $b_a$ & $=$ & $0.82$ & \multicolumn{4}{c}{\phantom{a}}
+	     & \phantom{a} & $b_a$ & $=$ & $0.82$ & \multicolumn{4}{c}{\phantom{a}}
+	     & \phantom{a} & $b_a$ & $=$ & $0.82$ & \multicolumn{4}{c}{\phantom{a}} \\
+			\midrule
+			PL2MF & \phantom{a} & $c_a$ & $=$ & $9.19$ & \phantom{a} & $c_v$ & $=$ & $0.76$
+	     & \phantom{a} & $c_a$ & $=$ & $1.52$ & \phantom{a} & $c_v$ & $=$ & $1.03$
+	     & \phantom{a} & $c_a$ & $=$ & $1.79$ & \phantom{a} & $c_v$ & $=$ & $1.88$ \\
+			PL2 & \phantom{a} & $c$ & $=$ & $17.01$ & \multicolumn{4}{c}{\phantom{a}}
+	   & \phantom{a} & $c$ & $=$ & $10.09$ & \multicolumn{4}{c}{\phantom{a}}
+	   & \phantom{a} & $c$ & $=$ & $10.09$ & \multicolumn{4}{c}{\phantom{a}} \\
+			PL2F & \phantom{a} & $c_a$ & $=$ & $1.87$ & \multicolumn{4}{c}{\phantom{a}}
+	     & \phantom{a} & $c_a$ & $=$ & $0.51$ & \multicolumn{4}{c}{\phantom{a}}
+	     & \phantom{a} & $c_a$ & $=$ & $1.51$ & \multicolumn{4}{c}{\phantom{a}} \\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption{Normalization parameters values, found through a constrained particle swarm optimization.}
+	\label{tab:norm-param}
+\end{table}

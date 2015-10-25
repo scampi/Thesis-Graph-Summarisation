@@ -1,14 +1,13 @@
-\begin{figure}
-\centering
 \begin{subfigure}[b]{.3\textwidth}
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tikzpicture}
-\begin{axis}[
-xlabel=$c_a$,
-ylabel=$MAP$,
-% y label style={rotate=-90}
-]
+	\renewcommand\thesubfigure{\alph{subfigure}1}
+	\centering
+	\resizebox{\textwidth}{!}{
+	\begin{tikzpicture}
+		\begin{axis}[
+		xlabel=$c_a$,
+		ylabel=$MAP$,
+		% y label style={rotate=-90}
+	]
 %%%%%%%%%%%%%%%%%%%%
 %%% x=cv y=ca, from 5 to 50, with step of 5
 %%%%%%%%%%%%%%%%%%%%
@@ -90,30 +89,32 @@ ylabel=$MAP$,
 \end{subfigure}
 \quad%
 \begin{subfigure}[b]{.3\textwidth}
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tikzpicture}
-\begin{axis}[
-  legend entries={
-    [teal]$PL2F$,
-	[blue]$c_v = 0.5$,
- 	[olive]$c_v = 1.5$,
-  	[gray]$c_v = 2.5$,
-  	[orange]$c_v = 3.5$,
-	[purple]$c_v = 4.5$,
- 	[brown]$c_v = 5.5$,
-  	[pink]$c_v = 6.5$,
-  	[yellow]$c_v = 7.5$,
-	[black]$c_v = 8.5$,
- 	[green]$c_v = 9.5$,
- 	[red]$c_v = 10.5$
-  },
-  legend columns=3,
-legend style={at={(0.5,1.4)},anchor=north},
- xlabel=$c_a$,
-ylabel=$MAP$,
-% y label style={rotate=-90},
-]
+	\addtocounter{subfigure}{-1}
+	\renewcommand\thesubfigure{\alph{subfigure}2}
+	\centering
+	\resizebox{\textwidth}{!}{
+	\begin{tikzpicture}
+	\begin{axis}[
+	  legend entries={
+	    [teal]$PL2F$,
+		[blue]$c_v = 0.5$,
+	 	[olive]$c_v = 1.5$,
+	  	[gray]$c_v = 2.5$,
+	  	[orange]$c_v = 3.5$,
+		[purple]$c_v = 4.5$,
+	 	[brown]$c_v = 5.5$,
+	  	[pink]$c_v = 6.5$,
+	  	[yellow]$c_v = 7.5$,
+		[black]$c_v = 8.5$,
+	 	[green]$c_v = 9.5$,
+	 	[red]$c_v = 10.5$
+	  },
+	  legend columns=3,
+	legend style={at={(0.5,1.4)},anchor=north},
+	 xlabel=$c_a$,
+	ylabel=$MAP$,
+	% y label style={rotate=-90},
+	]
 
 %%%%%%%%%%%%%%%%%%%%
 %%% x=cv y=ca, from 5 to 50, with step of 5
@@ -197,14 +198,16 @@ ylabel=$MAP$,
 \end{subfigure}
 \quad%
 \begin{subfigure}[b]{.3\textwidth}
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tikzpicture}
-\begin{axis}[
- xlabel=$c_a$,
-ylabel=$MAP$,
-% y label style={rotate=-90},
-]
+	\addtocounter{subfigure}{-1}
+	\renewcommand\thesubfigure{\alph{subfigure}3}
+	\centering
+	\resizebox{\textwidth}{!}{
+	\begin{tikzpicture}
+	\begin{axis}[
+	 xlabel=$c_a$,
+	ylabel=$MAP$,
+	% y label style={rotate=-90},
+	]
 
 %%%%%%%%%%%%%%%%%%%%
 %%% x=cv y=ca, from 5 to 50, with step of 5
@@ -287,6 +290,3 @@ ylabel=$MAP$,
 	\centering
 	\caption{SS11}
 \end{subfigure}
-\caption{Experiment with the PL2MF normalization parameters. The figures report the MAP values of the respective datasets, where a curve plots a fixed $c_v$ value with $c_a$ varying from $0.5$ to $10.5$ with a precision step of $1$.}
-\label{fig:pl2mf-norm}
-\end{figure}
