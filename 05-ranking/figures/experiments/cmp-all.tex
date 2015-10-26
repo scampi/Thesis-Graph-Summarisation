@@ -1,0 +1,130 @@
+%\begin{tikzpicture}
+%\begin{axis}[
+%	ybar,
+%	symbolic x coords={INEX09,SS10,SS11},
+%	enlargelimits=0.15,
+%	ylabel={MAP},
+%	x=2cm,
+%	bar width=0.3cm,
+%	xtick=data,
+%	ymajorgrids = true,
+%	legend style={at={(0.5,-0.15)}, anchor=north,legend columns=-1},
+%	legend entries={BM25MF,QC + LC + AEL}
+%]
+%% These plots are here only to the set the style
+%\addplot[blue, fill=blue!20, bar shift=-0.15cm] coordinates {
+%	(INEX09, 0.04)
+%	(SS10, 0.04)
+%	(SS11, 0.04)
+%};
+%\addplot[red, fill=red!20, bar shift=0.3cm] coordinates {
+%	(INEX09, 0.04)
+%	(SS10, 0.04)
+%	(SS11, 0.04)
+%};
+%
+%\addplot[blue, fill=blue!20, bar shift=-0.15cm] coordinates {
+%	(INEX09, 0.1593)
+%	(SS10, 0.1303)
+%	(SS11, 0.1811)
+%};
+%\addplot[red, fill=red!20, bar shift=0.3cm] coordinates {
+%	(INEX09, 0.1589)
+%};
+%\addplot[red, fill=red!20, postaction={pattern=crosshatch dots}, bar shift=0.3cm] coordinates {
+%	(SS10, 0.1720)
+%	(SS11, 0.2416)
+%};
+%\end{axis}
+%\end{tikzpicture}
+
+
+
+
+\begin{tikzpicture}
+\begin{axis}[
+xticklabel pos=right,
+name=bm25mf,
+xbar,
+enlargelimits=0.15,
+xlabel={MAP},
+y=2cm,
+bar width=0.3cm,
+ytick=data,
+xmajorgrids = true,
+legend style={at={(0.5,-0.02)}, anchor=north,legend columns=-1},
+legend entries={BM25MF,QC + LC + AEL},
+axis y line=none,
+clip=false
+]
+% These plots are here only to the set the style
+\addplot[blue, fill=blue!20, bar shift=-0.15cm] coordinates {
+	(0.1303, 1)
+	(0.1303, 2)
+	( 0.1303, 3)
+};
+\addplot[red, fill=red!20, bar shift=0.3cm] coordinates {
+	(0.1303, 1)
+	(0.1303, 2)
+	(0.1303, 3)
+};
+
+% Results
+\addplot[blue, fill=blue!20, bar shift=-0.15cm] coordinates {
+	(0.1593, 1)
+	(0.1303, 2)
+	(0.1811, 3)
+};
+\addplot[red, fill=red!20, bar shift=0.3cm] coordinates {
+	(0.1589, 1)
+};
+\addplot[red, fill=red!20, postaction={pattern=crosshatch dots}, bar shift=0.3cm] coordinates {
+	(0.1720, 2)
+	(0.2416, 3)
+};
+\node[xshift=-0.7cm,align=center] at (axis cs:0.11,1) {INEX09};
+\node[xshift=-0.7cm,align=center] at (axis cs:0.11,2) {SS10};
+\node[xshift=-0.7cm,align=center] at (axis cs:0.11,3) {SS11};
+\end{axis}
+\begin{axis}[
+xticklabel pos=right,
+legend style={at={(0.5,-0.02)}, anchor=north,legend columns=-1},
+legend entries={PL2MF,QC + LC + AEL},
+at={(bm25mf.north west)},anchor=north east, xshift=-1.7cm,
+x dir = reverse,
+xbar,
+enlargelimits=0.15,
+xlabel={MAP},
+y=2cm,
+bar width=0.3cm,
+ytick=data,
+xmajorgrids = true,
+axis y line=none
+]
+% These plots are here only to the set the style
+\addplot[blue, fill=blue!20, bar shift=-0.15cm] coordinates {
+	(0.1232, 1)
+	(0.1232, 2)
+	(0.1232, 3)
+};
+\addplot[red, fill=red!20, bar shift=0.3cm] coordinates {
+	(0.1232, 1)
+	(0.1232, 2)
+	(0.1232, 3)
+};
+
+% Results
+\addplot[blue, fill=blue!20, bar shift=-0.15cm] coordinates {
+	(0.1525, 1)
+	(0.1232, 2)
+	(0.1797, 3)
+};
+\addplot[red, fill=red!20, postaction={pattern=north east lines}, bar shift=0.3cm] coordinates {
+	(0.1492, 1)
+};
+\addplot[red, fill=red!20, postaction={pattern=crosshatch dots}, bar shift=0.3cm] coordinates {
+	(0.1717, 2)
+	(0.2360, 3)
+};
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,173 @@
+%\begin{tikzpicture}
+%\begin{axis}[
+%	ybar,
+%	symbolic x coords={INEX09,SS10,SS11},
+%	enlargelimits=0.2,
+%	ylabel={MAP},
+%	x=2cm,
+%	bar width=0.3cm,
+%	xtick=data,
+%	ymajorgrids = true,
+%	legend style={at={(0.5,-0.15)}, anchor=north,legend columns=-1},
+%	legend entries={BM25MF,With,Without},
+%]
+%% These plots are here only to the set the style
+%\addplot[blue, fill=blue!20, bar shift=-0.45cm] coordinates {
+%	(INEX09, 0.04)
+%	(SS10, 0.04)
+%	(SS11, 0.04)
+%};
+%\addplot[red, fill=red!20, bar shift=0cm] coordinates {
+%	(INEX09, 0.04)
+%	(SS10, 0.04)
+%	(SS11, 0.04)
+%};
+%\addplot[brown, fill=brown!20, bar shift=0.45cm] coordinates {
+%	(INEX09, 0.04)
+%	(SS10, 0.04)
+%	(SS11, 0.04)
+%};
+%
+%% Baseline: BM25MF + attribute label
+%\addplot[blue, fill=blue!20, bar shift=-0.45cm] coordinates {
+%	(INEX09, 0.1593)
+%	(SS10,   0.1303)
+%	(SS11,   0.1811)
+%};
+%% LC with control function
+%\addplot[red, fill=red!20, bar shift=0cm] coordinates {
+%	(INEX09, 0.1606)
+%	(SS10,   0.1321)
+%	(SS11,   0.1802)
+%};
+%\addplot[red, fill=red!20, postaction={pattern=north east lines}, bar shift=0cm] coordinates {
+%	(INEX09, 0.1606)
+%};
+%% LC without control function
+%\addplot[brown, fill=brown!20, bar shift=0.45cm] coordinates {
+%	(SS10,   0.1260)
+%};
+%\addplot[brown, fill=brown!20, postaction={pattern=crosshatch dots}, bar shift=0.45cm] coordinates {
+%	(INEX09, 0.1293)
+%	(SS11,   0.1296)
+%};
+%\end{axis}
+%\end{tikzpicture}
+
+
+
+\begin{tikzpicture}
+\begin{axis}[
+xticklabel pos=right,
+name=bm25mf,
+xbar,
+enlargelimits=0.2,
+xlabel={MAP},
+y=2.2cm,
+bar width=0.35cm,
+ytick=data,
+xmajorgrids = true,
+legend style={at={(0.5,-0.02)}, anchor=north,legend columns=-1},
+legend entries={BM25MF,With,Without},
+axis y line=none,
+clip=false
+]
+% These plots are here only to the set the style
+\addplot[blue, fill=blue!20, bar shift=-0.45cm] coordinates {
+	(0.1260, 1)
+	(0.1260, 1)
+	(0.1260, 1)
+};
+\addplot[red, fill=red!20, bar shift=0cm] coordinates {
+	(0.1260, 1)
+	(0.1260, 2)
+	(0.1260, 3)
+};
+\addplot[brown, fill=brown!20, bar shift=0.45cm] coordinates {
+	(0.1260, 1)
+	(0.1260, 2)
+	(0.1260, 3)
+};
+
+% Baseline: BM25MF + attribute label
+\addplot[blue, fill=blue!20, bar shift=-0.45cm] coordinates {
+	(0.1593, 1)
+	(0.1303, 2)
+	(0.1811, 3)
+};
+% LC with control function
+\addplot[red, fill=red!20, bar shift=0cm] coordinates {
+	(0.1321, 2)
+	(0.1802, 3)
+};
+\addplot[red, fill=red!20, postaction={pattern=north east lines}, bar shift=0cm] coordinates {
+	(0.1606, 1)
+};
+% LC without control function
+\addplot[brown, fill=brown!20, bar shift=0.45cm] coordinates {
+	(0.1260, 2)
+};
+\addplot[brown, fill=brown!20, postaction={pattern=crosshatch dots}, bar shift=0.45cm] coordinates {
+	(0.1293, 1)
+	(0.1296, 3)
+};
+\node[xshift=-0.4cm,align=center] at (axis cs:0.11,1) {INEX09};
+\node[xshift=-0.4cm,align=center] at (axis cs:0.11,2) {SS10};
+\node[xshift=-0.4cm,align=center] at (axis cs:0.11,3) {SS11};
+\end{axis}
+\begin{axis}[
+xticklabel pos=right,
+legend style={at={(0.5,-0.02)}, anchor=north,legend columns=-1},
+legend entries={PL2MF,With,Without},
+at={(bm25mf.north west)},anchor=north east, xshift=-1.7cm,
+x dir = reverse,
+xbar,
+enlargelimits=0.2,
+xlabel={MAP},
+y=2.2cm,
+bar width=0.35cm,
+ytick=data,
+xmajorgrids = true,
+axis y line=none
+]
+% These plots are here only to the set the style
+\addplot[blue, fill=blue!20, bar shift=-0.45cm] coordinates {
+	(0.1179, 1)
+	(0.1179, 1)
+	(0.1179, 1)
+};
+\addplot[red, fill=red!20, bar shift=0cm] coordinates {
+	(0.1179, 1)
+	(0.1179, 2)
+	(0.1179, 3)
+};
+\addplot[brown, fill=brown!20, bar shift=0.45cm] coordinates {
+	(0.1179, 1)
+	(0.1179, 2)
+	(0.1179, 3)
+};
+
+% Baseline: PL2MF + attribute label
+\addplot[blue, fill=blue!20, bar shift=-0.45cm] coordinates {
+	(0.1525, 1)
+	(0.1232, 2)
+	(0.1797, 3)
+};
+% LC with control function
+\addplot[red, fill=red!20, postaction={pattern=crosshatch dots}, bar shift=0cm] coordinates {
+	(0.1494, 1)
+};
+\addplot[red, fill=red!20, postaction={pattern=north east lines}, bar shift=0cm] coordinates {
+	(0.1253, 2)
+	(0.1802, 3)
+};
+% LC without control function
+\addplot[brown, fill=brown!20, bar shift=0.45cm] coordinates {
+	(0.1179, 2)
+};
+\addplot[brown, fill=brown!20, postaction={pattern=crosshatch dots}, bar shift=0.45cm] coordinates {
+	(0.1182, 1)
+	(0.1466, 3)
+};
+\end{axis}
+\end{tikzpicture}

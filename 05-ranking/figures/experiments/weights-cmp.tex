@@ -1,10 +1,6 @@
 \begin{table*}
 \centering
 \ra{0.5}
-\caption{Evaluation of the weights effectiveness on PL2MF and BM25MF.% effectiveness. Mean Average Precision (MAP) scores of each BM25MF and PL2MF with each weight individually; using the two-tailed Wilcoxon matched-pairs signed-ranks test, a $p$-Value with one star $*$ marks statistically significant difference at level $0.10$, and two stars $**$ at level $0.05$, with the baseline, i.e., BM25MF (respectively, PL2MF); $\Delta\%$ indicates the difference in percentage between the two MAP values.
-}
-\label{tab:mf-effect}
-
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{cc@{\hs}rrccc@{\hs}rrccc@{\hs}rrcc}
 \toprule
@@ -54,13 +50,13 @@ Method & \phantom{a} & \multicolumn{4}{c}{INEX09}
 %                \\
 \\
 \emph{\textbf{BM25MF + LC}} & \multicolumn{15}{c}{\phantom{a}} \\
-\multirow{2}{*}{{\raggedright With Function (\ref{eq:lc-norm})}} & \phantom{a} & 0.1606 & 0.3964 & $2.8e^{-01*}$ & $+0.82$
+\multirow{2}{*}{{\raggedright With Control Function (\ref{eq:lc-norm})}} & \phantom{a} & 0.1606 & 0.3964 & $2.8e^{-01*}$ & $+0.82$
                                                                  & \phantom{a} & 0.1321 & 0.3761 & $3.7e^{-01}$ & -
                                                                  & \phantom{a} & 0.1802 & 0.1920 & $5.4e^{-01}$ & - \\
- & \phantom{a} & \multicolumn{4}{c}{$B=1,\;\alpha=0.7$}
-   & \phantom{a} & \multicolumn{4}{c}{$B=2,\;\alpha=0.4$}
-   & \phantom{a} & \multicolumn{4}{c}{$B=1,\;\alpha=0.9$} \\
-{\raggedright Without Function (\ref{eq:lc-norm})} & \phantom{a} & 0.1293 & 0.3055 & $8.9e^{-04**}$ & $-18.83$
+ & \phantom{a} & \multicolumn{4}{c}{$n=1,\;\alpha=0.7$}
+   & \phantom{a} & \multicolumn{4}{c}{$n=2,\;\alpha=0.4$}
+   & \phantom{a} & \multicolumn{4}{c}{$n=1,\;\alpha=0.9$} \\
+{\raggedright Without Control Function (\ref{eq:lc-norm})} & \phantom{a} & 0.1293 & 0.3055 & $8.9e^{-04**}$ & $-18.83$
                                                    & \phantom{a} & 0.1260 & 0.3609 & $5.3e^{-01}$ & -
                                                    & \phantom{a} & 0.1296 & 0.1820 & $2.1e^{-03**}$ & $-39.74$ \\
 \\
@@ -129,9 +125,9 @@ Method & \phantom{a} & \multicolumn{4}{c}{INEX09}
 \multirow{2}{*}{{\raggedright With Function (\ref{eq:lc-norm})}} & \phantom{a} & 0.1494 & 0.3673 & $1.5e^{-02**}$ & $-2.03$
                                                 & \phantom{a} & 0.1253 & 0.3663 & $2.4e^{-01*}$ & $+1.70$
                                                 & \phantom{a} & 0.1802 & 0.1900 & $1.4e^{-01*}$ & $+0.29$ \\%[-0.05in]
- & \phantom{a} & \multicolumn{4}{c}{$B=1,\;\alpha=0.7$}
-   & \phantom{a} & \multicolumn{4}{c}{$B=2,\;\alpha=0.4$}
-   & \phantom{a} & \multicolumn{4}{c}{$B=1,\;\alpha=0.9$} \\
+ & \phantom{a} & \multicolumn{4}{c}{$n=1,\;\alpha=0.7$}
+   & \phantom{a} & \multicolumn{4}{c}{$n=2,\;\alpha=0.4$}
+   & \phantom{a} & \multicolumn{4}{c}{$n=1,\;\alpha=0.9$} \\
 {\raggedright Without Function (\ref{eq:lc-norm})} & \phantom{a} & 0.1182 & 0.2909 & $5.4e^{-07**}$ & $-21.84$
                                                    & \phantom{a} & 0.1179 & 0.3391 & $3.8e^{-01}$ & -
                                                    & \phantom{a} & 0.1466 & 0.1900 & $7.3e^{-03**}$ & $-18.42$
@@ -156,4 +152,7 @@ Method & \phantom{a} & \multicolumn{4}{c}{INEX09}
                                       & \phantom{a} & 0.2360 & 0.2520 & $2.5e^{-05**}$ & $+31.33$ \\
 \bottomrule
 \end{tabular}}
+\caption{Evaluation of the weights effectiveness on PL2MF and BM25MF.% effectiveness. Mean Average Precision (MAP) scores of each BM25MF and PL2MF with each weight individually; using the two-tailed Wilcoxon matched-pairs signed-ranks test, a $p$-Value with one star $*$ marks statistically significant difference at level $0.10$, and two stars $**$ at level $0.05$, with the baseline, i.e., BM25MF (respectively, PL2MF); $\Delta\%$ indicates the difference in percentage between the two MAP values.
+}
+\label{tab:mf-effect}
 \end{table*}

@@ -101,44 +101,118 @@ Overall, the experiments show that the MF model improves significantly the ranki
 \subsection{Effectiveness of the Weights}
 \label{sec:weights-effectiveness}
 
-In this section, we discuss the impact of discarding the attribute label as a source of possible relevant terms on the ranking performance. Then we evaluate the weights from Section~\ref{sec:weights} developed for the MF model.
-The Table~\ref{tab:mf-effect} reports the MAP scores of BM25MF and PL2MF combined with each weight individually and using the normalization parameters values from the Table~\ref{tab:norm-param}. Apart from the row ``Without Attribute Label'', all runs consider the attribute label as an additional value as in the previous experiments.
+In this section, we discuss several tuning of the MF ranking extensions. First, we discuss the impact of discarding the attribute label as a source of possible relevant terms on the ranking performance. Then, we evaluate the weights from Section~\ref{sec:weights} developed for the MF model.
 
-\subsubsection{\emph{The Impact of Attribute Label}}
+Results of the evaluations are depicted in Figure~\ref{fig:mf-weights}. On the left side of figures are displayed the PL2MF results, and on the right results of BM25MF. Using the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, the MF extension with no added weight is used as the base of the comparison. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead. Raw results are reported in Table~\ref{tab:mf-effect} of the Appendix section.
+
+\subsubsection{\emph{Impact of the Attribute Label}}
 \label{sec:with-att}
 
-In this section, we investigate the consequence of not considering the attribute label as a source of relevant terms.
-The Table~\ref{tab:mf-effect} reports under the \emph{BM25MF} and \emph{PL2MF} methods the results of considering or not the attribute label as an additional value.
-We observe that removing the attribute label (\emph{Without Attribute Label} row) lowers the performance of the ranking with a statistical significance on INEX09 with BM25MF and PL2MF, and on SS11 with PL2MF only. This shows that the attribute labels can be a source of possible relevant terms.
+In this section, we investigate the consequence of \textbf{not} considering the attribute label as a source of potentially relevant terms, i.e., the attribute is not expanded into a leaf as described in Section~\ref{chap:tree-ranking:mf-model}.
 
-\subsubsection{\emph{The Query Coverage Weight}}
+Figure~\ref{fig:mf-att} depicts the results, where we observe that removing the attribute label lowers the performance of the ranking with a statistical significance on INEX09 with BM25MF and PL2MF, and on SS11 with PL2MF only. This shows that the attribute labels can be a source of possible relevant terms.
+
+\subsubsection{\emph{Query Coverage Weight}}
 \label{sec:qc-weight-effect}
 
-In order to evaluate the benefit of the QC weight, we first analyse its effect separately when applied as an entity, an attribute or a value-specific weight. Then we study the consequence of applying it on all nodes at the same time (\emph{All} row). The Table~\ref{tab:mf-effect} reports the results under the \emph{BM25MF + QC} and \emph{PL2MF + QC} methods. QC improves the retrieval performance when applied on the attribute node, with a statistical significance on SS10 and SS11.
+In order to evaluate the benefit of the query coverage weight QC, we first analyse its effect separately when applied as an entity, an attribute or a value-specific weight. Then we study the consequence of applying it on all nodes at the same time.
 
-\subsubsection{\emph{The Leaf Coverage Weight}}
+We observe in Figure~\ref{fig:mf-qc} that the QC weight improves the retrieval performance when applied on the attribute node, with a statistical significance on SS10 and SS11.
+
+\subsubsection{\emph{Leaf Coverage Weight}}
 \label{sec:lc-weight-effect}
 
-The evaluation of the LC weight investigates its efficiency with and without the function (\ref{eq:lc-norm}). The results are reported in Table~\ref{tab:mf-effect} under the \emph{BM25MF + LC} and \emph{PL2MF + LC} methods. We provide for each dataset the best performing $B$ and $\alpha$ parameters. We can observe that LC with the function (\ref{eq:lc-norm}) improves slightly the retrieval performance on SS10 and SS11. The reason is that, without this function, LC assigns a low weight to long values even if they have occurrences of all query terms.
+The evaluation of the leaf coverage weight LC investigates its efficiency with and without the \emph{control} function (\ref{eq:lc-norm}), where we depict the results in Figure~\ref{fig:mf-lc}.
 
-\subsubsection{\emph{The Attribute and Entity Labels Weights}}
+We provide for each dataset the best performing parameters described in Section~\ref{sec:leaf-coverage} for the control function. For the three datasets regardless of the MF extension, the values are as follows:
+\begin{description}
+	\item[INEX09:] $n=1\;\;\alpha=0.7$;
+	\item[SS10:] $n=2\;\;\alpha=0.4$; and
+	\item[SS11:] $n=1\;\;\alpha=0.9$.
+\end{description}
+We can observe that the LC weight, with the control function (\ref{eq:lc-norm}) applied, improves slightly the retrieval performance on SS10 and SS11. The reason is that without this function, LC assigns a low weight to leaves containing many terms, even if they have occurrences of all query terms.
+
+\subsubsection{\emph{Attribute and Entity Labels Weights}}
 \label{sec:ael-weight-effect}
 
-We evaluate the AEL weights first by considering the Attribute and the Entity Label weights separately, then both at the same time. The Table~\ref{tab:mf-effect} reports the results of applying such query-independent weights under the \emph{BM25MF + AEL} and \emph{PL2MF + AEL} methods.
-We note that the Attribute Label weight gives significant benefits to the ranking in SS10 and SS11, while it decreases the ranking performance in INEX09. This indicates that carefully defined weights for important and non-important attributes can contribute significantly to the effectiveness of the approach. We note also that the same can be seen with the Entity Label weight applied alone. The reason is similar to the Attribute Label weight.
-Except in INEX09, using both weights at the same time increases the performance of MF ranking functions noticeably.
+For the weights that depend on the label of the entity or of an attribute, we use the following regular expressions to determine the value of the weight:
+\begin{itemize}
+	\item $2$ if the label matches ``$.\star[label\,\vert\,name\,\vert\,title\,\vert\,sameas]\$$'';
+	\item $0.5$ if the label matches ``$.\star[seealso\,\vert\,wikilinks]\$$'';
+	\item $0.1$ if the label matches ``\url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}\_\textbackslash{}d+\$''; and
+	\item $1$ otherwise.
+\end{itemize}
+For instance, if an attribute label is \url{http://xmlns.com/foaf/0.1/name} then a weight of $2$ is assigned.
 
-\subsubsection{\emph{The Combination of Weights}}
+The third regular expression matches an attribute URI defining items of a collection in RDF\footnote{RDF Container: \url{http://www.w3.org/TR/rdf-schema/\#ch\_container}}. It is assigned a low weight of $0.1$ to reduce the importance of terms occurring in each item of the collection.\\
+
+We evaluate the Attribute and Entity Labels (AEL) weights first by considering the Attribute and the Entity Label weights separately, then both at the same time. Figure~\ref{fig:mf-ael} depicts the results of applying such query-independent weights.
+
+We note that the Attribute Label weight gives significant benefits to the ranking in SS10 and SS11, while it decreases the ranking performance in INEX09. This indicates that carefully defined weights for important and non-important attributes can contribute significantly to the effectiveness of the approach. We note also that the same can be seen with the Entity Label weight applied alone. The reason is similar to the Attribute Label weight.
+
+Except for INEX09, using both weights at the same time increases the performance of MF ranking functions noticeably.
+
+\subsubsection{\emph{Combination of Weights}}
 \label{sec:combi-weight-effect}
 
-In this section, we investigate the retrieval performance when all four weights are used together. We report the results in Table~\ref{tab:mf-effect} under the methods  \emph{BM25MF + QC + LC + AEL} and \emph{PL2MF + QC + LC + AEL}, with the weights configuration
-\begin{inparaenum}[(1)]
-    \item QC applied on the attribute node;
-    \item LC with dataset-specific $B$ and $\alpha$ parameters; and
+In this section, we investigate the retrieval performance when all four weights are used together. We depict results in Figure~\ref{fig:mf-all}, with the weights configuration
+\begin{enumerate}
+    \item QC applied on the attribute node only;
+    \item LC with dataset-specific $n$ and $\alpha$ parameters for the control function; and
     \item AEL weights.
-\end{inparaenum}
-The weights applied on a same node are combined by the multiplication of each weight value on that node, i.e., either $b_a$ (resp., $c_a$) or $b_v$ (resp., $c_v$) weight values.
-The attribute label being considered as a value, and the entity label being an additional attribute, we apply also the QC weight on those two labels in this experiment.
+\end{enumerate}
+
+The weights applied on a same node are combined by the multiplication of each weight value on that node.
+The attribute and entity label being leaves in the ranking model, we apply also the QC weight on those two in this experiment.
+
 On INEX09 their combination decreases slightly the performance for PL2MF. On SS10 and SS11, although the QC and LC weights applied separately do not improve the effectiveness of the MF ranking functions by much, their combination with AEL increases the retrieval performance by at least $30\%$ on SS10 and SS11.
 
-\input{05-ranking/figures/experiments/weights-cmp}
+\begin{figure}
+	\centering
+	\begin{subfigure}{.483\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+			\input{05-ranking/figures/experiments/cmp-w-wo-att}
+		}
+		\caption{Without the attribute as a leaf}
+		\label{fig:mf-att}
+	\end{subfigure}
+	\quad
+	\begin{subfigure}{.483\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+			\input{05-ranking/figures/experiments/cmp-qc}
+		}
+		\caption{Query coverage weight QC applied on the leaf, on the attribute, on the entity, and on all three levels}
+		\label{fig:mf-qc}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}{.483\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+			\input{05-ranking/figures/experiments/cmp-lc}
+		}
+		\caption{Leaf coverage weight LC, tested with and without the control function in Equation~(\ref{eq:lc-norm})}
+		\label{fig:mf-lc}
+	\end{subfigure}
+	\quad
+	\begin{subfigure}{.483\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+			\input{05-ranking/figures/experiments/cmp-ael}
+		}
+		\caption{Entity and attribute labels weights}
+		\label{fig:mf-ael}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}{.8\textwidth}
+		\centering
+		\resizebox{\textwidth}{!}{
+			\input{05-ranking/figures/experiments/cmp-all}
+		}
+		\caption{All weights combined}
+		\label{fig:mf-all}
+	\end{subfigure}
+	\caption{Evaluation of weights with the MF extensions. On the left side of figures are displayed the PL2MF results; on the right results of BM25MF. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead.}
+	\label{fig:mf-weights}
+\end{figure}

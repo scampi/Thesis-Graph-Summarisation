@@ -1,0 +1,210 @@
+%\begin{tikzpicture}
+%\begin{axis}[
+%	ybar,
+%	symbolic x coords={INEX09,SS10,SS11},
+%	enlargelimits=0.2,
+%	ylabel={MAP},
+%	x=2.5cm,
+%	bar width=0.3cm,
+%	xtick=data,
+%	ymajorgrids = true,
+%	legend style={at={(0.5,-0.15)}, anchor=north,legend columns=-1},
+%	legend entries={BM25MF,Entity,Attribute,All},
+%]
+%% These plots are here only to the set the style
+%\addplot[blue, fill=blue!20, bar shift=-0.675cm] coordinates {
+%	(INEX09, 0.04)
+%	(SS10, 0.04)
+%	(SS11, 0.04)
+%};
+%\addplot[red, fill=red!20, bar shift=-0.225cm] coordinates {
+%	(INEX09, 0.04)
+%	(SS10, 0.04)
+%	(SS11, 0.04)
+%};
+%\addplot[brown, fill=brown!20, bar shift=0.225cm] coordinates {
+%	(INEX09, 0.04)
+%	(SS10, 0.04)
+%	(SS11, 0.04)
+%};
+%\addplot[black, fill=black!20, bar shift=0.675cm] coordinates {
+%	(INEX09, 0.04)
+%	(SS10, 0.04)
+%	(SS11, 0.04)
+%};
+%
+%% Baseline: BM25MF + attribute label
+%\addplot[blue, fill=blue!20, bar shift=-0.675cm] coordinates {
+%	(INEX09, 0.1593)
+%	(SS10,   0.1303)
+%	(SS11,   0.1811)
+%};
+%% Entity Label Weight
+%\addplot[red, fill=red!20, postaction={pattern=north east lines}, bar shift=-0.225cm] coordinates {
+%	(INEX09, 0.1574)
+%};
+%\addplot[red, fill=red!20, postaction={pattern=crosshatch dots}, bar shift=-0.225cm] coordinates {
+%	(SS10,   0.1401)
+%	(SS11,   0.1937)
+%};
+%% Attribute Label Weight
+%\addplot[brown, fill=brown!20, bar shift=0.225cm] coordinates {
+%	(INEX09, 0.1604)
+%};
+%\addplot[brown, fill=brown!20, postaction={pattern=crosshatch dots}, bar shift=0.225cm] coordinates {
+%	(SS10,   0.1504)
+%	(SS11,   0.2173)
+%};
+%% All
+%\addplot[black, fill=black!20, bar shift=0.675cm] coordinates {
+%	(INEX09, 0.1593)
+%};
+%\addplot[black, fill=black!20, postaction={pattern=crosshatch dots}, bar shift=0.675cm] coordinates {
+%	(SS10,   0.1584)
+%	(SS11,   0.2274)
+%};
+%\end{axis}
+%\end{tikzpicture}
+
+
+
+
+
+
+\begin{tikzpicture}
+\begin{axis}[
+xticklabel pos=right,
+name=bm25mf,
+xbar,
+enlargelimits=0.2,
+xlabel={MAP},
+y=2.5cm,
+bar width=0.35cm,
+ytick=data,
+xmajorgrids = true,
+legend style={at={(0.5,-0.02)}, anchor=north,legend columns=-1},
+legend entries={BM25MF,Entity,Attribute,All},
+axis y line=none,
+clip=false
+]
+% These plots are here only to the set the style
+\addplot[blue, fill=blue!20, bar shift=-0.675cm] coordinates {
+	(0.1303, 1)
+	(0.1303, 2)
+	(0.1303, 3)
+};
+\addplot[red, fill=red!20, bar shift=-0.225cm] coordinates {
+	(0.1303, 1)
+	(0.1303, 2)
+	(0.1303, 3)
+};
+\addplot[brown, fill=brown!20, bar shift=0.225cm] coordinates {
+	(0.1303, 1)
+	(0.1303, 2)
+	(0.1303, 3)
+};
+\addplot[black, fill=black!20, bar shift=0.675cm] coordinates {
+	(0.1303, 1)
+	(0.1303, 2)
+	(0.1303, 3)
+};
+
+% Baseline: BM25MF + attribute label
+\addplot[blue, fill=blue!20, bar shift=-0.675cm] coordinates {
+	(0.1593, 1)
+	(0.1303, 2)
+	(0.1811, 3)
+};
+% Entity Label Weight
+\addplot[red, fill=red!20, postaction={pattern=north east lines}, bar shift=-0.225cm] coordinates {
+	(0.1574, 1)
+};
+\addplot[red, fill=red!20, postaction={pattern=crosshatch dots}, bar shift=-0.225cm] coordinates {
+	(0.1401, 2)
+	(0.1937, 3)
+};
+% Attribute Label Weight
+\addplot[brown, fill=brown!20, bar shift=0.225cm] coordinates {
+	(0.1604, 1)
+};
+\addplot[brown, fill=brown!20, postaction={pattern=crosshatch dots}, bar shift=0.225cm] coordinates {
+	(0.1504, 2)
+	(0.2173, 3)
+};
+% All
+\addplot[black, fill=black!20, bar shift=0.675cm] coordinates {
+	(0.1593, 1)
+};
+\addplot[black, fill=black!20, postaction={pattern=crosshatch dots}, bar shift=0.675cm] coordinates {
+	(0.1584, 2)
+	(0.2274, 3)
+};
+\node[xshift=-0.8cm,align=center] at (axis cs:0.11,1) {INEX09};
+\node[xshift=-0.8cm,align=center] at (axis cs:0.11,2) {SS10};
+\node[xshift=-0.8cm,align=center] at (axis cs:0.11,3) {SS11};
+\end{axis}
+\begin{axis}[
+xticklabel pos=right,
+legend style={at={(0.5,-0.02)}, anchor=north,legend columns=-1},
+legend entries={PL2MF,Entity,Attribute,All},
+at={(bm25mf.north west)},anchor=north east, xshift=-1.7cm,
+x dir = reverse,
+xbar,
+enlargelimits=0.2,
+xlabel={MAP},
+y=2.5cm,
+bar width=0.35cm,
+ytick=data,
+xmajorgrids = true,
+axis y line=none
+]
+% These plots are here only to the set the style
+\addplot[blue, fill=blue!20, bar shift=-0.675cm] coordinates {
+	(0.1232, 1)
+	(0.1232, 2)
+	(0.1232, 3)
+};
+\addplot[red, fill=red!20, bar shift=-0.225cm] coordinates {
+	(0.1232, 1)
+	(0.1232, 2)
+	(0.1232, 3)
+};
+\addplot[brown, fill=brown!20, bar shift=0.225cm] coordinates {
+	(0.1232, 1)
+	(0.1232, 2)
+	(0.1232, 3)
+};
+\addplot[black, fill=black!20, bar shift=0.675cm] coordinates {
+	(0.1232, 1)
+	(0.1232, 2)
+	(0.1232, 3)
+};
+
+% Baseline: PL2MF + attribute label
+\addplot[blue, fill=blue!20, bar shift=-0.675cm] coordinates {
+	(0.1525, 1)
+	(0.1232, 2)
+	(0.1797, 3)
+};
+% Entity Label Weight
+\addplot[red, fill=red!20, postaction={pattern=north east lines}, bar shift=-0.225cm] coordinates {
+	(0.1523, 1)
+	(0.1824, 3)
+};
+\addplot[red, fill=red!20, postaction={pattern=crosshatch dots}, bar shift=-0.225cm] coordinates {
+	(0.1305, 2)
+};
+% Attribute Label Weight
+\addplot[brown, fill=brown!20, postaction={pattern=crosshatch dots}, bar shift=0.225cm] coordinates {
+	(0.1521, 1)
+	(0.1471, 2)
+	(0.2150, 3)
+};
+% All
+\addplot[black, fill=black!20, postaction={pattern=crosshatch dots}, bar shift=0.675cm] coordinates {
+	(0.1516, 1)
+	(0.1542, 2)
+	(0.2187, 3)
+};
+\end{axis}
+\end{tikzpicture}

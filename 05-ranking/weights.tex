@@ -21,7 +21,7 @@ $$
 where $X$ is either a value, an attribute set or the entity and $q$ is the query.
 
 \subsection{The Leaf Coverage Weight}
-\label{sec:coverage}
+\label{sec:leaf-coverage}
 
 The Leaf Coverage (LC) weight reflects the proportion of terms in a value matching the query, i.e., how much it is covered by the query. Since a leaf in the MF ranking model holds some content about the entity, we assume that the more query terms match a large portion of the leaf, the more this leaf is a ``precise'' description of the query. This weight is integrated into the MF ranking function using the parameter $\alpha_v$.\\
 
@@ -76,10 +76,10 @@ However, we remark that this definition disadvantages longer values over shorter
 	\label{fig:control-function}
 \end{figure}
 
-In order to have a better control over the effect of the LC weight, we developed a control function which
+In order to have a better control over the effect of the LC weight, we developed a \emph{control} function which
 \begin{inparaenum}[(1)]
-	\item imposes a fixed lower bound to prevent short values receiving a higher weight than long ones; and
-	\item increases as a power function to ensure a high coverage weight only when the leaf coverage LC is close to 1.
+	\item imposes a fixed lower bound $\alpha$ to prevent short values receiving a higher weight than long ones; and
+	\item increases as a power function with $n$ to ensure a high coverage weight only when the leaf coverage LC is close to 1.
 \end{inparaenum}
 \begin{equation}
 \label{eq:lc-norm}
@@ -92,15 +92,3 @@ where $\alpha \in \; ]0,1[$ is a parameter that sets the lower bound of LC, and 
 
 The Attribute and Entity Labels (AEL) weights balance the importance of an entity or an attribute depending on its label. This weight is integrated into the ranking function using the $\alpha_a$ parameter.
 The weight value is defined empirically, and depends on the attribute. For instance, in a dataset concerned about books, a query match on the title might be considered more important than a match on the author's description.
-Comparing the label to a regular expression, the weight is equal to:
-
-\begin{itemize}
-    \item $2$ if the label matches ``$.\star[label\,\vert\,name\,\vert\,title\,\vert\,sameas]\$$'';
-    \item $0.5$ if the label matches ``$.\star[seealso\,\vert\,wikilinks]\$$'';
-    \item $0.1$ if the label matches ``\url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}\_$[0-9]+\$$''; and
-    \label{it:rdf:bag}
-    \item $1$ otherwise.
-\end{itemize}
-For instance, if an attribute label is \url{http://xmlns.com/foaf/0.1/name} then a weight of $2$ is assigned.
-
-The regular expression (\ref{it:rdf:bag}) matches an attribute URI defining items of a collection in RDF\footnote{RDF Container: \url{http://www.w3.org/TR/rdf-schema/\#ch\_container}}. It is assigned a low weight of $0.1$ to reduce the importance of terms occurring in each item of the collection. The entity label is treated as an additional attribute of the entity and is assigned a weight of $2$.
