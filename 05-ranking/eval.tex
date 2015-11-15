@@ -137,9 +137,9 @@ We can observe that the LC weight, with the control function (\ref{eq:lc-norm}) 
 
 For the weights that depend on the label of the entity or of an attribute, we use the following regular expressions to determine the value of the weight:
 \begin{itemize}
-	\item $2$ if the label matches ``$.\star[label\,\vert\,name\,\vert\,title\,\vert\,sameas]\$$'';
-	\item $0.5$ if the label matches ``$.\star[seealso\,\vert\,wikilinks]\$$'';
-	\item $0.1$ if the label matches ``\url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}\_\textbackslash{}d+\$''; and
+	\item $2$ if the label matches "\verb/.*(label|name|title|sameas)$/";
+	\item $0.5$ if the label matches "\verb/.*(seealso|wikilinks)$/";
+	\item $0.1$ if the label matches "\verb|^http://www.w3.org/1999/02/22-rdf-syntax-ns#_\d+$|"; and
 	\item $1$ otherwise.
 \end{itemize}
 For instance, if an attribute label is \url{http://xmlns.com/foaf/0.1/name} then a weight of $2$ is assigned.
@@ -216,3 +216,258 @@ On INEX09 their combination decreases slightly the performance for PL2MF. On SS1
 	\caption{Evaluation of weights with the MF extensions. On the left side of figures are displayed the PL2MF results; on the right results of BM25MF. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead.}
 	\label{fig:mf-weights}
 \end{figure}
+
+\section{Query-dependent Ranking of the Graph Summary}
+
+Graph summarisation is used for extracting the underlying structure of graph-shaped data. However, the size of a summary can still be an obstacle towards an effective browsing of the data.
+
+Yu and Yagadish propose in~\cite{yu:2006:schema-summarization} to ``summarise'' an \emph{existing} database schema by showing only the \emph{important} parts. This allows to get a succinct overview of the database.
+However, that work proposes an approach that is independent of the actual information need of a user.
+
+In the case of a graph summary, we consider the information need of a user to be expressed as a graph-shaped query. Given a query over the summary, we propose to rank its solutions using the MF ranking model. In this way, the user will first browse subgraphs of the summary that are most relevant to his need.
+
+\subsection{Dataset}
+\label{sec:summary-ranking:dataset}
+
+In order to evaluate the ranking on a graph summary, we use the USEWOD2013 dataset \cite{usewod:2013}. This dataset provides query logs from several SPARQL endpoints. In this evaluation, we focus on the logs from the DBpedia SPARQL endpoint. SPARQL~\cite{PrudS08} is the standard query language for RDF data. Given a graph-shaped query, it retrieves all subgraphs from a dataset which match its pattern.
+
+\paragraph{Query extraction.}
+
+The graph summary highlights the structure of the graph it was created from. Therefore, we are only interested in queries that pertain to the graph's structure. As a consequence, we need to ``clean'' the queries from the USEWOD2013 dataset by applying the following operations:
+\begin{enumerate}
+	\item retain only the basic graph patterns~\cite{PrudS08} (BGP);
+	\item transform CONSTRUCT and ASK queries~\cite{PrudS08} into \emph{wildcard} select queries;
+	\item remove information specific to an entity; and
+	\item discard any solution modifiers.
+\end{enumerate}
+Once those operations are performed, we have then a collection of queries that are only concerned about the structure of the graph queried.
+In the following, we describe each operation and consider the query below as an ongoing example of the effect of an operation on the query:
+
+\begin{minted}[linenos,frame=lines,framesep=1mm]{sparql}
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+ASK {
+  dbr:Paris dbo:country "France" ;
+            rdfs:label ?label .
+  dbr:Eiffel_Tower dbp:owner dbr:Paris .
+  FILTER isLiteral(?label)
+}
+ORDER BY ?label
+\end{minted}
+
+\subparagraph{Operation 1.}
+
+A basic graph pattern (BGP) represents a set of triple patterns, which together form a graph pattern. A triple pattern represents an edge of a graph, where any of its components can be a variable.
+\begin{definition}[Triple Pattern] A triple pattern is a tuple $t \in (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var)$ where $\mathcal{L}$ is the set of labels and $Var$ is an infinite set of variables.
+\end{definition}
+The components of a triple pattern $t$ are denoted $subject(t)$, $predicate(t)$ and $object(t)$, respectively.
+
+In this operation, we discard any component of the SPARQL query that is not a BGP, e.g., filters.
+With regards to the ongoing example, the effect of this operation removes the FILTER pattern line~10.
+\begin{minted}[linenos,frame=lines,framesep=1mm]{sparql}
+# Same set of prefixes
+ASK {
+  dbr:Paris dbo:country "France" ;
+            rdfs:label ?label .
+  dbr:Eiffel_Tower dbp:owner dbr:Paris .
+}
+ORDER BY ?label
+\end{minted}
+
+\subparagraph{Operation 2.}
+
+A SPARQL query can be either
+\begin{inparaenum}[(i)]
+	\item a \emph{CONSTRUCT}, i.e., a query that allows to create a graph from a solution;
+	\item a \emph{ASK}, i.e., a query that returns a boolean value that is true if there was at least one match, and false otherwise; or
+	\item a \emph{SELECT}, i.e., a query that returns a table, where a row represents a solution for the query and a column one of its variables.
+\end{inparaenum}
+
+In this experiment, we disregard the kind of output requested for a query. Also, the variables that may have been specifically selected in a SELECT query are not important here. Therefore, we view all queries as \emph{wildcard} SELECT queries, i.e., the binding of every variable in a solution is returned.
+
+With regards to the ongoing example, this operation results in the query being transformed into a SELECT query.
+\begin{minted}[linenos,frame=lines,framesep=1mm]{sparql}
+# Same set of prefixes
+SELECT * {
+  dbr:Paris dbo:country "France" ;
+            rdfs:label ?label .
+  dbr:Eiffel_Tower dbp:owner dbr:Paris .
+}
+ORDER BY ?label
+\end{minted}
+
+\subparagraph{Operation 3.}
+
+An entity can be a person, a place, an abstract concept, etc. For this experiment, we are interested in queries that pertain to graph's structure. Therefore, we replace with a \emph{unique} variable any detail a query might have about a specific entity.
+
+If the detail is either a URI such as \href{http://dbpedia.org/resource/Paris}{<http://dbpedia.org/resource/Paris>}, a literal such as \emph{"Paris"}, then it is replaced with a unique variable. In the case where a literal is a type (Section~\ref{sec:ssd:type}), it is then kept as is.
+
+With regards to the ongoing example, we replace in this operation the URIs \href{http://dbpedia.org/resource/Paris}{dbr:Paris} and \href{http://dbpedia.org/resource/Eiffel\_Tower}{dbr:Eiffel\_Tower} with the variables \emph{?uri\_1} and \emph{?uri\_2}, respectively. Also, the literal "France" is replace with the variable \emph{lit\_1}.
+\begin{minted}[linenos,frame=lines,framesep=1mm]{sparql}
+# Same set of prefixes
+SELECT * {
+  ?uri_1 dbo:country ?lit_1 ;
+         rdfs:label ?label .
+  ?uri_2 dbp:owner ?uri_1 .
+}
+ORDER BY ?label
+\end{minted}
+
+\subparagraph{Operation 4.}
+
+In SPARQL, one can use \emph{solution modifiers} in order to alter the result set of the query. For instance, the keyword \emph{LIMIT} is used for limiting the number of results up to a specified value. As for previous operations, a solution modifier does not impact on the graph structure; therefore, those are removed from the extracted queries.
+
+Finally, this operation removes the solution modifier \emph{ORDER BY} from the ongoing example query.
+\begin{minted}[linenos,frame=lines,framesep=1mm]{sparql}
+# Same set of prefixes
+SELECT * {
+  ?uri_1 dbo:country ?lit_1 ;
+         rdfs:label ?label .
+  ?uri_2 dbp:owner ?uri_1 .
+}
+\end{minted}
+
+\paragraph{Query classification.}
+
+We classify a query according to the complexity of a pattern. The complexity is based on two features of a query, which are
+\begin{inparaenum}[(i)]
+	\item the number of ``star-shaped'' patterns; and
+	\item the size of a star-shaped pattern.
+\end{inparaenum}
+
+A star-shaped pattern --- or \emph{star} in short --- is a BGP where the \emph{subject} of all triple patterns is the same. The size of such a pattern is determined by the number of triple patterns it contains. For instance, the BGP ``?s rdfs:label ?label . ?s foaf:name ?name .'' is a star of size 2, since the subject of both triple patterns is ``?s''.
+
+Such a classification scheme allows to capture two aspects of a graph summary that have an impact on its \emph{precision} introduced in Section~\ref{sec:error-classification}. The size of a star in a query pertains to the attribute and type error. Instead, the number of stars in a query pertains to the connectivity error.
+
+\paragraph{Discussion.}
+
+Table~\ref{tab:usewod2013-queries} reports general statistics about the queries extracted from the USEWOD2013 DBpedia~3.3 logs. The full list of queries is available in the Appendix~\ref{app:summary-ranking}. For each category of complexity, we present here the number of queries, the number of unique terms, --- where a term is a URI or a literal --- and distribution of queries across the categories as a percentage.
+
+The queries are grouped by its complexity, where a group is identified with the a string having the following regular expression: "\verb/\d+(-\d+)*/". For instance, the string ``\emph{2-1}'' identifies a group of queries that have \textit{two} star-shaped patterns, one with \textit{two} triple patterns and the other with only \textit{one}.
+
+Using the process outlined above, a total of 293 queries spanning over 17 categories were extracted. We note that the distribution of queries follows a power law. Indeed, most of the queries are contained in the categories ``2'', ``3'', and ``4''; those represent BGPs with only a single star-shaped pattern. Only 52 queries (18\%) actually contain more than one star. This suggests that a majority of the extracted queries are intended at retrieving \emph{entities}.
+
+\begin{table}
+	\centering
+	\resizebox{.8\textwidth}{!}{
+		\begin{tabular}{lc@{\hs}rc@{\hs}rc@{\hs}r}
+			\toprule
+			Category & \phantom{a} & Number of Queries & \phantom{a} & Number of Unique Terms & \phantom{a} & Query Distribution (in \%) \\
+			\cmidrule{3-3} \cmidrule{5-5} \cmidrule{7-7}
+			1-1-4 & \phantom{a} & 2 & \phantom{a} & 9 & \phantom{a} & 0.68 \\
+			1-1-3 & \phantom{a} & 2 & \phantom{a} & 6 & \phantom{a} & 0.68 \\
+			1-1-2 & \phantom{a} & 1 & \phantom{a} & 3 & \phantom{a} & 0.34 \\
+			3-4 & \phantom{a} & 1 & \phantom{a} & 6 & \phantom{a} & 0.34 \\
+			2-2 & \phantom{a} & 2 & \phantom{a} & 5 & \phantom{a} & 0.68 \\
+			1-5 & \phantom{a} & 1 & \phantom{a} & 6 & \phantom{a} & 0.34 \\
+			1-4 & \phantom{a} & 1 & \phantom{a} & 5 & \phantom{a} & 0.34 \\
+			1-3 & \phantom{a} & 1 & \phantom{a} & 4 & \phantom{a} & 0.34 \\
+			1-2 & \phantom{a} & 19 & \phantom{a} & 30 & \phantom{a} & 6.48 \\
+			1-1 & \phantom{a} & 22 & \phantom{a} & 28 & \phantom{a} & 7.51 \\
+			10 & \phantom{a} & 1 & \phantom{a} & 10 & \phantom{a} & 0.34 \\
+			9 & \phantom{a} & 1 & \phantom{a} & 9 & \phantom{a} & 0.34 \\
+			6 & \phantom{a} & 7 & \phantom{a} & 33 & \phantom{a} & 2.39 \\
+			5 & \phantom{a} & 7 & \phantom{a} & 24 & \phantom{a} & 2.39 \\
+			4 & \phantom{a} & 26 & \phantom{a} & 49 & \phantom{a} & 8.87 \\
+			3 & \phantom{a} & 65 & \phantom{a} & 87 & \phantom{a} & 22.18 \\
+			2 & \phantom{a} & 134 & \phantom{a} & 112 & \phantom{a} & 45.73 \\
+			\midrule
+			\textit{Total} & \phantom{a} & 293 & \phantom{a} & 201 & \phantom{a} & 100.00 \\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption{Queries extracted from the USEWOD2013 query logs}
+	\label{tab:usewod2013-queries}
+\end{table}
+
+\subsection{Graph Summary Ranking}
+
+While creating a summary of a given graph, one may accumulate several statistics. We generate a summary with the following statistics:
+\begin{enumerate}
+	\item the number of nodes mapped to a sumnode;
+	\item the number of occurrences of an attribute associated to a specific sumnode;
+	\item the number of times an attribute connects two sumnodes; and
+	\item the number of types in a sumnode.
+\end{enumerate}
+
+\paragraph{Ranking functions.}
+
+We present three ranking functions that can be applied over a graph summary.
+
+\subparagraph{Basic approach.}
+
+A straightforward approach consists in summing up all the statistics available to a subgraph that matched a query. The rationale is that the greater the sum, the more relevant is that solution.
+
+\subparagraph{Field-based approach.}
+
+In this approach, we apply the Normalisation~\ref{norm:content}.
+
+\subparagraph{MF-based approach.}
+
+In this approach, we apply both normalisations available with the MF ranking model, i.e., Normalisations~\ref{norm:content} and~\ref{norm:degree}.
+
+\subsection{Evaluation}
+\label{sec:summary-ranking:eval}
+
+In this experiment, we evaluate the performance of a MF extension, i.e., BM25MF, at ranking subgraphs of a graph summary. We present first the ranking paradigm that we follow, before describing the experiment itself. Then, we describe the evaluation method for asserting the performance of the MF extension. Finally, we discuss the results of the experiment.
+
+\paragraph{Ranking paradigm.}
+
+Given a SPARQL query, its solutions retrieved from a graph summary can be erroneous as expressed in Chapter~\ref{chap03:sec:quality}; indeed, a summary path from a solution might have no instance that form a path in the original graph as well. A good solution is then a subgraph of the summary that does exist in the original graph. Therefore, a ranking algorithm should rank first such solutions.
+
+\paragraph{Experimental setting.}
+
+Due to imprecisions in a summary as discussed in Chapter~\ref{chap03:sec:quality}, a query can return solutions that do not have any actual \emph{summary instance} in the original graph. We the present the following experimental setting in order to evaluate the performance of the MF extension with regards to the ranking paradigm.
+
+Given a SPARQL query extracted from the USEWOD2013 query logs of DBpedia, we replace with a variable that we denote as ``\emph{?POF}'' a term of the query, one at a time. A term is either a predicate or an object of a triple pattern. The resulting query is then executed over a graph summary of DBpedia.
+
+In parallel, we run the query over the original graph; this allows us to compare the bindings of the ?POF variables as returned from both graphs, i.e., the original graph and its summary. The difference between the two sets of bindings is an indication of the summary's precision for that query.
+
+We keep only the queries that have a solution over the DBpedia dataset; this ensures that any invalid binding of the ?POF variable is due to the summary.
+
+\subparagraph{Example.}
+
+Consider the SPARQL query taken as an example in the previous section. We replace the term \emph{rdfs:label} with the \emph{?POF} variable. Let us consider as well that the terms \emph{rdfs:label} and \emph{rdfs:comment} are bindings for that variable as retrieved from the original graph; however, bindings retrieved from the summary are \emph{rdfs:label}, \emph{rdfs:comment} and \emph{dc:title}.
+The term \emph{dc:title} is then invalid.
+
+%\begin{table}
+%	\centering
+%	\resizebox{.5\textwidth}{!}{
+%		\begin{tabular}{lc@{\hs}rc@{\hs}rc@{\hs}r}
+%			\toprule
+%			Category & \phantom{a} & Min & \phantom{a} & Max & \phantom{a} & Average \\
+%			\cmidrule{3-3} \cmidrule{5-5} \cmidrule{7-7}
+%			10 & \phantom{a} & 213 & \phantom{a} & 448 & \phantom{a} & 241.50 \\
+%			1-1-2 & \phantom{a} & 1 & \phantom{a} & 44514 & \phantom{a} & 11132.50 \\
+%			1-1-3 & \phantom{a} & 1 & \phantom{a} & 44514 & \phantom{a} & 8923.80 \\
+%			1-1-4 & \phantom{a} & 1 & \phantom{a} & 3369 & \phantom{a} & 987.58 \\
+%			1-1 & \phantom{a} & 3 & \phantom{a} & 36684 & \phantom{a} & 6407.35 \\
+%			1-2 & \phantom{a} & 3 & \phantom{a} & 44858 & \phantom{a} & 6568.68 \\
+%			1-3 & \phantom{a} & 1 & \phantom{a} & 134 & \phantom{a} & 48.50 \\
+%			1-4 & \phantom{a} & 77 & \phantom{a} & 845 & \phantom{a} & 534.00 \\
+%			1-5 & \phantom{a} & 566 & \phantom{a} & 1706 & \phantom{a} & 1294.33 \\
+%			2-2 & \phantom{a} & 132 & \phantom{a} & 2926 & \phantom{a} & 1386.62 \\
+%			2 & \phantom{a} & 3 & \phantom{a} & 144103 & \phantom{a} & 23107.88 \\
+%			3-4 & \phantom{a} & 147 & \phantom{a} & 4455 & \phantom{a} & 1179.14 \\
+%			3 & \phantom{a} & 26 & \phantom{a} & 143859 & \phantom{a} & 9733.65 \\
+%			4 & \phantom{a} & 26 & \phantom{a} & 49682 & \phantom{a} & 5239.40 \\
+%			5 & \phantom{a} & 57 & \phantom{a} & 12793 & \phantom{a} & 1875.20 \\
+%			6 & \phantom{a} & 57 & \phantom{a} & 5250 & \phantom{a} & 454.26 \\
+%			9 & \phantom{a} & 213 & \phantom{a} & 448 & \phantom{a} & 244.67 \\
+%			\bottomrule
+%		\end{tabular}
+%	}
+%	\caption{Queries extracted from the USEWOD2013 query logs}
+%	\label{tab:usewod2013-queries:coverage}
+%\end{table}
+
+\paragraph{Ranking performance measure.}
+
+We use the Mean Average Precision (MAP) as the measure of ranking performance.
+
+\paragraph{Discussion.}
+
+

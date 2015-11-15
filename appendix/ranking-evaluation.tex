@@ -1,6 +1,8 @@
 \chapter{Data Tables of the DAG Ranking Evaluation}
 
-The $p$-Value is computed with the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, where a statistically significant difference at level $0.10$ is marked with one star $*$ and at level $0.05$ with two stars $**$. BM25MF and PL2MF are used as a baseline in this test. $\Delta\%$ indicates the difference in percentage between the two MAP values compared in that test.
+\section{Entity Ranking}
+
+Table~\ref{tab:ranking-cmp-results} reports the evaluation results of comparing MF extensions BM25MF and PL2MF against several state-of-the-art ranking functions. The $p$-Value is computed with the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, where a statistically significant difference at level $0.10$ is marked with one star $*$ and at level $0.05$ with two stars $**$. BM25MF and PL2MF are used as a baseline in this test. $\Delta\%$ indicates the difference in percentage between the two MAP values compared in that test.
 
 \input{05-ranking/figures/experiments/ranking-comparison}
 
@@ -8,3 +10,29 @@ The $p$-Value is computed with the two-tailed Wilcoxon matched-pairs signed-rank
 Table~\ref{tab:mf-effect} reports the MAP scores of BM25MF and PL2MF combined with each weight individually and using the normalization parameters values from the Table~\ref{tab:norm-param}. Apart from the row ``Without Attribute Label'', all runs consider the attribute label as an additional value as in the previous experiments.
 
 \input{05-ranking/figures/experiments/weights-cmp}
+
+\section{Graph Summary Ranking}
+\label{app:summary-ranking}
+
+The queries are grouped by its complexity, as outlined in Section~\ref{sec:summary-ranking:dataset}. A group is identified with the a string having the following regular expression: "\verb/\d+(-\d+)*/". For instance, the string ``\emph{2-1}'' identifies a group of queries that have \textit{two} star-shaped patterns, one with \textit{two} triple patterns and the other with only \textit{one}.
+
+The SPARQL queries below are extracted from the logs available in the USEWOD2013 dataset \cite{usewod:2013}. We make use of the following prefixes:
+\begin{labeling}{\textbf{yago:}}
+	\item[\textbf{dbo:}] \url{http://dbpedia.org/ontology/}
+	\item[\textbf{dbp:}] \url{http://dbpedia.org/property/}
+	\item[\textbf{foaf:}] \url{http://xmlns.com/foaf/0.1/}
+	\item[\textbf{geo:}] \url{http://www.w3.org/2003/01/geo/wgs84\_pos#}
+	\item[\textbf{rdfs:}] \url{http://www.w3.org/2000/01/rdf-schema#}
+	\item[\textbf{skos:}] \url{http://www.w3.org/2004/02/skos/core#}
+	\item[\textbf{yago:}] \url{http://dbpedia.org/class/yago/}
+\end{labeling}
+
+Following are the SPARQL queries grouped by complexity:
+
+\input{appendix/queries1}
+
+\input{appendix/queries2}
+
+\input{appendix/queries3}
+
+\input{appendix/queries4}
