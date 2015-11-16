@@ -25,15 +25,15 @@ We present in this section two dimensions we use for evaluating a summary, i.e.,
 
 \begin{quotation}
 	\item[\emph{Summary volume.}]
-	
+
 	We measure the amount of data from the gold standard summary that is compressed into the evaluated summary. To this end, we compare the volume of the summary against the volume of the gold standard. We report this comparison as the ratio  $\mathcal{S}:\mathcal{S}_{fb}$ of the former to the later.
-	
+
 	$$
 	\mathcal{S}:\mathcal{S}_{fb} = \frac{\vert \mathcal{W} \vert + \vert \mathcal{B} \vert}{\vert \mathcal{W}_{fb} \vert + \vert \mathcal{B}_{fb} \vert}
 	$$
-	
+
 	\item[\emph{Algorithm performance.}]
-	
+
 	%The MapReduce implementation of the graph summarisation is composed of two separate steps:
 	%\begin{inparaenum}[(1)]
 	%\item a \emph{mapping} step, where we assign a node of the data graph to its $\sim$-equivalence class; and
@@ -64,7 +64,7 @@ The Table~\ref{tab:volume-ratio} reports the volume ratio between the summary $\
 
 The summaries based only on the type information, i.e., $R_{st}$ and $R_t$, exhibit a higher compression compared to the gold standard. With regards to the gold standard volume, the volume ratio is under $5\%$ on the \emph{Low} and \emph{Medium} datasets and at most half on the more complex datasets. On average, we note that the volume of a summary with $R_{st}$ is slightly higher than with $R_t$. The reason is that a node of the data graph can be mapped to several sumnodes with the \emph{Single-Type} summary $R_{st}$, which leads to an increase of the size of the summary.
 
-The attribute feature appears to be a better feature for summarising a graph than type. Indeed, the volume ratio of $\mathcal{S}_a$ and $\mathcal{S}_{ioa}$ remains stable with \emph{Medium} ($42.51$ and $51.45$, resp.) and \emph{High} ($47.99$ and $66.13$, resp.) datasets. However, this is not the case with the $\mathcal{S}_{st}$ and $\mathcal{S}_t$ summaries. 
+The attribute feature appears to be a better feature for summarising a graph than type. Indeed, the volume ratio of $\mathcal{S}_a$ and $\mathcal{S}_{ioa}$ remains stable with \emph{Medium} ($42.51$ and $51.45$, resp.) and \emph{High} ($47.99$ and $66.13$, resp.) datasets. However, this is not the case with the $\mathcal{S}_{st}$ and $\mathcal{S}_t$ summaries.
 
 We can observe a correlation between the volume ratio and the size of $\mathcal{L}^T$.
 We note that the \emph{Attributes} summarisation $R_a$ actually achieves the lowest ratio on the \texttt{dbpedia} dataset. This shows that the use of attributes in \texttt{dbpedia} is homogeneous across types. The volume ratio of the \emph{IO Attributes} summary $\mathcal{S}_{ioa}$ is on average on par with the ratio of the \emph{Attributes} summary $\mathcal{S}_a$, indicating a certain homogeneity of incoming edges in the data graph.
@@ -94,7 +94,7 @@ By using both type and attribute information as with the \emph{Attributes \& Typ
 			($\mathcal{S}_{ioa}$,89.57)
 			($\mathcal{S}_{ioat}$,89.57)
 		};
-		
+
 		\addplot coordinates {
 			($\mathcal{S}_{st}$,0.23)
 			($\mathcal{S}_{t}$,0.22)
@@ -103,7 +103,7 @@ By using both type and attribute information as with the \emph{Attributes \& Typ
 			($\mathcal{S}_{ioa}$,51.45)
 			($\mathcal{S}_{ioat}$,62.68)
 		};
-		
+
 		\addplot coordinates {
 			($\mathcal{S}_{st}$, 17.81)
 			($\mathcal{S}_{t}$,17.60)
@@ -161,7 +161,7 @@ We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not
 			($\mathcal{S}_{ioa}$, 5254718)
 			($\mathcal{S}_{ioat}$, 5212401)
 		};
-		
+
 		\addplot coordinates {
 			($\mathcal{S}_{st}$, 51724125)
 			($\mathcal{S}_{t}$, 45942442)
@@ -170,7 +170,7 @@ We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not
 			($\mathcal{S}_{ioa}$, 53557640)
 			($\mathcal{S}_{ioat}$, 52440249)
 		};
-		
+
 		\addplot coordinates {
 			($\mathcal{S}_{st}$, 4246345)
 			($\mathcal{S}_{t}$, 2763572)
@@ -188,7 +188,7 @@ We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not
 			($\mathcal{S}_{ioa}$, 102540080)
 			($\mathcal{S}_{ioat}$, 105685365)
 		};
-		
+
 		\legend{$\mu_L$,$\mu_M$,$\mu_H$,$\mu_{VH}$}
 		\end{axis}
 		\end{tikzpicture}

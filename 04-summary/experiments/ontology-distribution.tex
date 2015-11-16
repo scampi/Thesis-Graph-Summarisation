@@ -3,9 +3,9 @@
                 grid=major,
                         xlabel=number of documents (\emph{log}),
                         ylabel=probability (\emph{log}),
-                ]       
+                ]
         \addplot[red, domain=1:100,ultra thick] {0.00257344864/(x^1.913581)};
-        \addlegendentry{$\alpha =  1.91$}       
+        \addlegendentry{$\alpha =  1.91$}
         \addplot+[only marks, mark size=1pt,mark=star, blue] table[x index=1,y index=0] {04-summary/experiments/basic-namespace-stats-probability};
 	\end{loglogaxis}
 \end{tikzpicture}

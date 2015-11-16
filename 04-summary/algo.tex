@@ -15,7 +15,7 @@ The creation of a graph summary is decomposed into four steps. These steps are c
 	\phantomsection
 	\label{step-ed}
 	In order to create a graph summary, the basic information we manipulate is an entity. The computation of the entity description \gls{edesc} requires a pass over the edges, with a worst case complexity of $O(\vert A \vert)$. The entity description provides the necessary contextual information needed for the summarisation relation.
-	
+
 	\item[\textbf{\underline{Step 2:}} \emph{Node to sumnode mapping.}]
 	\phantomsection
 	\label{step-hn}
@@ -23,12 +23,12 @@ The creation of a graph summary is decomposed into four steps. These steps are c
 	%This is the core operation of the \texttt{GetSumnode} function, which assigns a sumnode to a node.
 	For example, a unique identifier can be created from the types of an entity for the relation $R_t$.
 	The worst case complexity of this operation is $O(\vert V \vert)$, since we need to visit each node of the graph.
-	
+
 	\item[\textbf{\underline{Step 3:}} \emph{Sumedge materialisation.}]
 	\phantomsection
 	\label{step-he}
 	We need to join the previous mapping of a node to its sumnode with the original graph in order to materialise an sumedge. We do this by two joins, i.e., on the source and target nodes. In this step, we need to visit each edge in the graph, so in the worst case it has a $O\left(\vert A \vert\right)$ complexity.
-	
+
 	\item[\textbf{\underline{Step 4:}} \emph{Statistics gathering.}]
 	\phantomsection
 	\label{step-stats}
@@ -137,7 +137,7 @@ In this section, we introduce the concept of \emph{edge authority} which is need
 
 \begin{labeling}{\emph{Edge Provenance:}}
 	\item[\emph{Edge Provenance:}] Due to the principle of Linked Data which states that anything can be said about anything, there is a need to know the provenance of an edge. This necessity goes in accordance with the N-Quads\footnote{\url{http://www.w3.org/TR/n-quads/}} serialisation format. The provenance of an edge indicates the dataset it is originally from.
-	
+
 	\item[\emph{Node Ownership:}] To assess the information given by an edge, we need to know the ownership of a node in addition to the edge's provenance. This concept differs from the \emph{provenance} of an edge in the sense that a dataset may contain edges about a node, but not necessarily owns that node.
 \end{labeling}
 
@@ -488,9 +488,9 @@ In comparison, the MapReduce-based one allows the summarisation to scale to much
 %	symbolic x coords={10,50,100,500},
 %	xtick=data
 %	]
-%	\addplot [ybar, fill=gray!50] 
+%	\addplot [ybar, fill=gray!50]
 %	plot [error bars/.cd, y dir=both, y explicit]
 %	table [y error plus=y-max, y error minus=y-min] {\mytable};
-%	\end{axis} 
+%	\end{axis}
 %	\end{tikzpicture}
 %\end{figure}

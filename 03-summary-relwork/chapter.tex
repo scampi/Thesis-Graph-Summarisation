@@ -261,7 +261,7 @@ In this Chapter, we reviewed the literature related to graph summarisation and c
 
 \begin{labeling}{\textbf{Expressiveness.}}
 	\item[\textbf{Expressiveness.}] The presented graph summarisation algorithms are designed for specific applications, and can then be difficult to port. We present a flexible and expressive graph summarisation based on graph \emph{homomorphism}.
-	
+
 	The definition of the summarisation simply needs the user's specification of how a node in the graph is mapped to a sumnode. The mapping is simply based on \emph{features} of a node. In addition, since our summarisation is based on homomorphism, the mapping process of a sumnode to a node is deterministic; there is no need to specify properties of the summary in advance, e.g., the number of sumnodes.
 	\item[\textbf{Performance.}] Graph summarisation algorithms require to visit each edge of the graph at least once. In order to improve the quality of the summary, some approaches \cite{zheng:ipsj:2011} perform several iterations over the graph. Iterations are necessary when the summarisation of a node also depends on nodes that are not directly connected to it, and so there is a need to traverse the graph. The larger is the graph, the more expensive it is to iterate over the graph. While such algorithms can be expressed in our framework, it is not an necessity in order to summarise a graph.
 	\item[\textbf{Generic.}] We present a generic graph summarisation approach that can be used as a base in a variety of applications. For example, a summary is core to drill-down/rollup operations in OLAP over graphs.

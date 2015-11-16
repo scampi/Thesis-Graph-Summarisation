@@ -75,7 +75,7 @@ Using PL2F, an entity $e$ is scored with regard to a query $q$ as follows:
   \label{eq:dfr-prisk}
   P_{P} & = & \frac{\lambda^{tfn}}{tfn!}\times e^{-\lambda} \:\text{ where }\: \lambda=\frac{TF}{N} \\
   \label{eq:dfr:rand-poisson}
-\end{eqnarray*}  
+\end{eqnarray*}
 where $qtw=\frac{q_t}{q_{t,max}}$ is the weight of the query $q$ for the term $t$ with $q_{t,max}$ the maximum of $q_t$ in $q$, $w_{e,t}$ is the weight of the term $t$ in the entity $e$, $1-P_{risk}$ estimates the information gain of a term $t$, $-log_2\left(P_{P}\right)$ evaluates the importance of a term $t$ in the entity $e$ thanks to the Poisson model and $TF$ is equal to the frequency of the term $t$ in the collection. The factorial is approximated with the Stirling's formula \mbox{$tfn!=\sqrt{2\pi}\times tfn^{tfn+0.5}\times e^{-tfn}$}.
 The term frequency of the term $t$ in the entity $e$ is normalized as follows:
 \begin{equation}

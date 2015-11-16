@@ -237,7 +237,7 @@ Two nodes $(u, v) \in V^2$ are said \emph{bisimilar} if $(u, v) \in \sim$.
 		\includegraphics{04-summary/figures/bisimulation}
 	}
 	\caption{Simulation relation}
-	\label{fig:bisimulation}	
+	\label{fig:bisimulation}
 \end{figure}
 
 The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same. Kaushik et al.~\cite{kaushik:2002:cib} propose the \emph{forward-and-backward} (f\&b)-bisimulation which extends the definition by considering incoming edges in addition to the outgoing ones. Since a summary deals with the graph's structure given by the relationships of attributes and types, we introduce the type as an additional requirement.
@@ -410,12 +410,12 @@ The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in t
 
 \begin{definition}[Types Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_t = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ be two graphs.
-	
+
 	The set of nodes $\mathcal{W}_t$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_t \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_t = \emptyset$, and it contains as many elements as the power set of types in the graph:
 	$$
 	\lvert \mathcal{W}_t \rvert = \lvert \mathbb{P}\left( \left\lbrace l_V(c) \mid \exists (u, \gls{atype}, c) \in A \wedge \gls{atype} \in T \right\rbrace \right) \rvert
 	$$
-	
+
 	We call $\mathcal{S}_t$ the types summary of $G$ according to the summarisation relation $R_t \subseteq V \times \mathcal{W}_t$ defined as:
 	$$
 	R_t = \left\lbrace (u, x) \in V \times \mathcal{W}_t \mid types(u) = types(x) \right\rbrace
@@ -431,12 +431,12 @@ The nodes $N_3$, $N_4$, and $N_5$ are $\sim_a$-equivalent because they share the
 
 \begin{definition}[Attributes Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_a = \left\langle \mathcal{W}_a, \mathcal{B}_a, l_{\mathcal{W}_a} \right\rangle$ be two graphs.
-	
+
 	The set of nodes $\mathcal{W}_a$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_a \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_a = \emptyset$, and it contains as many elements as the power set of attributes in the graph:
 	$$
 	\lvert \mathcal{W}_a \rvert = \lvert \mathbb{P}\left( \left\lbrace \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \right\rbrace \right) \rvert
 	$$
-	
+
 	We call $\mathcal{S}_a$ the attributes summary of $G$ according to the summarisation relation $R_a \subseteq V \times \mathcal{W}_a$ defined as:
 	$$
 	R_a = \left\lbrace (u, x) \in V \times \mathcal{W}_a \mid attributes(u) = attributes(x) \right\rbrace
@@ -484,7 +484,7 @@ The nodes $N_1$ and $N_2$ are mapped to a same sumnode by $R_{at}$ because they 
 
 \begin{definition}[Attributes \& Types Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{at} = \left\langle \mathcal{W}_{at}, \mathcal{B}_{at}, l_{\mathcal{W}_{at}} \right\rangle$ be two graphs.
-	
+
 	The set of nodes $\mathcal{W}_{at}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{at} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{at} = \emptyset$, and it contains as many elements as the power set of attributes and types in the graph:
 	$$
 	\begin{aligned}
@@ -492,7 +492,7 @@ The nodes $N_1$ and $N_2$ are mapped to a same sumnode by $R_{at}$ because they 
 	& \{ l_V(c) \mid \exists (u, \gls{atype}, c) \in A \wedge \gls{atype} \in T \} ) \rvert
 	\end{aligned}
 	$$
-	
+
 	We call $\mathcal{S}_{at}$ the attributes \& types summary of $G$ according to the summarisation relation $R_{at} \subseteq V \times \mathcal{W}_{at}$ defined as:
 	$$
 	\begin{aligned}
@@ -510,12 +510,12 @@ All three nodes $N_3$, $N_4$, and $N_5$ map to the same sumnode by the relation 
 
 \begin{definition}[IO Attributes Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ioa} = \left\langle \mathcal{W}_{ioa}, \mathcal{B}_{ioa}, l_{\mathcal{W}_{ioa}} \right\rangle$ be two graphs.
-	
+
 	The set of nodes $\mathcal{W}_{ioa}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ioa} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ioa} = \emptyset$, and it contains as many elements as the power set of attributes in the graph:
 	$$
 	\lvert \mathcal{W}_{ioa} \rvert = \lvert \mathbb{P}\left( \left\lbrace \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \right\rbrace \right) \rvert
 	$$
-	
+
 	We call $\mathcal{S}_{ioa}$ the IO attributes summary of $G$ according to the summarisation relation $R_{ioa} \subseteq V \times \mathcal{W}_{ioa}$ defined as:
 	$$
 	\begin{aligned}
@@ -537,12 +537,12 @@ We define $R_{ia}$ as the relation based on the set of incoming attributes. We c
 
 \begin{definition}[Incoming Attributes Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ia} = \left\langle \mathcal{W}_{ia}, \mathcal{B}_{ia}, l_{\mathcal{W}_{ia}} \right\rangle$ be two graphs.
-	
+
 	The set of nodes $\mathcal{W}_{ia}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ia} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ia} = \emptyset$, and it contains as many elements as the power set of attributes in the graph:
 	$$
 	\lvert \mathcal{W}_{ia} \rvert = \lvert \mathbb{P}\left( \left\lbrace \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \right\rbrace \right) \rvert
 	$$
-	
+
 	We call $\mathcal{S}_{ia}$ the incoming attributes summary of $G$ according to the summarisation relation $R_{ia} \subseteq V \times \mathcal{W}_{ia}$ defined as:
 	$$
 	R_{ia} = \left\lbrace (u, x) \in V \times \mathcal{W}_{ia} \mid attributes^{-1}(u) = attributes^{-1}(x) \right\rbrace
@@ -562,7 +562,7 @@ We define $R_{iat}$ as the relation based on the set of types and incoming attri
 
 \begin{definition}[Incoming Attributes \& Types Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{iat} = \left\langle \mathcal{W}_{iat}, \mathcal{B}_{iat}, l_{\mathcal{W}_{iat}} \right\rangle$ be two graphs.
-	
+
 	The set of nodes $\mathcal{W}_{iat}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{iat} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{iat} = \emptyset$, and it contains as many elements as the power set of attributes and types in the graph:
 	$$
 	\begin{aligned}
@@ -570,7 +570,7 @@ We define $R_{iat}$ as the relation based on the set of types and incoming attri
 	& \{ l_V(c) \mid \exists (u, \gls{atype}, c) \in A \wedge \gls{atype} \in T \} ) \rvert
 	\end{aligned}
 	$$
-	
+
 	We call $\mathcal{S}_{iat}$ the incoming attributes \& types summary of $G$ according to the summarisation relation $R_{iat} \subseteq V \times \mathcal{W}_{iat}$ defined as:
 	$$
 	\begin{aligned}
@@ -591,7 +591,7 @@ Although the nodes $N_1$ and $N_2$ are mapped to a same sumnode with $R_{at}$, t
 
 \begin{definition}[IO Attributes \& Types Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ioat} = \left\langle \mathcal{W}_{ioat}, \mathcal{B}_{ioat}, l_{\mathcal{W}_{ioat}} \right\rangle$ be two graphs.
-	
+
 	The set of nodes $\mathcal{W}_{ioat}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ioat} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ioat} = \emptyset$, and it contains as many elements as the power set of attributes and types in the graph:
 	$$
 	\begin{aligned}
@@ -599,7 +599,7 @@ Although the nodes $N_1$ and $N_2$ are mapped to a same sumnode with $R_{at}$, t
 	& \{ l_V(c) \mid \exists (u, \gls{atype}, c) \in A \wedge \gls{atype} \in T \} ) \rvert
 	\end{aligned}
 	$$
-	
+
 	We call $\mathcal{S}_{ioat}$ the IO attributes \& types summary of $G$ according to the summarisation relation $R_{ioat} \subseteq V \times \mathcal{W}_{ioat}$ defined as:
 	$$
 	\begin{aligned}

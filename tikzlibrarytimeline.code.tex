@@ -1,7 +1,7 @@
 % * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 % COPYRIGHT 2014 - Claudio Fiandrino
 % Released under the LaTeX Project Public License v1.3c or later
-% 
+%
 % email: <claudio dot fiandrino at gmail dot com>
 %
 % Timeline TikZ library version 0.3a - 19/07/2014
@@ -60,7 +60,7 @@
   below line/.style={% new style for having the trapezium below the timeline
   	anchor=north,
   	shape border rotate=180,
-  	yshift=-2\timelineheight,  
+  	yshift=-2\timelineheight,
   }
 }
 % settings to customize aspect of timeline
@@ -90,7 +90,7 @@
   \draw[fill,opacity=0.8] (0,0) rectangle (\timelinewidth,\timelineheight);
   \shade[top color=black, bottom color=white,middle color=black!20]
     (0,0) rectangle (\timelinewidth,-\timelineoffset);
-  \shade[top color=white, bottom color=black,middle color=black!20]  
+  \shade[top color=white, bottom color=black,middle color=black!20]
     (0,\timelineheight) rectangle (\timelinewidth,\timelineheight+\timelineoffset);
 
   \ifcustominterval%
@@ -98,10 +98,10 @@
   \else%
     \foreach \smitem [count=\xi] in {1,...,#2}  {\global\let\maxsmitem\xi}%
   \fi%
-  
+
   \pgfmathsetmacro\position{\timelinewidth/(\maxsmitem+1)}
   \node at (0,0.5\timelineheight)(\timespan-0){\phantom{Week 0}};
- 
+
   \ifcustominterval%
     \foreach \x[count=\xi] in {#2}{%
       \node[text=white,text depth=0pt]at +(\xi*\position,0.5\timelineheight) (\timespan-\xi) {\timespan\ \x};%
@@ -110,7 +110,7 @@
     \foreach \x[count=\xi] in {1,...,#2}{%
       \node[text=white, text depth=0pt]at +(\xi*\position,0.5\timelineheight) (\timespan-\xi) {\timespan\ \x};%
     }%
-  \fi%  
+  \fi%
 }
 
 \newcounter{involv}
@@ -124,10 +124,10 @@
 }
 
 \newcommand{\initialphase}[1]{
-\node[phase appearance,#1,anchor=west,between week=0 and 1 in 0,] 
+\node[phase appearance,#1,anchor=west,between week=0 and 1 in 0,]
  (phase-\theinvolv)
  at ($(\timespan-0)!0!(\timespan-1)$){};
-\setcounter{involv}{0} 
+\setcounter{involv}{0}
 }
 
 \newenvironment{phases}{\begin{pgfonlayer}{background}}{\end{pgfonlayer}}

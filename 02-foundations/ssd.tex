@@ -38,7 +38,7 @@ We consider the data as being a labelled directed graph and build methods based 
 We describe in this Section a graph data model based on the work of \cite{delbru:jws:entity}. The graph is represented with two layers that depict the data at two extremes: the \emph{dataset} and the \emph{entity} layers. The Figure~\ref{fig:gdm} depicts the layers of the model, where the dataset layer is depicted at the top, and the entity layer at the bottom.
 \begin{labeling}{\textbf{Dataset Layer:}}
 	\item[\textbf{Dataset Layer:}] The dataset layer is the ensemble of entities' collections. It provides coarse information about the data where the focus is on the relationships between datasets. In the figure, the dataset \emph{D1} connects to the dataset \emph{D2} via the link \emph{p1}, and \emph{D2} is connected to \emph{D1} via two links, i.e., \emph{p2} and \emph{p3}.
-	\item[\textbf{Entity Layer:}] The entity layer contains information about entities. Of the two layers, this provides the finer details about the data where relationships between and attributes about entities are described. In the figure, the entity layer provides additional information on those links, showing which entities are actually connected within and across datasets. 
+	\item[\textbf{Entity Layer:}] The entity layer contains information about entities. Of the two layers, this provides the finer details about the data where relationships between and attributes about entities are described. In the figure, the entity layer provides additional information on those links, showing which entities are actually connected within and across datasets.
 \end{labeling}
 
 The dataset layer shows the links between datasets, i.e., \emph{inter-dataset} links, while the entity layer provides in addition information on the links within a dataset, i.e., \emph{intra-dataset} links.
@@ -62,7 +62,7 @@ In the following we formally define a graph and introduce concepts used in the r
 
 \begin{definition}[Graph]
 	Let $V$ be a set of nodes and $\mathcal{L}$ a set of labels. The set of labelled edges is defined as $A \subseteq \left\lbrace (x, \alpha, y) \mid (x, y) \in V^2, \alpha \in \mathcal{L} \right\rbrace$.
-	
+
 	A \emph{graph} $G$ is a tuple $G = \left\langle V, A, l_V \right\rangle$ where $l_V : V \mapsto \mathcal{L}$ is a node-labelling function.
 \end{definition}
 
@@ -72,13 +72,13 @@ We introduce below vocabulary terms used throughout the thesis.
 	\item[\textbf{Edge}] An edge labelled $\alpha$ from the node $x$ to the node $y$ is written as $\left(x, \alpha, y\right)$. We say that $x$ is the \emph{source}, and $y$ is the \emph{target}.
 
 	\item[\textbf{Path}] We call a \emph{path} a sequence of edges label $\alpha_1.\cdots.\alpha_n$. A path exists in the graph $G$ if there is a sequence of nodes $\left\lbrace v_1, \cdots, v_{n+1} \right\rbrace \subseteq V$ connected with such labelled edges.
-	
+
 	The Figure~\ref{fig:graph} depicts a graph of people and their relations with various places. The path $author.lives$ exists in that graph as it connects the nodes $\left\lbrace N_0, N_2, N_3 \right\rbrace$.
 
 	\item[\textbf{Attribute}] We call \emph{attribute} the label of an edge.
-	
+
 	We define as $attributes\left(x \in V\right) = \left\lbrace \alpha \in \mathcal{L} \mid \exists y \in V, (x, \alpha, y) \in A \right\rbrace$ the set of attributes associated with a node $x$ in $G$.
-	
+
 	Similarly, we define the set of \emph{incoming} attributes as
 	$$
 	attributes^{-1}\left(x \in V\right) = \left\lbrace \alpha \in \mathcal{L} \mid \exists w \in V, (w, \alpha, x) \in A \right\rbrace
