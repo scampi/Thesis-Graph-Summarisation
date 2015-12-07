@@ -262,6 +262,7 @@ ORDER BY ?label
 
 A basic graph pattern (BGP) represents a set of triple patterns, which together form a graph pattern. A triple pattern represents an edge of a graph, where any of its components can be a variable.
 \begin{definition}[Triple Pattern] A triple pattern is a tuple $t \in (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var)$ where $\mathcal{L}$ is the set of labels and $Var$ is an infinite set of variables.
+\label{def:triple-pattern}
 \end{definition}
 The components of a triple pattern $t$ are denoted $subject(t)$, $predicate(t)$ and $object(t)$, respectively.
 
@@ -393,26 +394,37 @@ While creating a summary of a given graph, one may accumulate several statistics
 	\item the number of types in a sumnode.
 \end{enumerate}
 
+\begin{figure}
+	\centering
+	\resizebox{.6\textwidth}{!}{
+		\input{05-ranking/figures/tikz/summary-ranking-ex.tex}
+	}
+	\caption{A solution to the SPARQL query of the running example. A number in parenthesis represents a statistic associated with that node.}
+	\label{fig:sparql-solution}
+\end{figure}
+
+As an example, we consider the graph in Figure~\ref{fig:sparql-solution} that is a solution of the query from the previous section over a graph summary. A number between parenthesis indicates a statistic associated with the node. For instance, there is one node from the original graph that got mapped to the sumnode $s_1$.
+
 \paragraph{Ranking functions.}
 
-We present three ranking functions that can be applied over a graph summary.
+We present the basic and MF-based approaches, two ranking functions that can be applied over a graph summary.
 
 \subparagraph{Basic approach.}
 
-A straightforward approach consists in summing up all the statistics available to a subgraph that matched a query. The rationale is that the greater the sum, the more relevant is that solution.
+A straightforward approach consists in summing up all the statistics available to a subgraph that matched a query. The rationale is that the greater the sum, the more relevant is that solution. The result is $5$ in Figure~\ref{fig:sparql-solution}.
 
-\subparagraph{Field-based approach.}
+%\subparagraph{Field-based approach.}
 
-In this approach, we apply the Normalisation~\ref{norm:content}.
+%In this approach, we apply the Normalisation~\ref{norm:content}. The consequence in Figure~\ref{fig:sparql-solution} is that the \emph{average cardinality} of the attribute ``dbp:owner'' is taken into consideration.
 
 \subparagraph{MF-based approach.}
 
-In this approach, we apply both normalisations available with the MF ranking model, i.e., Normalisations~\ref{norm:content} and~\ref{norm:degree}.
+In this approach, we apply both normalisations available with the MF ranking model, i.e., Normalisations~\ref{norm:content} and~\ref{norm:degree}. The difference of this approach with previous is that the \emph{average cardinality} of every node is considered.
 
 \subsection{Evaluation}
 \label{sec:summary-ranking:eval}
 
-In this experiment, we evaluate the performance of a MF extension, i.e., BM25MF, at ranking subgraphs of a graph summary. We present first the ranking paradigm that we follow, before describing the experiment itself. Then, we describe the evaluation method for asserting the performance of the MF extension. Finally, we discuss the results of the experiment.
+In this experiment, we evaluate the performance of the MF-based approach at ranking subgraphs of a graph summary. We present first the ranking paradigm that we follow, before describing the experiment itself. Then, we describe the evaluation method for asserting the performance of the MF extension. Finally, we discuss the results of the experiment.
 
 \paragraph{Ranking paradigm.}
 
@@ -420,9 +432,9 @@ Given a SPARQL query, its solutions retrieved from a graph summary can be errone
 
 \paragraph{Experimental setting.}
 
-Due to imprecisions in a summary as discussed in Chapter~\ref{chap03:sec:quality}, a query can return solutions that do not have any actual \emph{summary instance} in the original graph. We the present the following experimental setting in order to evaluate the performance of the MF extension with regards to the ranking paradigm.
+Due to imprecisions in a summary as discussed in Chapter~\ref{chap03:sec:quality}, a query can return solutions that do not have any actual \emph{summary instance} in the original graph. We the present the following experimental setting in order to evaluate the performance of the MF extension with regards to the ranking paradigm.\\
 
-Given a SPARQL query extracted from the USEWOD2013 query logs of DBpedia, we replace with a variable that we denote as ``\emph{?POF}'' a term of the query, one at a time. A term is either a predicate or an object of a triple pattern. The resulting query is then executed over a graph summary of DBpedia.
+Given a SPARQL query extracted from the USEWOD2013 query logs of DBpedia, we replace with a variable that we denote as ``\emph{?POF}'' a term of the query, one at a time. A term is either a predicate or an object of a triple pattern. The resulting query is then executed over a graph summary of DBpedia.\\
 
 In parallel, we run the query over the original graph; this allows us to compare the bindings of the ?POF variables as returned from both graphs, i.e., the original graph and its summary. The difference between the two sets of bindings is an indication of the summary's precision for that query.
 
@@ -430,8 +442,7 @@ We keep only the queries that have a solution over the DBpedia dataset; this ens
 
 \subparagraph{Example.}
 
-Consider the SPARQL query taken as an example in the previous section. We replace the term \emph{rdfs:label} with the \emph{?POF} variable. Let us consider as well that the terms \emph{rdfs:label} and \emph{rdfs:comment} are bindings for that variable as retrieved from the original graph; however, bindings retrieved from the summary are \emph{rdfs:label}, \emph{rdfs:comment} and \emph{dc:title}.
-The term \emph{dc:title} is then invalid.
+Consider the SPARQL query taken as an example in the previous section. We replace the term \emph{rdfs:label} with the \emph{?POF} variable. Let us consider as well that the terms \emph{rdfs:label} and \emph{rdfs:comment} are bindings for that variable as retrieved from the original graph; however, bindings retrieved from the summary are \emph{rdfs:label}, \emph{rdfs:comment} and \emph{dc:title}. The term \emph{dc:title} is then invalid.
 
 %\begin{table}
 %	\centering
@@ -466,8 +477,104 @@ The term \emph{dc:title} is then invalid.
 
 \paragraph{Ranking performance measure.}
 
-We use the Mean Average Precision (MAP) as the measure of ranking performance.
+We consider two aspects of the ranking in this evaluation:
+\begin{enumerate}
+	\item whether a solution that provides bindings for the \emph{?POF} variable that are part of the error set (Section~\ref{sec:error-classification}) is ranked lower that one that does not; and
+	\item the more a solution returns elements from the error set, the lower ranked it is.
+\end{enumerate}
+In order to achieve this, we use the Mean Average Precision~\cite{manning:2008:iir} (MAP) as the measure of ranking performance.
+The average solution metric considers the \emph{order} of a solution in the rank list, in addition to whether a solution is relevant or not.
+The MAP measure averages that metric over all the queries that were executed.
 
 \paragraph{Discussion.}
 
+We compare in this paragraph the performance of both ranking functions when applied over the Types summary of DBpedia. First, we evaluate the impact of the normalisation parameters on the MF-based ranking approach. Then, we discuss the ranking performance of the basic and MF-based approaches.
+
+\subparagraph{Normalisation parameters impact.}
+
+Figures~\ref{fig:summary-ranking-norm} depict the impact of the Normalisation~\ref{norm:content} and~\ref{norm:degree} parameters on the ranking of graphs. On the X axis we vary the value of the parameter $b_a$ for Normalisation~\ref{norm:degree}. Each curve corresponds to a value of the parameter $b_v$ fro Normalization~\ref{norm:content}. On the Y axis we report the MAP measurement for the MF-based ranking approach. The raw results of the curves are available in Appendix~\ref{tab:summary-ranking-norm}.\\
+
+In this experiment, we divided the queries into two categories: simple graphs and complex graphs. Simple graphs indicate queries that have only one star, i.e., the queries from the complexity categories 10, 9, 6, 5, 4, 3, and 2. Complex graphs represents queries that contain more than one star, i.e., the queries with complexity categories 1-1-4, 1-1-3, 1-1-2, 3-4, 2-2, 1-5, 1-4, 1-3, 1-2, and 1-1.
+
+Figure~\ref{fig:summary-ranking-norm-simple} depicts the \emph{average} of the MAP measurements from the seven queries classes of the simple category. Figure~\ref{fig:summary-ranking-norm-complex} depicts the \emph{average} of the MAP measurements from the ten queries classes within the complex category.\\
+
+We observe that with simple graphs in Figure~\ref{fig:summary-ranking-norm-simple} the parameter $b_a$ for Normalisation~\ref{norm:degree} reported on the X axis has little effect on the ranking. On the contrary, we see it has a positive impact in Figure~\ref{fig:summary-ranking-norm-complex} for complex graphs.
+The parameter $b_v$ for Normalisation~\ref{norm:content} increases the performance of the ranking as its value reaches $1$.
+This shows the normalisation parameters introduced with the MF ranking model allow a fine tuning of the ranking to the data at hand.
+
+\input{05-ranking/figures/summary-group-norm}
+
+\subparagraph{Basic and MF-based approaches comparison.}
+
+Given the outcome of the previous experiment, we set to $1.0$ the parameters of the Normalisations in the MF-based approach for the comparison between MF-based and basic ranking approaches of the graph summary.\\
+
+Table~\ref{tab:summary-ranking-cmp} reports the MAP values of the basic and MF-based approaches over the Types summary of Dbpedia. We write the MAP value in bold for the approach that has the greatest. We observe that for a majority of the query complexities, the MF-based approach provides a better ranking than the basic approach.
+
+This shows the benefits of the MF ranking model of normalising the data over two levels: the Normalisation~\ref{norm:content} allows to compare several solutions to a query regardless of different statistics they might have; with the Normalisation~\ref{norm:degree}, it is possible to rank solutions to a query that have different degree of a same attribute.
+
+\input{05-ranking/figures/summary-ranking-comp}
+
+%\begin{figure}
+	%\centering
+	%\resizebox{.7\textwidth}{!}{
+		%\begin{tikzpicture}
+		%\begin{axis}[
+			%compat=newest,
+			%ymajorgrids,
+			%ybar,
+			%symbolic x coords={$1-1-4$,$1-1-3$,$1-1-2$,$3-4$,$2-2$,$1-5$,$1-4$,$1-3$,$1-2$,$1-1$,$10$,$9$,$6$,$5$,$4$,$3$,$2$},
+			%enlargelimits=0.15,
+			%ylabel={MAP},
+			%x=2cm,
+			%bar width=0.3cm,
+			%xtick=data,
+			%legend style={at={(0.5,-0.15)},
+				%anchor=north,legend columns=-1},
+		%]
+		%\addplot coordinates {
+			%($1-1-4$, 0.8096)
+			%($1-1-3$, 0.8692)
+			%($1-1-2$, 1.0000)
+			%($3-4$,   1.0000)
+			%($2-2$,   0.7503)
+			%($1-5$,   0.9784)
+			%($1-4$,   0.8793)
+			%($1-3$,   0.6730)
+			%($1-2$,   0.8795)
+			%($1-1$,   0.9381)
+			%($10$,    0.9351)
+			%($9$,     0.9344)
+			%($6$,     0.7877)
+			%($5$,     0.8475)
+			%($4$,     0.8685)
+			%($3$,     0.8763)
+			%($2$,     0.9320)
+		%};
+
+		%\addplot coordinates {
+			%($1-1-4$, 0.8102)
+			%($1-1-3$, 0.8698)
+			%($1-1-2$, 1.0000)
+			%($3-4$,   1.0000)
+			%($2-2$,   0.7870)
+			%($1-5$,   0.9791)
+			%($1-4$,   0.8867)
+			%($1-3$,   0.6744)
+			%($1-2$,   0.8977)
+			%($1-1$,   0.9447)
+			%($10$,    0.9439)
+			%($9$,     0.9433)
+			%($6$,     0.8699)
+			%($5$,     0.9111)
+			%($4$,     0.9089)
+			%($3$,     0.9154)
+			%($2$,     0.9389)
+		%};
+
+		%\legend{Basic,MF-based}
+		%\end{axis}
+		%\end{tikzpicture}
+	%}
+	%\caption{Comparison of the basic and MF-based ranking approaches on the Types summary of DBpedia 3.3}
+%\end{figure}
 

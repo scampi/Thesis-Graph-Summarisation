@@ -14,6 +14,8 @@ Table~\ref{tab:mf-effect} reports the MAP scores of BM25MF and PL2MF combined wi
 \section{Graph Summary Ranking}
 \label{app:summary-ranking}
 
+\subsection{Queries}
+
 The queries are grouped by its complexity, as outlined in Section~\ref{sec:summary-ranking:dataset}. A group is identified with the a string having the following regular expression: "\verb/\d+(-\d+)*/". For instance, the string ``\emph{2-1}'' identifies a group of queries that have \textit{two} star-shaped patterns, one with \textit{two} triple patterns and the other with only \textit{one}.
 
 The SPARQL queries below are extracted from the logs available in the USEWOD2013 dataset \cite{usewod:2013}. We make use of the following prefixes:
@@ -36,3 +38,45 @@ Following are the SPARQL queries grouped by complexity:
 \input{appendix/queries3}
 
 \input{appendix/queries4}
+
+\subsection{Normalisation Parameters Effect}
+
+\begin{table}
+	\centering
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{llc@{\hs}rrrrrrrrrrr}
+			\toprule
+			& $b_v$ & \phantom{a} & \multicolumn{11}{c}{$b_a$} \\
+			& & & 0.0 & 0.1 & 0.2 & 0.3 & 0.4 & 0.5 & 0.6 & 0.7 & 0.8 & 0.9 & 1.0 \\
+			\cmidrule{4-14}
+			\underline{\textbf{Simple Graphs}} \\
+			\phantom{a} & 0.0 & \phantom{a} & 0.8832 & 0.8834 & 0.8834 & 0.8834 & 0.8833 & 0.8833 & 0.8833 & 0.8832 & 0.8832 & 0.8831 & 0.8831 \\
+			\phantom{a} & 0.1 & \phantom{a} & 0.8929 & 0.8927 & 0.8927 & 0.8926 & 0.8926 & 0.8926 & 0.8925 & 0.8924 & 0.8924 & 0.8923 & 0.8923 \\
+			\phantom{a} & 0.2 & \phantom{a} & 0.8977 & 0.8977 & 0.8975 & 0.8975 & 0.8975 & 0.8974 & 0.8973 & 0.8972 & 0.8971 & 0.8970 & 0.8968 \\
+			\phantom{a} & 0.3 & \phantom{a} & 0.9009 & 0.9009 & 0.9008 & 0.9008 & 0.9007 & 0.9007 & 0.9007 & 0.9006 & 0.9005 & 0.9004 & 0.9001 \\
+			\phantom{a} & 0.4 & \phantom{a} & 0.9033 & 0.9033 & 0.9033 & 0.9033 & 0.9032 & 0.9032 & 0.9031 & 0.9031 & 0.9030 & 0.9029 & 0.9027 \\
+			\phantom{a} & 0.5 & \phantom{a} & 0.9059 & 0.9059 & 0.9058 & 0.9058 & 0.9058 & 0.9058 & 0.9057 & 0.9057 & 0.9056 & 0.9054 & 0.9053 \\
+			\phantom{a} & 0.6 & \phantom{a} & 0.9085 & 0.9084 & 0.9084 & 0.9083 & 0.9082 & 0.9083 & 0.9082 & 0.9081 & 0.9080 & 0.9079 & 0.9077 \\
+			\phantom{a} & 0.7 & \phantom{a} & 0.9111 & 0.9110 & 0.9109 & 0.9108 & 0.9108 & 0.9107 & 0.9108 & 0.9106 & 0.9104 & 0.9103 & 0.9101 \\
+			\phantom{a} & 0.8 & \phantom{a} & 0.9130 & 0.9129 & 0.9128 & 0.9127 & 0.9126 & 0.9126 & 0.9125 & 0.9124 & 0.9123 & 0.9121 & 0.9119 \\
+			\phantom{a} & 0.9 & \phantom{a} & 0.9151 & 0.9150 & 0.9150 & 0.9149 & 0.9148 & 0.9148 & 0.9147 & 0.9146 & 0.9145 & 0.9142 & 0.9140 \\
+			\phantom{a} & 1.0 & \phantom{a} & 0.9191 & 0.9191 & 0.9190 & 0.9190 & 0.9190 & 0.9190 & 0.9190 & 0.9189 & 0.9189 & 0.9189 & 0.9188 \\
+			\midrule
+			\underline{\textbf{Complex Graphs}} \\
+			\phantom{a} & 0.0 & \phantom{a} & 0.8781 & 0.8789 & 0.8792 & 0.8795 & 0.8800 & 0.8804 & 0.8810 & 0.8815 & 0.8820 & 0.8829 & 0.8842 \\
+			\phantom{a} & 0.1 & \phantom{a} & 0.8800 & 0.8806 & 0.8810 & 0.8815 & 0.8820 & 0.8825 & 0.8830 & 0.8835 & 0.8841 & 0.8846 & 0.8854 \\
+			\phantom{a} & 0.2 & \phantom{a} & 0.8803 & 0.8809 & 0.8812 & 0.8816 & 0.8820 & 0.8825 & 0.8830 & 0.8835 & 0.8839 & 0.8844 & 0.8850 \\
+			\phantom{a} & 0.3 & \phantom{a} & 0.8806 & 0.8811 & 0.8814 & 0.8818 & 0.8821 & 0.8825 & 0.8829 & 0.8834 & 0.8838 & 0.8842 & 0.8848 \\
+			\phantom{a} & 0.4 & \phantom{a} & 0.8808 & 0.8813 & 0.8815 & 0.8819 & 0.8821 & 0.8825 & 0.8829 & 0.8833 & 0.8838 & 0.8843 & 0.8847 \\
+			\phantom{a} & 0.5 & \phantom{a} & 0.8810 & 0.8815 & 0.8817 & 0.8820 & 0.8823 & 0.8827 & 0.8831 & 0.8834 & 0.8838 & 0.8844 & 0.8846 \\
+			\phantom{a} & 0.6 & \phantom{a} & 0.8812 & 0.8816 & 0.8819 & 0.8821 & 0.8824 & 0.8828 & 0.8831 & 0.8834 & 0.8838 & 0.8842 & 0.8845 \\
+			\phantom{a} & 0.7 & \phantom{a} & 0.8814 & 0.8818 & 0.8820 & 0.8822 & 0.8824 & 0.8827 & 0.8830 & 0.8833 & 0.8836 & 0.8839 & 0.8841 \\
+			\phantom{a} & 0.8 & \phantom{a} & 0.8819 & 0.8821 & 0.8822 & 0.8824 & 0.8826 & 0.8829 & 0.8831 & 0.8834 & 0.8835 & 0.8838 & 0.8841 \\
+			\phantom{a} & 0.9 & \phantom{a} & 0.8821 & 0.8823 & 0.8825 & 0.8827 & 0.8829 & 0.8831 & 0.8833 & 0.8836 & 0.8838 & 0.8840 & 0.8841 \\
+			\phantom{a} & 1.0 & \phantom{a} & 0.8822 & 0.8826 & 0.8828 & 0.8830 & 0.8833 & 0.8836 & 0.8839 & 0.8841 & 0.8843 & 0.8846 & 0.8850 \\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption{Average MAP values over simple and complex graphs}
+	\label{tab:summary-ranking-norm}
+\end{table}

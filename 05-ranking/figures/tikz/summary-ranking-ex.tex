@@ -1,0 +1,19 @@
+\begin{tikzpicture}[->,node distance=2cm]
+	\node (a) {$s_1$ (1)};
+	\node[below of = a,yshift=1cm] (b) {dbp:owner (1)};
+	\node[below of = b,yshift=1cm] (c) {$s_2$ (1)};
+
+	\node[below left of = c,xshift=-2cm] (e) {dbo:country (1)};
+	\node[below right of = c,xshift=2cm] (f) {rdfs:label (1)};
+
+	\node[draw,below of = e] (e1) {$*$};
+	\node[draw,below of = f] (f1) {$*$};
+
+	\path
+		(a) edge (b)
+		(b) edge (c)
+		(c) edge (e) edge (f)
+		(e) edge (e1)
+		(f) edge (f1)
+		;
+\end{tikzpicture}
