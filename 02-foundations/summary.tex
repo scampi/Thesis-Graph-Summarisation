@@ -3,7 +3,7 @@
 
 In various Computer Science areas, the information is represented as and is analysed through graphs. Graphs are used to capture the social relationship between people, to represent processes and their transition in concurrency, or to structure data in a flexible way, e.g., using the Object Exchange Model \cite{papakonstantinou:1995:oea} or, more recently, the Resource Description Framework \cite{rdfconcepts}.
 
-A common challenge encountered when analysing a graph is its volume. A large number of nodes or edges reduces the scalability and increases the running time of algorithms applied on the data. A solution is to ``translate'' the graph into another smaller graph while preserving its structure. That process is called \emph{graph summarisation} and the resulting graph is then considered as a \emph{summary} of the original graph.
+A common challenge encountered when analysing a graph is its volume. A large number of nodes or edges reduces the scalability and increases the running time of algorithms applied on the data. A solution is to ``translate'' the graph into another smaller graph while preserving its structure. That process is called \emph{graph summarisation} and the resulting graph is then considered as a \emph{summary} of the entity graph.
 
 To the volume is added the challenge of the graph structure being (partially) unknown. Even though an ontology describing the structure might be available, it is not followed strictly. This prevents upstream operations such as querying or query optimisation to be performed efficiently. A graph summarisation may then be used for shedding light on the structure of the graph.
 
@@ -59,7 +59,7 @@ Current approaches of the summary computation seek to reduce the complexity of a
 \# Distributed Graph Summarisation
 
 In order to deal with large graphs, distributed implementations of graph summarisation has been researched.
-Liu et al. in \cite{liu:cikm:2014} present a graph summarisation approach based the \emph{Message Passing} paradigm: the algorithm iteratively merges nodes of the graph until a predefined number of nodes are left. Various solutions for selecting which nodes to merge are discussed, a method based on \emph{Locality Sensitive Hashing} is introduced. The merge process introduces errors with regards to the original graph, i.e., either missing or additional edges.
+Liu et al. in \cite{liu:cikm:2014} present a graph summarisation approach based the \emph{Message Passing} paradigm: the algorithm iteratively merges nodes of the graph until a predefined number of nodes are left. Various solutions for selecting which nodes to merge are discussed, a method based on \emph{Locality Sensitive Hashing} is introduced. The merge process introduces errors with regards to the entity graph, i.e., either missing or additional edges.
 
 \section{Graph Summarisation Quality}
 

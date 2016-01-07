@@ -14,7 +14,7 @@ We have introduced in Chapter~\ref{chap:summary} a framework for defining graph 
 
 In order to answer these questions, we propose a precision model which measures the amount of \emph{errors} in a summary. This model relies on the ordering of the summaries. We present in this section a partial order relation on the summaries.\\
 
-%There exists several possible summarisation relations, each resulting in a graph summary that exhibits different properties. In the Section~\ref{chap03:sec:quality}, we discuss the impact of the relation on the \emph{precision} of a graph summary with regards to the original graph. There is no graph summary that fits all use cases, a summary suitable for one might not be for another. In this section, we describe how various summarisation relations can be ordered into a \emph{lattice}. Thus, we can reuse previous computations where a graph summary can result from another one, instead from the original graph.
+%There exists several possible summarisation relations, each resulting in a graph summary that exhibits different properties. In the Section~\ref{chap03:sec:quality}, we discuss the impact of the relation on the \emph{precision} of a graph summary with regards to the entity graph. There is no graph summary that fits all use cases, a summary suitable for one might not be for another. In this section, we describe how various summarisation relations can be ordered into a \emph{lattice}. Thus, we can reuse previous computations where a graph summary can result from another one, instead from the entity graph.
 
 We denote with $\sqsubseteq$ a binary relation on the set of summarisation relations. It relates two summarisation relations if one can be expressed as a composition of the other.
 
@@ -58,7 +58,7 @@ The binary relation $\sqsubseteq$ is a partial order. The set of summarisation r
 The set of summarisation relations can then be ordered according to $\sqsubseteq$. The Figure~\ref{fig:lattice} depicts the lattice that is formed by the partial order $\sqsubseteq$ for the summarisation relations introduced in Section~\ref{sec:approximate}. For example, we can see that the Types summary $R_t$ is smaller than the IO Attributes \& Types summary $R_{ioat}$, i.e., $R_{ioat} \sqsubseteq R_t$.
 
 \begin{remark}
-The graph lattice depicts that all summaries presented in Section~\ref{sec:approximate} can be generated from the IO Attributes \& Types summary $R_{ioat}$. In cases where the IO Attributes \& Types summary has significantly less edges and nodes than the original graph, this allows a more efficient computation of all summaries which summarisation relation $R$ are smaller than the latter summary, i.e., $R_{ioat} \sqsubseteq R$.
+The graph lattice depicts that all summaries presented in Section~\ref{sec:approximate} can be generated from the IO Attributes \& Types summary $R_{ioat}$. In cases where the IO Attributes \& Types summary has significantly less edges and nodes than the entity graph, this allows a more efficient computation of all summaries which summarisation relation $R$ are smaller than the latter summary, i.e., $R_{ioat} \sqsubseteq R$.
 \end{remark}
 
 \begin{figure}
@@ -73,7 +73,7 @@ The graph lattice depicts that all summaries presented in Section~\ref{sec:appro
 The Figure~\ref{fig:rel-order} depicts the sumnodes built from two summarisation relations over the graph on Figure~\ref{fig:graph}, i.e., the Types summarisation relation $R_t$ as dotted lines, and the Attributes \& Types summarisation relation $R_{at}$ as dashed lines. The solid lines represent a relation $S \subseteq \mathcal{W}_{at} \times \mathcal{W}_t$, where $\mathcal{W}_{at}$ is the set of sumnodes in the Attributes \& Types summary, and $\mathcal{W}_{t}$ the sumnodes in the Types summary.
 Using the binary relation $S$, we have the order $R_{at} \sqsubseteq R_t$ between the two summarisation relations.
 
-With the $R_{at}$ relation, the nodes $N_6$ and $N_7$ belong to different sumnodes, while they belong to the same with the $R_t$ relation. The same $R_t$ summary is built from the original graph and from the $R_{at}$ summary. The partial order allows then to leverage pre-computed summaries in order to generate a new one.
+With the $R_{at}$ relation, the nodes $N_6$ and $N_7$ belong to different sumnodes, while they belong to the same with the $R_t$ relation. The same $R_t$ summary is built from the entity graph and from the $R_{at}$ summary. The partial order allows then to leverage pre-computed summaries in order to generate a new one.
 
 \begin{figure}
 	\centering
@@ -84,25 +84,25 @@ With the $R_{at}$ relation, the nodes $N_6$ and $N_7$ belong to different sumnod
 
 \section{Summary Error}
 
-The confidence one may put on knowledge deduced from a summary has a more or less severe impact depending on the application. Also, the severity of an error depends on what information about the data graph is affected by the error. In this section, we introduce a model for measuring the precision of a summary.
+The confidence one may put on knowledge deduced from a summary has a more or less severe impact depending on the application. Also, the severity of an error depends on what information about the entity graph is affected by the error. In this section, we introduce a model for measuring the precision of a summary.
 
 \subsection{Error Model}
 
-The graph summary highlights the \emph{structure} of the data graph. Errors in the summary boil down to the presence of invalid edges. Indeed, a path or a combination of paths may exists in the summary $\mathcal{S}$, but not in its data graph $G$. This precision model accounts for the paths that exist in the summary but not in the data graph.\\
+The graph summary highlights the \emph{structure} of the entity graph. Errors in the summary boil down to the presence of invalid edges. Indeed, a path or a combination of paths may exists in the summary $\mathcal{S}$, but not in its entity graph $G$. This precision model accounts for the paths that exist in the summary but not in the entity graph.\\
 
-%The definition of the precision model requires the introduction of an order relation on the summary. A set of summaries over a same data graph can be ordered using the relation $\sqsubseteq$ \cite{Fernandez:1990:IEA:87626.87629}.
+%The definition of the precision model requires the introduction of an order relation on the summary. A set of summaries over a same entity graph can be ordered using the relation $\sqsubseteq$ \cite{Fernandez:1990:IEA:87626.87629}.
 %For instance, if we consider the $\sim_{fbt}$ and $\sim_t$ summaries in Figures~\ref{fig:fbb-summary} and \ref{fig:classes-summary}, the nodes of $G$ in the equivalence classes $[N_1]^{\sim_{fbt}}$ and $[N_2]^{\sim_{fbt}}$ also belong to the equivalence class $[N_1]^{\sim_t}$. The equivalence classes of $\sim_{fbt}$ are then included in the equivalence classes of $\sim_t$. Therefore, the $\sim_{fbt}$-summary is inferior to the $\sim_t$-summary, noted as $\sim_{fbt} \sqsubseteq \sim_t$.
 %
 %\begin{definition}[$\sqsubseteq$ Ordering]
-%Let $\sim_1$ and $\sim_2$ be two equivalences on a data graph $G$. There is a partial order $\sqsubseteq$ on the $\sim_1$ and $\sim_2$ summaries, noted $\sim_1 \sqsubseteq \sim_2$, if and only if: $\forall [x]^{\sim_1} \in V^{\sim_1}, \exists [x]^{\sim_2} \in V^{\sim_2}, [x]^{\sim_1} \subseteq [x]^{\sim_2}$.
+%Let $\sim_1$ and $\sim_2$ be two equivalences on an entity graph $G$. There is a partial order $\sqsubseteq$ on the $\sim_1$ and $\sim_2$ summaries, noted $\sim_1 \sqsubseteq \sim_2$, if and only if: $\forall [x]^{\sim_1} \in V^{\sim_1}, \exists [x]^{\sim_2} \in V^{\sim_2}, [x]^{\sim_1} \subseteq [x]^{\sim_2}$.
 %\end{definition}
 
-As per the recursive definition of the bisimulation summarisation relation $R_{fbt}$ presented in Section~\ref{sec:bisim-summary}, a node in the bisimulation summary $\mathcal{S}_{fbt}$ refers to nodes of $G$ that share the same \emph{incoming} and \emph{outgoing} paths. Thus, the $\mathcal{S}_{fbt}$ summary is the most precise summary for a data graph with regards to the structure, i.e., all paths in the summary do exist in the original data graph.
+As per the recursive definition of the bisimulation summarisation relation $R_{fbt}$ presented in Section~\ref{sec:bisim-summary}, a node in the bisimulation summary $\mathcal{S}_{fbt}$ refers to nodes of $G$ that share the same \emph{incoming} and \emph{outgoing} paths. Thus, the $\mathcal{S}_{fbt}$ summary is the most precise summary for an entity graph with regards to the structure, i.e., all paths in the summary do exist in the original entity graph.
 
 According to the partial order $\sqsubseteq$, the bisimulation summary $\mathcal{S}_{fbt}$ of a graph $G$ is ``smaller'' than any of the other presented summaries on $G$, i.e., for any summarisation relation $R$ we have $R_{fbt} \sqsubseteq R$. Therefore, any edge on a summary can be inferred from the $\mathcal{S}_{fbt}$ summary. However, the converse is not necessarily true.\\
 % Relations between two $\sim$-equivalence classes can be inferred between the included $\sim_{fbt}$-equivalence classes.
 
-We define the set $Err(R)$ as the set of inferred edges that are erroneous, i.e., the edges that do exist in a summary, but not in the original graph. Since the summary $\mathcal{S}_{fbt}$ is the most precise with regards to the structure of the original graph, we use the summary $\mathcal{S}_{fbt}$ instead of the original graph $G$ to define the set $Err(R)$.
+We define the set $Err(R)$ as the set of inferred edges that are erroneous, i.e., the edges that do exist in a summary, but not in the entity graph. Since the summary $\mathcal{S}_{fbt}$ is the most precise with regards to the structure of the entity graph, we use the summary $\mathcal{S}_{fbt}$ instead of the entity graph $G$ to define the set $Err(R)$.
 
 \begin{definition}[Summary Error $Err(R)$]
 Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ the bisimulation summary generated with the relation $R_{fbt}$.
@@ -135,7 +135,7 @@ Sink sumnodes are omitted for clarity. Sumnodes of the bisimulation summary $\ma
 
 Given that $R_{fbt} \sqsubseteq R_t$, the nodes $S^{fbt}_1$ and $S^{fbt}_2$ are mapped to the node $S^t_1$. Similarly, the nodes $S^{fbt}_4$ and $S^{fbt}_5$ are mapped to the node $S^t_3$. Since we have that $(S^t_1, works, S^t_3) \in \mathcal{B}_t$, the edges $(S^{fbt}_1, works, S^{fbt}_5) \in Err(R_{fbt})$ and $(S^{fbt}_2, works, S^{fbt}_5) \in Err(R_{fbt})$ can be inferred, for example.
 
-Edges from the $Err(R_t)$ set cause the nodes $S^{fbt}_1$, $S^{fbt}_5$, and $S^{fbt}_6$ to be connected. This generates the path $works.location.capital$ that exists in the \emph{Types} summary, but not in the bisimulation summary, and thus by extension, in the original graph $G$.
+Edges from the $Err(R_t)$ set cause the nodes $S^{fbt}_1$, $S^{fbt}_5$, and $S^{fbt}_6$ to be connected. This generates the path $works.location.capital$ that exists in the \emph{Types} summary, but not in the bisimulation summary, and thus by extension, in the entity graph $G$.
 
 \begin{figure}
 	\centering
@@ -150,7 +150,7 @@ Edges from the $Err(R_t)$ set cause the nodes $S^{fbt}_1$, $S^{fbt}_5$, and $S^{
 \subsection{Classification of Errors}
 \label{sec:error-classification}
 
-Depending on the kind of edge in the set $Err(R)$, we identify three categories: \emph{connectivity}, \emph{attribute}, and \emph{type}. The \emph{connectivity} category reflects errors of a summary with regards to the structure of the data graph, while the \emph{attribute} and \emph{type} categories with regards to its schema.
+Depending on the kind of edge in the set $Err(R)$, we identify three categories: \emph{connectivity}, \emph{attribute}, and \emph{type}. The \emph{connectivity} category reflects errors of a summary with regards to the structure of the entity graph, while the \emph{attribute} and \emph{type} categories with regards to its schema.
 
 We illustrate the three categories in the following with regards to the \emph{Types} $\mathcal{S}_t$ and \emph{Attributes} $\mathcal{S}_a$ summaries only. Because the presented summarisation relations are bigger than $R_t$ and $R_a$ as per the partial order $\sqsubseteq$, any error experienced with either $R_t$ or $R_a$ may also occur with the others.
 
@@ -169,7 +169,7 @@ $$
 
 \subsubsection{Attribute Error $Err(R)_{attr}$}
 
-The attribute error captures edges from the summary error set $Err(R)$ that have an impact on the schema of the data graph, due to additional attributes inferred by the summary. For example, the node $S^t_4$ in Figure~\ref{fig:classes-summary} implies the existence of a node in $G$ with edges $capital$ and $label$, which is however not the case. We define $Err(R)_{attr}$ as the set that contains edges of $Err(R)$ in which the attribute is not in the set $attributes(x)$ of the node $x$.
+The attribute error captures edges from the summary error set $Err(R)$ that have an impact on the schema of the entity graph, due to additional attributes inferred by the summary. For example, the node $S^t_4$ in Figure~\ref{fig:classes-summary} implies the existence of a node in $G$ with edges $capital$ and $label$, which is however not the case. We define $Err(R)_{attr}$ as the set that contains edges of $Err(R)$ in which the attribute is not in the set $attributes(x)$ of the node $x$.
 
 \begin{definition}[Attribute Error]
 	Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$. Let $Err(R)$ be the summary error of $\mathcal{S}$. We define the attribute error set $Err(R)_{attr}$ as follows:
@@ -185,7 +185,7 @@ The attribute error captures edges from the summary error set $Err(R)$ that have
 
 \subsubsection{Type Error $Err(R)_{type}$}
 
-The type error captures edges from the summary error set $Err(R)$ that impact on the schema of the data graph, due to additional types inferred from the summary.
+The type error captures edges from the summary error set $Err(R)$ that impact on the schema of the entity graph, due to additional types inferred from the summary.
 For example, in the Figure~\ref{fig:attributes-summary} the node $S^a_2$ contains the nodes $\left\lbrace N_3, N_4, N_5 \right\rbrace$, since all three have the same set of attributes, i.e., $label$, $location$ and $a$. Then, we may infer from that node the possible existence of a node in $G$ with types $Place$ and $City$, which is however not the case. We define $Err(R)_{type}$ as the set that contains additional types inferred from $Err(R)$, i.e., a type attribute $(x, \gls{atype}, y) \in Err(R)$, in which the target $y$ is not in the set $types(x)$ of the node $x$.
 
 \begin{definition}[Type Error]
@@ -205,7 +205,7 @@ For example, in the Figure~\ref{fig:attributes-summary} the node $S^a_2$ contain
 
 If we were to traverse the inferred graph $\mathcal{I}(R)$, we can follow sumedges of the $\mathcal{B}_{fbt}$ set from the bisimulation summary $\mathcal{S}_{fbt}$, but also from the summary error set $Err(R)$. The former sumedges are \emph{true positive} sumedges, while the latter are \emph{false positive} sumedges.
 
-Our rationale is that following sumedges from the first set can be reflected on the original graph by following an instance of that summary path, hence it is a true positive sumedge. On the contrary, following a sumedge from the summary error set can not be reflected on the original graph since there are no instances of that summary path that forms an existing edge.\\
+Our rationale is that following sumedges from the first set can be reflected on the entity graph by following an instance of that summary path, hence it is a true positive sumedge. On the contrary, following a sumedge from the summary error set can not be reflected on the entity graph since there are no instances of that summary path that forms an existing edge.\\
 
 We define the true positive sumedges for a given sumnode as its outgoing sumedges that belong to the bisimulation summary.
 

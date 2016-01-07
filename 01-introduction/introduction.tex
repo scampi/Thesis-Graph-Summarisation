@@ -164,7 +164,7 @@ Hence, we propose the \emph{``MF'' ranking model} that leverage the graph struct
 The purpose of the summary is to describe the structure of a graph. Therefore, it can hold the function of a \emph{schema} for that graph.
 A schema is the basis of many algorithms over the data. A schema describes the content thus facilitating users searching for a particular resource. A schema may provide statistical information about the data, which is useful for query optimisation. Schemas help in the integration process of several data sources. As a consequence, a major challenge is to determine what features of the data can be used in order to effectively generate a schema.\\
 
-The construction of a graph summary does not ensure that the original graph can be re-built from its summary. This means that some details about the graph's structure was discarded during the summarisation process. Although some errors in the summary can be acceptable for a user exploring the data, it can cause a signifant drop of performance for a query optimizer. Hence, it is necessary to measure how accurate a summary is with regards to the data.
+The construction of a graph summary does not ensure that the entity graph can be re-built from its summary. This means that some details about the graph's structure was discarded during the summarisation process. Although some errors in the summary can be acceptable for a user exploring the data, it can cause a signifant drop of performance for a query optimizer. Hence, it is necessary to measure how accurate a summary is with regards to the data.
 
 In the recent years, the amount of data has been growing increasingly. A glimpse of this growth over the years can be visually appreciated\footnote{The Linking Open Data cloud diagram: \url{http://lod-cloud.net/}} through the various diagrams of the Linking Open Data cloud. It is common to see data with millions of entities and billions of statements, to which the ``Open Data'' movement contributed a significant part. However, the ease of sharing data has the downside of that data not following a strict schema, if any.\\
 
@@ -203,7 +203,7 @@ The thesis is divided in three parts. This first part \emph{Prelude} contains th
 \begin{labeling}{Chapter~\ref{chap:summary}:}
 \item[Chapter~\ref{chap:graph-summary:related-work}:] We present in this chapter various approaches at summarising graph data and for what scenario they were built for. We emphasize their shortcommings and how these are answered thanks to the graph summary.
 \item[Chapter~\ref{chap:summary}:] In this chapter, we introduce the formal model of a graph summary. Then, we present a technique for generating graph summaries for Web Data at scale.
-\item[Chapter~\ref{chap03:sec:quality}:] The summary of a graph is built in a bottom-up fashion, through the aggregation of nodes of the original graph. The graph summary being a graph homomorphism, it is not assured that original graph can be re-built from its summary. Therefore, some details about the graph's structure are missing from the graph summary. In order to account for this loss, we developed a model for measuring the precision of a graph summary.
+\item[Chapter~\ref{chap03:sec:quality}:] The summary of a graph is built in a bottom-up fashion, through the aggregation of nodes of the entity graph. The graph summary being a graph homomorphism, it is not assured that entity graph can be re-built from its summary. Therefore, some details about the graph's structure are missing from the graph summary. In order to account for this loss, we developed a model for measuring the precision of a graph summary.
 \item[Chapter~\ref{chap:tree-ranking}:] In this chapter, we introduce the ``MF'' ranking model for semi-structured data. The model considers the structural heterogeneity of the data for a better scoring of entities.
 \end{labeling}
 
@@ -221,7 +221,7 @@ We investigate the aspects of graph summarisation and semi-structured data ranki
 
 \begin{itemize}
 	\item a formal model for an entity graph in Chapter~\ref{chap:ssd};
-	\item a review of litterature regarding the summarisation of graphs in Chapter~\ref{chap:graph-summary:related-work};
+	\item a review of literature regarding the summarisation of graphs in Chapter~\ref{chap:graph-summary:related-work};
 	\item a method for generating graph summaries of large and distributed semi-structured data in Chapter~\ref{chap:summary};
 	\item a model for measuring the precision of a graph summary in Chapter~\ref{chap03:sec:quality};
 	\item a novel ranking model specifically design for dealing with the structural and content heterogeneity of Web Data in Chapter~\ref{chap:tree-ranking}; and

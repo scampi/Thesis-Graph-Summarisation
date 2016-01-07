@@ -404,7 +404,7 @@ While creating a summary of a given graph, one may accumulate several statistics
 	\label{fig:sparql-solution}
 \end{figure}
 
-As an example, we consider the graph in Figure~\ref{fig:sparql-solution} that is a solution of the query from the previous section over a graph summary. A number between parenthesis indicates a statistic associated with the node. For instance, there is one node from the original graph that got mapped to the sumnode $s_1$.
+As an example, we consider the graph in Figure~\ref{fig:sparql-solution} that is a solution of the query from the previous section over a graph summary. A number between parenthesis indicates a statistic associated with the node. For instance, there is one node from the entity graph that got mapped to the sumnode $s_1$.
 
 \paragraph{Ranking functions.}
 
@@ -429,21 +429,21 @@ In this experiment, we evaluate the performance of the MF-based approach at rank
 
 \paragraph{Ranking paradigm.}
 
-Given a SPARQL query, its solutions retrieved from a graph summary can be erroneous as expressed in Chapter~\ref{chap03:sec:quality}; indeed, a summary path from a solution might have no instance that form a path in the original graph as well. A good solution is then a subgraph of the summary that does exist in the original graph. Therefore, a ranking algorithm should rank first such solutions.
+Given a SPARQL query, its solutions retrieved from a graph summary can be erroneous as expressed in Chapter~\ref{chap03:sec:quality}; indeed, a summary path from a solution might have no instance that form a path in the entity graph as well. A good solution is then a subgraph of the summary that does exist in the entity graph. Therefore, a ranking algorithm should rank first such solutions.
 
 \paragraph{Experimental setting.}
 
-Due to imprecisions in a summary as discussed in Chapter~\ref{chap03:sec:quality}, a query can return solutions that do not have any actual \emph{summary instance} in the original graph. We the present the following experimental setting in order to evaluate the performance of the MF extension with regards to the ranking paradigm.\\
+Due to imprecisions in a summary as discussed in Chapter~\ref{chap03:sec:quality}, a query can return solutions that do not have any actual \emph{summary instance} in the entity graph. We the present the following experimental setting in order to evaluate the performance of the MF extension with regards to the ranking paradigm.\\
 
 Given a SPARQL query extracted from the USEWOD2013 query logs of DBpedia, we replace with a variable that we denote as ``\emph{?POF}'' a term of the query, one at a time. A term is either a predicate or an object of a triple pattern. The resulting query is then executed over a graph summary of DBpedia.\\
 
-In parallel, we run the query over the original graph; this allows us to compare the bindings of the ?POF variables as returned from both graphs, i.e., the original graph and its summary. The difference between the two sets of bindings is an indication of the summary's precision for that query.
+In parallel, we run the query over the entity graph; this allows us to compare the bindings of the ?POF variables as returned from both graphs, i.e., the entity graph and its summary. The difference between the two sets of bindings is an indication of the summary's precision for that query.
 
 We keep only the queries that have a solution over the DBpedia dataset; this ensures that any invalid binding of the ?POF variable is due to the summary.
 
 \subparagraph{Example.}
 
-Consider the SPARQL query taken as an example in the previous section. We replace the term \emph{rdfs:label} with the \emph{?POF} variable. Let us consider as well that the terms \emph{rdfs:label} and \emph{rdfs:comment} are bindings for that variable as retrieved from the original graph; however, bindings retrieved from the summary are \emph{rdfs:label}, \emph{rdfs:comment} and \emph{dc:title}. The term \emph{dc:title} is then invalid.
+Consider the SPARQL query taken as an example in the previous section. We replace the term \emph{rdfs:label} with the \emph{?POF} variable. Let us consider as well that the terms \emph{rdfs:label} and \emph{rdfs:comment} are bindings for that variable as retrieved from the entity graph; however, bindings retrieved from the summary are \emph{rdfs:label}, \emph{rdfs:comment} and \emph{dc:title}. The term \emph{dc:title} is then invalid.
 
 %\begin{table}
 %	\centering

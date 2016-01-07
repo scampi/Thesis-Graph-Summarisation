@@ -8,7 +8,7 @@ Next, we describe in Section~\ref{sec:summary-impl} two implementations of the a
 \subsection{Algorithms}
 \label{sec:summary-algos}
 
-The creation of a graph summary is decomposed into four steps. These steps are common to both versions of the algorithm, i.e., the graph summarisation of a single dataset and of a collection of datasets. In a first step, we aggregate all the information about a node needed for the summarisation relation. In a second step, we create a table that associates a node of $G$ to a sumnode. In a third step, we materialise the sumedges by joining the previous table with the original graph. The fourth step is optional and consists in gathering statistics about the summarised graph.
+The creation of a graph summary is decomposed into four steps. These steps are common to both versions of the algorithm, i.e., the graph summarisation of a single dataset and of a collection of datasets. In a first step, we aggregate all the information about a node needed for the summarisation relation. In a second step, we create a table that associates a node of $G$ to a sumnode. In a third step, we materialise the sumedges by joining the previous table with the entity graph. The fourth step is optional and consists in gathering statistics about the summarised graph.
 
 \begin{labeling}{\textbf{\underline{Step 2:}} \emph{Node to sumnode mapping.}}
 	\item[\textbf{\underline{Step 1:}} \emph{Entity description.}]
@@ -27,7 +27,7 @@ The creation of a graph summary is decomposed into four steps. These steps are c
 	\item[\textbf{\underline{Step 3:}} \emph{Sumedge materialisation.}]
 	\phantomsection
 	\label{step-he}
-	We need to join the previous mapping of a node to its sumnode with the original graph in order to materialise an sumedge. We do this by two joins, i.e., on the source and target nodes. In this step, we need to visit each edge in the graph, so in the worst case it has a $O\left(\vert A \vert\right)$ complexity.
+	We need to join the previous mapping of a node to its sumnode with the entity graph in order to materialise an sumedge. We do this by two joins, i.e., on the source and target nodes. In this step, we need to visit each edge in the graph, so in the worst case it has a $O\left(\vert A \vert\right)$ complexity.
 
 	\item[\textbf{\underline{Step 4:}} \emph{Statistics gathering.}]
 	\phantomsection
