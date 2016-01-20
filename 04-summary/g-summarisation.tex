@@ -5,9 +5,10 @@ Web Data contains a large amount of structured data spanning over many different
 
 In order to make sense of this deluge of data, summarisation techniques are available for different levels of the data. For example, all the information related to an entity can be summarised so to highlight the important parts. In this section, we are interested in the summarisation of the \emph{structure} of graphs. In the context of Web Data, the structure of a graph is defined by the use of predicates and classes.
 
-We present first a model for graph summarisation. Then, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data in many cases. Finally, we describe how inter-linked datasets can be summarised.
+We present first a model for graph summarisation in Section~\ref{sec:summary:model}. Then in Section~\ref{sec:precise-summary}, we introduce a model for a \emph{precise} summary. Finally, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data in many cases in Section~\ref{sec:approximate}.% Finally, we describe how inter-linked datasets can be summarised.
 
 \subsection{Model}
+\label{sec:summary:model}
 
 In this section, we present a formal model of graph summarisation.
 
@@ -24,10 +25,10 @@ Graph summarisation is an operation over the graph that abstracts from its conte
 \end{enumerate}
 These properties of a summary are fulfilled by defining the graph summarisation as a graph \emph{homomorphism}.
 
-\subsubsection{Graph Homomorphism.}
+\subsubsection{Graph Homomorphism}
 
-A graph is homomorph to another one if there exists a mapping of nodes that matches \emph{edges} from the first to the second graph. This ensures that the structure of the first graph is kept.
-The Figure~\ref{fig:homomorphism} depicts two graphs, where there exists a relation $R$ that maps nodes of the left graph to nodes of the right graph. The edges of the left graph are also kept in the right graph. Indeed, there is an edge from nodes $2$ and $3$ to $1$, and as well there is an edge between their mapped nodes, $a$ and $b$ respectively.
+A graph is homomorphic to another one if there exists a mapping of nodes that matches \emph{edges} from the first to the second graph. This ensures that the structure of the first graph is kept.
+The Figure~\ref{fig:homomorphism} depicts two graphs, where there exists a relation $R$ that maps nodes of the left graph to nodes of the right graph. The edges of the left graph are also kept in the right graph. Indeed, there is an edge from nodes $2$ and $3$ to $1$, and as well there is an edge between their mapped nodes --- nodes $a$ and $b$ respectively.
 
 \begin{definition}[Graph Homomorphism]
 Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{W}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be two graphs. Let $R \subseteq V \times \mathcal{W}$ be a binary relation.
@@ -38,10 +39,10 @@ $$
 We say that $G$ is homomorphic to $\mathcal{S}$ with regards to $R$.
 \end{definition}
 
-A graph homomorphism is defined by a many-to-many binary relation $R$ from the nodes $V$ to the nodes $\mathcal{W}$, and that for every edge in $A$ there is a corresponding edge in $\mathcal{B}$. Whenever two nodes in the graph $G$ are linked by a predicate $\alpha$, then so are their corresponding nodes in the graph $\mathcal{S}$.\\
+A graph homomorphism is defined by a many-to-many binary relation $R$ from the nodes $V$ to the nodes $\mathcal{W}$, and that for every edge in $A$ there is a corresponding edge in $\mathcal{B}$. Whenever two nodes in the graph $G$ are linked by an attribute $\alpha$, then so are their corresponding nodes in the graph $\mathcal{S}$.\\
 
 \begin{remark}
-From this point on, we shall differentiate between the nodes and edges of the graph from those of the summary by calling a node of the summary a \emph{sumnode}, and an edge a \emph{sumedge}. Unless stated explicitly, the terms node and edge refer to the components of the entity graph.
+From this point on, we shall differentiate between the nodes and edges of the entity graph from those of the summary by calling a node of the summary a \emph{sumnode}, and an edge a \emph{sumedge}. Unless stated explicitly, the terms node and edge refer to the components of the entity graph.
 \end{remark}
 
 \begin{figure}
@@ -53,7 +54,7 @@ From this point on, we shall differentiate between the nodes and edges of the gr
 
 \paragraph{Source material.}
 
-A graph and its summary do not share the same set of nodes. The nodes of the summary are taken from a set that is distinct from the set of nodes in the graph. We refer to that set as the \emph{source material} which we denote as $\mathcal{Z}$. We define in the following two nodes of the summary that are used in its creation, i.e., the undefined sumnode and the sink sumnode.
+A graph and its summary do not share the same set of nodes. The nodes of the summary are taken from a set that is distinct from the set of nodes in the graph. We refer to that set as the \emph{source material} which we denote as $\mathcal{Z}$. We define in the following paragraphs two nodes of the summary that are used in its creation, i.e., the undefined sumnode and the sink sumnode.
 
 \subparagraph{Undefined sumnode.}
 \label{sec:undefined-sumnode}
@@ -117,9 +118,9 @@ Figure~\ref{fig:basic-summary} depicts a possible summary for a graph. The dotte
 	\label{fig:basic-summary}
 \end{figure}
 
-\paragraph{Graph summary uniqueness.}
+\paragraph{Uniqueness.}
 
-Given a summarisation relation, there exists a unique graph summary for a graph. This is ensured by the construction of the set of sumnodes. Indeed, each node in the graph is mapped to a \emph{deterministic} set of sumnodes in the summary.
+Given a summarisation relation, each node in the graph is mapped to a set of sumnodes in the summary. If the mapping is \emph{deterministic}, then there exists a unique graph summary for a graph within the context of that summarisation relation. The summarisation relations proposed in Section~\label{sec:approximate} generate a unique summary for a given entity graph. Indeed, the conditions on which a mapping is based is deterministic. For example, the summarisation relation $R_t$ introduced in that section bases its mapping on the set of types associated to a node.
 
 \begin{figure}
 	\centering
@@ -159,6 +160,7 @@ Given a summarisation relation, there exists a unique graph summary for a graph.
 %\end{definition}
 
 \subsection{Precise Graph Summary}
+\label{sec:precise-summary}
 
 The purpose of a summary is to mirror the structure of the graph while being significantly smaller. Therefore, the summary can substitute the graph and improve the performance of applications. How well the summary mirrors the graph is then of high importance. From a structural perspective, a summary is precise if it is undiscernable from the entity graph, which we define in this section.
 
@@ -351,7 +353,7 @@ We investigate the direction of \emph{approximate} summarisation for the creatio
 The creation of a DataGuide is equivalent to the conversion of a non-deterministic finite automaton to a deterministic finite automaton.
 Due to heterogeneous structure of the data, the size of a DataGuide grows exponentially, becoming larger than the original data as noted by Goldman et al.~\cite{goldman1999approximate}.
 
-We created in~\cite{campinas:2011:eos} a dataset based on Sindice\footnote{\url{http://sindice.com}}'s collection for the task of entity-oriented search. The Figure~\ref{fig:onto-dist} depicts the distribution of the frequency of ontologies used across documents, i.e., the probability for an ontology to be used in exactly $n$ documents. The distribution shows a power-law distribution following a Zipf function with a slope of $\alpha = 2.27$.
+We created in~\cite{campinas:2011:eos} a dataset based on Sindice~\cite{oren:2008:sdl} collection for the task of entity-oriented search. The Figure~\ref{fig:onto-dist} depicts the distribution of the frequency of ontologies used across documents, i.e., the probability for an ontology to be used in exactly $n$ documents. The distribution shows a power-law distribution following a Zipf function with a slope of $\alpha = 2.27$.
 %For example, one ontology (\url{http://purl.org/dc/terms/}) is used in more than 150 million documents and another one (\url{http://www.w3.org/2006/vcard/ns\#}) is used in more than 64 millions documents.
 
 This investigation has showed that most ontologies (99\%) are used only once. However, the distribution tail is sparse, suggesting that a few ontologies are used in a large proportion of documents.

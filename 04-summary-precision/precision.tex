@@ -55,7 +55,7 @@ The binary relation $\sqsubseteq$ is a partial order. The set of summarisation r
 	Therefore, the binary relation $\sqsubseteq$ is a partial order.
 \end{proof}
 
-The set of summarisation relations can then be ordered according to $\sqsubseteq$. The Figure~\ref{fig:lattice} depicts the lattice that is formed by the partial order $\sqsubseteq$ for the summarisation relations introduced in Section~\ref{sec:approximate}. For example, we can see that the Types summary $R_t$ is smaller than the IO Attributes \& Types summary $R_{ioat}$, i.e., $R_{ioat} \sqsubseteq R_t$.
+The set of summarisation relations can then be ordered according to $\sqsubseteq$. The Figure~\ref{fig:lattice} depicts the lattice that is formed by the partial order $\sqsubseteq$ for the summarisation relations introduced in Section~\ref{sec:approximate}. For example, we remark that the Types summary $R_t$ is smaller than the IO Attributes \& Types summary $R_{ioat}$, i.e., $R_{ioat} \sqsubseteq R_t$.
 
 \begin{remark}
 The graph lattice depicts that all summaries presented in Section~\ref{sec:approximate} can be generated from the IO Attributes \& Types summary $R_{ioat}$. In cases where the IO Attributes \& Types summary has significantly less edges and nodes than the entity graph, this allows a more efficient computation of all summaries which summarisation relation $R$ are smaller than the latter summary, i.e., $R_{ioat} \sqsubseteq R$.
