@@ -1,0 +1,38 @@
+\chapter{Conclusions}
+
+In the last decade, we have seen the Internet evolve into a global database. The rise of many standards for structured data and the ease of sharing information over the Internet provoked a deluge of (semi-)structured data. In order to bring this into being, the focus was put on the ease of representing and sharing knowledge; engaging people into publishing information was key as illustrated by the 5-stars rewarding system~\cite{5stars} proposed by Tim Berners-Lee. However, the lack of \emph{insight} into the data's structure prevents the effective use of this inter-connected data.\\
+
+We have proposed in this thesis a framework for generating summaries of a graph directly from the data itself. A generated summary is we believe the answer for providing insights into one's data. In this chapter, we summarize the research work conducted in this Ph.D. project, we recall the main contributions achieved, and discuss some possible future works.
+
+\section{Summary of the Thesis}
+
+%\textit{How can the user learn about the data structure so to formulate intelligent queries ?}
+%\textit{How can a user decide which type/predicate to use ?}
+
+In the Internet, information about a certain concept can be found within several datasets. Thus, a user is faced with the challenge of integrating the information from a range of sources that may not model their information in the same way. This lack of visibility into the data's structure impede as well tasks such as discovery and browsing; such tasks require a user to be aware of the data's structure in order to write queries.
+
+In this thesis, we have presented a methodology that enables users to achieve such and similar tasks:
+\begin{description}
+	\item[Graph Summarisation:] We have introduced a generic framework for summarising the graph structure. By specifying a summarisation relation, a user is able replicate the structure of a graph into a smaller, more manageable graph. That summary retains the structure of the original graph and, therefore, may be used for tasks that would too costly to perform on the original graph. With a summary, one can answer quickly if a certain graph pattern occurs without having to process the original graph. A summary may then hold the function of a schema for the graph.
+	\item[Summary Precision:] We have presented a model for measuring the precision of a summary. This models relies on a gold standard graph summary, such as generated using the bisiumation relation, in order to compute which edges of the summary are false positives. This model allows to grasp the impact of a summarisation over two properties of a graph: its schema and its connectivity. We have evaluated in experiments over real-world datasets the tradeoffs between computational complexity and precision of various summarisation relations; they have shown the applicability and advantages of a summary.
+	\item[Graph Ranking:] We developed an extension of field-based ranking models to support arbitrary directed acyclic graphs. Our model named ``MF'' provides an additional ranking parameters which allows fine tuning for a specific dataset. In addition to the parameter for normalising field length, our approach offers the possibility to account for fields having a variable number of values. We have shown through various experiments that our MF ranking model outperforms traditional field-based ranking models.
+\end{description}
+Finally, we have presented several applications of the graph summarisation and ranking. We have developped a RDF model for a summary, so that it may hold the function of a schema. We have shown how to leverage a summary for providing terms recommendation when writing a query.
+
+\section{Directions for Future Research}
+
+Graph summarisation offers a solution to the problem of data heterogenity and unknown graph's structure. This opens a wide range of potential applications. In the following, we present a list of possible future directions of research related to the problem of graph summarisation:
+\begin{description}
+	\item[Graph Summary Updates] As soon as a dataset is updated, i.e., either an edge is added, removed, or modified, the summary becomes out-dated. In order for the summary to reflect the current structure of a graph, we need to update the summary. However, the proposed framework does not propose an efficient mechanism for keeping a summary fresh without having to generate the summary anew. An approach worth investigating is to leverage the existing summary in order to compute what part of the graph changed, and how those changes impacted on the connected component of the graph.
+	\item[Data Quality] Thanks to the summary reflecting the graph's structure, it is possible to assess the quality of the data from a modeling perspective. One is able to identify structural inconsistencies with the data, such as
+		\begin{inparaenum}[(a)]
+		\item missing attributes;
+		\item invalid combination of attributes; or
+		\item incorrect type usage.
+		\end{inparaenum}
+		Using such quality features of the data, one can improve the data modeling so to better fit an application. How a summary may be used for such a purpose is an open question that would require further study.
+	\item[Data Integration] The task of integrating data is often challenged with datasets having varying, loose-defined or extremely complex, schemas. With Web Data, this task is made even more difficult by the lack of schema in general to begin with. How can we improve this task in the context of Web Data through the use of graph summaries ?
+	\item[Approximate Summary] Given the heterogeneity of the Web Data, we discussed that approximate graph summaries are the only viable option in many use cases. Also, we can appreciate the quality of a summary thanks to the summary precision model. Using this model as a guide, there is a need to develop approximate summarisation relations that have less impact on the schema and connectivity precision of the generated summary.
+	\item[Entity Graph Ranking] We generalised field-based ranking models to directed acyclic graphs with the introduction of our MF ranking model. Entities found in Web Data are modeled differently from one dataset to the other. Indeed, an entity may be represented as a star-graph in a dataset, while showing in another a more complex structure with a graph having few hops. With the help of graph summaries on the datasets to try and reconcile different modeling, is it then possible to rank entities having different representations ?
+\end{description}
+

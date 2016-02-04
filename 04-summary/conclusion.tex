@@ -1,12 +1,9 @@
-\section{Conclusion}
+\section{Conclusion and Future Work}
 
-- generic framework for summarising graphs
-- extracts the structure of a graph
-- set of approximate graph summaries to scale to large graphs
-- presented an algorithm for computing a graph summary using shared-nothing distributed framework, Hadoop
+In this chapter, we presented a generic framework for summarising graphs. It is generic in that different kinds of summarisation are possible. The framework allows to highlight the underlying structure of an entity graph. Since the produced summary is a graph homomorphic to the entity graph, it can be used instead of the original graph.
 
-In this chapter, we presented a generic framework for summarising graphs. It is generic in that different kinds of summarisation are possible. The framework allows to highlight the underlying structure of graphs. Since the produced summary is a graph homomorphic to the entity graph, it can be used instead of the original graph. Since a summary is smaller that its entity graph, this positively impacts the performance of upstream applications.
+This property of the summary has a positive consequence: if a summary is smaller that its entity graph, using it instead of the entity graph positively impacts the performance of upstream applications. Indeed, one may leverage the summary to understand the structure of a graph so to pin-point elements of interest; then, the entity graph can be used to retrieve those specific elements.\\
 
+As a future work, we plan to investigate how a summary may be updated pending changes on entity graph it was created from. This would improve the management of summaries, and keeping the information in the summary as fresh as possible.
 
-- update existing summary
-- summary of a collection of graphs ?
+In addition, we will study how to summarize a collection of datasets. This differs from the summarisation of a single dataset since we need then to consider the provenance of edges.

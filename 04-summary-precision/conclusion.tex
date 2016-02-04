@@ -1,6 +1,9 @@
-\section{Conclusion}
+\section{Conclusion and Future Work}
 
-- model for measuring the precision of a summary by comparing it to a gold standard
-- notion of error set of edges
-- 2 categories of errors, i.e., schema and connectivity
-- depending on the application, the approximate graph summaries are a good fit
+In this chapter, we presented a technique for measuring the precision of a summary with regards to two aspects of the entity graph: the schema and the connectivity. We compare the summary to evaluate against a gold standard which allow us to compute the amount of false connections introduced by the summary.
+
+We then analyse the trade-offs between the efficiency and the precision of the graph summarisation algorithms. We have performed the evaluation of the algorithms over 14 real-world datasets of various size and complexity. The experimental results show that it is possible to approximate quite accurately the gold standard graph summary but with a much lower space and time complexity. The experimental results also provide initial evidence about the applicability of the algorithms in different context, e.g., schema summarisation or structure summarisation.\\
+
+In future work, we will concentrate on finding features of the entity graph that can be used to improve the connectivity precision of the summary, while still being efficient to compute on a shared-nothing environment such as Hadoop.
+
+Furthermore, we will investigate how the summary precision model may extended so it may indicate which part of a summary is more or less precise that another. This would allow a more comprehensive understanding of the entity graph a summary represents.
