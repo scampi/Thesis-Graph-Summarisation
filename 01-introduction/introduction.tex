@@ -182,10 +182,10 @@ Different applications have varying interactivity with respect to the summary. W
 
 Graph summarisation produces a \emph{summary} of the graph's structure, providing information akin to a schema in relational databases. We can then leverage the summary in various ways, of which some are presented in this thesis.
 
-\begin{labeling}{\emph{Querying assistance.}}
+\begin{labeling}{\emph{Browsing of a dataset's structure.}}
 \item[\emph{Graph schema.}] We present in Section~\ref{chap03:sec:wd-mgnt} that the graph summary can serve the function of a \emph{schema} for the graph. The generated schema allows a user to learn about the structure of the graph, and ultimately how to query for information.
-	\item[\emph{Querying assistance.}] In Section~\ref{sec:exploiting:sparqled:recommendation} we use the structural information from a summary in order to assist a user in writing a query over the graph. This allows users having little to no knowledge about the data to build meaningful queries.
-%\item[\emph{Browsing of a dataset's structure.}] The information gathered during the graph summarisation process of a dataset is made available for browsing. This enables a user to learn about the internals of a dataset: its structure, the kind of information it carries, the relationships between concepts, or its connections to other datasets.
+\item[\emph{Querying assistance.}] In Section~\ref{sec:exploiting:sparqled:recommendation} we use the structural information from a summary in order to assist a user in writing a query over the graph. This allows users having little to no knowledge about the data to build meaningful queries.
+\item[\emph{Browsing of a dataset's structure.}] The information gathered during the graph summarisation process of a dataset is made available for browsing in Section~\ref{sec:web-data-inspector}. This enables a user to learn about the internals of a dataset: its structure, the kind of information it carries, the relationships between concepts, or its connections to other datasets. With such knowledge, the user may identify problems with the data, e.g., missing attributes.
 \end{labeling}
 
 \section{Outline}
@@ -210,7 +210,7 @@ The thesis is divided in three parts. This first part \emph{Prelude} contains th
 \minisec{Part IV: Putting the Pieces Together}
 
 \begin{labeling}{Chapter~\ref{chap:system}:}
-\item[Chapter~\ref{chap:system}:] In this chapter, we present applications of the introduced methods. We develop a system based on a generated graph summary that assists users in writing graph-shaped queries without a priori knowledge of the data structure. We present a RDF model of the graph summary, which allows the summary to serve the function of a schema.
+\item[Chapter~\ref{chap:system}:] In this chapter, we present applications of the introduced methods. We develop a system based on a generated graph summary that assists users in writing graph-shaped queries without a priori knowledge of the data structure. We present a RDF model of the graph summary, which allows the summary to serve the function of a schema. In addition, we present another application of the graph summary that enables one to inspect a dataset so that problems with the data may be identified.
 \end{labeling}
 
 \section{Contributions}
