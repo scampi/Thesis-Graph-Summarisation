@@ -80,7 +80,7 @@ On line~5 we retrieve the sumnode of $v$ only if it is not a type, since we cons
 	\label{alg:summary}
 \end{algorithm}
 
-\paragraph{Example.}
+\subparagraph{Example.}
 
 In the Figure~\ref{tab:algo-ex}, we depict the \emph{Types} summarisation $R_t$ of a graph showing people and documents. We group the edges describing a same node in \hyperref[step-ed]{Step 1}. In \hyperref[step-hn]{Step 2} we assign the sumnode \emph{h1} to the nodes (i.e., \emph{:e1} and \emph{:e3}) of type \emph{:Person}, and \emph{h2} to the node (i.e., \emph{:e2}) of type \emph{:Document}. In \hyperref[step-he]{Step 3}, we join the edges of the input graph with the table created in \hyperref[step-hn]{Step 2} in order to retrieve the sumnodes.
 It is possible to gather statistics about the summarisation in \hyperref[step-stats]{Step 4} by, e.g., grouping over the sumnodes and counting the number of rows in a group. Figure~\ref{fig:algo-ex} depicts the \emph{Types} summary that is the output of the algorithm which execution is depicted in Figure~\ref{tab:algo-ex}.
@@ -112,7 +112,7 @@ It is possible to gather statistics about the summarisation in \hyperref[step-st
 
 The Web Data is a collection of semi-structured data that hail from a variety of sources. Sources may provide overlapping information and reference each other. In such an environment, questions of trust about the legality of information arise, e.g., whether some description associated to a node in the graph is accurate or not. Since the graph summary is built from (inter-linked) data, it may present a structure of the graph that is not expected for a given dataset. We discuss in the next paragraph challenges presented in summarising inter-lined datasets.
 
-\paragraph{Challenge in summarising heterogeneous inter-linked datasets.}
+\subparagraph{Challenge in summarising heterogeneous inter-linked datasets.}
 
 The information about an entity, e.g., a person, a place, an organisation, \ldots, can be spread across several datasets. In the Web of Data this happens when a same entity URI is reused across datasets. The \hyperref[step-hn]{Step 2} of the graph summarisation relies on the entity description \gls{edesc} in order to create the corresponding sumnode. Some edges of the description might be erroneous, which would then impact negatively on the summary. A solution is to keep track of the \emph{origin} of an edge and act accordingly during the summarisation process.
 
@@ -131,7 +131,7 @@ In order to prevent this issue, we need to differentiate edges within \emph{D1} 
 	\label{fig:sum-issue}
 \end{figure}
 
-\paragraph{Edge authority.}
+\subparagraph{Edge authority.}
 
 In this section, we introduce the concept of \emph{edge authority} which is needed for the summarisation of inter-linked datasets.
 
@@ -183,7 +183,7 @@ The edge $\left(a_2, \gamma, b_1\right)$ does not have authority, since its prov
 	\label{fig:authority}
 \end{figure}
 
-\paragraph{Algorithm.}
+\subparagraph{Algorithm.}
 
 %Step2
 %In order to compute the summary over a collection of datasets, we need to record the dataset label from where the entity description originates from. The output of this step is a list of tuples, i.e., $\left\lbrace (d, u, x) \in D \times V \times \mathcal{W} \right\rbrace$ where $d$ is a dataset label, $u$ a node and $x$ a sumnode. We remark that the sumnode is ``local'' to the dataset, since information about an entity can be scattered over several datasets.
