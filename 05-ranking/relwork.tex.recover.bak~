@@ -109,9 +109,9 @@ In general, the term frequency is not used ``as is'' in the TF function: it is f
 
 Using BM25F, an entity $e$ is scored with regard to a query $q$ as follows:
 \begin{eqnarray}
-	Score(e,q) & = & \alpha_e\times\sum_{t\in q}{q_t\times tfn \times \omega_t}\\
+	Score(e,q) & = & \alpha_e\times\sum_{t\in q}{q_t\times tfn_e \times \omega_t}\\
 	\label{eq:tfidf-score}
-	tfn & = & \frac{f_{t,e}\times(k_1+1)}{f_{t,e}+k_1} \\
+	tfn_e & = & \frac{f_{t,e}\times(k_1+1)}{f_{t,e}+k_1} \\
 	\label{eq:bm25f_2}
 	f_{t,e} & = &
 	\sum_{a\in e}{\frac{\alpha_a\times f_{t,e,a}}{1+b_a\times\left(\frac{l_{e,a}}{l_a}-1\right)}}
@@ -120,7 +120,7 @@ Using BM25F, an entity $e$ is scored with regard to a query $q$ as follows:
 in which the following notations are used:
 \begin{itemize}
 	\item $q_t$ is the weight of the query $q$ for the term $t$, i.e., its frequency within the query $q$;
-	\item $tfn$ is the term frequency normalization function;
+	\item $tfn_e$ is the term frequency normalization function;
 	\item $\omega_t$ is the IDF function of the term $t$;
 	\item $k_1$ is the saturation parameter;
 	\item $f_{t,e,a}$ is the frequency of the term $t$ in the attribute $a$ of the entity $e$;
@@ -146,9 +146,9 @@ Using PL2F, an entity $e$ is scored with regard to a query $q$ as follows:
 	\label{eq:dfr-score}
 	w_{e,t} & = & \left(1-P_{risk}\right) \times \left(-log_2\left(P_{P}\right)\right) \\
 	\label{eq:dfr-term-weight}
-	P_{risk} & = & \frac{tfn}{1+tfn} \\
+	P_{risk} & = & \frac{tfn_e}{1+tfn} \\
 	\label{eq:dfr-prisk}
-	P_{P} & = & \frac{\lambda^{tfn}}{tfn!}\times e^{-\lambda} \:\text{ where }\: \lambda=\frac{F}{N} \\
+	P_{P} & = & \frac{\lambda^{tfn_e}}{tfn!}\times e^{-\lambda} \:\text{ where }\: \lambda=\frac{F}{N} \\
 	\label{eq:dfr:rand-poisson}
 \end{eqnarray*}
 in which the following notations are used:
@@ -162,12 +162,12 @@ in which the following notations are used:
 
 The factorial is approximated with the Stirling's formula:
 $$
-tfn!=\sqrt{2\pi}\times tfn^{tfn+0.5}\times e^{-tfn}
+tfn_e!=\sqrt{2\pi}\times tfn^{tfn+0.5}\times e^{-tfn}
 $$
 
 The term frequency of the term $t$ in the entity $e$ is normalized as follows:
 \begin{equation}
-	tfn = \sum_{a\in e}{\alpha_a\times f_{t,e,a} \times log_2\left(1+c_a\times\frac{l_a}{l_{e,a}}\right)}
+	tfn_e = \sum_{a\in e}{\alpha_a\times f_{t,e,a} \times log_2\left(1+c_a\times\frac{l_a}{l_{e,a}}\right)}
 	\label{eq:pl2f}
 \end{equation}
 where $c_a$ is a per-attribute hyperparameter with $c_a \in\;]0,+\infty[$.

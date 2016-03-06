@@ -3,7 +3,7 @@
 
 The Web of Data consists of a wide range of heterogeneous datasets, where the schema and the ontology can vary from one to the other. To overcome this diversity of attributes, different approaches for defining the fields of an entity have been proposed.\\
 
-From a RDF perspective, the authors consider in \cite{Perez-Aguera:2010:UBS} five weighted fields to represent the structure of an entity: literals (textual values), keywords extracted from the root's label, i.e., the subject URI, keywords extracted from the incoming links, entity's types and keywords extracted from object URIs. Compared to the BM25F and PL2F field-based approaches defined in \ref{sec:ranking-wod}, this approach is not able to grasp the rich structure of the data since attributes are discarded.
+From a RDF perspective, the authors consider in \cite{Perez-Aguera:2010:UBS} five weighted fields to represent the structure of an entity: literals (textual values), keywords extracted from the root's label, i.e., the subject URI, keywords extracted from the incoming links, the entity's types and keywords extracted from object URIs. Compared to the BM25F and PL2F field-based approaches defined in \ref{sec:ranking-wod}, this approach is not able to grasp the rich structure of the data since attributes are discarded.
 
 The BM25F and PL2F approaches we use in our experiments Section~\ref{sec:experiments} are similar in nature to the BM25F adaptation proposed in \cite{blanco:2011:iswc}, where the authors consider one field per attribute in the data collection and can assign a different weight to each attribute. However, they restrict their approach to attributes with literal values, discarding those with URI values. In contrast to \cite{blanco:2011:iswc}, we consider attributes both with literal and URI values. URIs in a RDF graph carry relevant keywords, with regards to
 \begin{inparaenum}[(1)]
@@ -64,10 +64,10 @@ However, all these approaches are an adaptation of the field-based ranking model
 
 We describe in this section vocabulary terms that will be reused throughout this chapter. We consider here a dataset to be a collection of entities, each entity being a graph. An entity may represent a person, a place, or an organisation. The \emph{unit of information} which is retrieved and ranked is an entity.
 
-We consider an entity to be a graph centered around a node, that we call the root, where each edge provides some description of that node. We define a rooted entity as the \emph{entity description} (Section~\ref{sec:entity-description}) of a \emph{root} node, where every node in the entity description is reachable from that root node.
+We consider an entity to be a graph centered around a node, that we call the root, where each edge provides some description of that node. We define a rooted entity as the \emph{entity description} (Definition~\ref{def:entity-description}) of a \emph{root} node, where every node in the entity description is reachable from that root node.
 
 \begin{definition}[Rooted Entity]
-Let $G = \left\langle V, A, l_V \right\rangle$ be a graph, and let $\gls{edesc}(u \in V) \subseteq A$ be the entity description of the node $u$. We define the entity rooted in $u$ as the entity description $\gls{edesc}(u)$ such that there is a path from $u$ to every node in $\gls{edesc}(u)$.
+Let $G = \left\langle V, A, l_V \right\rangle$ be a graph, and let $\gls{edesc}(u \in V) \subseteq A$ be the entity description of the node $u$. We call the entity description \gls{edesc}(u) a rooted entity in $u$ if and only if there is a path from $u$ to every node in $\gls{edesc}(u)$.
 \end{definition}
 
 Figure~\ref{fig:entities} depicts four entities identified by the root nodes \emph{me}, \emph{\_:b1}, \emph{\_:b2} and \emph{paper/547}.
@@ -83,7 +83,7 @@ Figure~\ref{fig:entities} depicts four entities identified by the root nodes \em
 
 We define here some vocabulary used in the rest of the chapter:
 \begin{description}
-	\item[term:] a node label can be split over some character, e.g., a white space; a split is then called a term.
+	\item[term:] a node label can be split over some character, e.g., a white space; we refer to a token resulting from this operation a \emph{term}.
 	\item[length:] the length denotes the number of terms, e.g., in a node.
 \end{description}
 
@@ -96,14 +96,15 @@ A field-based ranking model views a graph as composed of multiple normalized wei
 In the Probabilistic Relevance Framework~\cite{Robertson:2009:PRF} (PRF), BM25F~\cite{zaragoza:2004:microsoft} is a field-based ranking function popular for web search.
 The Divergence From Randomness~\cite{amati:2002:acm} (DFR) framework gives birth to many ranking models, in particular to PL2F~\cite{macdonald:2005:clef} which is of the field-based family.\\
 
-In field-based ranking approaches, different parts of the entity description are arranged into various categories that we denote as \emph{fields}. A \emph{score} of the entity is computed to reflect how relevant the entity is with regards to a query; the score computation is dependent of the fields.
+In field-based ranking approaches, different parts of the entity description are arranged into various categories that we denote as \emph{fields}. A field is then composed of field labels and/or edge labels. A \emph{score} of the entity is computed to reflect how relevant the entity is with regards to a query; the score computation is dependent of the fields.
+
 In presence of a multi-valued attribute, the common approach is to merge the content of all the values into one single value.
 
 \minisec{Ranking Features}
 
 The following features are used in the field-based ranking functions:
 \begin{labeling}{\textbf{average field length}}
-	\item[\textbf{field length}] refers to the number of terms in a value node label. In case of a multi-valued attribute, it refers to the number of terms across all the values associated to the attribute.
+	\item[\textbf{field length}] refers to the number of terms in a node label. In case of a multi-valued fields, it refers to the number of terms across all the nodes associated with the field.
 	\item[\textbf{average field length}] is equal to the mean of \emph{field length} across entities.
 \end{labeling}
 
@@ -121,7 +122,7 @@ In general, the term frequency is not used ``as is'' in the TF function: it is f
 
 Field-based ranking algorithms are constructed with the following basic operations. The importance of a query term in an entity is measured simply by how many times it occurs, i.e., its \emph{frequency}.
 \begin{labeling}{\textit{\underline{Step 1:}}}
-	\item[\textit{\underline{Step 1:}}] In a first step, each field of an entity is assigned value that reflects its relevance with regards to a term in the query.
+	\item[\textit{\underline{Step 1:}}] In a first step, each field of an entity is assigned a value that reflects its relevance with regards to a term in the query.
 	\item[\textit{\underline{Step 2:}}] In a second step, the values of each field are summed up and a function is applied on the result so to fit the model of the ranking algorithm.
 	\item[\textit{\underline{Step 3:}}] Finally, in a third step the relevance of the entity for each term in the query are summed up in order to compute the \emph{score} of the entity, which represents how important the entity is with regards to the query.
 \end{labeling}
@@ -130,7 +131,7 @@ Field-based ranking algorithms are constructed with the following basic operatio
 
 Using the field-based ranking algorithm BM25F~\cite{zaragoza:2004:microsoft}, we show in this section how to compute the importance $Score(e,q)$ of an entity $e$ for a query $q$.\\
 
-The first step consist in normalising the term frequency with regards to the length of a field in the entity, compared to its average in the dataset.
+The first step consist in computing the normalised term frequency $\bar{f}_{t,e,a}$ with regards to the length of a field in the entity, compared to its average in the dataset.
 
 \begin{equation}
 \bar{f}_{t,e,a} = \frac{\alpha_a\times f_{t,e,a}}{1+b_a\times\left(\frac{l_{e,a}}{l_a}-1\right)}
@@ -149,7 +150,7 @@ where:
 In a second step, we sum up the \emph{normalised} term frequency from all fields, which result is passed to the \emph{saturation} function. It is called the ``saturation'' function because it ensures that a term occurring many times in the entity does not out-weight the importance of other query terms.
 
 \begin{equation}
-tfn = \frac{\sum_{a \in e}{\bar{f}_{t,e,a}}\times(k_1+1)}{\sum_{a \in e}{\bar{f}_{t,e,a}}+k_1}
+tfn_e = \frac{\sum_{a \in e}{\bar{f}_{t,e,a}}\times(k_1+1)}{\sum_{a \in e}{\bar{f}_{t,e,a}}+k_1}
 \label{eq:bm25f_2}
 \end{equation}
 where $k_1$ is the saturation parameter.\\
@@ -157,7 +158,7 @@ where $k_1$ is the saturation parameter.\\
 In a third step, we combine the contribution of each query term, weighted by their importance in the dataset.
 
 \begin{equation}
-Score(e,q) = \alpha_e\times\sum_{t\in q}{q_t\times tfn \times \omega_t}
+Score(e,q) = \alpha_e\times\sum_{t\in q}{q_t\times tfn_e \times \omega_t}
 \label{eq:tfidf-score}
 \end{equation}
 where:
@@ -199,23 +200,23 @@ where:
 	\item $l_a$ is the \emph{average field length} of the attribute $a$.\\
 \end{itemize}
 
-In the second step, we apply the other two components of PL2F over the sum $tfn$ of the normalised term frequency across fields, i.e., $tfn = \sum_{a \in e}{\bar{f}_{t,e,a}}$:
+In the second step, we apply the other two components of PL2F over the sum $tfn_e$ of the normalised term frequency across fields, i.e., $tfn = \sum_{a \in e}{\bar{f}_{t,e,a}}$:
 \begin{labeling}{\underline{randomness model:}}
 	\item[\underline{information gain:}] the Laplace after-effect model $P_{risk}$ is used to estimate the information gain $1-P_{risk}$:
 	\begin{equation}
-		P_{risk} = \frac{tfn}{1+tfn}
+		P_{risk} = \frac{tfn_e}{1+tfn}
 		\label{eq:dfr-prisk}
 	\end{equation}
 
 	\item[\underline{randomness model:}] the Poisson distribution $P_P$ is used to model the randomness:
 	\begin{equation}
-		P_{P} = \frac{\lambda^{tfn}}{tfn!}\times e^{-\lambda} \:\text{ where }\: \lambda=\frac{F}{N}
+		P_{P} = \frac{\lambda^{tfn_e}}{tfn!}\times e^{-\lambda} \:\text{ where }\: \lambda=\frac{F}{N}
 		\label{eq:dfr:rand-poisson}
 	\end{equation}
 	where $F$ is equal to the frequency of the term $t$ in the dataset, and $N$ the number of entities in the dataset.
 	The factorial is approximated with the Stirling's formula:
 	$$
-	tfn!=\sqrt{2\pi}\times tfn^{tfn+0.5}\times e^{-tfn}
+	tfn_e!=\sqrt{2\pi}\times tfn^{tfn+0.5}\times e^{-tfn}
 	$$
 \end{labeling}
 

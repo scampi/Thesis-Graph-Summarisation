@@ -60,20 +60,20 @@ In this section, we evaluate and compare the performance of BM25 and PL2 ranking
 \begin{labeling}{\emph{BM25~\cite{robertson:1994:sigir}}}
   \item[\emph{TF-IDF}] is a logarithmic function of the term frequency and defines the Equation (\ref{eq:tfidf-score}) as
   $
-  tfn=log(F_t)+1
+  tfn_e=log(F_t)+1
   $,
   where $F_t$ is the number of occurrences of the term $t$ in the entity.
   \item[\emph{BM25~\cite{robertson:1994:sigir}}] considers the document as a simple bag of words. It is a function of the term frequency derived from a two-Poisson model and it uses an entity-length normalization. The entity length is computed as the sum of the \emph{field length} defined in the Section~\ref{sec:ranking-wod}.
 
   It defines the Equation (\ref{eq:tfidf-score}) as
   $
-  tfn=\frac{F_t\times(k_1+1)}{F_t+k_1\times \left(1+b\times\left(\frac{l_e}{l_{avg}}-1\right)\right)}
+  tfn_e=\frac{F_t\times(k_1+1)}{F_t+k_1\times \left(1+b\times\left(\frac{l_e}{l_{avg}}-1\right)\right)}
   $,
 where $l_e$ is the \emph{entity length} of the entity $e$, $l_{avg}$ is the average of the \emph{entity length} in the collection and $b$ is a normalization parameter.
   \item[\emph{BM25F}] is defined in Equation (\ref{eq:tfidf-score}). It considers documents as composed of fields, each field being a bag of words.
   \item[\emph{PL2~\cite{amati:2002:acm}}] considers the document as a simple bag of words. It is a model derived from the DFR framework, with the Equation (\ref{eq:pl2f}) formulated as
   $
-  tfn=F_t\times log_2\left(1+c\times\frac{l_{avg}}{l_e}\right)
+  tfn_e=F_t\times log_2\left(1+c\times\frac{l_{avg}}{l_e}\right)
   $,
   where $c$ is a normalization parameter.
   \item[\emph{PL2F}] is defined in Equation (\ref{eq:dfr-score}). It considers a document as a set of fields, each field being a bag of words.

@@ -1,7 +1,7 @@
 \section{Weights}
 \label{sec:weights}
 
-In this section, we introduce several weights for the MF model. We first present two query-dependent weights:
+In this section, we introduce several weights for the MF model. Those weights are developed specifically for improving the task of ``entity search'': given a query, retrieve the most relevant entity. We first present two query-dependent weights:
 \begin{inparaenum}[(1)]
   \item the \emph{Query Coverage} weight which indicates how well the query terms are covered by an entity, an attribute or a value; and
   \item the \emph{Leaf Coverage} weight which indicates how well a value node is covered by a query.
@@ -22,6 +22,8 @@ where $X$ is either a value, an attribute set or the entity and $q$ is the query
 
 \subsection{The Leaf Coverage Weight}
 \label{sec:leaf-coverage}
+
+Values part of a multi-valued attribute share a common topic, described by said attribute. However, the relevancy of each value with regard to the query is different. We can assume that, given a same attribute, an entity where two terms occur in a single value is more relevant than another entity where each term occurs in two values. This can be seen as a way to integrate some kind of term proximity measure in the retrieval model, i.e., two words are considered close to each other when they occur in the same value. Reflecting this difference into the importance of a term using an appropriate value-specific weight can improve the ranking efficiency.
 
 The Leaf Coverage (LC) weight reflects the proportion of terms in a value matching the query, i.e., how much it is covered by the query. Since a leaf in the MF ranking model holds some content about the entity, we assume that the more query terms match a large portion of the leaf, the more this leaf is a ``precise'' description of the query. This weight is integrated into the MF ranking function using the parameter $\alpha_v$.\\
 

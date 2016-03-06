@@ -5,7 +5,7 @@ The Web of Data can be seen as an encyclopaedia spanning over the entire Web. It
 
 The amount of entities on the Web that are associated with a structured description has reached a state where the search for specific entities can only be handled with systems such as web search engines. These systems are based on the Information Retrieval (IR) paradigm, where a set of documents matching a query is retrieved and \emph{ranked} as per their relevance with regards to the query.
 
-Traditionally, documents ranked by such systems contain little to no structure. This poses a challenges when applied over Web Data, since we have now data with a complex graph structure. Moreover, entities exhibit a high heterogeneity: the modelling of an entity can vary from datasets to datasets, even within a same domain; entities from a same domain can have a completely different set of descriptive attributes, or use attributes that don't reflect the data the best. This calls for a novel approach in ranking graph structured data.\\
+Traditionally, documents ranked by such systems contain little to no structure. This poses a challenges when applied to Web Data, since we have now data with a complex graph structure. Moreover, entities exhibit a high heterogeneity: the modelling of an entity can vary from datasets to datasets, even within a same domain; entities from a same domain can have a completely different set of descriptive attributes, or use attributes that don't reflect the data. This calls for a novel approach in ranking graph structured data.\\
 
 Current IR search engines are not adapted to rank entities that are, in addition to highly structured, also heterogeneous. In web search engines, \emph{field-based} ranking models are popular for the ranking of structured documents such as HTML pages. However, such models have the following shortcomings:
 \begin{enumerate}
@@ -14,7 +14,7 @@ Current IR search engines are not adapted to rank entities that are, in addition
 	\item the structure within a field cannot be modelled.
 \end{enumerate}
 
-In this chapter, we investigate how the rich structure made available by the Web of Data can be leveraged to improve the ranking of entities. We introduce the \emph{``MF'' ranking model} as an extension to field-based approaches for ranking graph data which addresses the previous shortcomings:
+In this chapter, we investigate how the rich structure made available by the Web of Data can be leveraged to improve the ranking of entities. We introduce the \emph{``MF'' ranking model} as an extension to field-based approaches for ranking graph data. The underlying data structure of this model is a \emph{directed acyclic graph} (DAG), which allows to support ranking data having many possible modeling. This novel model addresses the previously stated shortcomings:
 \begin{enumerate}
 	\item the structure of the ranking model reflects the structure of the data;
 	\item fields can have an arbitrary number of values; and

@@ -48,15 +48,15 @@ The following features are used in the field-based ranking functions:
 
 Using BM25F, an entity $e$ is scored with regard to a query $q$ as follows:
 \begin{eqnarray}
-  Score(e,q) & = & \alpha_e\times\sum_{t\in q}{q_t\times tfn \times \omega_t}\\
+  Score(e,q) & = & \alpha_e\times\sum_{t\in q}{q_t\times tfn_e \times \omega_t}\\
   \label{eq:tfidf-score}
-  tfn & = & \frac{f_{t,e}\times(k_1+1)}{f_{t,e}+k_1} \\
+  tfn_e & = & \frac{f_{t,e}\times(k_1+1)}{f_{t,e}+k_1} \\
   \label{eq:bm25f_2}
   f_{t,e} & = &
   \sum_{a\in e}{\frac{\alpha_a\times f_{t,e,a}}{1+b_a\times\left(\frac{l_{e,a}}{l_a}-1\right)}}
   \label{eq:bm25f_1}
 \end{eqnarray}
-where $q_t$ is the weight of the query $q$ for the term $t$, i.e., its frequency within the query $q$, $tfn$ is the term frequency normalization function, $\omega_t$ is the Inverse Document Frequency (IDF) function of the term $t$, $k_1$ is the saturation parameter, $f_{t,e,a}$ is the frequency of the term $t$ in the attribute $a$ of the entity $e$, $\alpha_a$ is a weight of the attribute $a$ and $\alpha_e$ a weight of the entity $e$, $b_a$ is the normalization parameter for the attribute $a$ with $b_a \in \left[0,1\right]$, $l_{e,a}$ is the \emph{field length} of the attribute $a$ in the entity $e$, $l_a$ is the \emph{average field length} of the attribute $a$. The IDF is defined as
+where $q_t$ is the weight of the query $q$ for the term $t$, i.e., its frequency within the query $q$, $tfn_e$ is the term frequency normalization function, $\omega_t$ is the Inverse Document Frequency (IDF) function of the term $t$, $k_1$ is the saturation parameter, $f_{t,e,a}$ is the frequency of the term $t$ in the attribute $a$ of the entity $e$, $\alpha_a$ is a weight of the attribute $a$ and $\alpha_e$ a weight of the entity $e$, $b_a$ is the normalization parameter for the attribute $a$ with $b_a \in \left[0,1\right]$, $l_{e,a}$ is the \emph{field length} of the attribute $a$ in the entity $e$, $l_a$ is the \emph{average field length} of the attribute $a$. The IDF is defined as
 $
 \omega_t=1+log\left(\frac{N}{N_t+1}\right)
 $,
@@ -71,15 +71,15 @@ Using PL2F, an entity $e$ is scored with regard to a query $q$ as follows:
   \label{eq:dfr-score}
   w_{e,t} & = & \left(1-P_{risk}\right) \times \left(-log_2\left(P_{P}\right)\right) \\
   \label{eq:dfr-term-weight}
-  P_{risk} & = & \frac{tfn}{1+tfn} \\
+  P_{risk} & = & \frac{tfn_e}{1+tfn} \\
   \label{eq:dfr-prisk}
-  P_{P} & = & \frac{\lambda^{tfn}}{tfn!}\times e^{-\lambda} \:\text{ where }\: \lambda=\frac{TF}{N} \\
+  P_{P} & = & \frac{\lambda^{tfn_e}}{tfn!}\times e^{-\lambda} \:\text{ where }\: \lambda=\frac{TF}{N} \\
   \label{eq:dfr:rand-poisson}
 \end{eqnarray*}
-where $qtw=\frac{q_t}{q_{t,max}}$ is the weight of the query $q$ for the term $t$ with $q_{t,max}$ the maximum of $q_t$ in $q$, $w_{e,t}$ is the weight of the term $t$ in the entity $e$, $1-P_{risk}$ estimates the information gain of a term $t$, $-log_2\left(P_{P}\right)$ evaluates the importance of a term $t$ in the entity $e$ thanks to the Poisson model and $TF$ is equal to the frequency of the term $t$ in the collection. The factorial is approximated with the Stirling's formula \mbox{$tfn!=\sqrt{2\pi}\times tfn^{tfn+0.5}\times e^{-tfn}$}.
+where $qtw=\frac{q_t}{q_{t,max}}$ is the weight of the query $q$ for the term $t$ with $q_{t,max}$ the maximum of $q_t$ in $q$, $w_{e,t}$ is the weight of the term $t$ in the entity $e$, $1-P_{risk}$ estimates the information gain of a term $t$, $-log_2\left(P_{P}\right)$ evaluates the importance of a term $t$ in the entity $e$ thanks to the Poisson model and $TF$ is equal to the frequency of the term $t$ in the collection. The factorial is approximated with the Stirling's formula \mbox{$tfn_e!=\sqrt{2\pi}\times tfn^{tfn+0.5}\times e^{-tfn}$}.
 The term frequency of the term $t$ in the entity $e$ is normalized as follows:
 \begin{equation}
-  tfn = \sum_{a\in e}{\alpha_a\times f_{t,e,a} \times log_2\left(1+c_a\times\frac{l_a}{l_{e,a}}\right)}
+  tfn_e = \sum_{a\in e}{\alpha_a\times f_{t,e,a} \times log_2\left(1+c_a\times\frac{l_a}{l_{e,a}}\right)}
   \label{eq:pl2f}
 \end{equation}
 where $c_a$ is a per-attribute hyperparameter with $c_a \in\;]0,+\infty[$.

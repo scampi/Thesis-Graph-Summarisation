@@ -17,6 +17,16 @@ However, a shortcoming is that the relationship between nodes is discarded withi
 
 Rather that representing the entity as a set of fields, the MF ranking model follows the structure of the graph. Each node of the graph --- not a set of nodes --- is represented as a bag of words. This allows to capture the graph's structure into the ranking model.
 
+\paragraph{Eliteness.}
+
+In \cite{harter:1974:thesis}, Harter introduced the notion of \emph{eliteness} in order to model content-bearing terms: a document is said to be \emph{elite} in term $t$ if it is somehow ``about'' the topic associated with $t$. In \cite{robertson:1981:PMI}, Robertson et al. introduce the relationship between the eliteness of a term in a document and its frequency: an elite term is most likely to be reused in the document, hence the term frequency is used as evidence of the term eliteness in the document.
+
+In \cite{zaragoza:2004:microsoft}, Zaragoza et al. extend the notion of eliteness to documents with multiple fields. In \cite{robertson:2004:cikm}, the authors argue that the normalized frequencies of a term in each field should be combined before applying the term weighting model.
+
+Similarly in our MF model, the term eliteness in an entity is shared between its attributes. The values related to a same attribute are associated to a same topic, described by the edge label. Therefore, a term eliteness in an attribute is shared between its values. For nested entities that are more than a hop away from the root, the same interpretation applies.\\
+
+In the following paragraphs, we describe how the term eliteness is garnered from every node of the entity description.
+
 \paragraph{Expanded entity graph.}
 
 Our model revolves around two core operations: on the one hand, the importance of an entity with regards to a query is computed on the leaves; on the other hand, internal nodes are used for aggregating the scores. In order to take into account
@@ -54,6 +64,7 @@ we expand the graph so that each label becomes a leaf. To do so, we transform th
 		\caption{The expanded graph of the entity in Figure~\ref{fig:concept-tree} where each node of the graph in Figure~\ref{fig:expanded-graph1} becomes a leaf. Nodes labelled with $*$ depict aggregations.}
 		\label{fig:expanded-graph2}
 	\end{subfigure}
+	\caption{Depiction of the MF model}
 \end{figure}
 
 \paragraph{Algorithm.}
@@ -62,10 +73,10 @@ The score of an entity with regards to a query is computed with a bottom-up appr
 
 For instance, we compute the contribution of the leaves ``$d$'', ``$N_5$'', and ``$N_4$'', which are aggregated on the parent node. The aggregated value is then combined with its sibling nodes, i.e., ``$b$'' and ``$N_2$''. These operations are repeated until the root of the tree is reached.
 
-\paragraph{MF Model Normalisations}
+\paragraph{MF Model Normalisations.}
 \label{chap:tree-ranking:mf-model:norm}
 
-Ranking models use statistics garnered from the entity to estimate its relevance with regards to a query. For instance, the frequency of a term can be used as an indicator for its importance in describing the entity. However, the entity is part of a dataset and the significance of the frequency as a measure varies between entities. This variability may due to several factors, e.g., the writing style; two entities can provide the same amount of information about a certain topic, but one uses twice as much terms as the other.
+Ranking models use statistics garnered from the entity to estimate its relevance with regards to a query. For instance, the frequency of a term can be used as an indicator for its importance in describing the entity. However, the entity is part of a dataset and the significance of the frequency as a measure varies between entities. This variability may be due to several factors, e.g., the writing style: two entities can provide the same amount of information about a certain topic, but one uses twice as much terms as the other.
 
 In order to account for this variability in the dataset, there is a need for \emph{normalising}~\cite{manning:2008:iir} the statistics garnered from the entity. For instance, in BM25F~\cite{zaragoza:2004:microsoft} the frequency of a term within a field is normalised based on
 \begin{inparaenum}[(a)]
@@ -75,7 +86,7 @@ In order to account for this variability in the dataset, there is a need for \em
 Thanks to the normalisation, it is possible to compare the relevance with regards to a query of entities within a dataset.\\
 
 With traditional field-based ranking models, there is one level of normalisation that is performed on the content level, as discussed in the previous paragraph.
-The MF ranking model offers two levels of normalisations:
+We can provide an additional normalisation, making two possible levels of normalisations with the MF ranking model:
 \begin{enumerate}
 	\item a normalisation on the \emph{content} level to account for the variability of a node's length within a dataset; and
 	\label{norm:content}
@@ -117,16 +128,6 @@ The first normalisation is applied on the \emph{leaf} nodes of the DAG. The seco
 %	\label{fig:tree}
 %\end{figure}
 
-\paragraph{Eliteness.}
-
-In \cite{harter:1974:thesis}, Harter introduced the notion of \emph{eliteness} in order to model content-bearing terms: a document is said to be \emph{elite} in term $t$ if it is somehow ``about'' the topic associated with $t$. In \cite{robertson:1981:PMI}, Robertson et al. introduce the relationship between the eliteness of a term in a document and its frequency: an elite term is most likely to be reused in the document, hence the term frequency is used as evidence of the term eliteness in the document.
-
-In \cite{zaragoza:2004:microsoft}, Zaragoza et al. extend the notion of eliteness to documents with multiple fields. In \cite{robertson:2004:cikm}, the authors argue that the normalized frequencies of a term in each field should be combined before applying the term weighting model.
-
-Similarly in our MF model, the term eliteness in an entity is shared between its attributes. The values related to a same attribute are associated to a same topic, described by the edge label. Therefore, a term eliteness in an attribute is shared between its values.\\
-
-Although values are related to a same attribute, the relevancy of each value with regard to the query is different. We can assume that, given a same attribute, an entity where two terms occur in a single value is more relevant than another entity where each term occurs in two values. This can be seen as a way to integrate some kind of term proximity measure in the retrieval model, i.e., two words are considered close to each other when they occur in the same value. Reflecting this difference into the importance of a term using an appropriate value-specific weight can improve the ranking efficiency.
-
 \subsection{MF Ranking Functions}
 \label{sec:mf-function}
 
@@ -135,15 +136,23 @@ We present first the features needed for the MF ranking model and then define bo
 
 \paragraph{Ranking features.}
 
-The MF ranking model requires the following features:
-\begin{labeling}{\textbf{average attribute cardinality:}}
+The MF model introduces two levels of normalisations. In order to implement them, the following features are needed:
+
+\subparagraph{Features for Normalisation~\ref{norm:content}.}
+
+\begin{labeling}{\textbf{average leaf length:}}
   \item[\textbf{leaf length:}] refers to the number of terms in the label of a leaf;
   \item[\textbf{average leaf length:}] is the mean of the \emph{leaf length} of sibling nodes for a particular attribute;
+\end{labeling}
+
+\subparagraph{Features for Normalisation~\ref{norm:degree}.}
+
+\begin{labeling}{\textbf{average attribute cardinality:}}
   \item[\textbf{attribute cardinality:}] is equal to the number of values an attribute possesses;
   \item[\textbf{average attribute cardinality:}] is equal to the mean of the \emph{attribute cardinality} across the entities where that attribute appears.
 \end{labeling}
 
-\subsection{BM25MF}
+\subsubsection{BM25MF}
 \label{sec:bm25mf-function}
 
 BM25F is extended by adapting the Equation (\ref{eq:bm25f_1}). The resulting normalised term frequency is then passed to the saturation function in the Equation (\ref{eq:bm25f_2}).
@@ -195,11 +204,11 @@ On the parent node, those three values are summed up and passed to the Equation~
 
 The result of the $f_{t,I}$ function is then passed to the parent node; it is summed with the outputs of the $f_{t,L}$ function on the leaves $b$ and $N_2$. The same process is applied on each branch until the root entity is reached, where we finally assigns a score to the entity using Equation~(\ref{eq:bm25f_2}) that represents its relevance with regards to the query.
 
-\subsection{PL2MF}
+\subsubsection{PL2MF}
 \label{sec:pl2mf-function}
 
 PL2F is extended by adapting the Equation (\ref{eq:pl2f}). The resulting normalised term frequency is then passed to the normalization function (\ref{eq:dfr-prisk}).
-Similarly to the BM25MF extension, the computation of the entity score with PL2MF consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively.\\
+Similarly to the BM25MF extension, the computation of the entity score with PL2MF consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively. We reuse the same notation as the ones from the previous section.\\ 
 
 The PL2MF ranking function is defined following the two levels of normalisations. The notation used in the following two functions are similar to the one introduced in Section~\ref{sec:bm25mf-function} for the BM25MF extension.
 The $f_{t,L}$ function implements the Normalisation~\ref{norm:content} on the content and is defined as follows:
@@ -216,7 +225,7 @@ f_{t,I} = \alpha_a \times log_2\left(1+c_a\times\frac{\left|{a}\right|}{\left|{a
 \end{equation}
 where $c_a$ is a parameter particular to the PL2F ranking function applied on internal nodes, with $c_a \in\; ]0,+\infty[$.
 
-\subsection{Generalisation}
+\subsubsection{Generalisation}
 
 With both extensions in Equations (\ref{bm25mf_v}) and (\ref{eq:pl2mf_v}), we normalize the term frequency $F_t$ based on the \emph{average field length} $l_a$. In Equations (\ref{bm25mf_a}) and (\ref{eq:pl2mf_a}), we further normalize the term frequency based on the \emph{average attribute cardinality} $\left|{a}\right|$.
 In addition to attribute-specific weights $\alpha_a$, the MF ranking model allows value-specific weights in its implementations with the parameter $\alpha_v$. We present value and attribute specific weights in the next section.\\
