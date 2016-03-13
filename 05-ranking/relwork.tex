@@ -142,7 +142,7 @@ where:
 	\item $t$ is a term in the query $q$;
 	\item $f_{t,e,a}$ is the frequency of the term $t$ in the field $a$ of the entity $e$;
 	\item $\alpha_a$ is a weight of the field $a$;
-	\item $b_a$ is the normalization parameter for the field $a$ with $b_a \in \left[0,1\right]$;
+	\item $b_a$ is the normalisation parameter for the field $a$ with $b_a \in \left[0,1\right]$;
 	\item $l_{e,a}$ is the \emph{field length} of the attribute $a$ in the entity $e$; and
 	\item $l_a$ is the \emph{average field length} of the attribute $a$.\\
 \end{itemize}
@@ -180,12 +180,12 @@ The Divergence From Randomness (DFR) is a framework for creating ranking models.
 \begin{enumerate}
 	\item the information gain;
 	\item the randomness model; and
-	\item the term frequency normalization model.
+	\item the term frequency normalisation model.
 \end{enumerate}
 
 Using PL2F~\cite{macdonald:2005:clef} we show in this section how to compute the importance $Score(e,q)$ of an entity $e$ for a query $q$.\\
 
-In the first step, the term frequency normalization model used is the\emph{normalization 2F}. Given a query term $t$ in the entity $e$, this model is a per-field normalisation of the term frequency and is defined as follows:
+In the first step, the term frequency normalisation model used is the\emph{normalisation 2F}. Given a query term $t$ in the entity $e$, this model is a per-field normalisation of the term frequency and is defined as follows:
 \begin{equation}
 	\bar{f}_{t,e,a} = \alpha_a\times f_{t,e,a} \times log_2\left(1+c_a\times\frac{l_a}{l_{e,a}}\right)
 	\label{eq:pl2f}

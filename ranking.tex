@@ -56,7 +56,7 @@ Using BM25F, an entity $e$ is scored with regard to a query $q$ as follows:
   \sum_{a\in e}{\frac{\alpha_a\times f_{t,e,a}}{1+b_a\times\left(\frac{l_{e,a}}{l_a}-1\right)}}
   \label{eq:bm25f_1}
 \end{eqnarray}
-where $q_t$ is the weight of the query $q$ for the term $t$, i.e., its frequency within the query $q$, $tfn_e$ is the term frequency normalization function, $\omega_t$ is the Inverse Document Frequency (IDF) function of the term $t$, $k_1$ is the saturation parameter, $f_{t,e,a}$ is the frequency of the term $t$ in the attribute $a$ of the entity $e$, $\alpha_a$ is a weight of the attribute $a$ and $\alpha_e$ a weight of the entity $e$, $b_a$ is the normalization parameter for the attribute $a$ with $b_a \in \left[0,1\right]$, $l_{e,a}$ is the \emph{field length} of the attribute $a$ in the entity $e$, $l_a$ is the \emph{average field length} of the attribute $a$. The IDF is defined as
+where $q_t$ is the weight of the query $q$ for the term $t$, i.e., its frequency within the query $q$, $tfn_e$ is the term frequency normalisation function, $\omega_t$ is the Inverse Document Frequency (IDF) function of the term $t$, $k_1$ is the saturation parameter, $f_{t,e,a}$ is the frequency of the term $t$ in the attribute $a$ of the entity $e$, $\alpha_a$ is a weight of the attribute $a$ and $\alpha_e$ a weight of the entity $e$, $b_a$ is the normalisation parameter for the attribute $a$ with $b_a \in \left[0,1\right]$, $l_{e,a}$ is the \emph{field length} of the attribute $a$ in the entity $e$, $l_a$ is the \emph{average field length} of the attribute $a$. The IDF is defined as
 $
 \omega_t=1+log\left(\frac{N}{N_t+1}\right)
 $,
@@ -64,7 +64,7 @@ where $N$ is the total number of entities in the collection and $N_t$ is the tot
 
 \paragraph{PL2F Ranking Function}
 
-DFR weighting models are based on the combination of three components, i.e., the information gain, the randomness model and the term frequency normalization model. PL2F bases the information gain on the Laplace after-effect model, uses Poisson as the model for randomness, and the \emph{normalization 2F} for the term frequency normalization.
+DFR weighting models are based on the combination of three components, i.e., the information gain, the randomness model and the term frequency normalisation model. PL2F bases the information gain on the Laplace after-effect model, uses Poisson as the model for randomness, and the \emph{normalisation 2F} for the term frequency normalisation.
 Using PL2F, an entity $e$ is scored with regard to a query $q$ as follows:
 \begin{eqnarray*}
   Score(e,q) & = & \alpha_e\times\sum_{t\in q}{qtw \times w_{e,t}}\\

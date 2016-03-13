@@ -170,7 +170,7 @@ in which the following notations are used:
 	\item $l$ is the \emph{leaf length} of the leaf; and
 	\item $l_a$ is the \emph{average leaf length}.
 	\item $\alpha_v$ is a weight specific to a leaf; and
-	\item $b_v$ where $b_v \in \left[0,1\right]$ is a parameter of the Normalization~\ref{norm:content}.
+	\item $b_v$ where $b_v \in \left[0,1\right]$ is a parameter of the Normalisation~\ref{norm:content}.
 \end{itemize}
 
 After applying the $f_{t,L}$ function, results from the leaves are summed up on the parent nodes. Then, a parent node applies the function $f_{t,I}$ over the sum. This process is repeated until the root of the DAG is reached. The $f_{t,I}$ function implements the Normalisation~\ref{norm:degree} on the degree of an internal node. This function is defined as follows:
@@ -183,7 +183,7 @@ in which the following notations are used:
 \item $\left|{a}\right|_e$ is the \emph{attribute cardinality} of the attribute $a$ in the entity $e$;
 \item $\left|{a}\right|$ is the \emph{average attribute cardinality} of the attribute $a$;
 \item $\alpha_a$ is a weight specific to an internal node; and
-\item $b_a$ where $b_a \in \left[0,1\right]$ is a parameter of the Normalization~\ref{norm:degree}.
+\item $b_a$ where $b_a \in \left[0,1\right]$ is a parameter of the Normalisation~\ref{norm:degree}.
 \end{itemize}
 
 \paragraph{Example.}
@@ -207,7 +207,7 @@ The result of the $f_{t,I}$ function is then passed to the parent node; it is su
 \subsubsection{PL2MF}
 \label{sec:pl2mf-function}
 
-PL2F is extended by adapting the Equation (\ref{eq:pl2f}). The resulting normalised term frequency is then passed to the normalization function (\ref{eq:dfr-prisk}).
+PL2F is extended by adapting the Equation (\ref{eq:pl2f}). The resulting normalised term frequency is then passed to the normalisation function (\ref{eq:dfr-prisk}).
 Similarly to the BM25MF extension, the computation of the entity score with PL2MF consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively. We reuse the same notation as the ones from the previous section.\\ 
 
 The PL2MF ranking function is defined following the two levels of normalisations. The notation used in the following two functions are similar to the one introduced in Section~\ref{sec:bm25mf-function} for the BM25MF extension.
@@ -230,7 +230,7 @@ where $c_a$ is a parameter particular to the PL2F ranking function applied on in
 With both extensions in Equations (\ref{bm25mf_v}) and (\ref{eq:pl2mf_v}), we normalize the term frequency $F_t$ based on the \emph{average field length} $l_a$. In Equations (\ref{bm25mf_a}) and (\ref{eq:pl2mf_a}), we further normalize the term frequency based on the \emph{average attribute cardinality} $\left|{a}\right|$.
 In addition to attribute-specific weights $\alpha_a$, the MF ranking model allows value-specific weights in its implementations with the parameter $\alpha_v$. We present value and attribute specific weights in the next section.\\
 
-If we assume a single value per attribute to match field-based ranking models, then the Equations (\ref{bm25mf_v}) and (\ref{bm25mf_a}) are transformed into the Equation (\ref{eq:bm25f_2}), with $\alpha_a\times\alpha_v$ as the BM25F's attribute weight, and $b_v$ as the attribute normalization parameter. BM25MF is under this condition equivalent to BM25F.
+If we assume a single value per attribute to match field-based ranking models, then the Equations (\ref{bm25mf_v}) and (\ref{bm25mf_a}) are transformed into the Equation (\ref{eq:bm25f_2}), with $\alpha_a\times\alpha_v$ as the BM25F's attribute weight, and $b_v$ as the attribute normalisation parameter. BM25MF is under this condition equivalent to BM25F.
 
 Under the same assumption, the Equations (\ref{eq:pl2mf_v}) and (\ref{eq:pl2mf_a}) are transformed into the Equation (\ref{eq:pl2f}), with $\alpha_a\times\alpha_v\times log_2(1+c_a)$ as the PL2F's attribute weight. PL2MF is under this condition equivalent to PL2F.\\
 

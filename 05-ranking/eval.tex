@@ -1,9 +1,10 @@
 \section{Experiments}
 \label{sec:experiments}
 
-In order to evaluate the MF model, we perform several experiments using three different datasets. We start by experimenting on the normalization parameters in order to study their impact on the effectiveness of the approach. We then compare the MF ranking functions against other traditional ones. We finally discuss the consequence of \textbf{not} considering the attribute label as a source of potential relevant terms and demonstrate the effectiveness of the proposed weights.
+In order to evaluate the MF model, we perform several experiments using three different datasets. We start by experimenting on the normalisation parameters in order to study their impact on the effectiveness of the approach. We then compare the MF ranking functions against other traditional ones. We finally discuss the consequence of \textbf{not} considering the attribute label as a source of potential relevant terms and demonstrate the effectiveness of the proposed weights.
 
-While there are other ways to perform entity ranking on the Web of Data, e.g., one can look at the other SemSearch 2011\footnote{SemSearch2011: \url{http://km.aifb.kit.edu/ws/semsearch11}} candidates, in this evaluation we concentrate on demonstrating how the MF model specifically extends and improves the very popular PRF and DFR frameworks.
+While there are other ways to perform entity ranking on the Web of Data, e.g., one can look at the other SemSearch 2011 candidates, in this evaluation we concentrate on demonstrating how the MF model specifically extends and improves the very popular PRF and DFR frameworks.
+%\footnote{SemSearch2011: \url{http://km.aifb.kit.edu/ws/semsearch11}}
 
 \subsection{Datasets}
 \label{sec:datasets}
@@ -11,7 +12,7 @@ While there are other ways to perform entity ranking on the Web of Data, e.g., o
 The datasets we are using in our experiments are the following:
 \begin{description}
   \item[INEX09] a dataset of 2,491,134 triples from DBpedia containing the description of entities in English, and converted for the INEX evaluation framework~\cite{Perez-Aguera:2010:UBS};
-  \item[SS10] the ``Billion Triple Challenge''\footnote{Billion Triple Challenge: \url{http://vmlion25.deri.ie}} (BTC) dataset, containing more than one billion triples, with the assessments of the SemSearch2010\footnote{SemSearch2010: \url{http://km.aifb.kit.edu/ws/semsearch10}} challenge;
+  \item[SS10] the ``Billion Triple Challenge''\footnote{Billion Triple Challenge: \url{http://vmlion25.deri.ie}} (BTC) dataset, containing more than one billion triples, with the assessments (a file containing relevance judgments on a sample of query answers) of the SemSearch2010\footnote{SemSearch2010: \url{http://km.aifb.kit.edu/ws/semsearch10}} challenge;
   \item[SS11] the BTC dataset with the assessments of the ``Entity Search track'' of the SemSearch2011\footnote{SemSearch2011: \url{http://km.aifb.kit.edu/ws/semsearch11/}} challenge.
 \end{description}
 The INEX09 dataset is significantly different than the other two based on BTC. Indeed, BTC is a heterogeneous dataset, created from web crawls of several search engines. INEX09 is a highly curated dataset from DBpedia.
@@ -21,16 +22,16 @@ The INEX09 dataset is significantly different than the other two based on BTC. I
 %
 % Next we perform a comparison between the MF extensions, i.e., BM25MF and PL2MF, against other ranking approaches.
 
-\subsection{\emph{The Normalization Parameters}}
+\subsection{\emph{The Normalisation Parameters}}
 \label{sec:norm-exp}
 
-In this section, we study the impact on the ranking of the normalization parameters. In addition to the length normalization of field-based ranking function (Normalisation~\ref{norm:content}), the MF ranking model offers an additional normalization on the attribute's cardinality (Normalisation~\ref{norm:degree}). The effectiveness of the PRF and DFR frameworks depends on finding the right values for the normalization parameters. However, these parameters are highly dependent on the dataset.\\
+In this section, we study the impact on the ranking of the normalisation parameters. In addition to the length normalisation of field-based ranking function (Normalisation~\ref{norm:content}), the MF ranking model offers an additional normalisation on the attribute's cardinality (Normalisation~\ref{norm:degree}). The effectiveness of the PRF and DFR frameworks depends on finding the right values for the normalisation parameters. However, these parameters are highly dependent on the dataset.\\
 
-Figures~\ref{fig:bm25mf-norm} and~\ref{fig:pl2mf-norm} depict the impact of the normalization parameters on the ranking performance of BM25MF and PL2MF, respectively. For all three datasets, a figure depicts on the \textbf{Y} axis the Mean Average Precision (MAP) scores, and on the \textbf{X} axis the Normalization~\ref{norm:content}, i.e., with parameter $b_v$ in Figure~\ref{fig:bm25mf-norm} (resp., parameter $c_v$ in Figure~\ref{fig:pl2mf-norm}). Each curve plots the results with a fixed Normalization~\ref{norm:degree} parameter, i.e., $b_a$ in Figure~\ref{fig:bm25mf-norm} and $c_a$ in Figure~\ref{fig:pl2mf-norm}.
+Figures~\ref{fig:bm25mf-norm} and~\ref{fig:pl2mf-norm} depict the impact of the normalisation parameters on the ranking performance of BM25MF and PL2MF, respectively. For all three datasets, the figures depict on the \textbf{Y} axis the Mean Average Precision (MAP) scores, and on the \textbf{X} axis the Normalisation~\ref{norm:content}, i.e., with parameter $b_v$ in Figure~\ref{fig:bm25mf-norm} (resp., parameter $c_v$ in Figure~\ref{fig:pl2mf-norm}). Each curve plots the results with a fixed Normalisation~\ref{norm:degree} parameter, i.e., $b_a$ in Figure~\ref{fig:bm25mf-norm} and $c_a$ in Figure~\ref{fig:pl2mf-norm}.
 
 The grid of parameters values in Figure~\ref{fig:bm25mf-norm} ranges from $0$ to $1$ with a step of $0.1$. In Figure~\ref{fig:pl2mf-norm}, the grid ranges from $0.5$ to $10.5$ with a step of $1$. Although these parameters can be attribute and value-specific, this experiment considers a constant parameter in order to reduce the number of combinations and to lower the variability of the results. Dashed lines depict the MAP scores of BM25F and PL2F and solid lines the scores of their MF extension, BM25MF and PL2MF respectively.\\
 
-These plots show that Normalisation~\ref{norm:degree}, the normalisation introduced with the MF ranking model, improves the performance. Indeed, the Normalisation~\ref{norm:content} parameters $b_v$ and $c_v$ traditional to the field-based ranking model do not grasp completely the heterogeneity in the data, which results in lower performance when compared to the MF extensions. This indicates that the distinction between leaves within an attribute has a positive effect on the ranking.
+These plots show that Normalisation~\ref{norm:degree}, the normalisation introduced with the MF ranking model, improves the performance. Indeed, the Normalisation~\ref{norm:content} parameters $b_v$ and $c_v$, which are traditional to the field-based ranking model, do not grasp completely the heterogeneity in the data, which results in lower performance when compared to the MF extensions. This indicates that the distinction between leaves within an attribute has a positive effect on the ranking.
 
 \begin{figure}
 	\centering
@@ -38,7 +39,7 @@ These plots show that Normalisation~\ref{norm:degree}, the normalisation introdu
 		\centering
 		\input{05-ranking/figures/tikz/norm-exp-bm25mf}
 		\addtocounter{subfigure}{-1}
-		\caption{Evaluation of BM25MF normalization parameters. A curve plots a fixed $b_v$ value (Equation~(\ref{bm25mf_v})) with $b_a$ (Equation~(\ref{bm25mf_a})) varying from $0$ to $1$ with a precision step of $0.1$.}
+		\caption{Evaluation of BM25MF normalisation parameters. A curve plots a fixed $b_v$ value (Equation~(\ref{bm25mf_v})) with $b_a$ (Equation~(\ref{bm25mf_a})) varying from $0$ to $1$ with a precision step of $0.1$.}
 		\label{fig:bm25mf-norm}
 	\end{subfigure}
 	\qquad
@@ -46,7 +47,7 @@ These plots show that Normalisation~\ref{norm:degree}, the normalisation introdu
 		\centering
 		\input{05-ranking/figures/tikz/norm-exp-pl2mf}
 		\addtocounter{subfigure}{-1}
-		\caption{Evaluation of PL2MF normalization parameters. A curve plots a fixed $c_v$ value (Equation~(\ref{eq:pl2mf_v})) with $c_a$ (Equation~(\ref{eq:pl2mf_a})) varying from $0.5$ to $10.5$ with a precision step of $1$.}
+		\caption{Evaluation of PL2MF normalisation parameters. A curve plots a fixed $c_v$ value (Equation~(\ref{eq:pl2mf_v})) with $c_a$ (Equation~(\ref{eq:pl2mf_a})) varying from $0.5$ to $10.5$ with a precision step of $1$.}
 		\label{fig:pl2mf-norm}
 	\end{subfigure}
 	\caption{Impact of the normalisation parameters on the MF ranking functions. The figures report the MAP values of the respective datasets on the Y axis. On the X axis and with each curve, we vary the values of normalisation parameters.}
@@ -55,7 +56,9 @@ These plots show that Normalisation~\ref{norm:degree}, the normalisation introdu
 \subsection{Comparison between MF and Field-Based Models}
 \label{sec:mf-field-cmp}
 
-In this section, we evaluate and compare the performance of BM25 and PL2 ranking model against their MF extensions, BM25MF and PL2F respectively, and show the superiority of the MF model. The TF-IDF function is used as a baseline.
+In this section, we evaluate and compare the performance of the BM25 and PL2 ranking models against their MF extensions, BM25MF and PL2F respectively, and show the superiority of the MF model. The TF-IDF function is used as a baseline.
+
+We outline below the ranking functions that are used in the experiments. We reuse the terminology for the equations that was presented in the previous section.
 
 \begin{labeling}{\emph{BM25~\cite{robertson:1994:sigir}}}
   \item[\emph{TF-IDF}] is a logarithmic function of the term frequency and defines the Equation (\ref{eq:tfidf-score}) as
@@ -63,29 +66,29 @@ In this section, we evaluate and compare the performance of BM25 and PL2 ranking
   tfn_e=log(F_t)+1
   $,
   where $F_t$ is the number of occurrences of the term $t$ in the entity.
-  \item[\emph{BM25~\cite{robertson:1994:sigir}}] considers the document as a simple bag of words. It is a function of the term frequency derived from a two-Poisson model and it uses an entity-length normalization. The entity length is computed as the sum of the \emph{field length} defined in the Section~\ref{sec:ranking-wod}.
+  \item[\emph{BM25~\cite{robertson:1994:sigir}}] considers the document as a simple bag of words. It is a function of the term frequency derived from a two-Poisson model and it uses an entity-length normalisation. The entity length is computed as the sum of the \emph{field length} defined in the Section~\ref{sec:ranking-wod}.
 
   It defines the Equation (\ref{eq:tfidf-score}) as
   $
   tfn_e=\frac{F_t\times(k_1+1)}{F_t+k_1\times \left(1+b\times\left(\frac{l_e}{l_{avg}}-1\right)\right)}
   $,
-where $l_e$ is the \emph{entity length} of the entity $e$, $l_{avg}$ is the average of the \emph{entity length} in the collection and $b$ is a normalization parameter.
+where $l_e$ is the \emph{entity length} of the entity $e$, $l_{avg}$ is the average of the \emph{entity length} in the collection and $b$ is a normalisation parameter.
   \item[\emph{BM25F}] is defined in Equation (\ref{eq:tfidf-score}). It considers documents as composed of fields, each field being a bag of words.
   \item[\emph{PL2~\cite{amati:2002:acm}}] considers the document as a simple bag of words. It is a model derived from the DFR framework, with the Equation (\ref{eq:pl2f}) formulated as
   $
   tfn_e=F_t\times log_2\left(1+c\times\frac{l_{avg}}{l_e}\right)
   $,
-  where $c$ is a normalization parameter.
+  where $c$ is a normalisation parameter.
   \item[\emph{PL2F}] is defined in Equation (\ref{eq:dfr-score}). It considers a document as a set of fields, each field being a bag of words.
 \end{labeling}
 
-The Table~\ref{tab:norm-param} reports the values of normalization parameters for each ranking function. For a given function and dataset, the parameter value that maximises the Mean Average Precision (MAP) is found through a constrained particle swarm optimisation~\cite{xiaohui:2002:sci}. The optimisation is run on ranking functions that have all their weights equal to one, i.e., $\alpha_e = \alpha_a = \alpha_v = 1$.\\
+The Table~\ref{tab:norm-param} reports the values of normalisation parameters for each ranking function. For a given function and dataset, the parameter value that maximises the Mean Average Precision (MAP) is found through a constrained particle swarm optimisation~\cite{xiaohui:2002:sci}. The optimisation is run on ranking functions that have all their weights equal to one, i.e., $\alpha_e = \alpha_a = \alpha_v = 1$. The reason is to limit what may impact the performance of a ranking function, thus invalidating the optimisation.\\
 
 \input{05-ranking/figures/experiments/norm-param}
 
 Using such parameters, we report in Figures~\ref{fig:bm25mf-field-cmp-bar}~and~\ref{fig:pl2mf-field-cmp-bar} the performance of the ranking functions on the three datasets, for BM25MF and PL2MF respectively. The raw results of the bar charts are available in the Appendix section, in Table~\ref{tab:ranking-cmp-results}.
 
-Using the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, the difference between a candidate ranking function and a MF extension is statistically significant at level $0.05$ if the bar is displayed with a \textit{dot} pattern; it is statistically significant at level $0.10$ if displayed with a \emph{grid} pattern instead.\\
+Using the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, the difference between a candidate ranking function and a MF extension is statistically significant at level $0.05$ if the bar is displayed with a \textit{dot} pattern; it is statistically significant at level $0.10$ if displayed with a \emph{oblique lines} pattern instead.\\
 
 %We note that for field-based ranking models and their MF extensions, the attribute label is considered as a value node, in order to be a source of potential relevant terms.
 TF-IDF provides a clear-cut discrepancy between INEX09 and the datasets based on BTC, i.e., SS10 and SS11, the reason being it is not suited for heterogeneous datasets.
@@ -94,16 +97,16 @@ On SS10, BM25MF (resp., PL2MF) does not report a significant difference with BM2
 
 On SS10 and SS11, the MF extensions provide better ranking performance with a significant difference than the field-based ranking functions with an increase of $15\%$ at the minimum. On INEX09, PL2F and its MF extension PL2MF provide similar ranking performance.
 
-Overall, the experiments show that the MF model improves significantly the ranking effectiveness over traditional field-based methods.
+Overall, the experiments show that the MF model improves significantly the ranking effectiveness over traditional field-based methods. In addition, the experiments emphasize as well the fine tuning possible with the MF ranking model, allowing to better fit the ranking to a specific dataset.
 
 \input{05-ranking/figures/experiments/mf-field-cmp-bar}
 
 \subsection{Effectiveness of the Weights}
 \label{sec:weights-effectiveness}
 
-In this section, we discuss several tuning of the MF ranking extensions. First, we discuss the impact of discarding the attribute label as a source of possible relevant terms on the ranking performance. Then, we evaluate the weights from Section~\ref{sec:weights} developed for the MF model.
+In this section, we evaluate the impact of the presented weights over the MF ranking extensions. First, we discuss the impact of discarding the attribute label as a source of possible relevant terms on the ranking performance. Then, we evaluate the weights from Section~\ref{sec:weights} developed for the MF model.
 
-Results of the evaluations are depicted in Figure~\ref{fig:mf-weights}. On the left side of figures are displayed the PL2MF results, and on the right results of BM25MF. Using the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, the MF extension with no added weight is used as the base of the comparison. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead. Raw results are reported in Table~\ref{tab:mf-effect} of the Appendix section.
+Results of the evaluations are depicted in Figure~\ref{fig:mf-weights}. The PL2MF results are displayed on the left side of the figures, and on the right side the results of BM25MF. Using the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, the MF extension with no added weight is used as the base of the comparison. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead. Raw results are reported in Table~\ref{tab:mf-effect} of the Appendix section.
 
 \subsubsection{\emph{Impact of the Attribute Label}}
 \label{sec:with-att}
@@ -142,7 +145,7 @@ For the weights that depend on the label of the entity or of an attribute, we us
 	\item $0.1$ if the label matches "\verb|^http://www.w3.org/1999/02/22-rdf-syntax-ns#_\d+$|"; and
 	\item $1$ otherwise.
 \end{itemize}
-For instance, if an attribute label is \url{http://xmlns.com/foaf/0.1/name} then a weight of $2$ is assigned.
+For instance, if an attribute label is \url{http://xmlns.com/foaf/0.1/name} then a weight of $2$ is assigned. The weight's values are set empirically, and were chosen in order to improve the task of entity search. The rationale is that a document where a query term occurs associated with an attribute matching "title\$" should be promoted.
 
 The third regular expression matches an attribute URI defining items of a collection in RDF\footnote{RDF Container: \url{http://www.w3.org/TR/rdf-schema/\#ch\_container}}. It is assigned a low weight of $0.1$ to reduce the importance of terms occurring in each item of the collection.\\
 
@@ -213,7 +216,7 @@ On INEX09 their combination decreases slightly the performance for PL2MF. On SS1
 		\caption{All weights combined}
 		\label{fig:mf-all}
 	\end{subfigure}
-	\caption{Evaluation of weights with the MF extensions. On the left side of figures are displayed the PL2MF results; on the right results of BM25MF. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead.}
+	\caption{Evaluation of weights with the MF extensions. On the left side of the figures are displayed the PL2MF results; on the right results of BM25MF. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead.}
 	\label{fig:mf-weights}
 \end{figure}
 
@@ -493,7 +496,7 @@ We compare in this paragraph the performance of both ranking functions when appl
 
 \subparagraph{Normalisation parameters impact.}
 
-Figures~\ref{fig:summary-ranking-norm} depict the impact of the Normalisation~\ref{norm:content} and~\ref{norm:degree} parameters on the ranking of graphs. On the X axis we vary the value of the parameter $b_a$ for Normalisation~\ref{norm:degree}. Each curve corresponds to a value of the parameter $b_v$ fro Normalization~\ref{norm:content}. On the Y axis we report the MAP measurement for the MF-based ranking approach. The raw results of the curves are available in Appendix~\ref{tab:summary-ranking-norm}.\\
+Figures~\ref{fig:summary-ranking-norm} depict the impact of the Normalisation~\ref{norm:content} and~\ref{norm:degree} parameters on the ranking of graphs. On the X axis we vary the value of the parameter $b_a$ for Normalisation~\ref{norm:degree}. Each curve corresponds to a value of the parameter $b_v$ fro Normalisation~\ref{norm:content}. On the Y axis we report the MAP measurement for the MF-based ranking approach. The raw results of the curves are available in Appendix~\ref{tab:summary-ranking-norm}.\\
 
 In this experiment, we divided the queries into two categories: simple graphs and complex graphs. Simple graphs indicate queries that have only one star, i.e., the queries from the complexity categories 10, 9, 6, 5, 4, 3, and 2. Complex graphs represents queries that contain more than one star, i.e., the queries with complexity categories 1-1-4, 1-1-3, 1-1-2, 3-4, 2-2, 1-5, 1-4, 1-3, 1-2, and 1-1.
 

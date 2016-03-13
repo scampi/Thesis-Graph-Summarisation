@@ -120,12 +120,12 @@ Using BM25F, an entity $e$ is scored with regard to a query $q$ as follows:
 in which the following notations are used:
 \begin{itemize}
 	\item $q_t$ is the weight of the query $q$ for the term $t$, i.e., its frequency within the query $q$;
-	\item $tfn_e$ is the term frequency normalization function;
+	\item $tfn_e$ is the term frequency normalisation function;
 	\item $\omega_t$ is the IDF function of the term $t$;
 	\item $k_1$ is the saturation parameter;
 	\item $f_{t,e,a}$ is the frequency of the term $t$ in the attribute $a$ of the entity $e$;
 	\item $\alpha_a$ is a weight of the attribute $a$ and $\alpha_e$ a weight of the entity $e$;
-	\item $b_a$ is the normalization parameter for the attribute $a$ with $b_a \in \left[0,1\right]$;
+	\item $b_a$ is the normalisation parameter for the attribute $a$ with $b_a \in \left[0,1\right]$;
 	\item $l_{e,a}$ is the \emph{attribute length} of the attribute $a$ in the entity $e$; and
 	\item $l_a$ is the \emph{average attribute length} of the attribute $a$.
 \end{itemize}
@@ -138,7 +138,7 @@ where $N$ is the total number of entities in the collection and $N_t$ is the tot
 
 \subsection{PL2F Ranking Function}
 
-DFR ranking models are based on the combination of three components, i.e., the information gain, the randomness model and the term frequency normalization model. PL2F bases the information gain on the Laplace after-effect model, uses Poisson as the model for randomness, and the \emph{normalization 2F} for the term frequency normalization.
+DFR ranking models are based on the combination of three components, i.e., the information gain, the randomness model and the term frequency normalisation model. PL2F bases the information gain on the Laplace after-effect model, uses Poisson as the model for randomness, and the \emph{normalisation 2F} for the term frequency normalisation.
 
 Using PL2F, an entity $e$ is scored with regard to a query $q$ as follows:
 \begin{eqnarray*}
