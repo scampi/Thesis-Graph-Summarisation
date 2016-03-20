@@ -216,7 +216,7 @@ On INEX09 their combination decreases slightly the performance for PL2MF. On SS1
 		\caption{All weights combined}
 		\label{fig:mf-all}
 	\end{subfigure}
-	\caption{Evaluation of weights with the MF extensions. On the left side of the figures are displayed the PL2MF results; on the right results of BM25MF. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead.}
+	\caption{Evaluation of weights with the MF extensions. The PL2MF results are displayed on the left side of the figures, and the results of BM25MF are on the right side. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead.}
 	\label{fig:mf-weights}
 \end{figure}
 
@@ -228,24 +228,30 @@ Graph summarisation is used for extracting the underlying structure of graph-sha
 Yu and Yagadish propose in~\cite{yu:2006:schema-summarization} to ``summarise'' an \emph{existing} database schema by showing only the \emph{important} parts. This allows to get a succinct overview of the database.
 However, that work proposes an approach that is independent of the actual information need of a user.
 
-In the case of a graph summary, we consider the information need of a user to be expressed as a graph-shaped query. Given a query over the summary, we propose to rank its solutions using the MF ranking model. In this way, the user will first browse subgraphs of the summary that are most relevant to his need.
+In the case of a graph summary, we consider the information need of a user to be expressed as a graph-shaped query. Given a query over the summary, we propose to rank its solutions using the MF ranking model. In this way, the user will first browse subgraphs of the summary that are most relevant to his need. In this section, we evaluate the MF ranking model applied to a summary, showing the ability of the two levels of Normalisations in MF for fine-tuning of the ranking function.
 
 \subsection{Dataset}
 \label{sec:summary-ranking:dataset}
 
 In order to evaluate the ranking on a graph summary, we use the USEWOD2013 dataset \cite{usewod:2013}. This dataset provides query logs from several SPARQL endpoints. In this evaluation, we focus on the logs from the DBpedia SPARQL endpoint. SPARQL~\cite{PrudS08} is the standard query language for RDF data. Given a graph-shaped query, it retrieves all subgraphs from a dataset which match its pattern.
 
-\paragraph{Query extraction.}
+\subsubsection{Query Extraction}
 
-The graph summary highlights the structure of the graph it was created from. Therefore, we are only interested in queries that pertain to the graph's structure. As a consequence, we need to ``clean'' the queries from the USEWOD2013 dataset by applying the following operations:
+The graph summary highlights the structure of the graph it was created from. Therefore, we are only interested in queries that pertain to the graph's structure. We present in this section a function that takes as input a SPARQL query, applies a set of rules over it, and outputs as result the transformed SPARQL query. The transformed query is then devoid of any specific details about entities.
+
+\begin{definition}[Query Extraction Function]
+Let $I$ and $O$ be two SPARQL queries. Let $qe$ be a function that consists of the following rules:
 \begin{enumerate}
 	\item retain only the basic graph patterns~\cite{PrudS08} (BGP);
 	\item transform CONSTRUCT and ASK queries~\cite{PrudS08} into \emph{wildcard} select queries;
 	\item remove information specific to an entity; and
 	\item discard any solution modifiers.
 \end{enumerate}
-Once those operations are performed, we have then a collection of queries that are only concerned about the structure of the graph queried.
-In the following, we describe each operation and consider the query below as an ongoing example of the effect of an operation on the query:
+The application of the function $qe$ on the query $I$ outputs the query $O$ that is independent of any entity.
+\label{def:query-extraction-function}
+\end{definition}
+
+In the following, we describe each operation of the function $qe$ and consider the query below as an ongoing example of the effect of an operation on the query:
 
 \begin{minted}[linenos,frame=lines,framesep=1mm]{sparql}
 PREFIX dbr: <http://dbpedia.org/resource/>
@@ -262,16 +268,19 @@ ASK {
 ORDER BY ?label
 \end{minted}
 
-\subparagraph{Operation 1.}
+\paragraph{Operation 1.}
 
 A basic graph pattern (BGP) represents a set of triple patterns, which together form a graph pattern. A triple pattern represents an edge of a graph, where any of its components can be a variable.
-\begin{definition}[Triple Pattern] A triple pattern is a tuple $t \in (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var)$ where $\mathcal{L}$ is the set of labels and $Var$ is an infinite set of variables.
+\begin{definition}[Triple Pattern]
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, let $\mathcal{L}$ be the set of labels, and $Var$ an infinite set of variables.
+A triple pattern is a tuple $t= \langle s, p, o \rangle$ where $t \in (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var)$.
+The components of a triple pattern $t$ are denoted $subject(t)$, $predicate(t)$ and $object(t)$, respectively.
+An edge $(x,\alpha,y) \in A$ of the graph $G$ is a match for a triple pattern $t$ if and only if the non-variable components of $t$ are equal to those of the edge $(x, \alpha, y)$.
 \label{def:triple-pattern}
 \end{definition}
-The components of a triple pattern $t$ are denoted $subject(t)$, $predicate(t)$ and $object(t)$, respectively.
 
 In this operation, we discard any component of the SPARQL query that is not a BGP, e.g., filters.
-With regards to the ongoing example, the effect of this operation removes the FILTER pattern line~10.
+With regards to the ongoing example, the effect of this operation removes the FILTER pattern in line~10.
 \begin{minted}[linenos,frame=lines,framesep=1mm]{sparql}
 # Same set of prefixes
 ASK {
@@ -282,7 +291,7 @@ ASK {
 ORDER BY ?label
 \end{minted}
 
-\subparagraph{Operation 2.}
+\paragraph{Operation 2.}
 
 A SPARQL query can be either
 \begin{inparaenum}[(i)]
@@ -304,7 +313,7 @@ SELECT * {
 ORDER BY ?label
 \end{minted}
 
-\subparagraph{Operation 3.}
+\paragraph{Operation 3.}
 
 An entity can be a person, a place, an abstract concept, etc. For this experiment, we are interested in queries that pertain to graph's structure. Therefore, we replace with a \emph{unique} variable any detail a query might have about a specific entity.
 
@@ -321,7 +330,7 @@ SELECT * {
 ORDER BY ?label
 \end{minted}
 
-\subparagraph{Operation 4.}
+\paragraph{Operation 4.}
 
 In SPARQL, one can use \emph{solution modifiers} in order to alter the result set of the query. For instance, the keyword \emph{LIMIT} is used for limiting the number of results up to a specified value. As for previous operations, a solution modifier does not impact on the graph structure; therefore, those are removed from the extracted queries.
 
@@ -335,7 +344,7 @@ SELECT * {
 }
 \end{minted}
 
-\paragraph{Query classification.}
+\subsubsection{Query Classification}
 
 We classify a query according to the complexity of a pattern. The complexity is based on two features of a query, which are
 \begin{inparaenum}[(i)]
@@ -345,11 +354,19 @@ We classify a query according to the complexity of a pattern. The complexity is 
 
 A star-shaped pattern --- or \emph{star} in short --- is a BGP where the \emph{subject} of all triple patterns is the same. The size of such a pattern is determined by the number of triple patterns it contains. For instance, the BGP ``?s rdfs:label ?label . ?s foaf:name ?name .'' is a star of size 2, since the subject of both triple patterns is ``?s''.
 
-Such a classification scheme allows to capture two aspects of a graph summary that have an impact on its \emph{precision} introduced in Section~\ref{sec:error-classification}. The size of a star in a query pertains to the attribute and type error. Instead, the number of stars in a query pertains to the connectivity error.
+Such a classification scheme allows to capture two aspects of a graph summary that have an impact on its \emph{precision} introduced in Section~\ref{sec:error-classification}. The size of a star in a query pertains to the attribute and type error. In addition, the number of stars in a query pertains to the connectivity error.
 
-\paragraph{Discussion.}
+\subsubsection{Observations of Queries in the Dataset}
 
-Table~\ref{tab:usewod2013-queries} reports general statistics about the queries extracted from the USEWOD2013 DBpedia~3.3 logs. The full list of queries is available in the Appendix~\ref{app:summary-ranking}. For each category of complexity, we present here the number of queries, the number of unique terms, --- where a term is a URI or a literal --- and distribution of queries across the categories as a percentage.
+We process the queries from the logs in the USEWOD2013 dataset using the function $qe$ from Definition~(\ref{def:query-extraction-function}).
+Once the operations from the function $qe$ are performed, we have then a collection of queries that are only concerned about the structure of the graph queried.
+
+Table~\ref{tab:usewod2013-queries} reports general statistics about the queries extracted from the USEWOD2013 DBpedia~3.3 logs using the function $qe$. The full list of queries is available in the Appendix~\ref{app:summary-ranking}. For each category of complexity as defined in the previous section, we report in the table
+\begin{inparaenum}[(a)]
+\item the number of queries;
+\item the number of unique terms where a term is a URI or a literal; and
+\item the distribution of queries across the categories as a percentage.
+\end{inparaenum}
 
 The queries are grouped by its complexity, where a group is identified with the a string having the following regular expression: "\verb/\d+(-\d+)*/". For instance, the string ``\emph{2-1}'' identifies a group of queries that have \textit{two} star-shaped patterns, one with \textit{two} triple patterns and the other with only \textit{one}.
 
@@ -389,6 +406,7 @@ Using the process outlined above, a total of 293 queries spanning over 17 catego
 \end{table}
 
 \subsection{Graph Summary Ranking}
+\label{sec:graph-summary-ranking}
 
 While creating a summary of a given graph, one may accumulate several statistics. We generate a summary with the following statistics:
 \begin{enumerate}
@@ -397,6 +415,7 @@ While creating a summary of a given graph, one may accumulate several statistics
 	\item the number of times an attribute connects two sumnodes; and
 	\item the number of types in a sumnode.
 \end{enumerate}
+Those statistics are used in the ranking function that we present below.
 
 \begin{figure}
 	\centering
@@ -428,7 +447,10 @@ In this approach, we apply both normalisations available with the MF ranking mod
 \subsection{Evaluation}
 \label{sec:summary-ranking:eval}
 
-In this experiment, we evaluate the performance of the MF-based approach at ranking subgraphs of a graph summary. We present first the ranking paradigm that we follow, before describing the experiment itself. Then, we describe the evaluation method for asserting the performance of the MF extension. Finally, we discuss the results of the experiment.
+In Section~\ref{sec:summary-ranking:dataset} we presented a dataset of queries that were extracted from logs of the DBpedia SPARQL endpoint. In Section~\ref{sec:summary-ranking:eval} we introduced two ranking functions that we apply on sub-graphs of a graph summary which is, in this evaluation, that of DBpedia.
+In this experiment, we evaluate the performance of the MF-based approach at ranking subgraphs of a graph summary.
+
+We present first the ranking paradigm that we follow, before describing the experiment itself. Then, we describe the evaluation method for asserting the performance of the MF extension. Finally, we discuss the results of the experiment.
 
 \paragraph{Ranking paradigm.}
 
