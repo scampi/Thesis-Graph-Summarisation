@@ -237,7 +237,7 @@ In order to evaluate the ranking on a graph summary, we use the USEWOD2013 datas
 
 \subsubsection{Query Extraction}
 
-The graph summary highlights the structure of the graph it was created from. Therefore, we are only interested in queries that pertain to the graph's structure. We present in this section a function that takes as input a SPARQL query, applies a set of rules over it, and outputs as result the transformed SPARQL query. The transformed query is then devoid of any specific details about entities.
+The graph summary highlights the structure of the graph it was created from. Therefore, we are only interested in queries that pertain to the structure of the graph. We present in this section a function that takes as input a SPARQL query, applies a set of rules over it, and outputs as result the transformed SPARQL query. The transformed query is then devoid of any specific details about entities.
 
 \begin{definition}[Query Extraction Function]
 Let $I$ and $O$ be two SPARQL queries. Let $qe$ be a function that consists of the following rules:
@@ -315,7 +315,7 @@ ORDER BY ?label
 
 \paragraph{Operation 3.}
 
-An entity can be a person, a place, an abstract concept, etc. For this experiment, we are interested in queries that pertain to graph's structure. Therefore, we replace with a \emph{unique} variable any detail a query might have about a specific entity.
+An entity can be a person, a place, an abstract concept, etc. For this experiment, we are interested in queries that pertain to structure of the graph. Therefore, we replace with a \emph{unique} variable any detail a query might have about a specific entity.
 
 If the detail is either a URI such as \href{http://dbpedia.org/resource/Paris}{<http://dbpedia.org/resource/Paris>}, a literal such as \emph{"Paris"}, then it is replaced with a unique variable. In the case where a literal is a type (Section~\ref{sec:ssd:type}), it is then kept as is.
 

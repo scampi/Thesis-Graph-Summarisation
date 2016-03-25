@@ -84,6 +84,7 @@ We define the sink sumnode $\varnothing \in \mathcal{Z}$ with $\varnothing \not 
 $$
 u \in V\; \forall \alpha \in \mathcal{L}\; \forall v \in V\; (u, \alpha, v) \not \in A \implies (u, \varnothing) \in P
 $$
+\label{def:sink-sumnode}
 \end{definition}
 
 \begin{remark}
@@ -246,7 +247,7 @@ Two nodes $(u, v) \in V^2$ are said \emph{bisimilar} if $(u, v) \in \sim$.
 	\label{fig:bisimulation}
 \end{figure}
 
-The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same. Kaushik et al.~\cite{kaushik:2002:cib} propose the \emph{forward-and-backward} (f\&b)-bisimulation which extends the definition by considering incoming edges in addition to the outgoing ones. Since a summary deals with the graph's structure given by the relationships of attributes and types, we introduce the type as an additional requirement.
+The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same. Kaushik et al.~\cite{kaushik:2002:cib} propose the \emph{forward-and-backward} (f\&b)-bisimulation which extends the definition by considering incoming edges in addition to the outgoing ones. Since a summary deals with the structure of the graph given by the relationships of attributes and types, we introduce the type as an additional requirement.
 
 In addition to the requirements of a f\&b-bisimulation between two nodes, we consider their type information. We define the \emph{fbt-bisimulation} as the f\&b-bisimulation that ensures that nodes are equivalent with regards to their type as well.
 

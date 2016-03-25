@@ -164,7 +164,7 @@ Hence, we propose the \emph{``MF'' ranking model} that leverage the graph struct
 The purpose of the summary is to describe the structure of a graph. Therefore, it can hold the function of a \emph{schema} for that graph.
 A schema is the basis of many algorithms over the data. A schema describes the content thus facilitating users searching for a particular resource. A schema may provide statistical information about the data, which is useful for query optimisation. Schemas help in the integration process of several data sources. As a consequence, a major challenge is to determine what features of the data can be used in order to effectively generate a schema.\\
 
-The construction of a graph summary does not ensure that the entity graph can be re-built from its summary. This means that some details about the graph's structure was discarded during the summarisation process. Although some errors in the summary can be acceptable for a user exploring the data, it can cause a signifant drop of performance for a query optimizer. Hence, it is necessary to measure how accurate a summary is with regards to the data.
+The construction of a graph summary does not ensure that the entity graph can be re-built from its summary. This means that some details about the structure of the graph was discarded during the summarisation process. Although some errors in the summary can be acceptable for a user exploring the data, it can cause a signifant drop of performance for a query optimizer. Hence, it is necessary to measure how accurate a summary is with regards to the data.
 
 In the recent years, the amount of data has been growing increasingly. A glimpse of this growth over the years can be visually appreciated\footnote{The Linking Open Data cloud diagram: \url{http://lod-cloud.net/}} through the various diagrams of the Linking Open Data cloud. It is common to see data with millions of entities and billions of statements, to which the ``Open Data'' movement contributed a significant part. However, the ease of sharing data has the downside of that data not following a strict schema, if any.\\
 
@@ -180,7 +180,7 @@ Different applications have varying interactivity with respect to the summary. W
 
 \section{Applications}
 
-Graph summarisation produces a \emph{summary} of the graph's structure, providing information akin to a schema in relational databases. We can then leverage the summary in various ways, of which some are presented in this thesis.
+Graph summarisation produces a \emph{summary} of the structure of the graph, providing information akin to a schema in relational databases. We can then leverage the summary in various ways, of which some are presented in this thesis.
 
 \begin{labeling}{\emph{Browsing of a dataset's structure.}}
 \item[\emph{Graph schema.}] We present in Section~\ref{chap03:sec:wd-mgnt} that the graph summary can serve the function of a \emph{schema} for the graph. The generated schema allows a user to learn about the structure of the graph, and ultimately how to query for information.
@@ -203,14 +203,14 @@ The thesis is divided in three parts. This first part \emph{Prelude} contains th
 \begin{labeling}{Chapter~\ref{chap:summary}:}
 \item[Chapter~\ref{chap:graph-summary:related-work}:] We present in this chapter various approaches at summarising graph data and for what scenario they were built for. We emphasize their shortcommings and how these are answered thanks to the graph summary.
 \item[Chapter~\ref{chap:summary}:] In this chapter, we introduce the formal model of a graph summary. Then, we present a technique for generating graph summaries for Web Data at scale.
-\item[Chapter~\ref{chap03:sec:quality}:] The summary of a graph is built in a bottom-up fashion, through the aggregation of nodes of the entity graph. The graph summary being a graph homomorphism, it is not assured that entity graph can be re-built from its summary. Therefore, some details about the graph's structure are missing from the graph summary. In order to account for this loss, we developed a model for measuring the precision of a graph summary.
+\item[Chapter~\ref{chap03:sec:quality}:] The summary of a graph is built in a bottom-up fashion, through the aggregation of nodes of the entity graph. The graph summary being a graph homomorphism, it is not assured that entity graph can be re-built from its summary. Therefore, some details about the structure of the graph are missing from the graph summary. In order to account for this loss, we developed a model for measuring the precision of a graph summary.
 \item[Chapter~\ref{chap:tree-ranking}:] In this chapter, we introduce the ``MF'' ranking model for semi-structured data. The model considers the structural heterogeneity of the data for a better scoring of entities.
 \end{labeling}
 
 \minisec{Part IV: Putting the Pieces Together}
 
 \begin{labeling}{Chapter~\ref{chap:system}:}
-\item[Chapter~\ref{chap:system}:] In this chapter, we present applications of the introduced methods. We develop a system based on a generated graph summary that assists users in writing graph-shaped queries without a priori knowledge of the data structure. We present a RDF model of the graph summary, which allows the summary to serve the function of a schema. In addition, we present another application of the graph summary that enables one to inspect a dataset so that problems with the data may be identified.
+\item[Chapter~\ref{chap:system}:] In this chapter, we present applications of the introduced methods. We develop a system based on a generated graph summary that assists users in writing graph-shaped queries without a priori knowledge of the data structure. We present an RDF model of the graph summary, which allows the summary to serve the function of a schema. In addition, we present another application of the graph summary that enables one to inspect a dataset so that problems with the data may be identified.
 \end{labeling}
 
 \section{Contributions}
