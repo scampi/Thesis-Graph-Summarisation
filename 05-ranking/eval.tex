@@ -272,7 +272,7 @@ ORDER BY ?label
 
 A basic graph pattern (BGP) represents a set of triple patterns, which together form a graph pattern. A triple pattern represents an edge of a graph, where any of its components can be a variable.
 \begin{definition}[Triple Pattern]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, let $\mathcal{L}$ be the set of labels, and $Var$ an infinite set of variables.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{L}$ be the set of labels, and $Var$ an infinite set of variables.
 A triple pattern is a tuple $t= \langle s, p, o \rangle$ where $t \in (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var)$.
 The components of a triple pattern $t$ are denoted $subject(t)$, $predicate(t)$ and $object(t)$, respectively.
 An edge $(x,\alpha,y) \in A$ of the graph $G$ is a match for a triple pattern $t$ if and only if the non-variable components of $t$ are equal to those of the edge $(x, \alpha, y)$.
