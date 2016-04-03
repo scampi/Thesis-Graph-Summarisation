@@ -274,8 +274,8 @@ $$
 \item $\sim_t$ preserves the types such that:
 $$
 \begin{aligned}
-\forall (x, \gls{atype}, t) \in A&\; \exists (y, \gls{atype}, t) \in A \\
-\text{conversely,}\;\; \forall (y, \gls{atype}, t) \in A&\; \exists (x, \gls{atype}, t) \in A
+\forall (x, \glssymbol{atype}, t) \in A&\; \exists (y, \glssymbol{atype}, t) \in A \\
+\text{conversely,}\;\; \forall (y, \glssymbol{atype}, t) \in A&\; \exists (x, \glssymbol{atype}, t) \in A
 \end{aligned}
 $$
 
@@ -396,14 +396,14 @@ Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{st} = \left\langl
 
 The set of nodes $\mathcal{W}_{st}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{st} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{st} = \emptyset$, and it contains as many elements as there are types in the graph:
 $$
-\lvert \mathcal{W}_{st} \rvert = \lvert \left\lbrace l_V(c) \mid \exists (u, \gls{atype}, c) \in A \wedge \gls{atype} \in T \right\rbrace \rvert
+\lvert \mathcal{W}_{st} \rvert = \lvert \left\lbrace l_V(c) \mid \exists (u, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \right\rbrace \rvert
 $$
 
 We call $\mathcal{S}_{st}$ the single-type summary of $G$ according to the summarisation relation $R_{st} \subseteq V \times \mathcal{W}_{st}$ defined as:
 $$
 \begin{aligned}
 R_{st} = \{ (u, x) \in V \times \mathcal{W}_{st} \mid &\; \exists (v, y) \in V \times \mathcal{W}_{st} \\
-	& (u,\gls{atype},v) \in A \wedge (x,\gls{atype},y) \wedge l_V(v) = l_\mathcal{W_{st}}(y) \wedge \gls{atype} \in T \}
+	& (u,\glssymbol{atype},v) \in A \wedge (x,\glssymbol{atype},y) \wedge l_V(v) = l_\mathcal{W_{st}}(y) \wedge \glssymbol{atype} \in T \}
 \end{aligned}
 $$
 \label{def:st}
@@ -420,7 +420,7 @@ The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in t
 
 	The set of nodes $\mathcal{W}_t$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_t \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_t = \emptyset$, and it contains as many elements as the power set of types in the graph:
 	$$
-	\lvert \mathcal{W}_t \rvert = \lvert \mathbb{P}\left( \left\lbrace l_V(c) \mid \exists (u, \gls{atype}, c) \in A \wedge \gls{atype} \in T \right\rbrace \right) \rvert
+	\lvert \mathcal{W}_t \rvert = \lvert \mathbb{P}\left( \left\lbrace l_V(c) \mid \exists (u, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \right\rbrace \right) \rvert
 	$$
 
 	We call $\mathcal{S}_t$ the types summary of $G$ according to the summarisation relation $R_t \subseteq V \times \mathcal{W}_t$ defined as:
@@ -496,7 +496,7 @@ The nodes $N_1$ and $N_2$ are mapped to a same sumnode by $R_{at}$ because they 
 	$$
 	\begin{aligned}
 	\lvert \mathcal{W}_{at} \rvert = \lvert \mathbb{P} ( & \{ \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \} \;\cup \\
-	& \{ l_V(c) \mid \exists (u, \gls{atype}, c) \in A \wedge \gls{atype} \in T \} ) \rvert
+	& \{ l_V(c) \mid \exists (u, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \} ) \rvert
 	\end{aligned}
 	$$
 
@@ -574,7 +574,7 @@ We define $R_{iat}$ as the relation based on the set of types and incoming attri
 	$$
 	\begin{aligned}
 	\lvert \mathcal{W}_{iat} \rvert = \lvert \mathbb{P} ( & \{ \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \} \;\cup \\
-	& \{ l_V(c) \mid \exists (u, \gls{atype}, c) \in A \wedge \gls{atype} \in T \} ) \rvert
+	& \{ l_V(c) \mid \exists (u, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \} ) \rvert
 	\end{aligned}
 	$$
 
@@ -603,7 +603,7 @@ Although the nodes $N_1$ and $N_2$ are mapped to a same sumnode with $R_{at}$, t
 	$$
 	\begin{aligned}
 	\lvert \mathcal{W}_{ioat} \rvert = \lvert \mathbb{P} ( & \{ \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \} \;\cup \\
-	& \{ l_V(c) \mid \exists (u, \gls{atype}, c) \in A \wedge \gls{atype} \in T \} ) \rvert
+	& \{ l_V(c) \mid \exists (u, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \} ) \rvert
 	\end{aligned}
 	$$
 

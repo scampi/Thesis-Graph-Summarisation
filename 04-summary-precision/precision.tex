@@ -186,17 +186,17 @@ The attribute error captures edges from the summary error set $Err(R)$ that have
 \subsubsection{Type Error $Err(R)_{type}$}
 
 The type error captures edges from the summary error set $Err(R)$ that impact on the schema of the entity graph, due to additional types inferred from the summary.
-For example, in the Figure~\ref{fig:attributes-summary} the node $S^a_2$ contains the nodes $\left\lbrace N_3, N_4, N_5 \right\rbrace$, since all three have the same set of attributes, i.e., $label$, $location$ and $a$. Then, we may infer from that node the possible existence of a node in $G$ with types $Place$ and $City$, which is however not the case. We define $Err(R)_{type}$ as the set that contains additional types inferred from $Err(R)$, i.e., a type attribute $(x, \gls{atype}, y) \in Err(R)$, in which the target $y$ is not in the set $types(x)$ of the node $x$.
+For example, in the Figure~\ref{fig:attributes-summary} the node $S^a_2$ contains the nodes $\left\lbrace N_3, N_4, N_5 \right\rbrace$, since all three have the same set of attributes, i.e., $label$, $location$ and $a$. Then, we may infer from that node the possible existence of a node in $G$ with types $Place$ and $City$, which is however not the case. We define $Err(R)_{type}$ as the set that contains additional types inferred from $Err(R)$, i.e., a type attribute $(x, \glssymbol{atype}, y) \in Err(R)$, in which the target $y$ is not in the set $types(x)$ of the node $x$.
 
 \begin{definition}[Type Error]
 	Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$. Let $Err(R)$ be the summary error of $\mathcal{S}$. We define the type error set $Err(R)_{type}$ as follows:
 
 	$$
-	Err(R)_{type} = \left\lbrace (x, \gls{atype}, y) \in Err(R) \mid y \not \in types(x) \right\rbrace
+	Err(R)_{type} = \left\lbrace (x, \glssymbol{atype}, y) \in Err(R) \mid y \not \in types(x) \right\rbrace
 	$$
 	where
 	$$
-	types(x \in \mathcal{W}_{fbt}) = \left\lbrace \l_{\mathcal{W}_{fbt}}(c) \mid \exists c \in \mathcal{W}_{fbt} (x, \gls{atype}, c) \in \mathcal{B}_{fbt} \right\rbrace
+	types(x \in \mathcal{W}_{fbt}) = \left\lbrace \l_{\mathcal{W}_{fbt}}(c) \mid \exists c \in \mathcal{W}_{fbt} (x, \glssymbol{atype}, c) \in \mathcal{B}_{fbt} \right\rbrace
 	$$
 \end{definition}
 

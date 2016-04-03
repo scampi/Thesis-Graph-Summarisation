@@ -12,10 +12,10 @@
 
 \path[every node/.style={fill=white,font=\footnotesize}]
 (u) edge node {$\alpha$} (v)
-(u) edge node {$\gls{atype}$} (a)
-(u) edge node {$\gls{atype}$} (b)
-(v) edge node {$\gls{atype}$} (a)
-(v) edge node {$\gls{atype}$} (b)
+(u) edge node {$\glssymbol{atype}$} (a)
+(u) edge node {$\glssymbol{atype}$} (b)
+(v) edge node {$\glssymbol{atype}$} (a)
+(v) edge node {$\glssymbol{atype}$} (b)
 
 (u) edge[dotted,-,bend right] node[near end] {$R_{st}$} (su)
 (v) edge[dotted,-,bend left] node[near start] {$R_{st}$} (sv)
@@ -24,7 +24,7 @@
 (sv) edge[loop above] node {$\alpha$} (sv)
 (su) edge[bend right = 15] node {$\alpha$} (sv)
 (sv) edge[bend right = 15] node {$\alpha$} (su)
-(su) edge node {$\gls{atype}$} (sa)
-(sv) edge node {$\gls{atype}$} (sb)
+(su) edge node {$\glssymbol{atype}$} (sa)
+(sv) edge node {$\glssymbol{atype}$} (sb)
 ;
 \end{tikzpicture}

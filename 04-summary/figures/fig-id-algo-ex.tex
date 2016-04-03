@@ -23,10 +23,10 @@
 \node[type node,below of = h2] (student) {Student};
 
 \path
-(e1) edge[red] node[fill=white] {\gls{atype}} (Aperson)
+(e1) edge[red] node[fill=white] {\glssymbol{atype}} (Aperson)
 		edge[red] node[below] {knows} (e2)
-(e2) edge[red] node[fill=white] {\gls{atype}} (Astudent)
-(Be2) edge[blue,dashed] node[fill=white] {\gls{atype}} (Bperson)
+(e2) edge[red] node[fill=white] {\glssymbol{atype}} (Astudent)
+(Be2) edge[blue,dashed] node[fill=white] {\glssymbol{atype}} (Bperson)
 (e1) edge[blue,dashed] node[below] {supervises} (Be2)
 
 (e1) edge[dotted] node[fill=white] {$R_t$} (h1)
@@ -36,8 +36,8 @@
 (h1) edge[loop right] node[right] {supervises} (h1)
 (h1) edge node[above] {knows} (h2)
 
-(h2) edge node[fill=white] {\gls{atype}} (person)
-		edge node[fill=white] {\gls{atype}} (student)
-(h1) edge node[fill=white] {\gls{atype}} (person)
+(h2) edge node[fill=white] {\glssymbol{atype}} (person)
+		edge node[fill=white] {\glssymbol{atype}} (student)
+(h1) edge node[fill=white] {\glssymbol{atype}} (person)
 ;
 \end{tikzpicture}

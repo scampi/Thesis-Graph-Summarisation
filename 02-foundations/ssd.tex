@@ -105,13 +105,13 @@ The \emph{type} of a node can be assigned by certain attributes; in RDF graphs, 
 
 \begin{definition}[Type Attributes Set $T$]
 Let $T \subset \mathcal{L}$ be a subset of labels.
-We define $T$ as the set of type attributes, and we call $\gls{atype} \in T$ a type attribute.
+We define $T$ as the set of type attributes, and we call $\glssymbol{atype} \in T$ a type attribute.
 \end{definition}
 
 For a given node $x \in V$, we consider $types(x)$ as the set of values for which the attribute is a type attribute.
 
 $$
-types(x\in V) = \left\lbrace l_V(c) \mid \exists c \in V (x, \gls{atype}, c) \in A \wedge \gls{atype} \in T \right\rbrace
+types(x\in V) = \left\lbrace l_V(c) \mid \exists c \in V (x, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \right\rbrace
 $$
 
 For instance, we have $types\left(N_6\right) = \left\{ \text{Country}, \text{Place} \right\}$ in Figure~\ref{fig:graph} as the set of type values for the node $N_6$.
@@ -149,14 +149,14 @@ We illustrate this in Figure~\ref{fig:edesc} where we might consider the entity 
 %In this thesis, we do not attempt to find the most appropriate entity description for a given graph. We choose the approach taken in Delbru et. al.~\cite{delbru:jws:entity}, where an entity description consists of the \emph{outgoing} edges adjacent to a node. This forms then what we call a \emph{star graph}.
 %
 %\begin{definition}[Entity Description]
-%Let $G = \left\langle V, A, l_V \right\rangle$ be a graph. We define the \emph{entity description} $\gls{edesc}(u \in V)$ as the set of outgoing edges:
+%Let $G = \left\langle V, A, l_V \right\rangle$ be a graph. We define the \emph{entity description} $\glssymbol{edesc}(u \in V)$ as the set of outgoing edges:
 %$$
-%\gls{edesc}(u \in V) = \left\lbrace (u, \alpha, v) \in A \mid \exists v \in V \right\rbrace
+%\glssymbol{edesc}(u \in V) = \left\lbrace (u, \alpha, v) \in A \mid \exists v \in V \right\rbrace
 %$$
 %\end{definition}
 
 \begin{definition}[Entity Description]
-Let $G = \left\langle V, A, l_V \right\rangle$ be a graph. We define the entity description of a node $u \in V$ as the set of edges $\gls{edesc}(u) \subseteq A$ that describe that node.
+Let $G = \left\langle V, A, l_V \right\rangle$ be a graph. We define the entity description of a node $u \in V$ as the set of edges $\glssymbol{edesc}(u) \subseteq A$ that describe that node.
 \label{def:entity-description}
 \end{definition}
 
@@ -188,5 +188,5 @@ We extend without loss of generality the definitions presented in this chapter t
 
 \begin{itemize}
 \item $G_d = \left\langle V_i, A_i, l_{V_i} \right\rangle$: The label of the graph $G$ is $d$, i.e., $l_G(G) = d$.
-\item $\gls{edesc}_d$: The edges from the entity description belong to a graph which dataset label is $d$.
+\item $\glssymbol{edesc}_d$: The edges from the entity description belong to a graph which dataset label is $d$.
 \end{itemize}

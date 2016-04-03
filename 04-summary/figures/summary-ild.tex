@@ -25,15 +25,15 @@
 \node[main node,below right of = t1] (tvn) {$\varnothing$};
 
 \path[every node/.style={fill=white,font=\small\ttfamily}]
-(n1) edge node {\gls{atype}} (person)
+(n1) edge node {\glssymbol{atype}} (person)
 		edge node {name} (john)
 		edge[dotted] node {$R_t$} (t1)
- edge node {\gls{atype}} (doc)
+ edge node {\glssymbol{atype}} (doc)
 		edge node {title} (rama)
 		edge[dotted] node {$R_t$} (t1)
-(t1) edge node {\gls{atype}} (tperson)
-		edge node {\gls{atype}} (tdoc)
-		edge node {\gls{atype}} (tdoc)
+(t1) edge node {\glssymbol{atype}} (tperson)
+		edge node {\glssymbol{atype}} (tdoc)
+		edge node {\glssymbol{atype}} (tdoc)
 		edge[bend left = 20] node {name} (tvn)
 		edge[bend right = 20] node {title} (tvn)
 ;

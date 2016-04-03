@@ -3,7 +3,7 @@
 
 In general, an entity contains some structure which provides relevant information about its content. For example, an entity that describes a book would be divided into chapters, each chapter into sections, each section into a set of paragraphs. In order to retain this structure for later use in the ranking, we generalize field-based approaches with the ``MF'' ranking model for Directed Acyclic Graphs (DAG) by integrating the complete graph structure into its model.
 
-First, we present the revised entity model and introduce the formal model of MF. Next we present two extensions to the MF model. Finally, we describe weights developed for the MF model.
+First, we present the revised entity model and introduce the formal model of \gls{MF}. Next we present two extensions to the \gls{MF} model. Finally, we describe weights developed for the \gls{MF} model.
 
 \subsection{Model}
 
@@ -15,7 +15,7 @@ In traditional field-based ranking models, an entity is modelled as a set of fie
 \end{itemize}
 However, a shortcoming is that the relationship between nodes is discarded within a field. Indeed, in traditional field-based ranking models, most of the entity's structure is discarded.\\
 
-Rather that representing the entity as a set of fields, the MF ranking model follows the structure of the graph. Each node of the graph --- not a set of nodes --- is represented as a bag of words. This allows to capture the structure of the graph into the ranking model.
+Rather that representing the entity as a set of fields, the \gls{MF} ranking model follows the structure of the graph. Each node of the graph --- not a set of nodes --- is represented as a bag of words. This allows to capture the structure of the graph into the ranking model.
 
 \paragraph{Eliteness.}
 
@@ -23,7 +23,7 @@ In \cite{harter:1974:thesis}, Harter introduced the notion of \emph{eliteness} i
 
 In \cite{zaragoza:2004:microsoft}, Zaragoza et al. extend the notion of eliteness to documents with multiple fields. In \cite{robertson:2004:cikm}, the authors argue that the normalized frequencies of a term in each field should be combined before applying the term weighting model.
 
-Similarly in our MF model, the term eliteness in an entity is shared between its attributes. The values related to a same attribute are associated to a same topic, described by the edge label. Therefore, a term eliteness in an attribute is shared between its values. For nested entities that are more than a hop away from the root, the same interpretation applies.\\
+Similarly in our \gls{MF} model, the term eliteness in an entity is shared between its attributes. The values related to a same attribute are associated to a same topic, described by the edge label. Therefore, a term eliteness in an attribute is shared between its values. For nested entities that are more than a hop away from the root, the same interpretation applies.\\
 
 In the following paragraphs, we describe how the term eliteness is garnered from every node of the entity description.
 
@@ -64,7 +64,7 @@ we expand the graph so that each label becomes a leaf. To do so, we transform th
 		\caption{The expanded graph of the entity in Figure~\ref{fig:concept-tree} where each node of the graph in Figure~\ref{fig:expanded-graph1} becomes a leaf. Nodes labelled with $*$ depict aggregations.}
 		\label{fig:expanded-graph2}
 	\end{subfigure}
-	\caption{Depiction of the MF model}
+	\caption[Depiction of the MF model]{Depiction of the \gls{MF} model}
 \end{figure}
 
 \paragraph{Algorithm.}
@@ -86,7 +86,7 @@ In order to account for this variability in the dataset, there is a need for \em
 Thanks to the normalisation, it is possible to compare the relevance with regards to a query of entities within a dataset.\\
 
 With traditional field-based ranking models, there is one level of normalisation that is performed on the content level, as discussed in the previous paragraph.
-We can provide an additional normalisation, making two possible levels of normalisations with the MF ranking model:
+We can provide an additional normalisation, making two possible levels of normalisations with the \gls{MF} ranking model:
 \begin{enumerate}
 	\item a normalisation on the \emph{content} level to account for the variability of a node's length within a dataset; and
 	\label{norm:content}
@@ -114,14 +114,14 @@ The first normalisation is applied on the \emph{leaf} nodes of the DAG. The seco
 %  	\begin{subfigure}{0.3\textwidth}
 %  		\centering
 %  		\input{05-ranking/figures/tikz/mf-model}
-%  		\caption{The MF ranking model for the entity. A square symbolizes where the contribution of a query term is performed. Red dashed squares represents internal nodes in the entity tree that were transformed into a leaf.}
+%  		\caption{The \gls{MF} ranking model for the entity. A square symbolizes where the contribution of a query term is performed. Red dashed squares represents internal nodes in the entity tree that were transformed into a leaf.}
 %		\label{fig:mf-model}
 %  	\end{subfigure}
 %  	\quad
 %  	\begin{subfigure}{\textwidth}
 %  		\centering
 %	  	\input{05-ranking/figures/tikz/mf-ranking}
-%  		\caption{Normalized term frequency computation in the MF ranking for the entity.}
+%  		\caption{Normalized term frequency computation in the \gls{MF} ranking for the entity.}
 %  		\label{fig:mf-ranking}
 %  	\end{subfigure}
 %	\caption{Abstract models for ranking a tree.}
@@ -131,12 +131,12 @@ The first normalisation is applied on the \emph{leaf} nodes of the DAG. The seco
 \subsection{MF Ranking Functions}
 \label{sec:mf-function}
 
-In this section, we describe \emph{BM25MF} and \emph{PL2MF}, the MF extensions of BM25F~\cite{zaragoza:2004:microsoft} and PL2F~\cite{macdonald:2005:clef}, respectively.
-We present first the features needed for the MF ranking model and then define both extensions.
+In this section, we describe \emph{\gls{BM25MF}} and \emph{\gls{PL2MF}}, the \gls{MF} extensions of BM25F~\cite{zaragoza:2004:microsoft} and PL2F~\cite{macdonald:2005:clef}, respectively.
+We present first the features needed for the \gls{MF} ranking model and then define both extensions.
 
 \paragraph{Ranking features.}
 
-The MF model introduces two levels of normalisations. In order to implement them, the following features are needed:
+The \gls{MF} model introduces two levels of normalisations. In order to implement them, the following features are needed:
 
 \subparagraph{Features for Normalisation~\ref{norm:content}.}
 
@@ -156,9 +156,9 @@ The MF model introduces two levels of normalisations. In order to implement them
 \label{sec:bm25mf-function}
 
 BM25F is extended by adapting the Equation (\ref{eq:bm25f_1}). The resulting normalised term frequency is then passed to the saturation function in the Equation (\ref{eq:bm25f_2}).
-The computation of the entity score with BM25MF consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively.\\
+The computation of the entity score with \gls{BM25MF} consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively.\\
 
-The BM25MF ranking function is defined following the two levels of normalisations.
+The \gls{BM25MF} ranking function is defined following the two levels of normalisations.
 The $f_{t,L}$ function implements the Normalisation~\ref{norm:content} on the content and is defined as follows:
 \begin{equation}
 \label{bm25mf_v}
@@ -208,9 +208,9 @@ The result of the $f_{t,I}$ function is then passed to the parent node; it is su
 \label{sec:pl2mf-function}
 
 PL2F is extended by adapting the Equation (\ref{eq:pl2f}). The resulting normalised term frequency is then passed to the normalisation function (\ref{eq:dfr-prisk}).
-Similarly to the BM25MF extension, the computation of the entity score with PL2MF consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively. We reuse the same notation as the ones from the previous section.\\ 
+Similarly to the \gls{BM25MF} extension, the computation of the entity score with \gls{PL2MF} consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively. We reuse the same notation as the ones from the previous section.\\ 
 
-The PL2MF ranking function is defined following the two levels of normalisations. The notation used in the following two functions are similar to the one introduced in Section~\ref{sec:bm25mf-function} for the BM25MF extension.
+The \gls{PL2MF} ranking function is defined following the two levels of normalisations. The notation used in the following two functions are similar to the one introduced in Section~\ref{sec:bm25mf-function} for the \gls{BM25MF} extension.
 The $f_{t,L}$ function implements the Normalisation~\ref{norm:content} on the content and is defined as follows:
 \begin{equation}
 \label{eq:pl2mf_v}
@@ -228,10 +228,10 @@ where $c_a$ is a parameter particular to the PL2F ranking function applied on in
 \subsubsection{Generalisation}
 
 With both extensions in Equations (\ref{bm25mf_v}) and (\ref{eq:pl2mf_v}), we normalize the term frequency $F_t$ based on the \emph{average field length} $l_a$. In Equations (\ref{bm25mf_a}) and (\ref{eq:pl2mf_a}), we further normalize the term frequency based on the \emph{average attribute cardinality} $\left|{a}\right|$.
-In addition to attribute-specific weights $\alpha_a$, the MF ranking model allows value-specific weights in its implementations with the parameter $\alpha_v$. We present value and attribute specific weights in the next section.\\
+In addition to attribute-specific weights $\alpha_a$, the \gls{MF} ranking model allows value-specific weights in its implementations with the parameter $\alpha_v$. We present value and attribute specific weights in the next section.\\
 
-If we assume a single value per attribute to match field-based ranking models, then the Equations (\ref{bm25mf_v}) and (\ref{bm25mf_a}) are transformed into the Equation (\ref{eq:bm25f_2}), with $\alpha_a\times\alpha_v$ as the BM25F's attribute weight, and $b_v$ as the attribute normalisation parameter. BM25MF is under this condition equivalent to BM25F.
+If we assume a single value per attribute to match field-based ranking models, then the Equations (\ref{bm25mf_v}) and (\ref{bm25mf_a}) are transformed into the Equation (\ref{eq:bm25f_2}), with $\alpha_a\times\alpha_v$ as the BM25F's attribute weight, and $b_v$ as the attribute normalisation parameter. \gls{BM25MF} is under this condition equivalent to BM25F.
 
-Under the same assumption, the Equations (\ref{eq:pl2mf_v}) and (\ref{eq:pl2mf_a}) are transformed into the Equation (\ref{eq:pl2f}), with $\alpha_a\times\alpha_v\times log_2(1+c_a)$ as the PL2F's attribute weight. PL2MF is under this condition equivalent to PL2F.\\
+Under the same assumption, the Equations (\ref{eq:pl2mf_v}) and (\ref{eq:pl2mf_a}) are transformed into the Equation (\ref{eq:pl2f}), with $\alpha_a\times\alpha_v\times log_2(1+c_a)$ as the PL2F's attribute weight. \gls{PL2MF} is under this condition equivalent to PL2F.\\
 
-Therefore, the MF model is a generalisation of field-based models for directed acyclic graphs.
+Therefore, the \gls{MF} model is a generalisation of field-based models for directed acyclic graphs.

@@ -1,9 +1,9 @@
 \section{Experiments}
 \label{sec:experiments}
 
-In order to evaluate the MF model, we perform several experiments using three different datasets. We start by experimenting on the normalisation parameters in order to study their impact on the effectiveness of the approach. We then compare the MF ranking functions against other traditional ones. We finally discuss the consequence of \textbf{not} considering the attribute label as a source of potential relevant terms and demonstrate the effectiveness of the proposed weights.
+In order to evaluate the \gls{MF} model, we perform several experiments using three different datasets. We start by experimenting on the normalisation parameters in order to study their impact on the effectiveness of the approach. We then compare the \gls{MF} ranking functions against other traditional ones. We finally discuss the consequence of \textbf{not} considering the attribute label as a source of potential relevant terms and demonstrate the effectiveness of the proposed weights.
 
-While there are other ways to perform entity ranking on the Web of Data, e.g., one can look at the other SemSearch 2011 candidates, in this evaluation we concentrate on demonstrating how the MF model specifically extends and improves the very popular PRF and DFR frameworks.
+While there are other ways to perform entity ranking on the Web of Data, e.g., one can look at the other SemSearch 2011 candidates, in this evaluation we concentrate on demonstrating how the \gls{MF} model specifically extends and improves the very popular PRF and DFR frameworks.
 %\footnote{SemSearch2011: \url{http://km.aifb.kit.edu/ws/semsearch11}}
 
 \subsection{Datasets}
@@ -17,21 +17,21 @@ The datasets we are using in our experiments are the following:
 \end{description}
 The INEX09 dataset is significantly different than the other two based on BTC. Indeed, BTC is a heterogeneous dataset, created from web crawls of several search engines. INEX09 is a highly curated dataset from DBpedia.
 
-%\subsection{Effectiveness of the MF Ranking Model}
+%\subsection{Effectiveness of the \gls{MF} Ranking Model}
 %\label{sec:mv-fields-effectiveness}
 %
-% Next we perform a comparison between the MF extensions, i.e., BM25MF and PL2MF, against other ranking approaches.
+% Next we perform a comparison between the \gls{MF} extensions, i.e., BM25MF and PL2MF, against other ranking approaches.
 
 \subsection{\emph{The Normalisation Parameters}}
 \label{sec:norm-exp}
 
-In this section, we study the impact on the ranking of the normalisation parameters. In addition to the length normalisation of field-based ranking function (Normalisation~\ref{norm:content}), the MF ranking model offers an additional normalisation on the attribute's cardinality (Normalisation~\ref{norm:degree}). The effectiveness of the PRF and DFR frameworks depends on finding the right values for the normalisation parameters. However, these parameters are highly dependent on the dataset.\\
+In this section, we study the impact on the ranking of the normalisation parameters. In addition to the length normalisation of field-based ranking function (Normalisation~\ref{norm:content}), the \gls{MF} ranking model offers an additional normalisation on the attribute's cardinality (Normalisation~\ref{norm:degree}). The effectiveness of the PRF and DFR frameworks depends on finding the right values for the normalisation parameters. However, these parameters are highly dependent on the dataset.\\
 
-Figures~\ref{fig:bm25mf-norm} and~\ref{fig:pl2mf-norm} depict the impact of the normalisation parameters on the ranking performance of BM25MF and PL2MF, respectively. For all three datasets, the figures depict on the \textbf{Y} axis the Mean Average Precision (MAP) scores, and on the \textbf{X} axis the Normalisation~\ref{norm:content}, i.e., with parameter $b_v$ in Figure~\ref{fig:bm25mf-norm} (resp., parameter $c_v$ in Figure~\ref{fig:pl2mf-norm}). Each curve plots the results with a fixed Normalisation~\ref{norm:degree} parameter, i.e., $b_a$ in Figure~\ref{fig:bm25mf-norm} and $c_a$ in Figure~\ref{fig:pl2mf-norm}.
+Figures~\ref{fig:bm25mf-norm} and~\ref{fig:pl2mf-norm} depict the impact of the normalisation parameters on the ranking performance of \gls{BM25MF} and \gls{PL2MF}, respectively. For all three datasets, the figures depict on the \textbf{Y} axis the Mean Average Precision (MAP) scores, and on the \textbf{X} axis the Normalisation~\ref{norm:content}, i.e., with parameter $b_v$ in Figure~\ref{fig:bm25mf-norm} (resp., parameter $c_v$ in Figure~\ref{fig:pl2mf-norm}). Each curve plots the results with a fixed Normalisation~\ref{norm:degree} parameter, i.e., $b_a$ in Figure~\ref{fig:bm25mf-norm} and $c_a$ in Figure~\ref{fig:pl2mf-norm}.
 
-The grid of parameters values in Figure~\ref{fig:bm25mf-norm} ranges from $0$ to $1$ with a step of $0.1$. In Figure~\ref{fig:pl2mf-norm}, the grid ranges from $0.5$ to $10.5$ with a step of $1$. Although these parameters can be attribute and value-specific, this experiment considers a constant parameter in order to reduce the number of combinations and to lower the variability of the results. Dashed lines depict the MAP scores of BM25F and PL2F and solid lines the scores of their MF extension, BM25MF and PL2MF respectively.\\
+The grid of parameters values in Figure~\ref{fig:bm25mf-norm} ranges from $0$ to $1$ with a step of $0.1$. In Figure~\ref{fig:pl2mf-norm}, the grid ranges from $0.5$ to $10.5$ with a step of $1$. Although these parameters can be attribute and value-specific, this experiment considers a constant parameter in order to reduce the number of combinations and to lower the variability of the results. Dashed lines depict the MAP scores of BM25F and PL2F and solid lines the scores of their \gls{MF} extension, \gls{BM25MF} and \gls{PL2MF} respectively.\\
 
-These plots show that Normalisation~\ref{norm:degree}, the normalisation introduced with the MF ranking model, improves the performance. Indeed, the Normalisation~\ref{norm:content} parameters $b_v$ and $c_v$, which are traditional to the field-based ranking model, do not grasp completely the heterogeneity in the data, which results in lower performance when compared to the MF extensions. This indicates that the distinction between leaves within an attribute has a positive effect on the ranking.
+These plots show that Normalisation~\ref{norm:degree}, the normalisation introduced with the \gls{MF} ranking model, improves the performance. Indeed, the Normalisation~\ref{norm:content} parameters $b_v$ and $c_v$, which are traditional to the field-based ranking model, do not grasp completely the heterogeneity in the data, which results in lower performance when compared to the \gls{MF} extensions. This indicates that the distinction between leaves within an attribute has a positive effect on the ranking.
 
 \begin{figure}
 	\centering
@@ -50,13 +50,13 @@ These plots show that Normalisation~\ref{norm:degree}, the normalisation introdu
 		\caption{Evaluation of PL2MF normalisation parameters. A curve plots a fixed $c_v$ value (Equation~(\ref{eq:pl2mf_v})) with $c_a$ (Equation~(\ref{eq:pl2mf_a})) varying from $0.5$ to $10.5$ with a precision step of $1$.}
 		\label{fig:pl2mf-norm}
 	\end{subfigure}
-	\caption[Impact of the normalisation parameters on the MF ranking functions]{Impact of the normalisation parameters on the MF ranking functions. The figures report the MAP values of the respective datasets on the Y axis. On the X axis and with each curve, we vary the values of normalisation parameters.}
+	\caption[Impact of the normalisation parameters on the MF ranking functions]{Impact of the normalisation parameters on the \gls{MF} ranking functions. The figures report the MAP values of the respective datasets on the Y axis. On the X axis and with each curve, we vary the values of normalisation parameters.}
 \end{figure}
 
 \subsection{Comparison between MF and Field-Based Models}
 \label{sec:mf-field-cmp}
 
-In this section, we evaluate and compare the performance of the BM25 and PL2 ranking models against their MF extensions, BM25MF and PL2F respectively, and show the superiority of the MF model. The TF-IDF function is used as a baseline.
+In this section, we evaluate and compare the performance of the BM25 and PL2 ranking models against their \gls{MF} extensions, \gls{BM25MF} and PL2F respectively, and show the superiority of the \gls{MF} model. The TF-IDF function is used as a baseline.
 
 We outline below the ranking functions that are used in the experiments. We reuse the terminology for the equations that was presented in the previous section.
 
@@ -86,34 +86,34 @@ The Table~\ref{tab:norm-param} reports the values of normalisation parameters fo
 
 \input{05-ranking/figures/experiments/norm-param}
 
-Using such parameters, we report in Figures~\ref{fig:bm25mf-field-cmp-bar}~and~\ref{fig:pl2mf-field-cmp-bar} the performance of the ranking functions on the three datasets, for BM25MF and PL2MF respectively. The raw results of the bar charts are available in the Appendix section, in Table~\ref{tab:ranking-cmp-results}.
+Using such parameters, we report in Figures~\ref{fig:bm25mf-field-cmp-bar}~and~\ref{fig:pl2mf-field-cmp-bar} the performance of the ranking functions on the three datasets, for \gls{BM25MF} and \gls{PL2MF} respectively. The raw results of the bar charts are available in the Appendix section, in Table~\ref{tab:ranking-cmp-results}.
 
-Using the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, the difference between a candidate ranking function and a MF extension is statistically significant at level $0.05$ if the bar is displayed with a \textit{dot} pattern; it is statistically significant at level $0.10$ if displayed with a \emph{oblique lines} pattern instead.\\
+Using the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, the difference between a candidate ranking function and a \gls{MF} extension is statistically significant at level $0.05$ if the bar is displayed with a \textit{dot} pattern; it is statistically significant at level $0.10$ if displayed with a \emph{oblique lines} pattern instead.\\
 
-%We note that for field-based ranking models and their MF extensions, the attribute label is considered as a value node, in order to be a source of potential relevant terms.
+%We note that for field-based ranking models and their \gls{MF} extensions, the attribute label is considered as a value node, in order to be a source of potential relevant terms.
 TF-IDF provides a clear-cut discrepancy between INEX09 and the datasets based on BTC, i.e., SS10 and SS11, the reason being it is not suited for heterogeneous datasets.
 
-On SS10, BM25MF (resp., PL2MF) does not report a significant difference with BM25 (resp., PL2). On INEX09 and SS11, the MF extensions provide an increase of at least $10\%$ in retrieval performance compared to BM25 and PL2.
+On SS10, \gls{BM25MF} (resp., \gls{PL2MF}) does not report a significant difference with BM25 (resp., PL2). On INEX09 and SS11, the \gls{MF} extensions provide an increase of at least $10\%$ in retrieval performance compared to BM25 and PL2.
 
-On SS10 and SS11, the MF extensions provide better ranking performance with a significant difference than the field-based ranking functions with an increase of $15\%$ at the minimum. On INEX09, PL2F and its MF extension PL2MF provide similar ranking performance.
+On SS10 and SS11, the \gls{MF} extensions provide better ranking performance with a significant difference than the field-based ranking functions with an increase of $15\%$ at the minimum. On INEX09, PL2F and its \gls{MF} extension \gls{PL2MF} provide similar ranking performance.
 
-Overall, the experiments show that the MF model improves significantly the ranking effectiveness over traditional field-based methods. In addition, the experiments emphasize as well the fine tuning possible with the MF ranking model, allowing to better fit the ranking to a specific dataset.
+Overall, the experiments show that the \gls{MF} model improves significantly the ranking effectiveness over traditional field-based methods. In addition, the experiments emphasize as well the fine tuning possible with the \gls{MF} ranking model, allowing to better fit the ranking to a specific dataset.
 
 \input{05-ranking/figures/experiments/mf-field-cmp-bar}
 
 \subsection{Effectiveness of the Weights}
 \label{sec:weights-effectiveness}
 
-In this section, we evaluate the impact of the presented weights over the MF ranking extensions. First, we discuss the impact of discarding the attribute label as a source of possible relevant terms on the ranking performance. Then, we evaluate the weights from Section~\ref{sec:weights} developed for the MF model.
+In this section, we evaluate the impact of the presented weights over the \gls{MF} ranking extensions. First, we discuss the impact of discarding the attribute label as a source of possible relevant terms on the ranking performance. Then, we evaluate the weights from Section~\ref{sec:weights} developed for the \gls{MF} model.
 
-Results of the evaluations are depicted in Figure~\ref{fig:mf-weights}. The PL2MF results are displayed on the left side of the figures, and on the right side the results of BM25MF. Using the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, the MF extension with no added weight is used as the base of the comparison. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead. Raw results are reported in Table~\ref{tab:mf-effect} of the Appendix section.
+Results of the evaluations are depicted in Figure~\ref{fig:mf-weights}. The \gls{PL2MF} results are displayed on the left side of the figures, and on the right side the results of \gls{BM25MF}. Using the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, the \gls{MF} extension with no added weight is used as the base of the comparison. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the \gls{MF} extension; bars with a oblique lines pattern is at level $0.10$ instead. Raw results are reported in Table~\ref{tab:mf-effect} of the Appendix section.
 
 \subsubsection{\emph{Impact of the Attribute Label}}
 \label{sec:with-att}
 
 In this section, we investigate the consequence of \textbf{not} considering the attribute label as a source of potentially relevant terms, i.e., the attribute is not expanded into a leaf as described in Section~\ref{chap:tree-ranking:mf-model}.
 
-Figure~\ref{fig:mf-att} depicts the results, where we observe that removing the attribute label lowers the performance of the ranking with a statistical significance on INEX09 with BM25MF and PL2MF, and on SS11 with PL2MF only. This shows that the attribute labels can be a source of possible relevant terms.
+Figure~\ref{fig:mf-att} depicts the results, where we observe that removing the attribute label lowers the performance of the ranking with a statistical significance on INEX09 with \gls{BM25MF} and \gls{PL2MF}, and on SS11 with \gls{PL2MF} only. This shows that the attribute labels can be a source of possible relevant terms.
 
 \subsubsection{\emph{Query Coverage Weight}}
 \label{sec:qc-weight-effect}
@@ -127,7 +127,7 @@ We observe in Figure~\ref{fig:mf-qc} that the QC weight improves the retrieval p
 
 The evaluation of the leaf coverage weight LC investigates its efficiency with and without the \emph{control} function (\ref{eq:lc-norm}), where we depict the results in Figure~\ref{fig:mf-lc}.
 
-We provide for each dataset the best performing parameters described in Section~\ref{sec:leaf-coverage} for the control function. For the three datasets regardless of the MF extension, the values are as follows:
+We provide for each dataset the best performing parameters described in Section~\ref{sec:leaf-coverage} for the control function. For the three datasets regardless of the \gls{MF} extension, the values are as follows:
 \begin{description}
 	\item[INEX09:] $n=1\;\;\alpha=0.7$;
 	\item[SS10:] $n=2\;\;\alpha=0.4$; and
@@ -153,7 +153,7 @@ We evaluate the Attribute and Entity Labels (AEL) weights first by considering t
 
 We note that the Attribute Label weight gives significant benefits to the ranking in SS10 and SS11, while it decreases the ranking performance in INEX09. This indicates that carefully defined weights for important and non-important attributes can contribute significantly to the effectiveness of the approach. We note also that the same can be seen with the Entity Label weight applied alone. The reason is similar to the Attribute Label weight.
 
-Except for INEX09, using both weights at the same time increases the performance of MF ranking functions noticeably.
+Except for INEX09, using both weights at the same time increases the performance of \gls{MF} ranking functions noticeably.
 
 \subsubsection{\emph{Combination of Weights}}
 \label{sec:combi-weight-effect}
@@ -168,7 +168,7 @@ In this section, we investigate the retrieval performance when all four weights 
 The weights applied on a same node are combined by the multiplication of each weight value on that node.
 The attribute and entity label being leaves in the ranking model, we apply also the QC weight on those two in this experiment.
 
-On INEX09 their combination decreases slightly the performance for PL2MF. On SS10 and SS11, although the QC and LC weights applied separately do not improve the effectiveness of the MF ranking functions by much, their combination with AEL increases the retrieval performance by at least $30\%$ on SS10 and SS11.
+On INEX09 their combination decreases slightly the performance for \gls{PL2MF}. On SS10 and SS11, although the QC and LC weights applied separately do not improve the effectiveness of the \gls{MF} ranking functions by much, their combination with AEL increases the retrieval performance by at least $30\%$ on SS10 and SS11.
 
 \begin{figure}
 	\centering
@@ -216,7 +216,7 @@ On INEX09 their combination decreases slightly the performance for PL2MF. On SS1
 		\caption{All weights combined}
 		\label{fig:mf-all}
 	\end{subfigure}
-	\caption[Evaluation of weights with the MF ranking extensions]{Evaluation of weights with the MF extensions. The PL2MF results are displayed on the left side of the figures, and the results of BM25MF are on the right side. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the MF extension; bars with a oblique lines pattern is at level $0.10$ instead.}
+	\caption[Evaluation of weights with the MF ranking extensions]{Evaluation of weights with the \gls{MF} extensions. The \gls{PL2MF} results are displayed on the left side of the figures, and the results of \gls{BM25MF} are on the right side. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the \gls{MF} extension; bars with a oblique lines pattern is at level $0.10$ instead.}
 	\label{fig:mf-weights}
 \end{figure}
 
@@ -228,7 +228,7 @@ Graph summarisation is used for extracting the underlying structure of graph-sha
 Yu and Yagadish propose in~\cite{yu:2006:schema-summarization} to ``summarise'' an \emph{existing} database schema by showing only the \emph{important} parts. This allows to get a succinct overview of the database.
 However, that work proposes an approach that is independent of the actual information need of a user.
 
-In the case of a graph summary, we consider the information need of a user to be expressed as a graph-shaped query. Given a query over the summary, we propose to rank its solutions using the MF ranking model. In this way, the user will first browse subgraphs of the summary that are most relevant to his need. In this section, we evaluate the MF ranking model applied to a summary, showing the ability of the two levels of Normalisations in MF for fine-tuning of the ranking function.
+In the case of a graph summary, we consider the information need of a user to be expressed as a graph-shaped query. Given a query over the summary, we propose to rank its solutions using the \gls{MF} ranking model. In this way, the user will first browse subgraphs of the summary that are most relevant to his need. In this section, we evaluate the \gls{MF} ranking model applied to a summary, showing the ability of the two levels of Normalisations in \gls{MF} for fine-tuning of the ranking function.
 
 \subsection{Dataset}
 \label{sec:summary-ranking:dataset}
@@ -430,7 +430,7 @@ As an example, we consider the graph in Figure~\ref{fig:sparql-solution} that is
 
 \paragraph{Ranking functions.}
 
-We present the basic and MF-based approaches, two ranking functions that can be applied over a graph summary.
+We present the basic and \gls{MF}-based approaches, two ranking functions that can be applied over a graph summary.
 
 \subparagraph{Basic approach.}
 
@@ -442,15 +442,15 @@ A straightforward approach consists in summing up all the statistics available t
 
 \subparagraph{MF-based approach.}
 
-In this approach, we apply both normalisations available with the MF ranking model, i.e., Normalisations~\ref{norm:content} and~\ref{norm:degree}. The difference of this approach with previous is that the \emph{average cardinality} of every node is considered.
+In this approach, we apply both normalisations available with the \gls{MF} ranking model, i.e., Normalisations~\ref{norm:content} and~\ref{norm:degree}. The difference of this approach with previous is that the \emph{average cardinality} of every node is considered.
 
 \subsection{Evaluation}
 \label{sec:summary-ranking:eval}
 
 In Section~\ref{sec:summary-ranking:dataset} we presented a dataset of queries that were extracted from logs of the DBpedia SPARQL endpoint. In Section~\ref{sec:summary-ranking:eval} we introduced two ranking functions that we apply on sub-graphs of a graph summary which is, in this evaluation, that of DBpedia.
-In this experiment, we evaluate the performance of the MF-based approach at ranking subgraphs of a graph summary.
+In this experiment, we evaluate the performance of the \gls{MF}-based approach at ranking subgraphs of a graph summary.
 
-We present first the ranking paradigm that we follow, before describing the experiment itself. Then, we describe the evaluation method for asserting the performance of the MF extension. Finally, we discuss the results of the experiment.
+We present first the ranking paradigm that we follow, before describing the experiment itself. Then, we describe the evaluation method for asserting the performance of the \gls{MF} extension. Finally, we discuss the results of the experiment.
 
 \paragraph{Ranking paradigm.}
 
@@ -458,7 +458,7 @@ Given a SPARQL query, its solutions retrieved from a graph summary can be errone
 
 \paragraph{Experimental setting.}
 
-Due to imprecisions in a summary as discussed in Chapter~\ref{chap03:sec:quality}, a query can return solutions that do not have any actual \emph{summary instance} in the entity graph. We the present the following experimental setting in order to evaluate the performance of the MF extension with regards to the ranking paradigm.\\
+Due to imprecisions in a summary as discussed in Chapter~\ref{chap03:sec:quality}, a query can return solutions that do not have any actual \emph{summary instance} in the entity graph. We the present the following experimental setting in order to evaluate the performance of the \gls{MF} extension with regards to the ranking paradigm.\\
 
 Given a SPARQL query extracted from the USEWOD2013 query logs of DBpedia, we replace with a variable that we denote as ``\emph{?POF}'' a term of the query, one at a time. A term is either a predicate or an object of a triple pattern. The resulting query is then executed over a graph summary of DBpedia.\\
 
@@ -514,11 +514,11 @@ The MAP measure averages that metric over all the queries that were executed.
 
 \paragraph{Discussion.}
 
-We compare in this paragraph the performance of both ranking functions when applied over the Types summary of DBpedia. First, we evaluate the impact of the normalisation parameters on the MF-based ranking approach. Then, we discuss the ranking performance of the basic and MF-based approaches.
+We compare in this paragraph the performance of both ranking functions when applied over the Types summary of DBpedia. First, we evaluate the impact of the normalisation parameters on the \gls{MF}-based ranking approach. Then, we discuss the ranking performance of the basic and \gls{MF}-based approaches.
 
 \subparagraph{Normalisation parameters impact.}
 
-Figures~\ref{fig:summary-ranking-norm} depict the impact of the Normalisation~\ref{norm:content} and~\ref{norm:degree} parameters on the ranking of graphs. On the X axis we vary the value of the parameter $b_a$ for Normalisation~\ref{norm:degree}. Each curve corresponds to a value of the parameter $b_v$ fro Normalisation~\ref{norm:content}. On the Y axis we report the MAP measurement for the MF-based ranking approach. The raw results of the curves are available in Appendix~\ref{tab:summary-ranking-norm}.\\
+Figures~\ref{fig:summary-ranking-norm} depict the impact of the Normalisation~\ref{norm:content} and~\ref{norm:degree} parameters on the ranking of graphs. On the X axis we vary the value of the parameter $b_a$ for Normalisation~\ref{norm:degree}. Each curve corresponds to a value of the parameter $b_v$ fro Normalisation~\ref{norm:content}. On the Y axis we report the MAP measurement for the \gls{MF}-based ranking approach. The raw results of the curves are available in Appendix~\ref{tab:summary-ranking-norm}.\\
 
 In this experiment, we divided the queries into two categories: simple graphs and complex graphs. Simple graphs indicate queries that have only one star, i.e., the queries from the complexity categories 10, 9, 6, 5, 4, 3, and 2. Complex graphs represents queries that contain more than one star, i.e., the queries with complexity categories 1-1-4, 1-1-3, 1-1-2, 3-4, 2-2, 1-5, 1-4, 1-3, 1-2, and 1-1.
 
@@ -526,17 +526,17 @@ Figure~\ref{fig:summary-ranking-norm-simple} depicts the \emph{average} of the M
 
 We observe that with simple graphs in Figure~\ref{fig:summary-ranking-norm-simple} the parameter $b_a$ for Normalisation~\ref{norm:degree} reported on the X axis has little effect on the ranking. On the contrary, we see it has a positive impact in Figure~\ref{fig:summary-ranking-norm-complex} for complex graphs.
 The parameter $b_v$ for Normalisation~\ref{norm:content} increases the performance of the ranking as its value reaches $1$.
-This shows the normalisation parameters introduced with the MF ranking model allow a fine tuning of the ranking to the data at hand.
+This shows the normalisation parameters introduced with the \gls{MF} ranking model allow a fine tuning of the ranking to the data at hand.
 
 \input{05-ranking/figures/summary-group-norm}
 
 \subparagraph{Basic and MF-based approaches comparison.}
 
-Given the outcome of the previous experiment, we set to $1.0$ the parameters of the Normalisations in the MF-based approach for the comparison between MF-based and basic ranking approaches of the graph summary.\\
+Given the outcome of the previous experiment, we set to $1.0$ the parameters of the Normalisations in the \gls{MF}-based approach for the comparison between \gls{MF}-based and basic ranking approaches of the graph summary.\\
 
-Table~\ref{tab:summary-ranking-cmp} reports the MAP values of the basic and MF-based approaches over the Types summary of Dbpedia. We write the MAP value in bold for the approach that has the greatest. We observe that for a majority of the query complexities, the MF-based approach provides a better ranking than the basic approach.
+Table~\ref{tab:summary-ranking-cmp} reports the MAP values of the basic and \gls{MF}-based approaches over the Types summary of Dbpedia. We write the MAP value in bold for the approach that has the greatest. We observe that for a majority of the query complexities, the \gls{MF}-based approach provides a better ranking than the basic approach.
 
-This shows the benefits of the MF ranking model of normalising the data over two levels: the Normalisation~\ref{norm:content} allows to compare several solutions to a query regardless of different statistics they might have; with the Normalisation~\ref{norm:degree}, it is possible to rank solutions to a query that have different degree of a same attribute.
+This shows the benefits of the \gls{MF} ranking model of normalising the data over two levels: the Normalisation~\ref{norm:content} allows to compare several solutions to a query regardless of different statistics they might have; with the Normalisation~\ref{norm:degree}, it is possible to rank solutions to a query that have different degree of a same attribute.
 
 \input{05-ranking/figures/summary-ranking-comp}
 
@@ -601,6 +601,6 @@ This shows the benefits of the MF ranking model of normalising the data over two
 		%\end{axis}
 		%\end{tikzpicture}
 	%}
-	%\caption{Comparison of the basic and MF-based ranking approaches on the Types summary of DBpedia 3.3}
+	%\caption{Comparison of the basic and \gls{MF}-based ranking approaches on the Types summary of DBpedia 3.3}
 %\end{figure}
 

@@ -45,6 +45,7 @@
 \usepackage{numprint}
 
 \usepackage{glossaries}
+\setacronymstyle{long-short}
 \makeglossaries
 \loadglsentries{defns}
 
@@ -151,7 +152,7 @@ linewidth=4pt
 \listoffigures
 \listoftables
 \listoftheorems[ignoreall,show={definition},numwidth=3.5em]
-\printglossaries
+%\printglossaries
 \cleardoubleoddpage
 \pagenumbering{arabic}
 
@@ -249,10 +250,10 @@ linewidth=4pt
 \bibliographystyle{alpha}%{Default}
 \bibliography{biblio,01-introduction/introduction,02-foundations/foundations,04-summary/bibliography,05-ranking/bibliography}
 
-%\cleardoubleoddpage
+\cleardoubleoddpage
 %\listoffigures
 %\listoftables
 %\listoftheorems[ignoreall,show={definition},numwidth=3.5em]
-%\printglossaries
+\printglossaries
 
 \end{document}
