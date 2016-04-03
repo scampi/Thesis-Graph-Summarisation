@@ -127,13 +127,13 @@ In order to prevent this issue, we need to differentiate edges within \emph{D1} 
 	\resizebox{.8\textwidth}{!}{
 		\input{04-summary/figures/summary-ild}
 	}
-	\caption{Challenge in summarising heterogeneous data sources with the \emph{Types} summarisation relation $R_t$. The datasets D1 and D2 contain edges that describe a same node labelled $N_1$.}
+	\caption[Challenge in summarising heterogeneous data sources with the \emph{Types} summarisation relation $R_t$]{Challenge in summarising heterogeneous data sources with the \emph{Types} summarisation relation $R_t$. The datasets D1 and D2 contain edges that describe a same node labelled $N_1$.}
 	\label{fig:sum-issue}
 \end{figure}
 
 \subparagraph{Edge authority.}
 
-In this section, we introduce the concept of \emph{edge authority} which is needed for the summarisation of inter-linked datasets.
+In this section, we introduce the concept of \emph{edge authority} which is needed for the summarisation of inter-linked datasets. The proposed definition may not fit every application, as it was crafted to fit our view of inter-linked datasets.
 
 \begin{labeling}{\emph{Edge Provenance:}}
 	\item[\emph{Edge Provenance:}] Due to the principle of Linked Data which states that anything can be said about anything, there is a need to know the provenance of an edge. This necessity goes in accordance with the N-Quads\footnote{\url{http://www.w3.org/TR/n-quads/}} serialisation format. The provenance of an edge indicates the dataset it is originally from.
@@ -179,7 +179,7 @@ The edge $\left(a_2, \gamma, b_1\right)$ does not have authority, since its prov
 \begin{figure}
 	\centering
 	\input{04-summary/figures/authority}
-	\caption{Edge authority. A dataset is represented by a colour and a line type. The provenance of an edge determines its colour and line type. The ownership of a node is determined visually by the dataset it is in.}
+	\caption[Edge authority]{Edge authority. A dataset is represented by a colour and a line type. The provenance of an edge determines its colour and line type. The ownership of a node is determined visually by the dataset it is in.}
 	\label{fig:authority}
 \end{figure}
 
@@ -465,7 +465,7 @@ We end both Step~3a and Step~3b with a grouping operation. In Step~3a, we group 
 		\caption{Sumedge and sumnode creation}
 		\label{fig:va-cascading}
 	\end{subfigure}
-	\caption{Graph summarisation using the Cascading framework. A node represent an operation over the incoming tuples, which if superscripted with GB involves an aggregate operation, i.e., there is a \texttt{GROUP BY} operation. The $*$ superscript over the RDF nodes indicates that the dictionary is used for mapping the data back into plain text. The triangle-shaped nodes represent points in the flow where the data is written to or read from.}
+	\caption[Graph summarisation using the Cascading framework]{Graph summarisation using the Cascading framework. A node represent an operation over the incoming tuples, which if superscripted with GB involves an aggregate operation, i.e., there is a \texttt{GROUP BY} operation. The $*$ superscript over the RDF nodes indicates that the dictionary is used for mapping the data back into plain text. The triangle-shaped nodes represent points in the flow where the data is written to or read from.}
 	\label{fig:summary-cascading}
 \end{figure}
 

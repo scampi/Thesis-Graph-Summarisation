@@ -8,11 +8,11 @@ A common challenge encountered when analysing a graph is its size. A large numbe
 In addition to the challenge of the graph size, we consider also the other challenge of the graph structure being partially or totally unknown. As discussed in Section~\ref{chap:introduction:data-mgmt}, although a dataset might adhere to an ontology, in general it cannot be used to understand the structure of that dataset, a possible reason being either
 \begin{inparaenum}[(a)]
 \item the dataset is a mashup of several data sources, each following a different ontology --- therefore, there is no ontology that describes the combined dataset; or
-\item the dataset is originally built from a variety of ontologies in order to fulfil modelling requirements.
+\item the dataset is originally built from a variety of ontologies in order to fulfill modelling requirements.
 \end{inparaenum}
 Therefore, a graph summarisation can then be used for shedding light on the structure of the graph, which can hold a function similar to a \emph{schema} in databases.\\
 
-Depending on the kind of interaction with the summary, a different level of details is needed. Intuitively, it is conceivable that a graphic application may require less information about the data compared to a query optimisation application. We present in this chapter the scientific litterature on graph summarisation. The research works are ordered by the increasing level of details needed in the summary by the respective use case applications.
+Depending on the kind of interaction with the summary, a different level of details is needed. Intuitively, it is conceivable that a graphic application may require less information about the data compared to a query optimisation application. We present in this chapter the scientific literature on graph summarisation. The research works are ordered by the increasing level of details needed in the summary by the respective use case applications.
 
 \section{Dimensions of Graph Summarisation Challenges}
 
@@ -131,9 +131,9 @@ The proposed approach creates a summary graph by mapping each node of the graph 
 	\item incident sumnodes of the sumnode a node maps to.
 	\label{rcompatible}
 \end{inparaenum}
-The algorithm first partition the graph in order to achieve (\ref{acompatible}), then iteratively splits each block (sumnode) in the partition until each node in a sumnode fulfil (\ref{rcompatible}). The latter step relies on the incident matrix between nodes in the graph and sumnodes in the summary to decide whether to split a sumnode or not; there is one such matrix per attribute. A cell $a_{i,j}$ of the matrix is equal to $1$ if a node on row $i$ maps to a sumnode which is a neighbour of the sumnode on column $j$, otherwise it is equal to $0$.
+The algorithm first partition the graph in order to achieve (\ref{acompatible}), then iteratively splits each block (sumnode) in the partition until each node in a sumnode fulfill (\ref{rcompatible}). The latter step relies on the incident matrix between nodes in the graph and sumnodes in the summary to decide whether to split a sumnode or not; there is one such matrix per attribute. A cell $a_{i,j}$ of the matrix is equal to $1$ if a node on row $i$ maps to a sumnode which is a neighbour of the sumnode on column $j$, otherwise it is equal to $0$.
 
-The algorithm requires several passes over the graph in order to fulfil (\ref{rcompatible}). For large graphs that do not fit in memory, this becomes a challenge in itself. Indeed, if some part of the graph is not in memory, it needs to be retrieved, e.g., from disk, which would impact negatively on the algorithm performance.
+The algorithm requires several passes over the graph in order to fulfill (\ref{rcompatible}). For large graphs that do not fit in memory, this becomes a challenge in itself. Indeed, if some part of the graph is not in memory, it needs to be retrieved, e.g., from disk, which would impact negatively on the algorithm performance.
 
 The authors extend this work in \cite{zhang:2010:ddg} where a measure for the ``interestingness'' of a graph summary is proposed. The aim of this measure is to quantify how easy it is for a person to visualise and understand the high-level structural characteristics of the graph. In Chapter~\ref{chap03:sec:quality}, we argue that the interestingness of a summary actually depends on the application it is used for. In that paper, the authors also investigate how to summarise numeric data; while this is an important aspect of graph summarisation in some application, we focus in this thesis on summarising the structure of the graph.\\
 
@@ -173,7 +173,7 @@ We note that the third layer which is the most detailed one is based on \emph{bi
 \section{Data Profiling}
 \label{chap03:review:query-profiling}
 
-A graph summarisation algorithm can be used for providing insights into a graph by accumulating some statistics during the summary construction process. In the time-line of Figure~\ref{fig:timeline}, literature pertaining to this use case are depicter with a red dotted-trapeze.\\
+A graph summarisation algorithm can be used for providing insights into a graph by accumulating some statistics during the summary construction process. In the time-line of Figure~\ref{fig:timeline}, literature pertaining to this use case are depicted with a red dotted-trapeze.\\
 
 Khatchadourian et. al \cite{khatchadourian:2010:eswc} describe the structure of the graph along with statistics thanks to summaries. The proposed summary is built using the bisimulation equivalence, which is described in Section~\ref{chap:summary:bisim}. The presented approach is tailored towards RDF graphs; instead, we present a graph summarisation framework that is independent of the graph modelling.
 

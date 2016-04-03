@@ -1,8 +1,9 @@
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_GB
-\documentclass[12pt,chapterprefix=true,listof=totoc]{scrbook}
+\documentclass[12pt,chapterprefix=true]{scrbook}
+%\documentclass[12pt,chapterprefix=true,listof=totoc]{scrbook}
 
-
+\usepackage{verse}
 \usepackage[table]{xcolor}
 \usepackage{array}
 
@@ -140,10 +141,17 @@ linewidth=4pt
 \pagenumbering{roman}
 \addchap*{Abstract}
 \input{abstract}
+%\addchap*{Acknowledgements}
+%\input{acknowledgements}
 
 \cleardoubleoddpage
 \setcounter{tocdepth}{1}
 \tableofcontents
+\cleardoubleoddpage
+\listoffigures
+\listoftables
+\listoftheorems[ignoreall,show={definition},numwidth=3.5em]
+\printglossaries
 \cleardoubleoddpage
 \pagenumbering{arabic}
 
@@ -224,7 +232,7 @@ linewidth=4pt
 
 %\input{exploiting/gagg/gagg}
 
-\part{Conclusions}
+%\part{Conclusions}
 
 \input{conclusions/chapter}
 
@@ -233,7 +241,7 @@ linewidth=4pt
 % http://tex.stackexchange.com/questions/62271/add-chapter-appendix-prefix-in-table-of-contents-of-scrbook-with-correct-appendi
 \cleardoubleoddpage
 \appendix
-%\let\chaptername\appendixname
+\let\chaptername\appendixname
 \renewcommand{\chaptermark}[1]{\markboth{Appendix\ \thechapter.\ #1}{}}
 \input{appendix/summary-evaluation}
 \input{appendix/ranking-evaluation}
@@ -241,10 +249,10 @@ linewidth=4pt
 \bibliographystyle{alpha}%{Default}
 \bibliography{biblio,01-introduction/introduction,02-foundations/foundations,04-summary/bibliography,05-ranking/bibliography}
 
-\cleardoubleoddpage
-\listoffigures
-\listoftables
-\listoftheorems[ignoreall,show={definition},numwidth=3.5em]
-\printglossaries
+%\cleardoubleoddpage
+%\listoffigures
+%\listoftables
+%\listoftheorems[ignoreall,show={definition},numwidth=3.5em]
+%\printglossaries
 
 \end{document}

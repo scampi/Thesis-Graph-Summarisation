@@ -48,7 +48,7 @@ From this point on, we shall differentiate between the nodes and edges of the en
 \begin{figure}
 	\centering
 	\input{04-summary/figures/homomorphism}
-	\caption{Graph homomorphism. There is a relation $R$ that maps nodes of the left graph to the nodes of the right graph which keeps the connection of the right graph.}
+	\caption[Graph homomorphism]{Graph homomorphism. There is a relation $R$ that maps nodes of the left graph to the nodes of the right graph which keeps the connection of the right graph.}
 	\label{fig:homomorphism}
 \end{figure}
 
@@ -115,7 +115,7 @@ Figure~\ref{fig:basic-summary} depicts a possible summary for a graph. The dotte
 	\resizebox{.7\textwidth}{!}{
 		\input{04-summary/figures/basic-summary}
 	}
-	\caption{A graph and a possible summary. Dotted lines labelled $R$ represent the summarisation relation that maps nodes in the graph $G$ to sumnodes in $\mathcal{S}$.}
+	\caption[A graph and a possible summary]{A graph and a possible summary. Dotted lines labelled $R$ represent the summarisation relation that maps nodes in the graph $G$ to sumnodes in $\mathcal{S}$.}
 	\label{fig:basic-summary}
 \end{figure}
 
@@ -150,7 +150,7 @@ Given a summarisation relation, each node in the graph is mapped to a set of sum
 			\bottomrule
 		\end{tabular}
 	\end{minipage}
-	\caption{Summary of the graph in Figure~\ref{fig:graph} with the summarisation relation $R_t$. The table indicates the mappings by $R_t$. The content in $G$ is abstracted by the sumnode $\varnothing$.}
+	\caption[Types summary of a graph]{Summary of the graph in Figure~\ref{fig:graph} with the summarisation relation $R_t$. The table indicates the mappings by $R_t$. The content in $G$ is abstracted by the sumnode $\varnothing$.}
 	\label{fig:classes-summary}
 \end{figure}
 
@@ -167,7 +167,7 @@ Given a summarisation relation, each node in the graph is mapped to a set of sum
 \subsection{Precise Graph Summary}
 \label{sec:precise-summary}
 
-The purpose of a summary is to mirror the structure of the graph while being significantly smaller. Therefore, the summary can substitute the graph and improve the performance of applications. How well the summary mirrors the graph is then of high importance. From a structural perspective, a summary is precise if it is undiscernable from the entity graph, which we define in this section.
+The purpose of a summary is to mirror the structure of the graph while being significantly smaller. Therefore, the summary can substitute the graph and improve the performance of applications. How well the summary mirrors the graph is then of high importance. From a structural perspective, a summary is precise if it is indiscernible from the entity graph, which we define in this section.
 
 Although the structure of the graph is preserved in the summary by definition of graph homomorphism, the structure of the summary may not exactly reflect the structure of the graph. Indeed, a summary may have paths that are not present in the entity graph $G$, as depicted in the Figure~\ref{fig:homomorphism}.
 
@@ -648,4 +648,4 @@ Although the nodes $N_1$ and $N_2$ are mapped to a same sumnode with $R_{at}$, t
 	\label{tab:sumrel}
 \end{table}
 
-We note that the presented \emph{approximate} summarisation relations are indeed not precise, because they do not fulfil the Definition~\ref{def:precise-summary}. Indeed, it is possible to find a path in the approximate summary for which an instance as per Definition~\ref{def:summary-path-instance} does not form a path in the graph. For instance, the set $\{N_1, N_5, N_6\}$ is an instance of the summary path $works \cdot location \cdot capital$; however, there is no path that connects all three nodes $N_1$, $N_5$, and $N_6$ with the attributes $works$, $location$, and $capital$.
+We note that the presented \emph{approximate} summarisation relations are indeed not precise, because they do not fulfill the Definition~\ref{def:precise-summary}. Indeed, it is possible to find a path in the approximate summary for which an instance as per Definition~\ref{def:summary-path-instance} does not form a path in the graph. For instance, the set $\{N_1, N_5, N_6\}$ is an instance of the summary path $works \cdot location \cdot capital$; however, there is no path that connects all three nodes $N_1$, $N_5$, and $N_6$ with the attributes $works$, $location$, and $capital$.

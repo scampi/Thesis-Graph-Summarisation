@@ -1,6 +1,6 @@
 \chapter{Conclusions}
 
-In the last decade, we have seen the Internet evolve into a global database. The rise of many standards for structured data and the ease of sharing information over the Internet provoked a deluge of (semi-)structured data. In order to bring this into being, the focus was put on the ease of representing and sharing knowledge; engaging people into publishing information was key as illustrated by the 5-stars rewarding system~\cite{5stars} proposed by Tim Berners-Lee. However, the lack of \emph{insight} into the structure of the data prevents the effective use of this inter-connected data.\\
+In the last decade, the Internet has evolved into a global database. The rise of many standards for structured data and the ease of sharing information over the Internet provoked a deluge of (semi-)structured data. In order to bring this into being, the focus was put on the ease of representing and sharing knowledge; engaging people into publishing information was key as illustrated by the 5-stars rewarding system~\cite{5stars} proposed by Tim Berners-Lee. However, the lack of \emph{insight} into the structure of the data prevents the effective use of this inter-connected data.\\
 
 We have proposed in this thesis a framework for generating summaries of a graph directly from the data itself. A generated summary is we believe the answer for providing insights into one's data. In this chapter, we summarize the research work conducted in this Ph.D. project, we recall the main contributions achieved, and discuss some possible future works.
 
@@ -21,7 +21,7 @@ Finally, we have presented several applications of graph summarisation and ranki
 
 \section{Directions for Future Research}
 
-Graph summarisation offers a solution to the problem of data heterogenity and unknown structure of the graph. This opens a wide range of potential applications. In the following, we present a list of possible future directions of research related to the problem of graph summarisation:
+Graph summarisation offers a solution to the problem of data heterogeneity and unknown structure of the graph. This opens a wide range of potential applications. In the following, we present a list of possible future directions of research related to the problem of graph summarisation:
 \begin{description}
 	\item[Graph Summary Updates] As soon as a dataset is updated, i.e., either an edge is added, removed, or modified, the summary becomes out-dated. In order for the summary to reflect the current structure of a graph, we need to update the summary. However, the proposed framework does not propose an efficient mechanism for keeping a summary fresh without having to generate the summary anew. An approach worth investigating is to leverage the existing summary in order to compute what part of the graph changed, and how those changes impacted on the connected component of the graph.
 	\item[Data Quality] Thanks to the summary reflecting the structure of the graph, it is possible to assess the quality of the data from a modeling perspective. One is able to identify structural inconsistencies with the data, such as
@@ -36,3 +36,4 @@ Graph summarisation offers a solution to the problem of data heterogenity and un
 	\item[Entity Graph Ranking] We generalised field-based ranking models to directed acyclic graphs with the introduction of our MF ranking model. Entities found in Web Data are modeled differently from one dataset to the other. Indeed, an entity may be represented as a star-graph in a dataset, while showing in another a more complex structure with a graph having few hops. With the help of graph summaries of the datasets to try and reconcile different modeling, is it then possible to rank entities having different representations ?
 \end{description}
 
+It is our belief that the work achieved in this thesis answers a growing need; that is, to get a better understanding of datasets structure. This knowledge is key for we assume a large number of applications. The concept of graph summarisation presented in this thesis applied to Web Data opens the door to better and new applications, and raises as well novel challenges as outlined in this section.
