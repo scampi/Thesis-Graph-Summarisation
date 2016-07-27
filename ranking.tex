@@ -58,9 +58,9 @@ Using BM25F, an entity $e$ is scored with regard to a query $q$ as follows:
 \end{eqnarray}
 where $q_t$ is the weight of the query $q$ for the term $t$, i.e., its frequency within the query $q$, $tfn_e$ is the term frequency normalisation function, $\omega_t$ is the Inverse Document Frequency (IDF) function of the term $t$, $k_1$ is the saturation parameter, $f_{t,e,a}$ is the frequency of the term $t$ in the attribute $a$ of the entity $e$, $\alpha_a$ is a weight of the attribute $a$ and $\alpha_e$ a weight of the entity $e$, $b_a$ is the normalisation parameter for the attribute $a$ with $b_a \in \left[0,1\right]$, $l_{e,a}$ is the \emph{field length} of the attribute $a$ in the entity $e$, $l_a$ is the \emph{average field length} of the attribute $a$. The IDF is defined as
 $
-\omega_t=1+log\left(\frac{N}{N_t+1}\right)
+\omega_t=1+log\left(\frac{N}{v_t+1}\right)
 $,
-where $N$ is the total number of entities in the collection and $N_t$ is the total number of entities that have occurrences of the term $t$.
+where $N$ is the total number of entities in the collection and $v_t$ is the total number of entities that have occurrences of the term $t$.
 
 \paragraph{PL2F Ranking Function}
 

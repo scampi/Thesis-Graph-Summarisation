@@ -35,7 +35,7 @@ Any kind of data can generally be modelled using a graph, since it is versatile 
 
 We consider the data as being a labelled directed graph and build methods based on this model. Therefore, the findings presented in this work can be applied to any domain where a graph is used as data representation.
 
-We describe in this Section a graph data model based on the work of \cite{delbru:jws:entity}. The graph is represented with two layers that depict the data at two extremes: the \emph{dataset} and the \emph{entity} layers. The Figure~\ref{fig:gdm} depicts the layers of the model, where the dataset layer is depicted at the top, and the entity layer at the bottom.
+We describe in this Section a graph data model based on the work of \cite{delbru:jws:entity}. The graph is represented with two layers that depict the data at two extremes: the \emph{dataset} and the \emph{entity} layers. We formally introduce the concepts of entity and dataset in Sections~\ref{sec:entity-description} and~\ref{sec:ssd:dataset}, respectively. The Figure~\ref{fig:gdm} depicts the layers of the model, where the dataset layer is depicted at the top, and the entity layer at the bottom.
 \begin{labeling}{\textbf{Dataset Layer:}}
 	\item[\textbf{Dataset Layer:}] A dataset represents a collection of entities; the dataset layer is the ensemble of entities' collections. This layer provides coarse information about the data: the focus of this layer is the relationships between datasets. In the figure, the dataset \emph{D1} connects to the dataset \emph{D2} via the link \emph{p1}, and \emph{D2} is connected to \emph{D1} via two links, i.e., \emph{p2} and \emph{p3}.
 	\item[\textbf{Entity Layer:}] The entity layer contains information about entities. Of the two layers, this one provides the finer details about the data: attributes about an entity, and also relationships between entities. In the figure, the entity layer provides additional information about the dataset layer, showing which entities are actually connected within --- and between --- datasets.
@@ -59,7 +59,7 @@ Regardless of the layer, we represent the information using a node and edge labe
 \section{Formal Model}
 \label{sec:gdm:formal-model}
 
-In the following we formally define a graph and introduce concepts used in the rest of the thesis. We use a graph as a generic representation of semi-structured data on the Web of Data. A graph is defined as a tuple consisting of a set of nodes $V$ and a set $A$ of directed edges labelled $a$. We consider edge and node labels to come from a set that we denote with $\mathcal{L}$. Figure~\ref{fig:graph} depicts a graph of people and places along with their connections.
+In the following we formally define a directed labelled graph that we call simply a graph henceforth, and introduce concepts used in the rest of the thesis. We use a graph as a generic representation of (semi-)structured and unstructured data on the Web of Data. A graph is defined as a tuple consisting of a set of nodes $V$ and a set $A$ of directed edges labelled $a$. We consider edge and node labels to come from a set that we denote with $\mathcal{L}$. Figure~\ref{fig:graph} depicts a graph of people and places along with their connections.
 
 \begin{definition}[Graph]
 	Let $V$ be a set of nodes and $\mathcal{L}$ a set of labels. The set of directed labelled edges is defined as $A \subseteq \left\lbrace (x, \alpha, y) \mid (x, y) \in V^2, \alpha \in \mathcal{L} \right\rbrace$.
@@ -74,17 +74,19 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, we introduce below ter
 
 	\item[\textbf{Path}] We call a \emph{path} a sequence of edges label $\alpha_1.\cdots.\alpha_n$. A path exists in the graph $G$ if there is a sequence of nodes $\left\lbrace v_1, \cdots, v_{n+1} \right\rbrace \subseteq V$ connected with such labelled edges.
 
-	In Figure~\ref{fig:graph} the path $author.lives$ exists in that graph as it connects the nodes $\left\lbrace N_0, N_2, N_3 \right\rbrace$.
+	In Figure~\ref{fig:graph} the path $author.lives$ exists in that graph as it connects the nodes $\left\lbrace v_0, v_2, v_3 \right\rbrace$.
 
 	\item[\textbf{Attribute}] We call \emph{attribute} the label of an edge.
 
-		We define as $attributes\left(x \in V\right) = \left\lbrace \alpha \in \mathcal{L} \mid \exists y \in V, (x, \alpha, y) \in A \right\rbrace$ the set of attributes associated as a source with a node $x$ in $G$. In the figure, we have $attributes(N_1) = \{lives,works,name,\tau\}$.
+		We define as $attributes\left(x \in V\right) = \left\lbrace \alpha \in \mathcal{L} \mid \exists y \in V, (x, \alpha, y) \in A \right\rbrace$ the set of attributes associated as a source with a node $x$ in $G$. In the figure, we have $attributes(v_1) = \{lives,works,name,\tau\}$.
 
 	Similarly, we define the set of \emph{incoming} attributes as
 	$$
 	attributes^{-1}\left(x \in V\right) = \left\lbrace \alpha \in \mathcal{L} \mid \exists w \in V, (w, \alpha, x) \in A \right\rbrace
 	$$
 	\item[\textbf{Value}] We call \emph{value} the label of a node which is the target of an edge.
+
+	\item[\textbf{$k$-hop}] We say that two nodes are $k$-hop away if there is a path composed of $k$ edges label connecting the two. For example in the figure, the nodes $v_1$ and $v_6$ are 2-hops away because of the path $lives, location$.
 \end{labeling}
 
 \begin{figure}
@@ -99,9 +101,18 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, we introduce below ter
 \subsection{Type Attribute}
 \label{sec:ssd:type}
 
-In a graph, attributes provide semantics: for example, we can expect that the value of the edge labelled ``name'' represents a textual identification of the node $N_1$. Among attributes we refer as \emph{type attributes} those that define a type to which the node belongs to, e.g., the edge labelled $\tau$ in Figure~\ref{fig:graph} assigns the type \emph{Person} to the node $N_1$.
+Attributes and node labels can be used in a graph for describing the content. For example in Figure~\ref{fig:graph}, we can expect that the value of the edge labelled ``name'' represents a textual identification of the node $v_1$. In addition, a set of nodes may represent a same concept, e.g., the nodes $v_1$ and $v_2$ represent a person. We call, e.g., ``person'', the \emph{type} of a node, and that node is an \emph{instance} of that type.
 
-The \emph{type} of a node can be assigned by certain attributes; in RDF graphs, we use the attribute \emph{rdf:type}\footnote{RDF type attribute: \url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#type}}. Then, the target node that is linked to by such an attribute defines the type of the source node. We define $T$ as the set of such \emph{type attributes}, and we denote to an element of that set with $\tau$.%, in order to abstract from the actual type attribute used.
+We model this in a graph thanks to an edge where
+\begin{inparaenum}[(1)]
+\item the source is an instance;
+\item the target is the type; and
+\item the attribute is a certain pre-defined label that we denot as $\tau$.
+\end{inparaenum}
+That certain attribute is used to indicate that the target of the edge represents a type; in RDF, it is commonly the \emph{rdf:type}\footnote{RDF type attribute: \url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#type}} attribute.
+
+Since there may be several attributes that can hold this function, we refer to them as the \emph{type attributes}. For example in Figure~\ref{fig:graph}, the edge $(v_1, \tau, \text{Person})$ indicates that the node $v_1$ is an instance of type \emph{Person}.
+We define $T$ as the set of \emph{type attributes}, and we denote an element of that set with $\tau$.%, in order to abstract from the actual type attribute used.
 
 \begin{definition}[Type Attributes Set $T$]
 Let $T \subset \mathcal{L}$ be a subset of labels.
@@ -111,15 +122,15 @@ We define $T$ as the set of type attributes, and we call $\glssymbol{atype} \in 
 For a given node $x \in V$, we consider $types(x)$ as the set of values for which the attribute is a type attribute.
 
 $$
-types(x\in V) = \left\lbrace l_V(c) \mid \exists c \in V (x, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \right\rbrace
+types(x\in V) = \left\lbrace l_V(c) \mid \exists c \in V\; \exists \glssymbol{atype} \in T: (x, \glssymbol{atype}, c) \in A \right\rbrace
 $$
 
-For instance, we have $types\left(N_6\right) = \left\{ \text{Country}, \text{Place} \right\}$ in Figure~\ref{fig:graph} as the set of type values for the node $N_6$.
+For instance, we have $types\left(v_6\right) = \left\{ \text{Country}, \text{Place} \right\}$ in Figure~\ref{fig:graph} as the set of type values for the node $v_6$.
 
 \subsection{Entity description}
 \label{sec:entity-description}
 
-The Web Data represents a graph of interconnected \emph{entities}, where an entity may be a person, a place, or an organisation, \ldots. We call an \emph{entity description} the pieces of informations in the graph that are about that entity. For instance, we can consider ``Galway'' to be part of the entity description of $N_3$ in Figure~\ref{fig:graph}, but not ``Rome''.
+The Web Data represents a graph of interconnected \emph{entities}, where an entity may be a person, a place, or an organisation, \ldots. We call an \emph{entity description} the pieces of informations in the graph that are about that entity. For instance, we can consider ``Galway'' to be part of the entity description of $v_3$ in Figure~\ref{fig:graph}, but not ``Rome''.
 
 There exists several ways to define which parts of the graph describe an entity. One may consider all the edges, incoming and outgoing, to form the entity description. For some graphs, edges that are two-hops away might be part of it too.
 
@@ -160,16 +171,17 @@ Let $G = \left\langle V, A, l_V \right\rangle$ be a graph. We define the entity 
 \label{def:entity-description}
 \end{definition}
 
-For example, if we consider the outgoing edges to form the entity description, we have for the node $N_6$ the following set:
+For example, if we consider the outgoing edges to form the entity description, we have for the node $v_6$ the following set:
 $$
 \begin{aligned}
-\mathcal{E}\left( N_6 \right) = \{ & \left( N_6, \text{label}, \text{Ireland} \right),\\
-& \left( N_6, \tau, \text{Country} \right),\\
-& \left( N_6, \tau, \text{Place} \right) \}
+\mathcal{E}\left( v_6 \right) = \{ & \left( v_6, \text{label}, \text{Ireland} \right),\\
+& \left( v_6, \tau, \text{Country} \right),\\
+& \left( v_6, \tau, \text{Place} \right) \}
 \end{aligned}
 $$
 
 \subsection{Dataset}
+\label{sec:ssd:dataset}
 
 In the Web of Data, a dataset~\cite{alexander:2009:dld} represents a collection of \emph{edges} which, e.g., are located in a same website, or share a common topic. A dataset can be a \emph{dump} in RDF, or the embedded metadata of pages in a website.
 %A dataset can refer to graphs from a collection of sources, e.g., several websites.

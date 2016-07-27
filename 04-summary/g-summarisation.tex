@@ -59,7 +59,7 @@ A graph and its summary do not share the same set of nodes. The nodes of the sum
 \subparagraph{Undefined sumnode.}
 \label{sec:undefined-sumnode}
 
-Depending on the definition of the binary relation $R$ used in a graph homomorphism, some nodes of the graph do not have any mapping. For example, the node $N_0$ in Figure~\ref{fig:graph} does not have a $type$ edge; it has then no mapping for a summarisation relation that considers the type of a node as depicted in the Figure~\ref{fig:classes-summary}.
+Depending on the definition of the binary relation $R$ used in a graph homomorphism, some nodes of the graph do not have any mapping. For example, the node $v_0$ in Figure~\ref{fig:graph} does not have a $type$ edge; it has then no mapping for a summarisation relation that considers the type of a node as depicted in the Figure~\ref{fig:classes-summary}.
 We map such a node of the graph to a sumnode $\mathfrak{U} \in \mathcal{Z}$ that we say to be \emph{undefined} for the binary relation $R$.
 
 \begin{definition}[Undefined Sumnode $\mathfrak{U}$]
@@ -142,11 +142,11 @@ Given a summarisation relation, each node in the graph is mapped to a set of sum
 			\toprule
 			$V$ & \phantom{a} & $\mathcal{W}$ \\
 			\cmidrule{1-1} \cmidrule{3-3}
-			$N_0$ & \phantom{a} & $\mathfrak{U}$ \\
-			$N_1$, $N_2$ & \phantom{a} & $S_1$ \\
-			$N_3$ & \phantom{a} & $S_2$ \\
-			$N_4$, $N_5$ & \phantom{a} & $S_3$ \\
-			$N_6$, $N_7$ & \phantom{a} & $S_4$ \\
+			$v_0$ & \phantom{a} & $\mathfrak{U}$ \\
+			$v_1$, $v_2$ & \phantom{a} & $S_1$ \\
+			$v_3$ & \phantom{a} & $S_2$ \\
+			$v_4$, $v_5$ & \phantom{a} & $S_3$ \\
+			$v_6$, $v_7$ & \phantom{a} & $S_4$ \\
 			\bottomrule
 		\end{tabular}
 	\end{minipage}
@@ -159,7 +159,7 @@ Given a summarisation relation, each node in the graph is mapped to a set of sum
 %The set of sink nodes in $G$ is represented by the sink equivalence class $[\emptyset]=\left\lbrace x \in V : \not \exists (x, \alpha, y) \in A \right\rbrace$ in $G^\sim$.
 %\end{definition}
 %
-%Depending on the $\sim$-equivalence, there can be nodes that do not have the required features to be assigned to a $\sim$-equivalence class. We define $B^\sim$ the \emph{blank $\sim$-equivalence class} as the set of such nodes of $G$, e.g., the node $N_0$ in the Figure~\ref{fig:graph} is assigned to the node $B^{\sim_t}$ in the Figure~\ref{fig:classes-summary}.
+%Depending on the $\sim$-equivalence, there can be nodes that do not have the required features to be assigned to a $\sim$-equivalence class. We define $B^\sim$ the \emph{blank $\sim$-equivalence class} as the set of such nodes of $G$, e.g., the node $v_0$ in the Figure~\ref{fig:graph} is assigned to the node $B^{\sim_t}$ in the Figure~\ref{fig:classes-summary}.
 %\begin{definition}[Blank $\sim$-Equivalence Class]
 %The set of nodes in $G$ for which there is no $\sim$-equivalent class is equal to the blank $\sim$-equivalence class $B^\sim$, i.e., $B^\sim=\left\lbrace x \in V : \forall y \in V, x \not \sim y \right\rbrace$.
 %\end{definition}
@@ -174,7 +174,7 @@ Although the structure of the graph is preserved in the summary by definition of
 Indeed, we remark that although the structure of the graph $G$ is kept in the summary, the inverse may not hold true. The Figure~\ref{fig:homomorphism} depicts a loop on the $b$ node; although there is an edge from $1$ to $4$, there is no edge in the opposite direction.\\
 %In Section~\ref{chap03:sec:quality} we study the precision of an \emph{approximate} graph summary.
 
-A summary is built from a graph based on a summarisation relation that maps each node of that graph to a sumnode, i.e., a node of the summary. An edge $(u, \alpha, v) \in A$ is mapped to a sumedge by definition of the graph homomorphism. Several paths in the graph may be mapped to a same path on the summary. We introduce the \emph{summary path instance} as the set of nodes in the graph which mappings form a path in the summary. For example, if we consider the summary in Figure~\ref{fig:classes-summary} built with the summarisation relation $R_t$, the set $\{N_1, N_3, N_6\}$ in an instance of the path $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in that summary; indeed, we have $(N_1, S_1) \in R_t$, $(N_3, S_2) \in R_t$, and $(N_6, S_4) \in R_t$.
+A summary is built from a graph based on a summarisation relation that maps each node of that graph to a sumnode, i.e., a node of the summary. An edge $(u, \alpha, v) \in A$ is mapped to a sumedge by definition of the graph homomorphism. Several paths in the graph may be mapped to a same path on the summary. We introduce the \emph{summary path instance} as the set of nodes in the graph which mappings form a path in the summary. For example, if we consider the summary in Figure~\ref{fig:classes-summary} built with the summarisation relation $R_t$, the set $\{v_1, v_3, v_6\}$ in an instance of the path $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in that summary; indeed, we have $(v_1, S_1) \in R_t$, $(v_3, S_2) \in R_t$, and $(v_6, S_4) \in R_t$.
 
 \begin{definition}[Summary Path Instance]
 \label{def:summary-path-instance}
@@ -187,7 +187,7 @@ $$
 $$
 \end{definition}
 
-In the previous example, we remark that the summary path instance $\{N_1, N_3, N_6\}$ given for $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in Figure~\ref{fig:classes-summary} is not the only one. Indeed, there are three more instances possible, i.e., $\{N_1, N_3, N_7\}$, $\{N_2, N_3, N_6\}$, and $\{N_2, N_3, N_7\}$. However, two out of those four do not form a path in the graph in Figure~\ref{fig:graph}, i.e., the sets $\{N_1, N_3, N_7\}$ and $\{N_2, N_3, N_7\}$. We call a summary \emph{precise} if there is no such case.
+In the previous example, we remark that the summary path instance $\{v_1, v_3, v_6\}$ given for $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in Figure~\ref{fig:classes-summary} is not the only one. Indeed, there are three more instances possible, i.e., $\{v_1, v_3, v_7\}$, $\{v_2, v_3, v_6\}$, and $\{v_2, v_3, v_7\}$. However, two out of those four do not form a path in the graph in Figure~\ref{fig:graph}, i.e., the sets $\{v_1, v_3, v_7\}$ and $\{v_2, v_3, v_7\}$. We call a summary \emph{precise} if there is no such case.
 
 \begin{definition}[Precise Graph Summary]
 \label{def:precise-summary}
@@ -328,14 +328,14 @@ In order to compute this summary, the algorithm proposed in \cite{Paige:1987:TPR
 			\toprule
 			$V$ & \phantom{a} & $\mathcal{W}$ \\
 			\cmidrule{1-1} \cmidrule{3-3}
-			$N_0$ & \phantom{a} & $S_0$ \\
-			$N_1$ & \phantom{a} & $S_1$ \\
-			$N_2$ & \phantom{a} & $S_2$ \\
-			$N_3$ & \phantom{a} & $S_3$ \\
-			$N_4$ & \phantom{a} & $S_4$ \\
-			$N_5$ & \phantom{a} & $S_5$ \\
-			$N_6$ & \phantom{a} & $S_6$ \\
-			$N_7$ & \phantom{a} & $S_7$ \\
+			$v_0$ & \phantom{a} & $S_0$ \\
+			$v_1$ & \phantom{a} & $S_1$ \\
+			$v_2$ & \phantom{a} & $S_2$ \\
+			$v_3$ & \phantom{a} & $S_3$ \\
+			$v_4$ & \phantom{a} & $S_4$ \\
+			$v_5$ & \phantom{a} & $S_5$ \\
+			$v_6$ & \phantom{a} & $S_6$ \\
+			$v_7$ & \phantom{a} & $S_7$ \\
 			\bottomrule
 		\end{tabular}
 	\end{minipage}
@@ -389,7 +389,7 @@ We report in Table~\ref{tab:sumrel} a summary of the presented relations along w
 \minisec{Summarisation Relation $R_{st}$}
 
 We define $R_{st}$ as the summarisation relation that maps a node according to its type. We call the summary it generates the \emph{single-type} summary.
-The nodes $N_4$, $N_5$, $N_6$, and $N_7$ in the Figure~\ref{fig:graph} are mapped to a same sumnode since they all have \emph{Place} as a type. The $R_{st}$ relation may map a node to multiple sumnodes since an entity may have several types. For instance, the nodes $N_6$ and $N_7$ are also mapped to another sumnode since they both share the type \emph{Country}.
+The nodes $v_4$, $v_5$, $v_6$, and $v_7$ in the Figure~\ref{fig:graph} are mapped to a same sumnode since they all have \emph{Place} as a type. The $R_{st}$ relation may map a node to multiple sumnodes since an entity may have several types. For instance, the nodes $v_6$ and $v_7$ are also mapped to another sumnode since they both share the type \emph{Country}.
 
 \begin{definition}[Single-Type Summary]
 Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{st} = \left\langle \mathcal{W}_{st}, \mathcal{B}_{st}, l_{\mathcal{W}_{st}} \right\rangle$ be two graphs.
@@ -413,7 +413,7 @@ $$
 \minisec{Summarisation Relation $R_t$}
 
 We define $R_t$ the summarisation relation that maps a node based on its set of types. We call the summary it generates the \emph{types} summary.
-The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in the Figure~\ref{fig:graph}. The nodes $N_6$ and $N_7$ are mapped to the sumnode $S_4$ because they are both associated with the types \emph{Place} and \emph{Country}. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $N_1$ and $N_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. It differs from $R_{st}$ since it considers the types of a node as \emph{set} rather than individually. Indeed, the node $N_6$ is mapped to two sumnodes under the relation $R_{st}$.
+The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in the Figure~\ref{fig:graph}. The nodes $v_6$ and $v_7$ are mapped to the sumnode $S_4$ because they are both associated with the types \emph{Place} and \emph{Country}. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $v_1$ and $v_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. It differs from $R_{st}$ since it considers the types of a node as \emph{set} rather than individually. Indeed, the node $v_6$ is mapped to two sumnodes under the relation $R_{st}$.
 
 \begin{definition}[Types Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_t = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ be two graphs.
@@ -434,7 +434,7 @@ The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in t
 \minisec{Summarisation Relation $R_a$}
 
 We define $R_a$ the relation that maps a node based on its set of attributes. We call the summary it generates the \emph{attributes} summary.
-The nodes $N_3$, $N_4$, and $N_5$ are $\sim_a$-equivalent because they share the same set of attributes, i.e., $\left\lbrace label, location, type \right\rbrace$. The graph in Figure~\ref{fig:attributes-summary} is the attributes summary of the graph in Figure~\ref{fig:graph}.
+The nodes $v_3$, $v_4$, and $v_5$ are $\sim_a$-equivalent because they share the same set of attributes, i.e., $\left\lbrace label, location, type \right\rbrace$. The graph in Figure~\ref{fig:attributes-summary} is the attributes summary of the graph in Figure~\ref{fig:graph}.
 
 \begin{definition}[Attributes Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_a = \left\langle \mathcal{W}_a, \mathcal{B}_a, l_{\mathcal{W}_a} \right\rangle$ be two graphs.
@@ -471,11 +471,11 @@ We note that the nodes that do not have any outgoing attributes are mapped to th
 			\toprule
 			$V$ & \phantom{a} & $\mathcal{W}$ \\
 			\cmidrule{1-1} \cmidrule{3-3}
-			$N_0$ & \phantom{a} & $S_0$ \\
-			$N_1$, $N_2$ & \phantom{a} & $S_1$ \\
-			$N_3$, $N_4$, $N_5$ & \phantom{a} & $S_2$ \\
-			$N_6$ & \phantom{a} & $S_3$ \\
-			$N_7$ & \phantom{a} & $S_4$ \\
+			$v_0$ & \phantom{a} & $S_0$ \\
+			$v_1$, $v_2$ & \phantom{a} & $S_1$ \\
+			$v_3$, $v_4$, $v_5$ & \phantom{a} & $S_2$ \\
+			$v_6$ & \phantom{a} & $S_3$ \\
+			$v_7$ & \phantom{a} & $S_4$ \\
 			\bottomrule
 		\end{tabular}}
 	\end{minipage}
@@ -487,7 +487,7 @@ We note that the nodes that do not have any outgoing attributes are mapped to th
 \minisec{Summarisation Relation $R_{at}$}
 
 We define $R_{at}$ as the relation that maps a node based on its set of types and attributes. We call the summary it generates the \emph{attributes \& types} summary.
-The nodes $N_1$ and $N_2$ are mapped to a same sumnode by $R_{at}$ because they are associated with the same type, i.e., \emph{Person}, and they have the same attributes, i.e., $\left\lbrace lives, name, type, works \right\rbrace$.
+The nodes $v_1$ and $v_2$ are mapped to a same sumnode by $R_{at}$ because they are associated with the same type, i.e., \emph{Person}, and they have the same attributes, i.e., $\left\lbrace lives, name, type, works \right\rbrace$.
 
 \begin{definition}[Attributes \& Types Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{at} = \left\langle \mathcal{W}_{at}, \mathcal{B}_{at}, l_{\mathcal{W}_{at}} \right\rangle$ be two graphs.
@@ -513,7 +513,7 @@ The nodes $N_1$ and $N_2$ are mapped to a same sumnode by $R_{at}$ because they 
 \minisec{Summarisation Relation $R_{ioa}$}
 
 We define $R_{ioa}$ the relation based on the set of incoming and outgoing attributes. We call the summary it generates the \emph{IO attributes} summary.
-All three nodes $N_3$, $N_4$, and $N_5$ map to the same sumnode by the relation $R_a$. However with $R_{ioa}$, each is assigned to a separate sumnode, since all three have different incoming set of attributes, i.e., $\left\lbrace lives \right\rbrace$, $\left\lbrace works \right\rbrace$, and $\varnothing$, respectively.
+All three nodes $v_3$, $v_4$, and $v_5$ map to the same sumnode by the relation $R_a$. However with $R_{ioa}$, each is assigned to a separate sumnode, since all three have different incoming set of attributes, i.e., $\left\lbrace lives \right\rbrace$, $\left\lbrace works \right\rbrace$, and $\varnothing$, respectively.
 
 \begin{definition}[IO Attributes Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ioa} = \left\langle \mathcal{W}_{ioa}, \mathcal{B}_{ioa}, l_{\mathcal{W}_{ioa}} \right\rangle$ be two graphs.
@@ -592,7 +592,7 @@ We define $R_{iat}$ as the relation based on the set of types and incoming attri
 \minisec{Summarisation Relation $R_{ioat}$}
 
 The relation $R_{ioat}$ maps a node based on the set of types, and the incoming and outgoing attributes sets. We call the summary this relation generates the \emph{IO attributes \& types} summary.
-Although the nodes $N_1$ and $N_2$ are mapped to a same sumnode with $R_{at}$, that is not the case with the relation $R_{ioat}$, because only the node $N_2$ has the incoming attribute $creator$.
+Although the nodes $v_1$ and $v_2$ are mapped to a same sumnode with $R_{at}$, that is not the case with the relation $R_{ioat}$, because only the node $v_2$ has the incoming attribute $creator$.
 % With $R_{ioa}$ and $R_{ioat}$, the incoming set of attributes is computed by reversing the direction of edges, i.e., the target becomes the source, and then grouping on the source node.
 %For these relations, the complexity is equal to $O\left(\vert A \vert\right)$, since we need to visit each edge in order to assign the node at the source of an edge to an equivalence class.
 
@@ -648,4 +648,4 @@ Although the nodes $N_1$ and $N_2$ are mapped to a same sumnode with $R_{at}$, t
 	\label{tab:sumrel}
 \end{table}
 
-We note that the presented \emph{approximate} summarisation relations are indeed not precise, because they do not fulfill the Definition~\ref{def:precise-summary}. Indeed, it is possible to find a path in the approximate summary for which an instance as per Definition~\ref{def:summary-path-instance} does not form a path in the graph. For instance, the set $\{N_1, N_5, N_6\}$ is an instance of the summary path $works \cdot location \cdot capital$; however, there is no path that connects all three nodes $N_1$, $N_5$, and $N_6$ with the attributes $works$, $location$, and $capital$.
+We note that the presented \emph{approximate} summarisation relations are indeed not precise, because they do not fulfill the Definition~\ref{def:precise-summary}. Indeed, it is possible to find a path in the approximate summary for which an instance as per Definition~\ref{def:summary-path-instance} does not form a path in the graph. For instance, the set $\{v_1, v_5, v_6\}$ is an instance of the summary path $works \cdot location \cdot capital$; however, there is no path that connects all three nodes $v_1$, $v_5$, and $v_6$ with the attributes $works$, $location$, and $capital$.

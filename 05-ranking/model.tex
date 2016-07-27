@@ -7,11 +7,11 @@ First, we present the revised entity model and introduce the formal model of \gl
 
 \subsection{Model}
 
-In traditional field-based ranking models, an entity is modelled as a set of fields, each being a \emph{bag of words}. However in doing so, the rich structure of the entity is lost. For example, in Figure~\ref{fig:concept-tree} where the graph of an entity rooted in $N_0$ is depicted, we can create three fields, one for each attribute $a$, $b$, and $c$; the label of nodes are then distributed as follows:
+In traditional field-based ranking models, an entity is modelled as a set of fields, each being a \emph{bag of words}. However in doing so, the rich structure of the entity is lost. For example, in Figure~\ref{fig:concept-tree} where the graph of an entity rooted in $v_0$ is depicted, we can create three fields, one for each attribute $a$, $b$, and $c$; the label of nodes are then distributed as follows:
 \begin{itemize}
-	\item $N_1$ is assigned to field $a$;
-	\item $N_2$, $N_4$, and $N_5$ are assigned to field $b$; and
-	\item $N_3$ and $N_4$ are assigned to the field $c$.
+	\item $v_1$ is assigned to field $a$;
+	\item $v_2$, $v_4$, and $v_5$ are assigned to field $b$; and
+	\item $v_3$ and $v_4$ are assigned to the field $c$.
 \end{itemize}
 However, a shortcoming is that the relationship between nodes is discarded within a field. Indeed, in traditional field-based ranking models, most of the entity's structure is discarded.\\
 
@@ -43,7 +43,7 @@ we expand the graph so that each label becomes a leaf. To do so, we transform th
 		\resizebox{\textwidth}{!}{
 			\input{05-ranking/figures/tikz/concept-tree}
 		}
-		\caption{An entity description represented as a DAG. The root of the entity is the node $N_0$}
+		\caption{An entity description represented as a DAG. The root of the entity is the node $v_0$}
 		\label{fig:concept-tree}
 	\end{subfigure}
 	\quad
@@ -71,7 +71,7 @@ we expand the graph so that each label becomes a leaf. To do so, we transform th
 
 The score of an entity with regards to a query is computed with a bottom-up approach. The leaves of the entity's DAG contain information about the entity; a function that leverage the content and which returns a numerical value is then applied on that level. The internal nodes of the DAG aggregates the values computed on its outgoing nodes using a second function; the aggregation continues until the root of the entity is reached.
 
-For instance, we compute the contribution of the leaves ``$d$'', ``$N_5$'', and ``$N_4$'', which are aggregated on the parent node. The aggregated value is then combined with its sibling nodes, i.e., ``$b$'' and ``$N_2$''. These operations are repeated until the root of the tree is reached.
+For instance, we compute the contribution of the leaves ``$d$'', ``$v_5$'', and ``$v_4$'', which are aggregated on the parent node. The aggregated value is then combined with its sibling nodes, i.e., ``$b$'' and ``$v_2$''. These operations are repeated until the root of the tree is reached.
 
 \paragraph{MF Model Normalisations.}
 \label{chap:tree-ranking:mf-model:norm}
@@ -190,19 +190,19 @@ in which the following notations are used:
 
 If we consider the Figure~\ref{fig:expanded-graph2} for instance with the following state:
 \begin{itemize}
-	\item the node labelled $N_4$ is replaced with the sentence ``\textit{The dog sleeps in his dog house.}'';
-	\item the node labelled $N_5$ is replaced with the sentence ``\textit{This dog runs like the wind blows.}''; and
+	\item the node labelled $v_4$ is replaced with the sentence ``\textit{The dog sleeps in his dog house.}'';
+	\item the node labelled $v_5$ is replaced with the sentence ``\textit{This dog runs like the wind blows.}''; and
 	\item the node labelled $d$ is replaced with ``\textit{description}''.
 \end{itemize}
-If we are given the query ``\textit{dog}'', the Equation~(\ref{bm25mf_v}) over the leaves $d$, $N_5$, and $N_4$ outputs the following:
-\begin{labeling}{\textit{\underline{Node labelled $N_4$:}}}
-	\item[\textit{\underline{Node labelled $N_4$:}}] $f_{t,L} = \frac{2}{1 + (\frac{7}{14} - 1)} = 4$ with $\alpha_v=1$, $b_v=1$, $F_t=2$, $l=7$, and $l_a=14$. Here, we assume that the \emph{average leaf length} $l_a$ for the attribute $d$ is $14$.
-	\item[\textit{\underline{Node labelled $N_5$:}}] $f_{t,L} = \frac{1}{1 + (\frac{7}{14} - 1)} = 2$ with $\alpha_v=1$, $b_v=1$, $F_t=1$, $l=7$, and $l_a=14$.
+If we are given the query ``\textit{dog}'', the Equation~(\ref{bm25mf_v}) over the leaves $d$, $v_5$, and $v_4$ outputs the following:
+\begin{labeling}{\textit{\underline{Node labelled $v_4$:}}}
+	\item[\textit{\underline{Node labelled $v_4$:}}] $f_{t,L} = \frac{2}{1 + (\frac{7}{14} - 1)} = 4$ with $\alpha_v=1$, $b_v=1$, $F_t=2$, $l=7$, and $l_a=14$. Here, we assume that the \emph{average leaf length} $l_a$ for the attribute $d$ is $14$.
+	\item[\textit{\underline{Node labelled $v_5$:}}] $f_{t,L} = \frac{1}{1 + (\frac{7}{14} - 1)} = 2$ with $\alpha_v=1$, $b_v=1$, $F_t=1$, $l=7$, and $l_a=14$.
 	\item[\textit{\underline{Node labelled $d$:}}] $f_{t,L} = 0$.
 \end{labeling}
 On the parent node, those three values are summed up and passed to the Equation~(\ref{bm25mf_a}). We get the result of $f_{t,I} = \frac{4 + 2}{1 + (\frac{3}{2} - 1)} = 4$ with $\alpha_a=b_a=1$, $\left|{a}\right|_e=3$, and $\left|{a}\right| = 2$; we assume that the \emph{average attribute cardinality} for the attribute $d$ is $2$.
 
-The result of the $f_{t,I}$ function is then passed to the parent node; it is summed with the outputs of the $f_{t,L}$ function on the leaves $b$ and $N_2$. The same process is applied on each branch until the root entity is reached, where we finally assigns a score to the entity using Equation~(\ref{eq:bm25f_2}) that represents its relevance with regards to the query.
+The result of the $f_{t,I}$ function is then passed to the parent node; it is summed with the outputs of the $f_{t,L}$ function on the leaves $b$ and $v_2$. The same process is applied on each branch until the root entity is reached, where we finally assigns a score to the entity using Equation~(\ref{eq:bm25f_2}) that represents its relevance with regards to the query.
 
 \subsubsection{PL2MF}
 \label{sec:pl2mf-function}

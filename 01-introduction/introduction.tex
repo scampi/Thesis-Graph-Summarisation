@@ -9,11 +9,11 @@ Since the advent of the Internet, people and companies exchange information on t
 \item metadata encoded into web pages that provides some meaning about their content.
 \end{itemize}
 
-The Semantic Web vision is to enrich this data with machine-readable semantic information, transforming the Web into a global database that we call the \emph{Web of Data}~\cite{bizer:2009:linked}. For example, the description of a table within a web page can be improved by associating some semantic markup, e.g., using the RDFa\footnote{RDFa: \url{http://www.w3.org/TR/xhtml-rdfa-primer/}} markup language, so that the columns of the table have a sense: for instance is it concerned with time data, people's name, geographic places, etc.\\
+The Semantic Web vision is to enrich this data with machine-readable semantic information, transforming the Web into a global database that we call the \emph{Web of Data}~\cite{bizer:2009:linked}. For example, the description of a table within a web page can be improved by using a semantic markup, e.g., using the RDFa\footnote{RDFa: \url{http://www.w3.org/TR/xhtml-rdfa-primer/}} markup language, so that the columns of the table have a sense: for instance is it concerned with time data, people's name, geographic places, etc.\\
 
 The Semantic Web movement amplified the growth of, now semantically enriched, information on the Web. The Linking Open Data\footnote{\url{http://www.w3.org/wiki/SweoIG/TaskForces/CommunityProjects/LinkingOpenData}} (LOD) project is a successful example, which provides a collection of inter-linked datasets about diverse domains.
 
-A core point of the Semantic Web is the use of ``Uniform Resource Identifiers'' (URIs) for denoting things, e.g., objects, people, places, \ldots. This allows to uniquely name something and describe it, so that it may be reused in other places. Once the data is described using URIs, and also that existing URIs are reused, we reach a state where the data published on the Web is \emph{inter-connected}. The data thus forms a ``graph'', with nodes being the things, and the edges being the kind of relationship between two things.
+A core point of the Semantic Web is the use of ``Uniform Resource Identifiers'' (URIs) for denoting things, e.g., objects, people, places, \ldots. This allows to uniquely name something and describe it, so that it may be reused in other places. Once the data is described using URIs, and also that existing URIs are reused, we reach a state where the data published on the Web is \emph{inter-connected}. The data thus forms a ``graph'', with nodes representing the described objects, and edges detailing the relationship between two objects (nodes).
 
 The inter-connected data is at the ``scale of the Web'', consisting of thousands, if not millions, of different pieces of information about some topics. This scale opens up interesting ways of searching, browsing, and exploring the data.
 
@@ -97,7 +97,13 @@ Web Data is in general not bundled with a schema, or a description akin to a sch
 
 Web Data can be created without the need to follow specific rules. The data does not need to adhere to some kind of pre-defined schema. Inter-linking with others' data is promoted in the Web of Data by the use of URIs. The distributed aspect of the data is emphasised by Halevy et al.~\cite{halevy:2003:smp} where a peer-to-peer data management system is proposed. However, data sources are assumed to have a schema, and the existence of a global schema that \emph{mediates} the sharing of information between sources is needed.
 
-In the Web of Data, the existence of a central place where the schema of data sources is kept is unreasonable due to the scale and dynamicity of the data. Our rationale is that a pre-defined schema cannot be enforced. Hence, we propose the \emph{graph summary} as a novel system for managing distributed, heterogeneous data sources on the Web.
+In the Web of Data, the existence of a central place where the schema of data sources is kept is unreasonable due to the scale and dynamicity of the data.
+Nonetheless, a schema enables two benefits
+\begin{inparaenum}[(1)]
+\item it ensures that new data adheres to that schema; and
+\item it provides an overview over existing data.
+\end{inparaenum}
+Given that the first point cannot be achieved in the Web of Data context, we propose the graph summary as a way to provide the second point: it is a novel system for managing distributed, heterogeneous data sources on the Web.
 
 %\section{Graph Exploration}
 %
@@ -131,10 +137,11 @@ The ranking of a document can be improved by, for example, adding some structura
 \subsection{Ranking of Graph Data}
 
 In the Web of Data, we use URIs to name things, e.g., people, monuments, places, \ldots, which allows one to lookup an URI and learn about it, but also for others to reference that URI in their own dataset. The Web Data takes then the form of a graph, where a node represent a concept and the edge a labelled relationship that links two nodes.
+While Web Data follows the standard RDF format that opens many opportunities to tackle graph ranking, we consider in this thesis to improve the ranking model.
 
 In Web Data, the structure of the graph carries some information about the data. However, most of it is discarded by field-based ranking approaches due to the bag of words modelling. The Figure~\ref{fig:bow-graph} depicts a  graph about ``Ireland'' and its neighbouring country; the Figure~\ref{fig:bow} is a depiction of its bag of words. We observe that with the bag of words modelling, we lose some semantic that is carried by the structure: the population number is not closely associated with the ``United Kingdom'' anymore.
 
-The ranking of a graph requires a novel way of modelling the data, in which the ``bag of words'' approach does not discard the structure.
+The ranking of a graph requires a novel way of modelling the data that does not discard the structure.
 Hence, we propose the \emph{``MF'' ranking model} that leverage the graph structure in order to better compute the relevance of a graph with regards to a query.
 
 \begin{figure}
@@ -162,7 +169,7 @@ Hence, we propose the \emph{``MF'' ranking model} that leverage the graph struct
 \section{Challenges}
 
 The purpose of the summary is to describe the structure of a graph. Therefore, it can hold the function of a \emph{schema} for that graph.
-A schema is the basis of many algorithms over the data. A schema describes the content thus facilitating users searching for a particular resource. A schema may provide statistical information about the data, which is useful for query optimisation. Schemas help in the integration process of several data sources. As a consequence, a major challenge is to determine what features of the data can be used in order to effectively generate a schema.\\
+A schema is the basis of many algorithms over the data. A schema describes the content thus facilitating users to search for a particular resource. From the description a schema provides, one may draw out statistical information about the data that can be useful in some scenarios, e.g., query optimisation. Schemas help in the integration process of several data sources. As a consequence, a major challenge is to determine what features of the data can be used in order to effectively generate a schema.\\
 
 The construction of a graph summary does not ensure that the entity graph can be re-built from its summary. This means that some details about the structure of the graph was discarded during the summarisation process. Although some errors in the summary can be acceptable for a user exploring the data, it can cause a significant drop of performance for a query optimizer. Hence, it is necessary to measure how accurate a summary is with regards to the data.
 
@@ -183,14 +190,14 @@ Different applications have varying interactivity with respect to the summary. W
 Graph summarisation produces a \emph{summary} of the structure of the graph, providing information akin to a schema in relational databases. We can then leverage the summary in various ways, of which some are presented in this thesis.
 
 \begin{labeling}{\emph{Browsing of a dataset's structure.}}
-\item[\emph{Graph schema.}] We present in Section~\ref{chap03:sec:wd-mgnt} that the graph summary can serve the function of a \emph{schema} for the graph. The generated schema allows a user to learn about the structure of the graph, and ultimately how to query for information.
+\item[\emph{Graph schema.}] We present in Section~\ref{chap03:sec:wd-mgnt} that the graph summary can serve the function of a \emph{schema} for the graph. The generated summary of a graph highlights its structure, unveiling the underlying schema; ultimately this allows one to query for the desired information.
 \item[\emph{Querying assistance.}] In Section~\ref{sec:exploiting:sparqled:recommendation} we use the structural information from a summary in order to assist a user in writing a query over the graph. This allows users having little to no knowledge about the data to build meaningful queries.
 \item[\emph{Browsing of a dataset's structure.}] The information gathered during the graph summarisation process of a dataset is made available for browsing in Section~\ref{sec:web-data-inspector}. This enables a user to learn about the internals of a dataset: its structure, the kind of information it carries, the relationships between concepts, or its connections to other datasets. With such knowledge, the user may identify problems with the data, e.g., missing attributes.
 \end{labeling}
 
 \section{Outline}
 
-The thesis is divided in three parts. This first part \emph{Prelude} contains the introduction to the thesis, and presents fundamental concepts and models that will reused throughout the rest of the thesis. We introduce in the second part \emph{Methods} new techniques for generating and evaluating graph summaries, as well as a new ranking model for semi-structured data. In the final part \emph{Putting the Pieces Together}, we describe applications of the presented methods.
+The thesis is divided in three parts. This first part \emph{Background} contains the introduction to the thesis, and presents fundamental concepts and models that will be reused throughout the rest of the thesis. We introduce in the second part \emph{Methods} new techniques for generating and evaluating graph summaries, as well as a new ranking model for semi-structured data. In the final part \emph{Putting the Pieces Together}, we describe applications of the presented methods.
 
 \minisec{Part II: Foundations}
 

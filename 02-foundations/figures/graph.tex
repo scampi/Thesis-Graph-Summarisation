@@ -1,16 +1,16 @@
 \begin{tikzpicture}[->,>=stealth',node distance=3.5cm]
-\node [draw,circle] (n0) {$N_0$};
+\node [draw,circle] (n0) {$v_0$};
 \node [draw,circle,above of = n0] (effi) {Effi\ldots};
-\node [draw,circle,right of = n0] (n2) {$N_1$};
-\node [draw,circle,below of = n2,yshift=-1cm] (n1) {$N_2$};
-\node [draw,circle,right of = n2] (n3) {$N_3$};
-\node [draw,circle,right of = n3] (n6) {$N_6$};
-\node [draw,circle,below of = n6,yshift=-1cm] (n4) {$N_4$};
+\node [draw,circle,right of = n0] (n2) {$v_1$};
+\node [draw,circle,below of = n2,yshift=-1cm] (n1) {$v_2$};
+\node [draw,circle,right of = n2] (n3) {$v_3$};
+\node [draw,circle,right of = n3] (n6) {$v_6$};
+\node [draw,circle,below of = n6,yshift=-1cm] (n4) {$v_4$};
 \node [draw,circle,below of = n2,yshift=1.25cm] (person) {Person};
 \node [draw,circle,below of = n1] (ren) {Renaud};
 \node [draw,circle,above of = n2] (ste) {St\'ephane};
-\node [draw,circle,right of = n4] (n5) {$N_5$};
-\node [draw,circle,right of = n6] (n7) {$N_7$};
+\node [draw,circle,right of = n4] (n5) {$v_5$};
+\node [draw,circle,right of = n6] (n7) {$v_7$};
 \node [draw,circle,above right of = n4,xshift=-.7cm] (place) {Place};
 \node [draw,circle,above of = n7,yshift=0cm] (country) {Country};
 \node [draw,circle,below of = n4] (deri) {DERI};
@@ -62,66 +62,66 @@
 %
 %% doc
 %%\SetVertexNormal[LineColor=red]
-%\Vertex[Math,x=0,y=.75]{N_0}
+%\Vertex[Math,x=0,y=.75]{v_0}
 %%\SetVertexNormal[LineColor=black]
 %\Vertex[x=0,y=1.75,L=Effi...]{doc}
-%\Edge[style={->},label=title](N_0)(doc)
+%\Edge[style={->},label=title](v_0)(doc)
 %% Person
 %%\SetVertexNormal[LineColor=red]
-%\Vertex[Math,x=1.75,y=-.75]{N_1}
-%\Vertex[Math,x=1.75,y=.75]{N_2}
+%\Vertex[Math,x=1.75,y=-.75]{v_1}
+%\Vertex[Math,x=1.75,y=.75]{v_2}
 %%\SetVertexNormal[LineColor=black]
 %\Vertex[x=.6,y=.2]{Person}
 %\Vertex[x=1,y=1.75,L=St\'ephane]{ste}
 %\Vertex[x=.25,y=-1,L=Renaud]{ren}
-%\Edge[style={->},label=type](N_1)(Person)
-%\Edge[style={->},label=type](N_2)(Person)
-%\Edge[style={->},label=name](N_2)(ste)
-%\Edge[style={->},label=name](N_1)(ren)
-%\Edge[style={->},label=creator](N_0)(N_2)
-%\Edge[style={->,bend left},label=author](N_0)(N_2)
-%\Edge[style={->,bend right=40},label=author](N_0)(N_1)
+%\Edge[style={->},label=type](v_1)(Person)
+%\Edge[style={->},label=type](v_2)(Person)
+%\Edge[style={->},label=name](v_2)(ste)
+%\Edge[style={->},label=name](v_1)(ren)
+%\Edge[style={->},label=creator](v_0)(v_2)
+%\Edge[style={->,bend left},label=author](v_0)(v_2)
+%\Edge[style={->,bend right=40},label=author](v_0)(v_1)
 %% City
 %%\SetVertexNormal[LineColor=red]
-%\Vertex[Math,x=3,y=.78]{N_3}
+%\Vertex[Math,x=3,y=.78]{v_3}
 %%\SetVertexNormal[LineColor=black]
 %\Vertex[x=2,y=1.5]{City}
 %\Vertex[x=3,y=1.75]{Galway}
-%\Edge[style={->},label=type](N_3)(City)
-%\Edge[style={->,bend right},label=label](N_3)(Galway)
-%\Edge[style={->,bend left},label=lives](N_1)(N_3)
-%\Edge[style={->},label=lives](N_2)(N_3)
+%\Edge[style={->},label=type](v_3)(City)
+%\Edge[style={->,bend right},label=label](v_3)(Galway)
+%\Edge[style={->,bend left},label=lives](v_1)(v_3)
+%\Edge[style={->},label=lives](v_2)(v_3)
 %%% Organisation
 %%\SetVertexNormal[LineColor=red]
-%\Vertex[Math,x=3,y=-.75]{N_4}
-%\Vertex[Math,x=3,y=-1.25]{N_5}
+%\Vertex[Math,x=3,y=-.75]{v_4}
+%\Vertex[Math,x=3,y=-1.25]{v_5}
 %%\SetVertexNormal[LineColor=black]
 %\Vertex[x=4.5,y=-.75]{Place}
 %\Vertex[x=3,y=.19]{DERI}
 %\Vertex[x=1.75,y=-1.3]{FBK}
-%\Edge[style={->},label=type](N_4)(Place)
-%\Edge[style={->},label=type](N_5)(Place)
-%\Edge[style={->},label=label](N_5)(FBK)
-%\Edge[style={->},label=label](N_4)(DERI)
-%\Edge[style={->},label=works](N_1)(N_4)
-%\Edge[style={->,bend right},label=works](N_2)(N_4)
+%\Edge[style={->},label=type](v_4)(Place)
+%\Edge[style={->},label=type](v_5)(Place)
+%\Edge[style={->},label=label](v_5)(FBK)
+%\Edge[style={->},label=label](v_4)(DERI)
+%\Edge[style={->},label=works](v_1)(v_4)
+%\Edge[style={->,bend right},label=works](v_2)(v_4)
 %% Country
 %%\SetVertexNormal[LineColor=red]
-%\Vertex[Math,x=4.5,y=.25]{N_6}
-%\Vertex[Math,x=5.75,y=-.8]{N_7}
+%\Vertex[Math,x=4.5,y=.25]{v_6}
+%\Vertex[Math,x=5.75,y=-.8]{v_7}
 %%\SetVertexNormal[LineColor=black]
 %\Vertex[x=5.5,y=1.5]{Country}
 %\Vertex[x=4,y=1.5]{Ireland}
 %\Vertex[x=5.2,y=0.2]{Rome}
-%\Edge[style={->},label=type](N_6)(Country)
-%\Edge[style={->,bend right=20},label=type](N_7)(Country)
-%\Edge[style={->},label=type](N_6)(Place)
-%\Edge[style={->},label=type](N_7)(Place)
-%\Edge[style={->},label=label](N_6)(Ireland)
-%\Edge[style={->},label=capital](N_7)(Rome)
-%\Edge[style={->},label=location](N_4)(N_6)
-%\Edge[style={->},label=location](N_3)(N_6)
-%\Edge[style={->,bend right=20},label=location](N_5)(N_7)
+%\Edge[style={->},label=type](v_6)(Country)
+%\Edge[style={->,bend right=20},label=type](v_7)(Country)
+%\Edge[style={->},label=type](v_6)(Place)
+%\Edge[style={->},label=type](v_7)(Place)
+%\Edge[style={->},label=label](v_6)(Ireland)
+%\Edge[style={->},label=capital](v_7)(Rome)
+%\Edge[style={->},label=location](v_4)(v_6)
+%\Edge[style={->},label=location](v_3)(v_6)
+%\Edge[style={->,bend right=20},label=location](v_5)(v_7)
 %\end{tikzpicture}
 
 %\begin{tikzpicture}[>=triangle 45]
@@ -131,14 +131,14 @@
 %digraph G {
 %	node [shape="circle"];
 %
-%	n0 [texlbl="$N_0$"];
-%	n1 [texlbl="$N_1$"];
-%	n2 [texlbl="$N_2$"];
-%	n3 [texlbl="$N_3$"];
-%	n4 [texlbl="$N_4$"];
-%	n5 [texlbl="$N_5$"];
-%	n6 [texlbl="$N_6$"];
-%	n7 [texlbl="$N_7$"];
+%	n0 [texlbl="$v_0$"];
+%	n1 [texlbl="$v_1$"];
+%	n2 [texlbl="$v_2$"];
+%	n3 [texlbl="$v_3$"];
+%	n4 [texlbl="$v_4$"];
+%	n5 [texlbl="$v_5$"];
+%	n6 [texlbl="$v_6$"];
+%	n7 [texlbl="$v_7$"];
 %
 %	eff [label="Effi..."];
 %	ste [texlbl="St\'ephane"];
