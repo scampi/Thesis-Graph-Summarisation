@@ -1,7 +1,7 @@
 \chapter{Introduction}
 \label{chap:introduction}
 
-Since the advent of the Internet, people and companies exchange information on the Web. There is now an abundance of information about various domains such as science, commerce, leisure, etc. Although the Web browsed by Humans mainly contains unstructured data such as text, a significant amount of structured data exists.
+Since the advent of the Internet, people and companies exchange information on the Web. There is now an abundance of information about a wide range of domains such as science, commerce, leisure, etc. Although the Web browsed by Humans mainly contains unstructured data such as text, a significant amount of structured data exists.
 
 \begin{itemize}
 \item hyperlinks from a web page to another in order to point to additional or related information;
@@ -69,7 +69,7 @@ With the Eunis dataset having at least 500 types and 1500 predicates, the user i
 \label{chap:introduction:data-mgmt}
 
 Web Data is composed of a variety of data about many entities, for example which can be a person\footnote{\url{https://en.wikipedia.org/wiki/Buzz_Aldrin}}, a country\footnote{\url{https://en.wikipedia.org/wiki/Ireland}}, an event\footnote{\url{https://en.wikipedia.org/wiki/Moon_landing}}, etc.
-The decentralised nature of the Web has the effect that information about a same \emph{entity} is available on several web pages. Data sources can be complementary in some aspects, and redundant in others. Furthermore, each source has its own take on data modelling. Sources may label an attribute of an entity differently although what is described is the same. Sources may also represent an attribute differently, e.g., the name of a person as two properties with first and last name, versus a single property which is a concatenation of the two. These various points highlight the \emph{heterogeneity} of the data on the Web, which stand as a challenge when managing data.\\
+The decentralised nature of the Web has the effect that information about a same \emph{entity} is available on several web pages. Data sources can be complementary in some aspects, and redundant in others. Furthermore, each source has its own take on data modelling. Sources may label an attribute of an entity differently although what is described is the same. Sources may also represent an attribute differently, e.g., the name of a person as two properties with first and last name, versus a single property which is a concatenation of the two. These facts highlight the \emph{heterogeneity} of the data on the Web, which stands as a challenge when managing data.\\
 
 In order to fulfill an information need, a user generally uses a web search engine. This allows him to browse only the most relevant pages with regards to his need out of the billions of web pages that the Web consists of. To achieve this, search engines rely on the structure of the data so to rank documents appropriately. The knowledge of the structure of the data, which can sometimes be seen as a \emph{schema}, is a necessary medium for exploration and, ultimately, finding the answer to one's need.
 
@@ -173,7 +173,7 @@ A schema is the basis of many algorithms over the data. A schema describes the c
 
 The construction of a graph summary does not ensure that the entity graph can be re-built from its summary. This means that some details about the structure of the graph was discarded during the summarisation process. Although some errors in the summary can be acceptable for a user exploring the data, it can cause a significant drop of performance for a query optimizer. Hence, it is necessary to measure how accurate a summary is with regards to the data.
 
-In the recent years, the amount of data has been growing increasingly. A glimpse of this growth over the years can be visually appreciated\footnote{The Linking Open Data cloud diagram: \url{http://lod-cloud.net/}} through the various diagrams of the Linking Open Data cloud. It is common to see data with millions of entities and billions of statements, to which the ``Open Data'' movement contributed a significant part. However, the ease of sharing data has the downside of that data not following a strict schema, if any.\\
+In the recent years, the amount of data has been growing increasingly. A glimpse of this growth over the years can be visually appreciated\footnote{The Linking Open Data cloud diagram: \url{http://lod-cloud.net/}} through the many diagrams of the Linking Open Data cloud. It is common to see data with millions of entities and billions of statements, to which the ``Open Data'' movement contributed a significant part. However, the ease of sharing data has the downside of that data not following a strict schema, if any.\\
 
 As a consequence, there is a need for techniques that can provide a structure akin to a schema, e.g., a summary, without restraining the ``evolution'' of the data, while at the same time that can scale to large volumes of data.
 
@@ -187,7 +187,7 @@ Different applications have varying interactivity with respect to the summary. W
 
 \section{Applications}
 
-Graph summarisation produces a \emph{summary} of the structure of the graph, providing information akin to a schema in relational databases. We can then leverage the summary in various ways, of which some are presented in this thesis.
+Graph summarisation produces a \emph{summary} of the structure of the graph, providing information akin to a schema in relational databases. We can then leverage the summary in several ways, of which some are presented in this thesis.
 
 \begin{labeling}{\emph{Browsing of a dataset's structure.}}
 \item[\emph{Graph schema.}] We present in Section~\ref{chap03:sec:wd-mgnt} that the graph summary can serve the function of a \emph{schema} for the graph. The generated summary of a graph highlights its structure, unveiling the underlying schema; ultimately this allows one to query for the desired information.
@@ -202,13 +202,13 @@ The thesis is divided in three parts. This first part \emph{Background} contains
 \minisec{Part II: Foundations}
 
 \begin{labeling}{Chapter~\ref{chap:ssd}:}
-\item[Chapter~\ref{chap:ssd}:] We present here a graph data model that encompasses the various formats used for modelling structured data. The model is layered so to represent the concepts of entity and dataset.% Then we describe a graph schema model which fits between those two layers.
+\item[Chapter~\ref{chap:ssd}:] We present here a graph data model that encompasses the wide variety of formats used for modelling structured data. The model is layered so to represent the concepts of entity and dataset.% Then we describe a graph schema model which fits between those two layers.
 \end{labeling}
 
 \minisec{Part III: Methods}
 
 \begin{labeling}{Chapter~\ref{chap:summary}:}
-\item[Chapter~\ref{chap:graph-summary:related-work}:] We present in this chapter various approaches at summarising graph data and for what scenario they were built for. We emphasize their shortcomings and how these are answered thanks to the graph summary.
+\item[Chapter~\ref{chap:graph-summary:related-work}:] We present in this chapter several approaches at summarising graph data and for what scenario they were built for. We emphasize their shortcomings and how these are answered thanks to the graph summary.
 \item[Chapter~\ref{chap:summary}:] In this chapter, we introduce the formal model of a graph summary. Then, we present a technique for generating graph summaries for Web Data at scale.
 \item[Chapter~\ref{chap03:sec:quality}:] The summary of a graph is built in a bottom-up fashion, through the aggregation of nodes of the entity graph. The graph summary being a graph homomorphism, it is not assured that entity graph can be re-built from its summary. Therefore, some details about the structure of the graph are missing from the graph summary. In order to account for this loss, we developed a model for measuring the precision of a graph summary.
 \item[Chapter~\ref{chap:tree-ranking}:] In this chapter, we introduce the ``MF'' ranking model for semi-structured data. The model considers the structural heterogeneity of the data for a better scoring of entities.

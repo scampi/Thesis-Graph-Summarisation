@@ -1,7 +1,7 @@
 \chapter{Graph Summarisation}
 \label{chap:summary}
 
-In various Computer Science areas, the information is represented as and is analysed through graphs. Graphs are used to capture the social relationship between people, to represent processes and their transition in concurrency, or to structure data in a flexible way, e.g., using the Object Exchange Model \cite{papakonstantinou:1995:oea} or, more recently, the Resource Description Framework \cite{rdfconcepts}.
+In many Computer Science areas, the information is represented as and is analysed through graphs. Graphs are used to capture the social relationship between people, to represent processes and their transition in concurrency, or to structure data in a flexible way, e.g., using the Object Exchange Model \cite{papakonstantinou:1995:oea} or, more recently, the Resource Description Framework \cite{rdfconcepts}.
 
 A common challenge encountered when analysing a graph is its volume. A large number of nodes or edges reduces the scalability and increases the running time of algorithms applied on the data. A solution is to ``translate'' the graph into another smaller graph while preserving its structure. That process is called \emph{graph summarisation} and the resulting graph is then considered as a \emph{summary} of the entity graph.
 
@@ -26,18 +26,18 @@ Each layer of the proposed index provides views of the LOD graph with varying gr
 
 \# OLAP on Graph:
 
-OLAP (Online Analytical Processing) is a technique for answering analytical queries over multi-dimensional data. Through various operations it allows a user to analyse the data from different perspectives. Each perspective is called a \emph{cube}, obtained by grouping the values of some dimensions. Several works investigate the use of OLAP over graphs: data records analysed through OLAP are now related to each other. The main difference between traditional OLAP and graph OLAP is the \emph{measure} which is traditionally a number becomes a \emph{graph}.
+OLAP (Online Analytical Processing) is a technique for answering analytical queries over multi-dimensional data. Through different operations it allows a user to analyse the data from different perspectives. Each perspective is called a \emph{cube}, obtained by grouping the values of some dimensions. Several works investigate the use of OLAP over graphs: data records analysed through OLAP are now related to each other. The main difference between traditional OLAP and graph OLAP is the \emph{measure} which is traditionally a number becomes a \emph{graph}.
 
-Chen et. al propose in \cite{chen:icdm:2008} two OLAP frameworks \emph{I-OLAP} and \emph{T-OLAP} for analysing graphs. However, the aggregation studied I-OLAP is aimed at various graphs representing the same entities; therefore, it is a merge of the graphs that keeps the entity layer. In a follow-up work \cite{qu:dasfaa:2011}, T-OLAP is further investigated. Along with \cite{zhao:sigmod:2011}, these two works introduces a graph OLAP framework which aggregates nodes into sumnodes, thus changing the topology of the graph. Compared to graph summarisation, these works are not intended to retain the structure of the graph, e.g., by considering incoming edges.
+Chen et. al propose in \cite{chen:icdm:2008} two OLAP frameworks \emph{I-OLAP} and \emph{T-OLAP} for analysing graphs. However, the aggregation studied I-OLAP is aimed at several graphs representing the same entities; therefore, it is a merge of the graphs that keeps the entity layer. In a follow-up work \cite{qu:dasfaa:2011}, T-OLAP is further investigated. Along with \cite{zhao:sigmod:2011}, these two works introduces a graph OLAP framework which aggregates nodes into sumnodes, thus changing the topology of the graph. Compared to graph summarisation, these works are not intended to retain the structure of the graph, e.g., by considering incoming edges.
 
 \#\# RDF Analytics:
 
-Colazzo et al. \cite{colazzo:www:2014} describe a framework for using OLAP over RDF data, leveraging the rich structure of such graphs. Each cube is built based on SPARQL queries which define sumnodes and sumedges. This analytical framework is flexible enough to accommodate various kinds of analysis, since the aggregate function is also based on a SPARQL query. Although the analysis of the data is done through its cubes by a user, the computation of a cube is always done over the original data. The need of writing SPARQL queries suggests that a user possesses some knowledge about the structure of the graph. This work is orthogonal to the one proposed in this thesis: our approach highlights the graph structure, thanks to which a deeper analysis of the graph can be done.
+Colazzo et al. \cite{colazzo:www:2014} describe a framework for using OLAP over RDF data, leveraging the rich structure of such graphs. Each cube is built based on SPARQL queries which define sumnodes and sumedges. This analytical framework is flexible enough to accommodate many kinds of analysis, since the aggregate function is also based on a SPARQL query. Although the analysis of the data is done through its cubes by a user, the computation of a cube is always done over the original data. The need of writing SPARQL queries suggests that a user possesses some knowledge about the structure of the graph. This work is orthogonal to the one proposed in this thesis: our approach highlights the graph structure, thanks to which a deeper analysis of the graph can be done.
 
 \section{Query Optimisation}
 
 
-The survey \cite{you:2013:towards} analyses various graph summarisation approaches and proposes a classification for these approaches. Three categories are defined according to what aspect of the graph is used for the summarisation:
+The survey \cite{you:2013:towards} analyses several graph summarisation approaches and proposes a classification for these approaches. Three categories are defined according to what aspect of the graph is used for the summarisation:
 \begin{enumerate}
 \item \emph{attribute-based} approaches consider the label of nodes for the summarisation;
 \item \emph{structure-based} approaches rely on the relationships between nodes to compute a summary; and
@@ -59,7 +59,7 @@ Current approaches of the summary computation seek to reduce the complexity of a
 \# Distributed Graph Summarisation
 
 In order to deal with large graphs, distributed implementations of graph summarisation has been researched.
-Liu et al. in \cite{liu:cikm:2014} present a graph summarisation approach based the \emph{Message Passing} paradigm: the algorithm iteratively merges nodes of the graph until a predefined number of nodes are left. Various solutions for selecting which nodes to merge are discussed, a method based on \emph{Locality Sensitive Hashing} is introduced. The merge process introduces errors with regards to the entity graph, i.e., either missing or additional edges.
+Liu et al. in \cite{liu:cikm:2014} present a graph summarisation approach based the \emph{Message Passing} paradigm: the algorithm iteratively merges nodes of the graph until a predefined number of nodes are left. Different solutions for selecting which nodes to merge are discussed, and a method based on \emph{Locality Sensitive Hashing} is introduced. The merge process introduces errors with regards to the entity graph, i.e., either missing or additional edges.
 
 \section{Graph Summarisation Quality}
 
