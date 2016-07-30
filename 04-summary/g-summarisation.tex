@@ -386,24 +386,24 @@ A graph summary can be constructed based on different features of the data. We p
 \end{itemize}
 We report in Table~\ref{tab:sumrel} a summary of the presented relations along with the name of the summary that a relation generates.
 
-\minisec{Summarisation Relation $R_{st}$}
+\minisec{Summarisation Relation $R_{ut}$}
 
-We define $R_{st}$ as the summarisation relation that maps a node according to its type. We call the summary it generates the \emph{single-type} summary.
-The nodes $v_4$, $v_5$, $v_6$, and $v_7$ in the Figure~\ref{fig:graph} are mapped to a same sumnode since they all have \emph{Place} as a type. The $R_{st}$ relation may map a node to multiple sumnodes since an entity may have several types. For instance, the nodes $v_6$ and $v_7$ are also mapped to another sumnode since they both share the type \emph{Country}.
+We define $R_{ut}$ as the summarisation relation that maps a node according to its type. We call the summary it generates the \emph{\emph{unique type}} summary.
+The nodes $v_4$, $v_5$, $v_6$, and $v_7$ in the Figure~\ref{fig:graph} are mapped to a same sumnode since they all have \emph{Place} as a type. The $R_{ut}$ relation may map a node to multiple sumnodes since an entity may have several types. For instance, the nodes $v_6$ and $v_7$ are also mapped to another sumnode since they both share the type \emph{Country}.
 
-\begin{definition}[Single-Type Summary]
-Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{st} = \left\langle \mathcal{W}_{st}, \mathcal{B}_{st}, l_{\mathcal{W}_{st}} \right\rangle$ be two graphs.
+\begin{definition}[Unique Type Summary]
+Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ut} = \left\langle \mathcal{W}_{ut}, \mathcal{B}_{ut}, l_{\mathcal{W}_{ut}} \right\rangle$ be two graphs.
 
-The set of nodes $\mathcal{W}_{st}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{st} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{st} = \emptyset$, and it contains as many elements as there are types in the graph:
+The set of nodes $\mathcal{W}_{ut}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ut} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ut} = \emptyset$, and it contains as many elements as there are types in the graph:
 $$
-\lvert \mathcal{W}_{st} \rvert = \lvert \left\lbrace l_V(c) \mid \exists (u, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \right\rbrace \rvert
+\lvert \mathcal{W}_{ut} \rvert = \lvert \left\lbrace l_V(c) \mid \exists (u, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \right\rbrace \rvert
 $$
 
-We call $\mathcal{S}_{st}$ the single-type summary of $G$ according to the summarisation relation $R_{st} \subseteq V \times \mathcal{W}_{st}$ defined as:
+We call $\mathcal{S}_{ut}$ the \emph{unique type} summary of $G$ according to the summarisation relation $R_{ut} \subseteq V \times \mathcal{W}_{ut}$ defined as:
 $$
 \begin{aligned}
-R_{st} = \{ (u, x) \in V \times \mathcal{W}_{st} \mid &\; \exists (v, y) \in V \times \mathcal{W}_{st} \\
-	& (u,\glssymbol{atype},v) \in A \wedge (x,\glssymbol{atype},y) \wedge l_V(v) = l_\mathcal{W_{st}}(y) \wedge \glssymbol{atype} \in T \}
+R_{ut} = \{ (u, x) \in V \times \mathcal{W}_{ut} \mid &\; \exists (v, y) \in V \times \mathcal{W}_{ut} \\
+	& (u,\glssymbol{atype},v) \in A \wedge (x,\glssymbol{atype},y) \wedge l_V(v) = l_\mathcal{W_{ut}}(y) \wedge \glssymbol{atype} \in T \}
 \end{aligned}
 $$
 \label{def:st}
@@ -413,7 +413,7 @@ $$
 \minisec{Summarisation Relation $R_t$}
 
 We define $R_t$ the summarisation relation that maps a node based on its set of types. We call the summary it generates the \emph{types} summary.
-The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in the Figure~\ref{fig:graph}. The nodes $v_6$ and $v_7$ are mapped to the sumnode $S_4$ because they are both associated with the types \emph{Place} and \emph{Country}. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $v_1$ and $v_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. It differs from $R_{st}$ since it considers the types of a node as \emph{set} rather than individually. Indeed, the node $v_6$ is mapped to two sumnodes under the relation $R_{st}$.
+The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in the Figure~\ref{fig:graph}. The nodes $v_6$ and $v_7$ are mapped to the sumnode $S_4$ because they are both associated with the types \emph{Place} and \emph{Country}. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $v_1$ and $v_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. It differs from $R_{ut}$ since it considers the types of a node as \emph{set} rather than individually. Indeed, the node $v_6$ is mapped to two sumnodes under the relation $R_{ut}$.
 
 \begin{definition}[Types Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_t = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ be two graphs.
@@ -626,7 +626,7 @@ Although the nodes $v_1$ and $v_2$ are mapped to a same sumnode with $R_{at}$, t
 	\toprule
 	 & \phantom{a} & \multicolumn{1}{c}{Notation} & \phantom{a} & \multicolumn{1}{c}{Summarisation Relation} \\
 	\cmidrule{3-3} \cmidrule{5-5}
-	\emph{Single-Type} & \phantom{a} & $\mathcal{S}_{st} = \left\langle \mathcal{W}_{st}, \mathcal{B}_{st}, l_{\mathcal{W}_{st}} \right\rangle$ & \phantom{a} & Definition (\ref{def:st}) \\
+	\emph{Unique Type} & \phantom{a} & $\mathcal{S}_{ut} = \left\langle \mathcal{W}_{ut}, \mathcal{B}_{ut}, l_{\mathcal{W}_{ut}} \right\rangle$ & \phantom{a} & Definition (\ref{def:st}) \\
 
 	\emph{Types} & \phantom{a} & $\mathcal{S}_t = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ & \phantom{a} & Definition (\ref{def:t}) \\
 

@@ -62,9 +62,9 @@ We note the mean of measurements in a category as $\mu_{L}$, $\mu_{M}$, $\mu_{H}
 
 The Table~\ref{tab:volume-ratio} reports the volume ratio between the summary $\mathcal{S}$ and the gold standard summary $\mathcal{S}_{fb}$. We report also the mean $\mu$ for each category of datasets complexity.
 
-The summaries based only on the type information, i.e., $R_{st}$ and $R_t$, exhibit a higher compression compared to the gold standard. With regards to the gold standard volume, the volume ratio is under $5\%$ on the \emph{Low} and \emph{Medium} datasets and at most half on the more complex datasets. On average, we note that the volume of a summary with $R_{st}$ is slightly higher than with $R_t$. The reason is that a node of the entity graph can be mapped to several sumnodes with the \emph{Single-Type} summary $R_{st}$, which leads to an increase of the size of the summary.
+The summaries based only on the type information, i.e., $R_{ut}$ and $R_t$, exhibit a higher compression compared to the gold standard. With regards to the gold standard volume, the volume ratio is under $5\%$ on the \emph{Low} and \emph{Medium} datasets and at most half on the more complex datasets. On average, we note that the volume of a summary with $R_{ut}$ is slightly higher than with $R_t$. The reason is that a node of the entity graph can be mapped to several sumnodes with the \emph{Unique Type} summary $R_{ut}$, which leads to an increase of the size of the summary.
 
-The attribute feature appears to be a better feature for summarising a graph than type. Indeed, the volume ratio of $\mathcal{S}_a$ and $\mathcal{S}_{ioa}$ remains stable with \emph{Medium} ($42.51$ and $51.45$, resp.) and \emph{High} ($47.99$ and $66.13$, resp.) datasets. However, this is not the case with the $\mathcal{S}_{st}$ and $\mathcal{S}_t$ summaries.
+The attribute feature appears to be a better feature for summarising a graph than type. Indeed, the volume ratio of $\mathcal{S}_a$ and $\mathcal{S}_{ioa}$ remains stable with \emph{Medium} ($42.51$ and $51.45$, resp.) and \emph{High} ($47.99$ and $66.13$, resp.) datasets. However, this is not the case with the $\mathcal{S}_{ut}$ and $\mathcal{S}_t$ summaries.
 
 We can observe a correlation between the volume ratio and the size of $\mathcal{L}^T$.
 We note that the \emph{Attributes} summarisation $R_a$ actually achieves the lowest ratio on the \texttt{dbpedia} dataset. This shows that the use of attributes in \texttt{dbpedia} is homogeneous across types. The volume ratio of the \emph{IO Attributes} summary $\mathcal{S}_{ioa}$ is on average on par with the ratio of the \emph{Attributes} summary $\mathcal{S}_a$, indicating a certain homogeneity of incoming edges in the entity graph.
@@ -77,7 +77,7 @@ By using both type and attribute information as with the \emph{Attributes \& Typ
 		\begin{tikzpicture}
 		\begin{axis}[
 		ybar,
-		symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
+		symbolic x coords={$\mathcal{S}_{ut}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
 		enlargelimits=0.15,
 		ylabel={Volume Ratio},
 		x=2cm,
@@ -87,7 +87,7 @@ By using both type and attribute information as with the \emph{Attributes \& Typ
 			anchor=north,legend columns=-1},
 		]
 		\addplot coordinates {
-			($\mathcal{S}_{st}$,1.89)
+			($\mathcal{S}_{ut}$,1.89)
 			($\mathcal{S}_{t}$,1.77)
 			($\mathcal{S}_{a}$,81.73)
 			($\mathcal{S}_{at}$,81.74)
@@ -96,7 +96,7 @@ By using both type and attribute information as with the \emph{Attributes \& Typ
 		};
 
 		\addplot coordinates {
-			($\mathcal{S}_{st}$,0.23)
+			($\mathcal{S}_{ut}$,0.23)
 			($\mathcal{S}_{t}$,0.22)
 			($\mathcal{S}_{a}$,42.51)
 			($\mathcal{S}_{at}$,53.37)
@@ -105,7 +105,7 @@ By using both type and attribute information as with the \emph{Attributes \& Typ
 		};
 
 		\addplot coordinates {
-			($\mathcal{S}_{st}$, 17.81)
+			($\mathcal{S}_{ut}$, 17.81)
 			($\mathcal{S}_{t}$,17.60)
 			($\mathcal{S}_{a}$,47.99)
 			($\mathcal{S}_{at}$,62.55)
@@ -114,7 +114,7 @@ By using both type and attribute information as with the \emph{Attributes \& Typ
 		};
 
 		\addplot coordinates {
-			($\mathcal{S}_{st}$, 45.00)
+			($\mathcal{S}_{ut}$, 45.00)
 			($\mathcal{S}_{t}$,51.81)
 			($\mathcal{S}_{a}$,4.71)
 			($\mathcal{S}_{at}$,59.10)
@@ -133,9 +133,9 @@ By using both type and attribute information as with the \emph{Attributes \& Typ
 
 The Table~\ref{tab:cpu-time} reports the CPU time in $ms$ of the \emph{edges} step in the graph summarisation computation. The reported times are the average of two runs of an algorithm for a certain dataset.
 
-The $R_{st}$ and $R_t$ summarisation relations may have undefined mappings due to missing type statements for some entities. For performance reason, the node $\mathfrak{U}$ are filtered from the resulting summary. Therefore, reported run times in Table~\ref{tab:cpu-time} from $R_{st}$ and $R_t$ cannot be compared to others.
+The $R_{ut}$ and $R_t$ summarisation relations may have undefined mappings due to missing type statements for some entities. For performance reason, the node $\mathfrak{U}$ are filtered from the resulting summary. Therefore, reported run times in Table~\ref{tab:cpu-time} from $R_{ut}$ and $R_t$ cannot be compared to others.
 
-On the \emph{Medium}, \emph{High}, and \emph{Very High} datasets, the time taken by the $R_{st}$ summarisation on the \hyperref[step-he]{Step 3} of the graph summary computation is higher than $R_t$. This highlights the property of the $R_{st}$ summarisation of being a many-to-many binary relation. As a consequence, we need to compute all the possible combinations of edges between the sumnodes.
+On the \emph{Medium}, \emph{High}, and \emph{Very High} datasets, the time taken by the $R_{ut}$ summarisation on the \hyperref[step-he]{Step 3} of the graph summary computation is higher than $R_t$. This highlights the property of the $R_{ut}$ summarisation of being a many-to-many binary relation. As a consequence, we need to compute all the possible combinations of edges between the sumnodes.
 We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not imply a higher runtime when compared to $R_{a}$ and $R_{at}$.
 
 \begin{figure}
@@ -144,7 +144,7 @@ We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not
 		\begin{tikzpicture}
 		\begin{axis}[
 		ybar,
-		symbolic x coords={$\mathcal{S}_{st}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
+		symbolic x coords={$\mathcal{S}_{ut}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
 		enlargelimits=0.15,
 		ylabel={CPU Time (ms)},
 		x=2cm,
@@ -154,7 +154,7 @@ We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not
 			anchor=north,legend columns=-1},
 		]
 		\addplot coordinates {
-			($\mathcal{S}_{st}$, 5181727)
+			($\mathcal{S}_{ut}$, 5181727)
 			($\mathcal{S}_{t}$, 5140988)
 			($\mathcal{S}_{a}$, 5208950)
 			($\mathcal{S}_{at}$, 5227250)
@@ -163,7 +163,7 @@ We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not
 		};
 
 		\addplot coordinates {
-			($\mathcal{S}_{st}$, 51724125)
+			($\mathcal{S}_{ut}$, 51724125)
 			($\mathcal{S}_{t}$, 45942442)
 			($\mathcal{S}_{a}$, 53505035)
 			($\mathcal{S}_{at}$, 53487935)
@@ -172,7 +172,7 @@ We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not
 		};
 
 		\addplot coordinates {
-			($\mathcal{S}_{st}$, 4246345)
+			($\mathcal{S}_{ut}$, 4246345)
 			($\mathcal{S}_{t}$, 2763572)
 			($\mathcal{S}_{a}$, 3962202)
 			($\mathcal{S}_{at}$, 3942577)
@@ -181,7 +181,7 @@ We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not
 		};
 
 		\addplot coordinates {
-			($\mathcal{S}_{st}$, 77643685)
+			($\mathcal{S}_{ut}$, 77643685)
 			($\mathcal{S}_{t}$, 52608760)
 			($\mathcal{S}_{a}$, 99839325)
 			($\mathcal{S}_{at}$, 104255540)
