@@ -416,9 +416,9 @@ We define $R_t$ the summarisation relation that maps a node based on its set of 
 The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in the Figure~\ref{fig:graph}. The nodes $v_6$ and $v_7$ are mapped to the sumnode $S_4$ because they are both associated with the types \emph{Place} and \emph{Country}. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $v_1$ and $v_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. It differs from $R_{ut}$ since it considers the types of a node as \emph{set} rather than individually. Indeed, the node $v_6$ is mapped to two sumnodes under the relation $R_{ut}$.
 
 \begin{definition}[Types Summary]
-	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_t = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ be two graphs.
+	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_t = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
 
-	The set of nodes $\mathcal{W}_t$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_t \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_t = \emptyset$, and it contains as many elements as the power set of types in the graph:
+	The set of nodes $\mathcal{W}_t$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_t \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_t = \emptyset$, and it contains as many elements as the powerset $\mathbb{P}$ of types in the graph:
 	$$
 	\lvert \mathcal{W}_t \rvert = \lvert \mathbb{P}\left( \left\lbrace l_V(c) \mid \exists (u, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \right\rbrace \right) \rvert
 	$$
@@ -437,9 +437,9 @@ We define $R_a$ the relation that maps a node based on its set of attributes. We
 The nodes $v_3$, $v_4$, and $v_5$ are $\sim_a$-equivalent because they share the same set of attributes, i.e., $\left\lbrace label, location, type \right\rbrace$. The graph in Figure~\ref{fig:attributes-summary} is the attributes summary of the graph in Figure~\ref{fig:graph}.
 
 \begin{definition}[Attributes Summary]
-	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_a = \left\langle \mathcal{W}_a, \mathcal{B}_a, l_{\mathcal{W}_a} \right\rangle$ be two graphs.
+	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_a = \left\langle \mathcal{W}_a, \mathcal{B}_a, l_{\mathcal{W}_a} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
 
-	The set of nodes $\mathcal{W}_a$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_a \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_a = \emptyset$, and it contains as many elements as the power set of attributes in the graph:
+	The set of nodes $\mathcal{W}_a$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_a \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_a = \emptyset$, and it contains as many elements as the powerset $\mathbb{P}$ of attributes in the graph:
 	$$
 	\lvert \mathcal{W}_a \rvert = \lvert \mathbb{P}\left( \left\lbrace \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \right\rbrace \right) \rvert
 	$$
@@ -490,9 +490,9 @@ We define $R_{at}$ as the relation that maps a node based on its set of types an
 The nodes $v_1$ and $v_2$ are mapped to a same sumnode by $R_{at}$ because they are associated with the same type, i.e., \emph{Person}, and they have the same attributes, i.e., $\left\lbrace lives, name, type, works \right\rbrace$.
 
 \begin{definition}[Attributes \& Types Summary]
-	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{at} = \left\langle \mathcal{W}_{at}, \mathcal{B}_{at}, l_{\mathcal{W}_{at}} \right\rangle$ be two graphs.
+	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{at} = \left\langle \mathcal{W}_{at}, \mathcal{B}_{at}, l_{\mathcal{W}_{at}} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
 
-	The set of nodes $\mathcal{W}_{at}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{at} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{at} = \emptyset$, and it contains as many elements as the power set of attributes and types in the graph:
+	The set of nodes $\mathcal{W}_{at}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{at} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{at} = \emptyset$, and it contains as many elements as the powerset $\mathbb{P}$ of attributes and types in the graph:
 	$$
 	\begin{aligned}
 	\lvert \mathcal{W}_{at} \rvert = \lvert \mathbb{P} ( & \{ \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \} \;\cup \\
@@ -516,9 +516,9 @@ We define $R_{ioa}$ the relation based on the set of incoming and outgoing attri
 All three nodes $v_3$, $v_4$, and $v_5$ map to the same sumnode by the relation $R_a$. However with $R_{ioa}$, each is assigned to a separate sumnode, since all three have different incoming set of attributes, i.e., $\left\lbrace lives \right\rbrace$, $\left\lbrace works \right\rbrace$, and $\varnothing$, respectively.
 
 \begin{definition}[IO Attributes Summary]
-	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ioa} = \left\langle \mathcal{W}_{ioa}, \mathcal{B}_{ioa}, l_{\mathcal{W}_{ioa}} \right\rangle$ be two graphs.
+	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ioa} = \left\langle \mathcal{W}_{ioa}, \mathcal{B}_{ioa}, l_{\mathcal{W}_{ioa}} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
 
-	The set of nodes $\mathcal{W}_{ioa}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ioa} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ioa} = \emptyset$, and it contains as many elements as the power set of attributes in the graph:
+	The set of nodes $\mathcal{W}_{ioa}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ioa} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ioa} = \emptyset$, and it contains as many elements as the powerset $\mathbb{P}$ of attributes in the graph:
 	$$
 	\lvert \mathcal{W}_{ioa} \rvert = \lvert \mathbb{P}\left( \left\lbrace \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \right\rbrace \right) \rvert
 	$$
@@ -543,9 +543,9 @@ All three nodes $v_3$, $v_4$, and $v_5$ map to the same sumnode by the relation 
 We define $R_{ia}$ as the relation based on the set of incoming attributes. We call the summary it generates the \emph{incoming attributes} summary.
 
 \begin{definition}[Incoming Attributes Summary]
-	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ia} = \left\langle \mathcal{W}_{ia}, \mathcal{B}_{ia}, l_{\mathcal{W}_{ia}} \right\rangle$ be two graphs.
+	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ia} = \left\langle \mathcal{W}_{ia}, \mathcal{B}_{ia}, l_{\mathcal{W}_{ia}} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
 
-	The set of nodes $\mathcal{W}_{ia}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ia} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ia} = \emptyset$, and it contains as many elements as the power set of attributes in the graph:
+	The set of nodes $\mathcal{W}_{ia}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ia} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ia} = \emptyset$, and it contains as many elements as the powerset $\mathbb{P}$ of attributes in the graph:
 	$$
 	\lvert \mathcal{W}_{ia} \rvert = \lvert \mathbb{P}\left( \left\lbrace \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \right\rbrace \right) \rvert
 	$$
@@ -568,9 +568,9 @@ We note that the nodes that do not have any incoming attributes are mapped to th
 We define $R_{iat}$ as the relation based on the set of types and incoming attributes. We call the summary this relation generates the \emph{incoming attributes \& types} summary.
 
 \begin{definition}[Incoming Attributes \& Types Summary]
-	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{iat} = \left\langle \mathcal{W}_{iat}, \mathcal{B}_{iat}, l_{\mathcal{W}_{iat}} \right\rangle$ be two graphs.
+	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{iat} = \left\langle \mathcal{W}_{iat}, \mathcal{B}_{iat}, l_{\mathcal{W}_{iat}} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
 
-	The set of nodes $\mathcal{W}_{iat}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{iat} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{iat} = \emptyset$, and it contains as many elements as the power set of attributes and types in the graph:
+	The set of nodes $\mathcal{W}_{iat}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{iat} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{iat} = \emptyset$, and it contains as many elements as the powerset $\mathbb{P}$ of attributes and types in the graph:
 	$$
 	\begin{aligned}
 	\lvert \mathcal{W}_{iat} \rvert = \lvert \mathbb{P} ( & \{ \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \} \;\cup \\
@@ -597,9 +597,9 @@ Although the nodes $v_1$ and $v_2$ are mapped to a same sumnode with $R_{at}$, t
 %For these relations, the complexity is equal to $O\left(\vert A \vert\right)$, since we need to visit each edge in order to assign the node at the source of an edge to an equivalence class.
 
 \begin{definition}[IO Attributes \& Types Summary]
-	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ioat} = \left\langle \mathcal{W}_{ioat}, \mathcal{B}_{ioat}, l_{\mathcal{W}_{ioat}} \right\rangle$ be two graphs.
+	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ioat} = \left\langle \mathcal{W}_{ioat}, \mathcal{B}_{ioat}, l_{\mathcal{W}_{ioat}} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
 
-	The set of nodes $\mathcal{W}_{ioat}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ioat} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ioat} = \emptyset$, and it contains as many elements as the power set of attributes and types in the graph:
+	The set of nodes $\mathcal{W}_{ioat}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ioat} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ioat} = \emptyset$, and it contains as many elements as the powerset $\mathbb{P}$ of attributes and types in the graph:
 	$$
 	\begin{aligned}
 	\lvert \mathcal{W}_{ioat} \rvert = \lvert \mathbb{P} ( & \{ \alpha \mid (u, v) \in V^2\; \exists (u, \alpha, v) \in A \} \;\cup \\
