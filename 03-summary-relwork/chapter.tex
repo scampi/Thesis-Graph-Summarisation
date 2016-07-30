@@ -68,7 +68,7 @@ Figure~\ref{fig:hetero-struct} depicts a graph in which the structure is inconsi
 
 \subparagraph{Heterogeneity of the vocabulary.}
 
-Considering our previous example of the people dataset, a graph can be seen as heterogeneous if it uses different attributes for each entity within. Figure~\ref{fig:hetero-voc} depicts a graph in which this is the case: entities $a_1$, $\cdots$, $a_n$ have a different attribute each. A possible summarisation would be to create an isomorph graph, but then the summarisation purpose --- to substitute the graph with another more manageable --- is lost. Another summarisation is depicted on the right as a dashed graph, where two nodes $s_a$ and $s_b$ are linked with all $n$ attributes. Although this reduces the number of nodes from $2 \times n$ to $2$, we loose the original distribution of the attributes.\\
+Considering our previous example of the people dataset, a graph can be seen as heterogeneous if it uses different attributes for each entity within. Figure~\ref{fig:hetero-voc} depicts a graph in which this is the case: entities $a_1$, $\cdots$, $a_n$ have a different attribute each. A possible summarisation would be to create an isomorphic graph, i.e., edges of both graphs can be mapped to one another, but then the summarisation purpose --- to substitute the graph with another more manageable --- is lost. Another summarisation is depicted on the right as a dashed graph, where two nodes $s_a$ and $s_b$ are linked with all $n$ attributes. Although this reduces the number of nodes from $2 \times n$ to $2$, we loose the original distribution of the attributes.\\
 
 In the rest of this chapter, we discuss the graph summarisation literature with regards to those three dimensions.
 
@@ -103,10 +103,11 @@ Figure~\ref{fig:timeline} depicts a time-line of the literature presented in thi
 \paragraph{Graph clustering versus graph summarisation.}
 
 Both techniques are similar in the sense that they partition the graph.
-Clustering is the process of finding the underlying structure of a dataset by grouping elements that are \emph{similar} to each other. A group is then called a cluster. In the context of a graph, a clustering technique seeks clusters of nodes that have many connections to each other \emph{within}, but few \emph{between} the clusters. Schaeffer presents in \cite{schaeffer:2007:graph} a survey of graph clustering approaches. Instead, with graph summarisation techniques we aim to partition the graph in such a way that the original structure of the graph is preserved.
+Clustering is the process of finding the underlying structure of a dataset by grouping elements that are \emph{similar} to each other. A group is then called a cluster. In the context of a graph, a clustering technique in general seeks clusters of nodes that have many connections to each other \emph{within}, but few \emph{between} the clusters. Schaeffer presents in \cite{schaeffer:2007:graph} a survey of graph clustering approaches. Instead, with graph summarisation techniques we aim to partition the graph in such a way that the original structure of the graph is preserved.
 
-\paragraph{Fundamental vocabulary.}
+\paragraph{Graph summarisation vocabulary.}
 
+We explain in this paragraph several terms that we use henceforth when discussing about graph summarisation.
 Given a graph $G = \left\langle V, A, l_V \right\rangle$, the process of graph summarisation creates another graph, called the \emph{summary} of $G$. Each node of $G$ is mapped to one or more nodes of the summary, which we call \emph{sumnodes}. Similarly, edges of the graph $G$ are also mapped to edges in the summary, which we call \emph{sumedges}. The goal of the graph summarisation is to create a summary where the structure of the entity graph $G$ is preserved.
 
 \begin{figure}
@@ -241,7 +242,9 @@ The purpose of the graph summarisation is to create a graph that share the same 
 
 DataGuides \cite{goldman1997dataguides} is the first work to improve the query execution through the use of an index on the summary of the structure of the graph. The summary is built with the requirement that every path in the summary is \emph{unique}; this would allow to spend less time searching through each different path. In the presence of a graph with a complex structure, the size of the summary can be as large as the graph, or even larger. This issue is discussed in \cite{goldman1999approximate}, where some constraints of DataGuides are relaxed, e.g., the existence of a path in the entity graph.\\
 
-DataGuides relies on the notion of automata for the creation of the summary: converting a graph that is a non-deterministic finite automaton to a deterministic finite automaton. Instead, several works leverage the notion of bisimulation~\cite{park:1981:cai} used in concurrency systems. To put it in a nutshell, some constraints of the bisimulation are changed so to reduce the size of the summary, or to better adapt it to a specific application. The size of a summary is then balanced against the level of details it stores.
+DataGuides relies on the notion of automata for the creation of the summary: converting a graph that is a non-deterministic finite automaton to a deterministic finite automaton. Instead, several works leverage the notion of bisimulation~\cite{park:1981:cai} used in concurrency systems.
+Bisimulation is a technique that aims to replicate all the paths of a graph in a summary, so that the summary and the original graph cannot be distinguished from a user's perspective. A detailed explanation of this technique can be found in Section~\ref{chap:summary:bisim}.
+Retaining all the paths of the original graph in the summary can reveal to be excessive for complex graphs. Therefore, some constraints of the bisimulation are changed so to reduce the size of the summary, or to better adapt it to a specific application. The size of a summary is then balanced against the level of details it stores.
 
 Milo et. al \cite{Milo:1999:ISP:645503.656266} extend the work on DataGuides, using the notion of bisimulation to build an index of the structure of the graph. The authors propose to reduce further the size of a summary by defining the shape of query to answer. However, it assumes some knowledge about the structure of the graph in order to define the shape of the query.
 
@@ -271,7 +274,7 @@ In this Chapter, we reviewed the literature related to graph summarisation and c
 	\item[\textbf{Expressiveness.}] The presented graph summarisation algorithms are designed for specific applications, and can then be difficult to port. We present a flexible and expressive graph summarisation based on graph \emph{homomorphism}.
 
 	The definition of the summarisation simply needs the user's specification of how a node in the graph is mapped to a sumnode. The mapping is simply based on \emph{features} of a node. In addition, since our summarisation is based on homomorphism, the mapping process of a sumnode to a node is deterministic; there is no need to specify properties of the summary in advance, e.g., the number of sumnodes.
-	\item[\textbf{Performance.}] Graph summarisation algorithms require to visit each edge of the entity graph at least once. In order to improve the quality of the summary, some approaches \cite{zheng:ipsj:2011} perform several iterations over the graph. Iterations are necessary when the summarisation of a node also depends on nodes that are not directly connected to it, and so there is a need to traverse the graph. The larger is the graph, the more expensive it is to iterate over the graph. While such algorithms can be expressed in our framework, it is not an necessity in order to summarise a graph.
+	\item[\textbf{Performance.}] Graph summarisation algorithms require to visit each edge of the entity graph at least once. In order to improve the quality of the summary, some approaches \cite{zheng:ipsj:2011} perform several iterations over the graph. Iterations are necessary when the summarisation of a node also depends on nodes that are not directly connected to it, and so there is a need to traverse the graph. The larger is the graph, the more expensive it is to iterate over the graph. While such algorithms can be expressed in our framework, it is not a necessity in order to summarise a graph.
 	\item[\textbf{Generic.}] We present a generic graph summarisation approach that can be used as a base in a variety of applications. For example, a summary is core to drill-down/rollup operations in OLAP over graphs.
 \end{labeling}
 

@@ -211,12 +211,12 @@ A bisimulation is a binary relation on $V$ that relates two nodes of the graph i
 
 If we consider two nodes $(u, v) \in V$, a simulation $R$ is a relation that states that for every edge $(u, \alpha, x) \in A$, there exists an edge $(v,\alpha, y) \in A$ such that there is also a simulation between the nodes $x$ and $y$. Intuitively, $(u,v) \in R$ communicates that the node $v$ can \emph{substitute} the node $u$ since all the outgoing paths from $u$ match those from $v$. A bisimulation is stronger as it states that the relation must be \emph{symmetric} as well, thus ensuring that either node may substitute the other.
 
-Figure~\ref{fig:bisimulation} depicts the simulation relation $R$ between nodes $E_0$ and $E'_0$ such that $(E_0, E'_0) \in R$; this illustrates that:
+Figure~\ref{fig:bisimulation} depicts the simulation relation $R$ between nodes $v_0$ and $v'_0$ such that $(v_0, v'_0) \in R$; this illustrates that:
 \begin{enumerate}
-	\item for every outgoing edge from $E_0$, there is also such an edge from $E'_0$; and
-	\item there is a simulation between the nodes thus reached $E_i$ and $E'_i$, i.e., $(E_i, E'_i) \in R$.
+	\item for every outgoing edge from $(v_0,\alpha_i,v_i)$, there is also an edge with the same label from $v'_0$; and
+	\item there is a simulation between the nodes thus reached $v_i$ and $v'_i$, i.e., $(v_i, v'_i) \in R$.
 \end{enumerate}
-If for the node $E'_0$ the previous two points hold as well, then the binary relation $R$ is actually a \emph{bisimulation}.
+If for the node $v'_0$ the previous two points hold as well, then the binary relation $R$ is actually a \emph{bisimulation}.
 %Two nodes are said \emph{bisimilar} if there is a bisimulation relation between the two.
 %Sink nodes are always bisimilar.
 
@@ -240,10 +240,10 @@ Two nodes $(u, v) \in V^2$ are said \emph{bisimilar} if $(u, v) \in \sim$.
 
 \begin{figure}
 	\centering
-	\resizebox{.5\textwidth}{!}{
-		\includegraphics{04-summary/figures/bisimulation}
+	\resizebox{.8\textwidth}{!}{
+		\input{04-summary/figures/simulation-relation}
 	}
-	\caption{Simulation relation}
+	\caption{Illustration of the conditions for a node $v'_0$ to substitute a node $v_0$, as per the simulation $R$. If the reverse is also true, i.e., that the node $v_0$ can substitute $v'_0$, then the nodes $v_0$ and $v'_0$ are said to be bisimilar.}
 	\label{fig:bisimulation}
 \end{figure}
 
