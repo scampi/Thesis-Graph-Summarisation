@@ -72,7 +72,7 @@ We present in this section three dimensions we use for evaluating a summary, i.e
 \begin{figure}
 	\centering
 	\resizebox{.8\textwidth}{!}{
-		\input{04-summary-precision/figures/unique-type-summary-size}
+		\input{05-summary-precision/figures/unique-type-summary-size}
 	}
 	\caption{Size of the \emph{unique type} summary $\mathcal{S}_{ut}$}
 	\label{fig:unique-type-summary-size}
@@ -111,7 +111,7 @@ By using both type and attribute information as with the \emph{Attributes \& Typ
 Indeed, the combination of the features on the \emph{High} datasets exhibits a much higher ratio than when taken separately.%, e.g., $55.87$ and $84.06$ respectively with $\mathcal{S}_{at}$, against $27.43$ and $49.83$ with $\mathcal{S}_a$.
 We can conclude that a sparse usage of attributes with a type creates an explosion of combinations. In general, the type feature is less stable than the attribute feature.
 
-\input{04-summary-precision/exps/compression-ratio}
+\input{05-summary-precision/exps/compression-ratio}
 
 \subsubsection{Performance of the Summarisation Relation}
 
@@ -123,7 +123,7 @@ The \emph{unique type} $R_{ut}$ and types $R_t$ summarisation relations can have
 On the \emph{Medium}, \emph{High}, and \emph{Very High} datasets, the time taken by the $R_{ut}$ summarisation on the \hyperref[step-he]{Step~3} of the graph summary computation is higher than $R_t$. This highlights the property of the $R_{ut}$ summarisation of being a many-to-many binary relation rather than a many-to-one, i.e., it can assign a node to several sumnodes. As a consequence, we need to compute all the possible combinations of edges between the sumnodes.
 We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not imply a higher runtime when compared to $R_{a}$ and $R_{at}$.
 
-\input{04-summary-precision/exps/cpu-time}
+\input{05-summary-precision/exps/cpu-time}
 
 \subsubsection{Graph Summary Precision}
 
@@ -142,7 +142,7 @@ We remark that the incoming attribute in the IO attributes summarisation relatio
 
 We remark that the overall precision $P2$ is very low on the datasets of \emph{Medium} and \emph{High} complexities. This suggests that few nodes of the summary have a high out-degree, creating a combinatorial explosion of false positive edges. This will be investigated in future work.
 
-\input{04-summary-precision/exps/connectivity-precision}
+\input{05-summary-precision/exps/connectivity-precision}
 
 \minisec{Schema Precision}
 
@@ -155,7 +155,7 @@ On the contrary, the attribute feature reports a good type precision, reaching o
 
 Incoming attributes do not increase much the type precision, since the type precision of $R_a$ stays on par with $R_{ioa}$. The $R_{at}$ relation provides a perfect summarisation of the graph schema. Again, the significant differences between $P1$ and $P2$ suggests one more time that few nodes of the summary contains a high out-degree, creating a combinatorial explosion of false positive edges.
 
-\input{04-summary-precision/exps/schema-precision}
+\input{05-summary-precision/exps/schema-precision}
 
 \minisec{Discussion}
 

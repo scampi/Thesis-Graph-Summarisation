@@ -3,21 +3,20 @@
 \documentclass[12pt,chapterprefix=true]{scrbook}
 %\documentclass[12pt,chapterprefix=true,listof=totoc]{scrbook}
 
-\usepackage{verse}
 \usepackage[table]{xcolor}
 \usepackage{array}
 
 \usepackage{tgheros}
 \usepackage[T1]{fontenc}
 
-%% http://www.khirevich.com/latex/microtype/
-\usepackage[activate={true,nocompatibility},factor=1100,final,tracking=true, kerning=true, spacing=true,stretch=10, shrink=10
-]{microtype}
+% http://www.khirevich.com/latex/microtype/
+%\usepackage[activate={true,nocompatibility},factor=1100,final,tracking=true, kerning=true, spacing=true,stretch=10, shrink=10]{microtype}
+\usepackage[activate={true,nocompatibility},factor=1100,final,tracking=true, kerning=true, spacing=true,stretch=0, shrink=0]{microtype}
 
 \usepackage[textsize=scriptsize,colorinlistoftodos]{todonotes}
 
 \usepackage[vlined,linesnumbered,titlenumbered,algoruled]{algorithm2e}
-\newcommand\mycommfont[1]{\it\textcolor[RGB]{89,88,60}{#1}}
+\newcommand\mycommfont[1]{\itshape\textcolor[RGB]{89,88,60}{#1}}
 \SetCommentSty{mycommfont}
 
 \usepackage{caption}
@@ -28,18 +27,6 @@
 \usepackage{multirow}
 \usepackage{paralist}
 \PassOptionsToPackage{hyphens}{url}
-\usepackage[bookmarks=true%
-,bookmarksnumbered=true%
-,hypertexnames=true%
-,breaklinks=true%
-,colorlinks=true%
-,linkcolor=blue%
-,citecolor=blue%
-,urlcolor=blue%
-,hyperindex%
-,pageanchor=true%
-,plainpages=false%
-]{hyperref}
 
 \usepackage{bbm}
 \usepackage{numprint}
@@ -63,6 +50,27 @@
 \newcommand{\hs}{\hspace{0.001in}}
 \newcommand{\s}{\hspace{0.06in}}
 
+\usepackage{arydshln}
+
+\setkomafont{subparagraph}{\normalfont\sffamily\itshape}
+\setkomafont{minisec}{\ttfamily\bfseries}
+\usepackage{enumitem}
+
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\let\leftbar\relax
+\let\endleftbar\relax
+\let\proof\relax
+\let\endproof\relax
+\usepackage{thmtools}
+\declaretheorem[qed=$\blacksquare$,numbered=no]{proof}
+\declaretheorem[numbered=no,style=remark]{remark}
+\declaretheorem[thmbox=M,numberwithin=section]{definition}
+\declaretheorem[thmbox=L,numberwithin=section]{theorem}
+\renewcommand{\listtheoremname}{List of Definitions}
+
 \usepackage{mdframed}
 \surroundwithmdframed[
 topline=false,%
@@ -74,30 +82,26 @@ linecolor=white!30!gray,%
 linewidth=4pt
 ]{remark}
 
-\usepackage{arydshln}
-
-\setkomafont{subparagraph}{\normalfont\sffamily\itshape}
-\setkomafont{minisec}{\ttfamily\bf}
-\usepackage{enumitem}
-
-\usepackage{mathrsfs}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\let\proof\relax
-\let\endproof\relax
-\usepackage{thmtools}
-\declaretheorem[qed=$\blacksquare$,numbered=no]{proof}
-\declaretheorem[numbered=no,style=remark]{remark}
-\declaretheorem[thmbox=M,numberwithin=section]{definition}
-\declaretheorem[thmbox=L,numberwithin=section]{theorem}
-\renewcommand{\listtheoremname}{List of Definitions}
-
 \usepackage{tocstyle}
 \renewcommand*{\addchaptertocentry}[2]{%
 	\addtocentrydefault{chapter}{\chaptername\nobreakspace #1}{#2}%
 }
 \usetocstyle{KOMAlike}
+
+\usepackage[bookmarks=true%
+,bookmarksnumbered=true%
+,hypertexnames=true%
+% http://tex.stackexchange.com/questions/50490/hyperref-package-breaklinks-option
+%,breaklinks=true%
+,colorlinks=true%
+,linkcolor=blue%
+,citecolor=blue%
+,urlcolor=blue%
+,hyperindex%
+,pageanchor=true%
+,plainpages=false%
+]{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
 
 \begin{document}
 
@@ -105,28 +109,29 @@ linewidth=4pt
 	\begin{center}
 		\null
 		\vspace{2cm}
-		{\Large
-		Insight Centre for Data Analytics, Galway\\
-		\begin{figure}[h]
-			\centering
-			\resizebox{.3\textwidth}{!}{
-				\includegraphics[scale=1]{logos/insight_logo}
-			}
-		\end{figure}
-		National University of Ireland, Galway\\
-		\begin{figure}[h]
-			\centering
-			\resizebox{.3\textwidth}{!}{
-				\includegraphics[scale=1]{logos/nuig_logo}
-			}
-		\end{figure}
-		}
+		%{\Large
+		%Insight Centre for Data Analytics, Galway\\
+		%\begin{figure}[h]
+			%\centering
+			%\resizebox{.3\textwidth}{!}{
+				%\includegraphics[scale=1]{logos/insight_logo}
+			%}
+		%\end{figure}
+		%National University of Ireland, Galway\\
+		%\begin{figure}[h]
+			%\centering
+			%\resizebox{.3\textwidth}{!}{
+				%\includegraphics[scale=1]{logos/nuig_logo}
+			%}
+		%\end{figure}
+		%}
 		\vspace{2cm}
 		{\Huge \textbf{Making Sense of Web Data}}\\
 		\vspace{1cm}
 		{\Large \textbf{St\'ephane Campinas}}\\
 		\vspace{1cm}
-		Under the supervision of \textbf{Dr. Stefan Decker}\\
+		Under the supervision of \textbf{Prof. Dr. Stefan Decker}\\
+		and co-supervision of Prof. \textbf{Dr. Dietrich Rebholz-Schuhmann}\\
 		of Insight Centre for Data Analytics, Galway\\
 		\vspace{2cm}
 		\today
@@ -136,8 +141,8 @@ linewidth=4pt
 \pagenumbering{roman}
 \addchap*{Abstract}
 \input{abstract}
-%\addchap*{Acknowledgements}
-%\input{acknowledgements}
+\addchap*{Acknowledgements}
+\input{acknowledgements}
 
 \cleardoubleoddpage
 \setcounter{tocdepth}{1}
@@ -182,11 +187,11 @@ linewidth=4pt
 
 %\input{04-summary/updates}
 
-\input{04-summary-precision/precision}
+\input{05-summary-precision/precision}
 
-\input{04-summary-precision/eval-precision}
+\input{05-summary-precision/eval-precision}
 
-\input{04-summary-precision/conclusion}
+\input{05-summary-precision/conclusion}
 
 %%
 %% tree ranking
@@ -213,23 +218,23 @@ linewidth=4pt
 %%
 \part{Putting the Pieces Together}
 
-\input{exploiting/apps}
+\input{07-systems/apps}
 
-\input{exploiting/wdm/wdm}
+\input{07-systems/wdm/wdm}
 
-\input{exploiting/sparqled/sparqled}
+\input{07-systems/sparqled/sparqled}
 
-\input{exploiting/wlv/web-linkage-validator}
+\input{07-systems/wlv/web-linkage-validator}
 
-\input{exploiting/conclusion}
+\input{07-systems/conclusion}
 
-%\input{exploiting/stats/stats}
+%\input{07-systems/stats/stats}
 
-%\input{exploiting/gagg/gagg}
+%\input{07-systems/gagg/gagg}
 
 %\part{Conclusions}
 
-\input{conclusions/chapter}
+\input{08-conclusions/chapter}
 
 \part{Appendices}
 
