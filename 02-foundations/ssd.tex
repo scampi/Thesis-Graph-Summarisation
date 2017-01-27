@@ -76,7 +76,7 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, we introduce below ter
 
 	In Figure~\ref{fig:graph} the path $author.lives$ exists in that graph as it connects the nodes $\left\lbrace v_0, v_2, v_3 \right\rbrace$.
 
-	\item[\textbf{Attribute}] We call \emph{attribute} the label of an edge.
+	\item[\textbf{Attribute}] We call \gls{edge-attribute} the label of an edge.
 
 		We define as $attributes\left(x \in V\right) = \left\lbrace \alpha \in \mathcal{L} \mid \exists y \in V, (x, \alpha, y) \in A \right\rbrace$ the set of attributes associated as a source with a node $x$ in $G$. In the figure, we have $attributes(v_1) = \{lives,works,name,\tau\}$.
 
@@ -194,8 +194,8 @@ In the Web of Data, a dataset~\cite{alexander:2009:dld} represents a collection 
 
 \begin{definition}[Dataset]
 Let $G_1, \cdots, G_i, \cdots, G_n$ be $n$ graphs such that $G_i = \left\langle V_i, A_i, l_{V_i} \right\rangle$ is a graph.
-Let $\gls{Glabel} : G \mapsto \mathcal{L}$ be a function that assigns a label to a graph.
-We define a dataset as the tuple $\left\langle D, \alpha \right\rangle$, where $D = \left\lbrace G_1, \cdots, G_n \right\rbrace$ and $\alpha \in \mathcal{L}$ is the dataset label such that $\forall 0 < i \le n\; \gls{Glabel}(G_i) = \alpha$.
+Let $\glssymbol{Glabel} : G \mapsto \mathcal{L}$ be a function that assigns a label to a graph.
+We define a dataset as the tuple $\left\langle D, \alpha \right\rangle$, where $D = \left\lbrace G_1, \cdots, G_n \right\rbrace$ and $\alpha \in \mathcal{L}$ is the dataset label such that $\forall 0 < i \le n\; \glssymbol{Glabel}(G_i) = \alpha$.
 \end{definition}
 
 We extend without loss of generality the definitions presented in this chapter to a dataset, which we indicate by adding a subscript $d$. We shall omit this subscript if it is clear from the context that only one dataset is considered. Therefore, we have the following definitions:

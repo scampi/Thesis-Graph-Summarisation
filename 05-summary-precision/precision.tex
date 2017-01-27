@@ -1,7 +1,7 @@
 \chapter{Graph Summary Precision}
 \label{chap03:sec:quality}
 
-The summary of a graph reflects the structure of that graph. Concretely, this means that all possible paths in the graph are also possible in its summary. However, this does not imply the converse, i.e., that all possible paths in a summary do exist in the graph it represents. The structure of the summary stems from the grouping of the nodes in the graph by the summarisation relation. Therefore, the question of the \emph{precision} of the summary with regards to the graph it represents is raised.
+The summary of a graph reflects the structure of that graph. Concretely, this means that all possible paths in the graph are also possible in its summary. However, this does not imply the converse, i.e., that all possible paths in a summary do exist in the graph it represents. The structure of the summary stems from the grouping of the nodes in the graph by the \gls{summarisation-relation}. Therefore, the question of the \emph{precision} of the summary with regards to the graph it represents is raised.
 
 We judge the precision of a summary by the difference of traversing a summary or the graph it represents. Our rationale is the larger the difference, the less precise the summary is. We consider the precision of a summary with regards to the graph it represents from two directions. Firstly, we are concerned with the existence of paths in the graph. Secondly, we consider whether combinations of attributes and/or types in the summary do exist in the graph.
 
@@ -10,13 +10,13 @@ In this chapter, we present a model for measuring the precision of a summary wit
 
 \section{Graph Summarisation Lattice}
 
-We have introduced in Chapter~\ref{chap:summary} a framework for defining graph summaries. Each summary presented consider different properties of the graph for the summarisation relation, e.g., the types summary $R_t$ considers the type information, while the attributes summary $R_a$ the label of edges. Since the summarisation relations consider different aspect of the graph, the nodes are grouped differently. This produces summaries of varying structure. In this chapter, we investigate how the summaries differ, whether a summary is better suited to a certain type of application that another.
+We have introduced in Chapter~\ref{chap:summary} a framework for defining graph summaries. Each summary presented consider different properties of the graph for the \gls{summarisation-relation}, e.g., the \gls{typessummary} $R_t$ considers the type information, while the \gls{attributes-summary} $R_a$ the label of edges. Since the \glspl{summarisation-relation} consider different aspect of the graph, the nodes are grouped differently. This produces summaries of varying structure. In this chapter, we investigate how the summaries differ, whether a summary is better suited to a certain type of application that another.
 
-In order to answer these questions, we propose a precision model which measures the amount of \emph{errors} in a summary. This model relies on the ordering of the summaries. We present in this section a partial order relation on the summaries.\\
+In order to answer these questions, we propose a \gls{precision} which measures the amount of \emph{errors} in a summary. This model relies on the ordering of the summaries. We present in this section a partial order relation on the summaries.\\
 
 %There exists several possible summarisation relations, each resulting in a graph summary that exhibits different properties. In the Section~\ref{chap03:sec:quality}, we discuss the impact of the relation on the \emph{precision} of a graph summary with regards to the entity graph. There is no graph summary that fits all use cases, a summary suitable for one might not be for another. In this section, we describe how various summarisation relations can be ordered into a \emph{lattice}. Thus, we can reuse previous computations where a graph summary can result from another one, instead from the entity graph.
 
-We denote with $\sqsubseteq$ a binary relation on the set of summarisation relations. It relates two summarisation relations if one can be expressed as a composition of the other.
+We denote with $\sqsubseteq$ a binary relation on the set of \glspl{summarisation-relation}. It relates two summarisation relations if one can be expressed as a composition of the other.
 
 \begin{definition}[Relation $\sqsubseteq$]
 	Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S}_1 = \left\langle \mathcal{W}_1, \mathcal{B}_1, l_{\mathcal{W}_1} \right\rangle$ be the summary of $G$ according to $R_1 \subseteq V \times \mathcal{W}_1$, and $\mathcal{S}_2 = \left\langle \mathcal{W}_2, \mathcal{B}_2, l_{\mathcal{W}_2} \right\rangle$ be the summary of $G$ according to $R_2 \subseteq V \times \mathcal{W}_2$.
@@ -37,12 +37,12 @@ We denote with $\sqsubseteq$ a binary relation on the set of summarisation relat
 	\label{fig:partial-order}
 \end{figure}
 
-A \emph{lattice} is a \emph{partially ordered} set that contains an \emph{infimum} and a \emph{supremum}. The infimum is an element of the set that is ``smaller'', according to the partial order, than all other elements. Conversely, a supremum is an element that is ``larger'' than any other element.
+A \gls{lattice} is a \emph{partially ordered} set that contains an \emph{infimum} and a \emph{supremum}. The infimum is an element of the set that is ``smaller'', according to the partial order, than all other elements. Conversely, a supremum is an element that is ``larger'' than any other element.
 
-We use the binary relation $\sqsubseteq$ to order the summarisation relations based on their definition: two summarisation relations can be ordered if one can be expressed with the other. Figure~\ref{fig:partial-order} is a depiction of the binary relation $\sqsubseteq$ used for ordering summarisation relations. In this set, the infimum is the identity relation that maps the graph to itself, and the supremum is the relation that maps all nodes to a single sumnode.
+We use the binary relation $\sqsubseteq$ to order the \glspl{summarisation-relation} based on their definition: two summarisation relations can be ordered if one can be expressed with the other. Figure~\ref{fig:partial-order} is a depiction of the binary relation $\sqsubseteq$ used for ordering summarisation relations. In this set, the infimum is the identity relation that maps the graph to itself, and the supremum is the relation that maps all nodes to a single sumnode.
 
 \begin{theorem}[Graph Summarisation Lattice]
-The binary relation $\sqsubseteq$ is a partial order. The set of summarisation relations with the partial order $\sqsubseteq$ forms a \emph{lattice} that we denote as the graph summarisation lattice.
+	The binary relation $\sqsubseteq$ is a \gls{partial-order}. The set of \glspl{summarisation-relation} with the partial order $\sqsubseteq$ forms a \emph{lattice} that we denote as the graph summarisation lattice.
 \end{theorem}
 
 \begin{proof}
@@ -55,22 +55,22 @@ The binary relation $\sqsubseteq$ is a partial order. The set of summarisation r
 	Therefore, the binary relation $\sqsubseteq$ is a partial order.
 \end{proof}
 
-The set of summarisation relations can then be ordered according to $\sqsubseteq$. The Figure~\ref{fig:lattice} depicts the lattice that is formed by the partial order $\sqsubseteq$ for the summarisation relations introduced in Section~\ref{sec:approximate}. For example, we remark that the Types summary $R_t$ is smaller than the IO Attributes \& Types summary $R_{ioat}$, i.e., $R_{ioat} \sqsubseteq R_t$.
+The set of \glspl{summarisation-relation} can then be ordered according to $\sqsubseteq$. The Figure~\ref{fig:lattice} depicts the lattice that is formed by the partial order $\sqsubseteq$ for the \glspl{summarisation-relation} introduced in Section~\ref{sec:approximate}. For example, we remark that the \gls{typessummary} $R_t$ is smaller than the \gls{io-attributes-types-summary} $R_{ioat}$, i.e., $R_{ioat} \sqsubseteq R_t$.
 
 \begin{remark}
-The graph lattice depicts that all summaries presented in Section~\ref{sec:approximate} can be generated from the IO Attributes \& Types summary $R_{ioat}$. In cases where the IO Attributes \& Types summary has significantly less edges and nodes than the entity graph, this allows a more efficient computation of all summaries which summarisation relation $R$ are smaller than the latter summary, i.e., $R_{ioat} \sqsubseteq R$.
+The graph lattice depicts that all summaries presented in Section~\ref{sec:approximate} can be generated from the \gls{io-attributes-types-summary} $R_{ioat}$. In cases where the \gls{io-attributes-types-summary} has significantly less edges and nodes than the entity graph, this allows a more efficient computation of all summaries which summarisation relation $R$ are smaller than the latter summary, i.e., $R_{ioat} \sqsubseteq R$.
 \end{remark}
 
 \begin{figure}
 	\centering
 	\input{05-summary-precision/figures/lattice}
-	\caption{Lattice of the summarisation relations set according to the partial order $\sqsubseteq$}
+	\caption{Lattice of the \glspl{summarisation-relation} set according to the partial order $\sqsubseteq$}
 	\label{fig:lattice}
 \end{figure}
 
 \paragraph{Example.}
 
-The Figure~\ref{fig:rel-order} depicts the sumnodes built from two summarisation relations over the graph on Figure~\ref{fig:graph}, i.e., the Types summarisation relation $R_t$ as dotted lines, and the Attributes \& Types summarisation relation $R_{at}$ as dashed lines. The solid lines represent a relation $S \subseteq \mathcal{W}_{at} \times \mathcal{W}_t$, where $\mathcal{W}_{at}$ is the set of sumnodes in the Attributes \& Types summary, and $\mathcal{W}_{t}$ the sumnodes in the Types summary.
+The Figure~\ref{fig:rel-order} depicts the sumnodes built from two summarisation relations over the graph on Figure~\ref{fig:graph}, i.e., the Types summarisation relation $R_t$ as dotted lines, and the Attributes \& Types summarisation relation $R_{at}$ as dashed lines. The solid lines represent a relation $S \subseteq \mathcal{W}_{at} \times \mathcal{W}_t$, where $\mathcal{W}_{at}$ is the set of sumnodes in the \gls{attributes-types-summary}, and $\mathcal{W}_{t}$ the sumnodes in the \gls{typessummary}.
 Using the binary relation $S$, we have the order $R_{at} \sqsubseteq R_t$ between the two summarisation relations.
 
 With the $R_{at}$ relation, the nodes $v_6$ and $v_7$ belong to different sumnodes, while they belong to the same with the $R_t$ relation. The same $R_t$ summary is built from the entity graph and from the $R_{at}$ summary. The partial order allows then to leverage pre-computed summaries in order to generate a new one.
@@ -78,7 +78,7 @@ With the $R_{at}$ relation, the nodes $v_6$ and $v_7$ belong to different sumnod
 \begin{figure}
 	\centering
 	\input{05-summary-precision/figures/relations-order}
-	\caption[Ordering of graph summaries]{Sumnodes of summarisation relations $R_t$ and $R_{at}$ for the graph in Figure~\ref{fig:graph}. The dashed lines represent the $R_{at}$ relation, the dotted lines the $R_t$ relation, and the solid lines the relation derived from the partial order $\sqsubseteq$, i.e., $R_{at} \sqsubseteq R_t$. The nodes with superscript $t$ belong to the summary built from $R_t$, while the nodes with superscript $at$ belong to the summary built from $R_{at}$.}
+	\caption[Ordering of graph summaries]{Sumnodes of \glspl{summarisation-relation} $R_t$ and $R_{at}$ for the graph in Figure~\ref{fig:graph}. The dashed lines represent the $R_{at}$ relation, the dotted lines the $R_t$ relation, and the solid lines the relation derived from the partial order $\sqsubseteq$, i.e., $R_{at} \sqsubseteq R_t$. The nodes with superscript $t$ belong to the summary built from $R_t$, while the nodes with superscript $at$ belong to the summary built from $R_{at}$.}
 	\label{fig:rel-order}
 \end{figure}
 
@@ -130,8 +130,8 @@ Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\la
 We call the \emph{inferred graph} $\mathcal{I}(R) = \left\langle \mathcal{W}_{fbt}, \mathcal{C}, l_{\mathcal{W}_{fbt}} \right\rangle$ the graph which nodes and edges are those of the bisimulation summary $\mathcal{S}_{fbt}$, augmented with the edges in $Err(R)$, i.e., $\mathcal{C} = \mathcal{B}_{fbt} \cup Err(R)$.
 \end{definition}
 
-The Figure~\ref{fig:accuracy} depicts the inferred graph $\mathcal{I}(R_t)$ according to the \emph{Types} summary $\mathcal{S}_t$ in Figure~\ref{fig:classes-summary}.
-Sink sumnodes are omitted for clarity. Sumnodes of the bisimulation summary $\mathcal{S}_{fbt}$ are depicted with solid lines, and sumnodes of the \emph{Types} summary $\mathcal{S}_t$ with dashed lines. Edges from the $Err(R_t)$ set are represented with grey dotted arrows, while we depict sumnodes of the Types summary with dashed arrows.\\
+The Figure~\ref{fig:accuracy} depicts the inferred graph $\mathcal{I}(R_t)$ according to the \gls{typessummary} $\mathcal{S}_t$ in Figure~\ref{fig:classes-summary}.
+Sink sumnodes are omitted for clarity. Sumnodes of the bisimulation summary $\mathcal{S}_{fbt}$ are depicted with solid lines, and sumnodes of the \gls{typessummary} $\mathcal{S}_t$ with dashed lines. Edges from the $Err(R_t)$ set are represented with grey dotted arrows, while we depict sumnodes of the \gls{typessummary} with dashed arrows.\\
 
 Given that $R_{fbt} \sqsubseteq R_t$, the nodes $S^{fbt}_1$ and $S^{fbt}_2$ are mapped to the node $S^t_1$. Similarly, the nodes $S^{fbt}_4$ and $S^{fbt}_5$ are mapped to the node $S^t_3$. Since we have that $(S^t_1, works, S^t_3) \in \mathcal{B}_t$, the edges $(S^{fbt}_1, works, S^{fbt}_5) \in Err(R_{fbt})$ and $(S^{fbt}_2, works, S^{fbt}_5) \in Err(R_{fbt})$ can be inferred, for example.
 
@@ -143,16 +143,16 @@ Edges from the $Err(R_t)$ set cause the nodes $S^{fbt}_1$, $S^{fbt}_5$, and $S^{
 		\input{05-summary-precision/figures/accuracy}
 	}
 	\caption[The inferred graph $\mathcal{I}(R_t)$ created from the comparison of the Types and Bisimulation summaries]{The inferred graph $\mathcal{I}(R_t)$ based on the summaries of Figures~\ref{fig:classes-summary} and \ref{fig:fbb-summary}.
-	Sink sumnodes are omitted for clarity. Sumnodes of the bisimulation summary $\mathcal{S}_{fbt}$ are depicted with solid lines, and sumnodes of the \emph{Types} summary $\mathcal{S}_t$ with dashed lines. Edges from the $Err(R_t)$ set are represented with grey dotted arrows, and sumedges from the \emph{Types} summary with dashed arrows.}
+	Sink sumnodes are omitted for clarity. Sumnodes of the bisimulation summary $\mathcal{S}_{fbt}$ are depicted with solid lines, and sumnodes of the \gls{typessummary} $\mathcal{S}_t$ with dashed lines. Edges from the $Err(R_t)$ set are represented with grey dotted arrows, and sumedges from the \emph{Types} summary with dashed arrows.}
 	\label{fig:accuracy}
 \end{figure}
 
 \subsection{Classification of Errors}
 \label{sec:error-classification}
 
-Depending on the kind of edge in the set $Err(R)$, we identify three categories: \emph{connectivity}, \emph{attribute}, and \emph{type}. The \emph{connectivity} category reflects errors of a summary with regards to the structure of the entity graph, while the \emph{attribute} and \emph{type} categories with regards to its schema.
+Depending on the kind of edge in the set $Err(R)$, we identify three categories: \gls{connectivity}, \gls{attribute}, and \gls{type}. The \emph{connectivity} category reflects errors of a summary with regards to the structure of the entity graph, while the \emph{attribute} and \emph{type} categories with regards to its schema.
 
-We illustrate the three categories in the following with regards to the \emph{Types} $\mathcal{S}_t$ and \emph{Attributes} $\mathcal{S}_a$ summaries only. Because the presented summarisation relations are bigger than $R_t$ and $R_a$ as per the partial order $\sqsubseteq$, any error experienced with either $R_t$ or $R_a$ may also occur with the others.
+We illustrate the three categories in the following with regards to the \emph{Types} \glssymbol{typessummary} and \emph{Attributes} \glssymbol{attributes-summary} summaries only. Because the presented \glspl{summarisation-relation} are bigger than $R_t$ and $R_a$ as per the partial order $\sqsubseteq$, any error experienced with either $R_t$ or $R_a$ may also occur with the others.
 
 \subsubsection{Connectivity Error $Err(R)_{con}$}
 
@@ -237,6 +237,6 @@ $$
 
 The sets $TP(x)$ and $FP(x)$ contain the true and false positive edges which source is $x$, respectively. For example, in Figure~\ref{fig:accuracy}, the edge $(S^{fbt}_0, creator, S^{fbt}_1)$ is in $TP(x)$, since it does exist in the bisimulation summary $\mathcal{S}_{fbt}$. The edge $(S^{fbt}_0, creator, S^{fbt}_2)$ is in $FP(x)$, since it does not exist in $\mathcal{S}_{fbt}$. In total, this results that $Prec\left(R, S^{fbt}_0\right) = \frac{3}{4}$.
 
-The \emph{probability interpretation} of $Prec(R, x)$ is the probability that a randomly selected edge is correctly summarised. We note the recall is always equal to $1$, since there is no false negative edges in the presented summarisation relations.\\
+The \emph{probability interpretation} of $Prec(R, x)$ is the probability that a randomly selected edge is correctly summarised. We note the recall is always equal to $1$, since there is no false negative edges in the presented \glspl{summarisation-relation}.\\
 
 We use $Prec(R, x)$ as the precision measure for each of the classification of errors. We note that for a same node, the edge precision may vary between the three categories. As an example, consider the node $S^{fbt}_0$ in Figure~\ref{fig:accuracy}. The edge attribute precision is equal to $0$, since the attributes in both $\mathcal{S}_{fbt}$ and $\mathcal{I}(R_t)$ summaries for this node are $creator$ and $author$. However, the connectivity precision is equal to $\frac{3}{4}$.

@@ -354,7 +354,7 @@ We classify a query according to the complexity of a pattern. The complexity is 
 
 A star-shaped pattern --- or \emph{star} in short --- is a BGP where the \emph{subject} of all triple patterns is the same. The size of such a pattern is determined by the number of triple patterns it contains. For instance, the BGP ``?s rdfs:label ?label . ?s foaf:name ?name .'' is a star of size 2, since the subject of both triple patterns is ``?s''.
 
-Such a classification scheme allows to capture two aspects of a graph summary that have an impact on its \emph{precision} introduced in Section~\ref{sec:error-classification}. The size of a star in a query pertains to the attribute and type error. In addition, the number of stars in a query pertains to the connectivity error.
+Such a classification scheme allows to capture two aspects of a graph summary that have an impact on its \emph{precision} introduced in Section~\ref{sec:error-classification}. The size of a star in a query pertains to the attribute and type error. In addition, the number of stars in a query pertains to the \gls{connectivity} error.
 
 \subsubsection{Observations of Queries in the Dataset}
 
@@ -514,7 +514,7 @@ The MAP measure averages that metric over all the queries that were executed.
 
 \paragraph{Discussion.}
 
-We compare in this paragraph the performance of both ranking functions when applied over the Types summary of DBpedia. First, we evaluate the impact of the normalisation parameters on the \gls{MF}-based ranking approach. Then, we discuss the ranking performance of the basic and \gls{MF}-based approaches.
+We compare in this paragraph the performance of both ranking functions when applied over the \gls{typessummary} of DBpedia. First, we evaluate the impact of the normalisation parameters on the \gls{MF}-based ranking approach. Then, we discuss the ranking performance of the basic and \gls{MF}-based approaches.
 
 \subparagraph{Normalisation parameters impact.}
 
@@ -534,7 +534,7 @@ This shows the normalisation parameters introduced with the \gls{MF} ranking mod
 
 Given the outcome of the previous experiment, we set to $1.0$ the parameters of the Normalisations in the \gls{MF}-based approach for the comparison between \gls{MF}-based and basic ranking approaches of the graph summary.\\
 
-Table~\ref{tab:summary-ranking-cmp} reports the MAP values of the basic and \gls{MF}-based approaches over the Types summary of Dbpedia. We write the MAP value in bold for the approach that has the greatest. We observe that for a majority of the query complexities, the \gls{MF}-based approach provides a better ranking than the basic approach.
+Table~\ref{tab:summary-ranking-cmp} reports the MAP values of the basic and \gls{MF}-based approaches over the \gls{typessummary} of Dbpedia. We write the MAP value in bold for the approach that has the greatest. We observe that for a majority of the query complexities, the \gls{MF}-based approach provides a better ranking than the basic approach.
 
 This shows the benefits of the \gls{MF} ranking model of normalising the data over two levels: the Normalisation~\ref{norm:content} allows to compare several solutions to a query regardless of different statistics they might have; with the Normalisation~\ref{norm:degree}, it is possible to rank solutions to a query that have different degree of a same attribute.
 

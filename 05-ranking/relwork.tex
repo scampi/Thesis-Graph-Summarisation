@@ -1,7 +1,7 @@
 \section{Related Work}
 \label{sec:searching:relwork}
 
-The Web of Data consists of a wide range of heterogeneous datasets, where the schema and the ontology can vary from one to the other. To overcome this diversity of attributes, different approaches for defining the fields of an entity have been proposed.\\
+The Web of Data consists of a wide range of heterogeneous datasets, where the schema and the ontology can vary from one to the other. To overcome this diversity of attributes, different approaches for defining the \glspl{field} of an entity have been proposed.\\
 
 From an RDF perspective, the authors consider in \cite{Perez-Aguera:2010:UBS} five weighted fields to represent the structure of an entity: literals (textual values), keywords extracted from the root's label, i.e., the subject URI, keywords extracted from the incoming links, the entity's types and keywords extracted from object URIs. Compared to the BM25F and PL2F field-based approaches defined in \ref{sec:ranking-wod}, this approach is not able to grasp the rich structure of the data since attributes are discarded.
 
@@ -90,7 +90,7 @@ We define here some vocabulary used in the rest of the chapter:
 \section{Field-Based Ranking Models}
 \label{sec:ranking-wod}
 
-In this section, we explain how to adapt two existing field-based ranking frameworks to the graph model described in Chapter~\ref{chap:ssd}.
+In this section, we explain how to adapt two existing \gls{field}-based ranking frameworks to the graph model described in Chapter~\ref{chap:ssd}.
 A field-based ranking model views a graph as composed of multiple normalized weighted fields. For example, a field can be the title, the author or the body of the document.\\
 
 In the Probabilistic Relevance Framework~\cite{Robertson:2009:PRF} (PRF), BM25F~\cite{zaragoza:2004:microsoft} is a field-based ranking function popular for web search.

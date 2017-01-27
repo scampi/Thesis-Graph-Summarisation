@@ -8,7 +8,7 @@
 				grid=major,
 				xmajorgrids=false,
 				ybar stacked, ymin=0, ymax=2, xtick=data,
-				symbolic x coords={$\mathcal{S}_{ut}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
+				symbolic x coords={\glssymbol{unique-type-summary},\glssymbol{typessummary},\glssymbol{attributes-summary},\glssymbol{attributes-types-summary},\glssymbol{io-attributes-summary},\glssymbol{io-attributes-types-summary}},
 				enlargelimits=0.2,
 				ylabel={Schema Precision $P1$},
 				x=2cm,
@@ -16,63 +16,63 @@
 			}
 			\begin{axis}[bar shift=-16pt]
 			\addplot[postaction={pattern=north east lines}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{ut}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.9999)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.9999)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 1.0000)
+				(\glssymbol{typessummary}, 1.0000)
+				(\glssymbol{attributes-summary}, 0.9999)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 0.9999)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\addplot[postaction={pattern=north east lines}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{ut}$, 0.7586)
-				($\mathcal{S}_{t}$, 0.7529)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 0.7586)
+				(\glssymbol{typessummary}, 0.7529)
+				(\glssymbol{attributes-summary}, 1.0000)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 1.0000)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\end{axis}
 			\begin{axis}
 
 			\addplot[postaction={pattern=dots}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{ut}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.9222)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.9415)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 1.0000)
+				(\glssymbol{typessummary}, 1.0000)
+				(\glssymbol{attributes-summary}, 0.9222)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 0.9415)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\addplot[postaction={pattern=dots}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{ut}$, 0.5927)
-				($\mathcal{S}_{t}$, 0.6607)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 0.5927)
+				(\glssymbol{typessummary}, 0.6607)
+				(\glssymbol{attributes-summary}, 1.0000)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 1.0000)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\end{axis}
 			\begin{axis}[bar shift=16pt]
 
 			\addplot[postaction={pattern=north west lines}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{ut}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.9675)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.9760)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 1.0000)
+				(\glssymbol{typessummary}, 1.0000)
+				(\glssymbol{attributes-summary}, 0.9675)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 0.9760)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\addplot[postaction={pattern=north west lines}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{ut}$, 0.7826)
-				($\mathcal{S}_{t}$, 0.9446)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 0.7826)
+				(\glssymbol{typessummary}, 0.9446)
+				(\glssymbol{attributes-summary}, 1.0000)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 1.0000)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\end{axis}
@@ -89,7 +89,7 @@
 				grid=major,
 				xmajorgrids=false,
 				ybar stacked, ymin=0, ymax=2, xtick=data,
-				symbolic x coords={$\mathcal{S}_{ut}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
+				symbolic x coords={\glssymbol{unique-type-summary},\glssymbol{typessummary},\glssymbol{attributes-summary},\glssymbol{attributes-types-summary},\glssymbol{io-attributes-summary},\glssymbol{io-attributes-types-summary}},
 				enlargelimits=0.2,
 				ylabel={Schema Precision $P2$},
 				x=2cm,
@@ -98,63 +98,63 @@
 			\begin{axis}[bar shift=-16pt]
 
 			\addplot[postaction={pattern=north east lines}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{ut}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.9995)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.9999)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 1.0000)
+				(\glssymbol{typessummary}, 1.0000)
+				(\glssymbol{attributes-summary}, 0.9995)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 0.9999)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\addplot[postaction={pattern=north east lines}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{ut}$, 0.5217)
-				($\mathcal{S}_{t}$, 0.4968)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 0.5217)
+				(\glssymbol{typessummary}, 0.4968)
+				(\glssymbol{attributes-summary}, 1.0000)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 1.0000)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\end{axis}
 			\begin{axis}
 
 			\addplot[postaction={pattern=dots}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{ut}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.7136)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.7753)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 1.0000)
+				(\glssymbol{typessummary}, 1.0000)
+				(\glssymbol{attributes-summary}, 0.7136)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 0.7753)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\addplot[postaction={pattern=dots}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{ut}$, 0.2798)
-				($\mathcal{S}_{t}$, 0.2925)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 0.2798)
+				(\glssymbol{typessummary}, 0.2925)
+				(\glssymbol{attributes-summary}, 1.0000)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 1.0000)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\end{axis}
 			\begin{axis}[bar shift=16pt]
 
 			\addplot[postaction={pattern=north west lines}, fill=blue!30, draw = blue] coordinates {
-				($\mathcal{S}_{ut}$, 1.0000)
-				($\mathcal{S}_{t}$, 1.0000)
-				($\mathcal{S}_{a}$, 0.1424)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 0.2151)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 1.0000)
+				(\glssymbol{typessummary}, 1.0000)
+				(\glssymbol{attributes-summary}, 0.1424)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 0.2151)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\addplot[postaction={pattern=north west lines}, fill=red!30, draw = red] coordinates {
-				($\mathcal{S}_{ut}$, 0.0843)
-				($\mathcal{S}_{t}$, 0.2398)
-				($\mathcal{S}_{a}$, 1.0000)
-				($\mathcal{S}_{at}$, 1.0000)
-				($\mathcal{S}_{ioa}$, 1.0000)
-				($\mathcal{S}_{ioat}$, 1.0000)
+				(\glssymbol{unique-type-summary}, 0.0843)
+				(\glssymbol{typessummary}, 0.2398)
+				(\glssymbol{attributes-summary}, 1.0000)
+				(\glssymbol{attributes-types-summary}, 1.0000)
+				(\glssymbol{io-attributes-summary}, 1.0000)
+				(\glssymbol{io-attributes-types-summary}, 1.0000)
 			};
 
 			\end{axis}

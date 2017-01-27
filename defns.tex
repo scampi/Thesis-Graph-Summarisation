@@ -1,8 +1,30 @@
-\newglossaryentry{edesc}{name={Entity Description},symbol={\ensuremath{\mathcal{E}}},description={the set of edges that describe an entity}}
-\newglossaryentry{dsource}{name=\ensuremath{d},description={function that defines the ownership of an node by assigning a dataset to it}}
-\newglossaryentry{atype}{name={Type Attribute},symbol={\ensuremath{\tau}},description={an attribute label that defines the type of an entity, e.g., rdf:type}}
-\newglossaryentry{Glabel}{name=\ensuremath{l_G},description={dataset label of a graph $G$}}
-\newglossaryentry{MF}{name={MF},description={generalisation of field-based ranking models for semi-structured data}}
-\newglossaryentry{BM25MF}{name={BM25MF},description={MF extension of the field-based ranking function BM25F},see={MF}}
-\newglossaryentry{PL2MF}{name={PL2MF},description={MF extension of the field-based ranking function PL2F},see={MF}}
-\newacronym[description={indicates the position in a SPARQL query for retrieving recommendations}]{POF}{POF}{Point Of Focus}
+\newacronym[name={Point Of Focus},description={the POF indicates the position in a SPARQL query for retrieving recommendations}]{POF}{POF}{Point Of Focus}
+
+\newglossaryentry{edesc}{name={Entity description},symbol={\ensuremath{\mathcal{E}}},description={the set of edges that describe an entity}}
+\newglossaryentry{dsource}{name={Node ownership},symbol={\ensuremath{d}},description={function that defines the ownership of an node by assigning a dataset to it}}
+\newglossaryentry{edge-attribute}{name={Attribute},symbol={\ensuremath{\alpha}},description={the label of an edge}}
+\newglossaryentry{atype}{name={Type attribute},symbol={\ensuremath{\tau}},description={an edge label that defines the type of the source node, e.g., rdf:type},parent={edge-attribute}}
+\newglossaryentry{Glabel}{name={Dataset label},symbol={\ensuremath{l_G}},description={function that assigns a label to a graph $G$}}
+
+\newglossaryentry{MF}{name={MF ranking model},text={MF},description={generalisation of field-based ranking models for semi-structured data}}
+\newglossaryentry{BM25MF}{name={BM25MF},parent={MF},description={MF extension of the field-based ranking function BM25F}}
+\newglossaryentry{PL2MF}{name={PL2MF},parent={MF},description={MF extension of the field-based ranking function PL2F}}
+\newglossaryentry{field}{name={Field},description={in the context of ranking, a field represents a characteristic portion of an entity},see={MF}}
+
+\newglossaryentry{gsummary}{name={Graph summary},plural={graph summaries},description={product of the graph summarisation}}
+\newglossaryentry{summarisation-relation}{plural={summarisation relations},name={summarisation relation},symbol={\ensuremath{R}},description={the relation that maps a node of the graph to a node of the summary}}
+\newglossaryentry{typessummary}{symbol={\ensuremath{\mathcal{S}_{t}}},name={Types summary},parent={gsummary},description={graph summarisation based on the type feature, taking the set of type for defining the \gls{summarisation-relation}}}
+\newglossaryentry{unique-type-summary}{symbol={\ensuremath{\mathcal{S}_{ut}}},name={Unique Type summary},parent={gsummary},description={graph summarisation based on the type feature, taking a single type for defining the \gls{summarisation-relation}}}
+\newglossaryentry{attributes-summary}{symbol={\ensuremath{\mathcal{S}_{a}}},name={Attributes summary},parent={gsummary},description={graph summarisation based on the outgoing attribute feature, taking the set of attributes for defining the \gls{summarisation-relation}}}
+\newglossaryentry{io-attributes-summary}{symbol={\ensuremath{\mathcal{S}_{ioa}}},name={IO Attributes summary},parent={gsummary},description={graph summarisation based on the incoming and outgoing attributes features, taking the set of incoming/outgoing attributes for defining the \gls{summarisation-relation}}}
+\newglossaryentry{attributes-types-summary}{symbol={\ensuremath{\mathcal{S}_{at}}},name={Attributes \& Types summary},parent={gsummary},description={graph summarisation based on the outgoing attribute and type features, taking the set of outgoing attributes and types for defining the \gls{summarisation-relation}}}
+\newglossaryentry{io-attributes-types-summary}{symbol={\ensuremath{\mathcal{S}_{ioat}}},name={IO Attributes \& Types summary},parent={gsummary},description={graph summarisation based on the incoming/outgoing attributes and type features, taking the set of incoming/outgoing attributes and types for defining the \gls{summarisation-relation}}}
+
+\newglossaryentry{precision}{name={Precision model},description={by comparing a \gls{gsummary} against a gold-standard summary, the precision of the former summary is measured}}
+\newglossaryentry{lattice}{name={Lattice},parent={precision},description={ordering of the \glspl{gsummary} based on a \gls{partial-order}}}
+\newglossaryentry{errors}{name={Classification of errors},parent={precision},description={different kinds of misinformation deduced from the \gls{gsummary} due to the graph summarisation process}}
+\newglossaryentry{schema}{name={schema},parent={errors},description={errors of \gls{type} and \gls{attribute} categories}}
+\newglossaryentry{connectivity}{name={connectivity},parent={errors},description={category of error of a \gls{gsummary} that pertains to the original graph traversal}}
+\newglossaryentry{type}{name={type},parent={errors},description={category of error of a \gls{gsummary} that pertains to the type information of the original graph}}
+\newglossaryentry{attribute}{name={attribute},parent={errors},description={category of error of a \gls{gsummary} that pertains to the attribute information of the original graph}}
+\newglossaryentry{partial-order}{symbol={\ensuremath{\sqsubseteq}},name={Partial order},parent={precision},description={binary relation on the set of \glspl{gsummary}}}

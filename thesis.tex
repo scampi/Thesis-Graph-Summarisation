@@ -3,6 +3,7 @@
 \documentclass[12pt,chapterprefix=true]{scrbook}
 %\documentclass[12pt,chapterprefix=true,listof=totoc]{scrbook}
 
+\usepackage{setspace}
 \usepackage[table]{xcolor}
 \usepackage{array}
 
@@ -28,11 +29,6 @@
 
 \usepackage{bbm}
 \usepackage{numprint}
-
-\usepackage{glossaries}
-\setacronymstyle{long-short}
-\makeglossaries
-\loadglsentries{defns}
 
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.10}
@@ -101,6 +97,12 @@ linewidth=4pt
 ]{hyperref}
 \usepackage[hyphenbreaks]{breakurl}
 
+\usepackage[toc,section=chapter]{glossaries}
+\setacronymstyle{long-short}
+\setglossarystyle{tree}
+\makeglossaries
+\loadglsentries{defns}
+
 \begin{document}
 
 \begin{titlepage}
@@ -124,7 +126,10 @@ linewidth=4pt
 		\end{figure}
 		}
 		\vspace{2cm}
-		{\Huge \textbf{Making Sense of Web Data}}\\
+		\begin{doublespacing}
+		{\Huge \textbf{Graph Summarisation of Web Data:}}\\
+		{\Huge \textbf{Data-driven Generation of Structured Representations}}\\
+		\end{doublespacing}
 		\vspace{1cm}
 		{\Large \textbf{St\'ephane Campinas}}\\
 		\vspace{1cm}

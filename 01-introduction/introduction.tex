@@ -132,14 +132,14 @@ Traditionally, the documents ranked contain mostly textual information, with lit
 
 Documents on the Web are mainly textual, containing information only for Humans to process. In order to rank such documents, a straight-forward approach is to consider a document as a set of words and using word frequencies to estimate its importance within the document. Thus, with such a modelling a document is referred to as a \emph{bag of words}.
 
-The ranking of a document can be improved by, for example, adding some structural information into the algorithm. Some specific parts can be extracted so to apply a weight, for instance the title. Such approaches are referred to as \emph{field-based} ranking. However, the structure considered in those are too simple and so they cannot leverage the complex (graph) structure that is exhibited in Web Data. This marks a shift from the ranking of (field-based) documents to graph data.
+The ranking of a document can be improved by, for example, adding some structural information into the algorithm. Some specific parts can be extracted so to apply a weight, for instance the title. Such approaches are referred to as \emph{\gls{field}-based} ranking. However, the structure considered in those are too simple and so they cannot leverage the complex (graph) structure that is exhibited in Web Data. This marks a shift from the ranking of (\gls{field}-based) documents to graph data.
 
 \subsection{Ranking of Graph Data}
 
 In the Web of Data, we use URIs to name things, e.g., people, monuments, places, \ldots, which allows one to lookup an URI and learn about it, but also for others to reference that URI in their own dataset. The Web Data takes then the form of a graph, where a node represent a concept and the edge a labelled relationship that links two nodes.
 While Web Data follows the standard RDF format that opens many opportunities to tackle graph ranking, we consider in this thesis to improve the ranking model.
 
-In Web Data, the structure of the graph carries some information about the data. However, most of it is discarded by field-based ranking approaches due to the bag of words modelling. The Figure~\ref{fig:bow-graph} depicts a  graph about ``Ireland'' and its neighbouring country; the Figure~\ref{fig:bow} is a depiction of its bag of words. We observe that with the bag of words modelling, we lose some semantic that is carried by the structure: the population number is not closely associated with the ``United Kingdom'' anymore.
+In Web Data, the structure of the graph carries some information about the data. However, most of it is discarded by \gls{field}-based ranking approaches due to the bag of words modelling. The Figure~\ref{fig:bow-graph} depicts a  graph about ``Ireland'' and its neighbouring country; the Figure~\ref{fig:bow} is a depiction of its bag of words. We observe that with the bag of words modelling, we lose some semantic that is carried by the structure: the population number is not closely associated with the ``United Kingdom'' anymore.
 
 The ranking of a graph requires a novel way of modelling the data that does not discard the structure.
 Hence, we propose the \emph{``MF'' ranking model} that leverage the graph structure in order to better compute the relevance of a graph with regards to a query.

@@ -46,7 +46,7 @@ With the coming of the Semantic Web, documents are turning into a real blend of 
 \subsection{Field-Based Ranking Models}
 \label{sec:ranking-wod}
 
-In this section, we explain how to adapt two existing field-based ranking frameworks to the entity model.
+In this section, we explain how to adapt two existing \gls{field}-based ranking frameworks to the entity model.
 A field-based ranking model views a document as composed of multiple normalized weighted fields. For example, a field can be the title, the author or the body of the document.
 
 In the Probabilistic Relevance Framework\cite{Robertson:2009:PRF} (PRF), BM25F~\cite{zaragoza:2004:microsoft} is a popular web-search field-based ranking function.
@@ -66,7 +66,7 @@ The following features are used in the field-based ranking functions:
 
 The ranking models presented here are from the \emph{TF-IDF} family, where \emph{TF} is a function of the term frequency, and \emph{IDF} is a function of inverse document frequency. The intuition behind TF is that it captures the relevancy of a term within a document, e.g., the more a term occurs in a document, the more important it is for that document. In contrary, the intuition behind IDF is to capture the importance of a term within the collection of documents: the more a term occur in the collection, the less relevant it is. For example, the term ``food'' would occur frequently in a cooking recipes book, however it may not be an interesting feature in a ranking function.
 
-In general, the term frequency is not used ``as is'' in the TF function, it is first \emph{normalised} before applying the TF function. Term frequency normalisation is useful in cases where the length of a document varies across the collection: it allows to capture this variability into the ranking function, making the score of documents comparable. In field-based ranking functions, the term frequency is normalized at the field level, capturing the length variability of a field across documents.
+In general, the term frequency is not used ``as is'' in the TF function, it is first \emph{normalised} before applying the TF function. Term frequency normalisation is useful in cases where the length of a document varies across the collection: it allows to capture this variability into the ranking function, making the score of documents comparable. In \gls{field}-based ranking functions, the term frequency is normalized at the field level, capturing the length variability of a field across documents.
 
 \subsubsection{BM25F Ranking Function}
 

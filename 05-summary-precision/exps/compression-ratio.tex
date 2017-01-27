@@ -4,7 +4,7 @@
 		\begin{tikzpicture}
 		\begin{axis}[
 			ybar,
-			symbolic x coords={$G:\mathcal{S}_{fbt}$,$G:\mathcal{S}_{ut}$,$G:\mathcal{S}_{t}$,$G:\mathcal{S}_{a}$,$G:\mathcal{S}_{at}$,$G:\mathcal{S}_{ioa}$,$G:\mathcal{S}_{ioat}$},
+			symbolic x coords={$G:\mathcal{S}_{fbt}$,$G:\glssymbol{unique-type-summary}$,$G:\glssymbol{typessummary}$,$G:\glssymbol{attributes-summary}$,$G:\glssymbol{attributes-types-summary}$,$G:\glssymbol{io-attributes-summary}$,$G:\glssymbol{io-attributes-types-summary}$},
 			enlargelimits=0.15,
 			ylabel={Compression Ratio},
 			x=2cm,
@@ -17,42 +17,42 @@
 		]
 		\addplot coordinates {
 			($G:\mathcal{S}_{fbt}$, 3589.49)
-			($G:\mathcal{S}_{ut}$, 294067.89)
-			($G:\mathcal{S}_{t}$, 313917.10)
-			($G:\mathcal{S}_{a}$, 3999.70)
-			($G:\mathcal{S}_{at}$, 3999.69)
-			($G:\mathcal{S}_{ioa}$, 3654.78)
-			($G:\mathcal{S}_{ioat}$, 3654.77)
+			($G:\glssymbol{unique-type-summary}$, 294067.89)
+			($G:\glssymbol{typessummary}$, 313917.10)
+			($G:\glssymbol{attributes-summary}$, 3999.70)
+			($G:\glssymbol{attributes-types-summary}$, 3999.69)
+			($G:\glssymbol{io-attributes-summary}$, 3654.78)
+			($G:\glssymbol{io-attributes-types-summary}$, 3654.77)
 		};
 
 		\addplot coordinates {
 			($G:\mathcal{S}_{fbt}$, 205.80)
-			($G:\mathcal{S}_{ut}$, 361299.27)
-			($G:\mathcal{S}_{t}$, 141978.05)
-			($G:\mathcal{S}_{a}$, 490.00)
-			($G:\mathcal{S}_{at}$, 326.39)
-			($G:\mathcal{S}_{ioa}$, 407.85)
-			($G:\mathcal{S}_{ioat}$, 283.95)
+			($G:\glssymbol{unique-type-summary}$, 361299.27)
+			($G:\glssymbol{typessummary}$, 141978.05)
+			($G:\glssymbol{attributes-summary}$, 490.00)
+			($G:\glssymbol{attributes-types-summary}$, 326.39)
+			($G:\glssymbol{io-attributes-summary}$, 407.85)
+			($G:\glssymbol{io-attributes-types-summary}$, 283.95)
 		};
 
 		\addplot coordinates {
 			($G:\mathcal{S}_{fbt}$, 386.79)
-			($G:\mathcal{S}_{ut}$, 2103.26)
-			($G:\mathcal{S}_{t}$, 2128.70)
-			($G:\mathcal{S}_{a}$, 959.60)
-			($G:\mathcal{S}_{at}$, 710.87)
-			($G:\mathcal{S}_{ioa}$, 717.87)
-			($G:\mathcal{S}_{ioat}$, 572.57)
+			($G:\glssymbol{unique-type-summary}$, 2103.26)
+			($G:\glssymbol{typessummary}$, 2128.70)
+			($G:\glssymbol{attributes-summary}$, 959.60)
+			($G:\glssymbol{attributes-types-summary}$, 710.87)
+			($G:\glssymbol{io-attributes-summary}$, 717.87)
+			($G:\glssymbol{io-attributes-types-summary}$, 572.57)
 		};
 
 		\addplot coordinates {
 			($G:\mathcal{S}_{fbt}$, 7.29)
-			($G:\mathcal{S}_{ut}$, 16.21)
-			($G:\mathcal{S}_{t}$, 14.08)
-			($G:\mathcal{S}_{a}$, 154.86)
-			($G:\mathcal{S}_{at}$, 12.34)
-			($G:\mathcal{S}_{ioa}$, 113.75)
-			($G:\mathcal{S}_{ioat}$, 12.04)
+			($G:\glssymbol{unique-type-summary}$, 16.21)
+			($G:\glssymbol{typessummary}$, 14.08)
+			($G:\glssymbol{attributes-summary}$, 154.86)
+			($G:\glssymbol{attributes-types-summary}$, 12.34)
+			($G:\glssymbol{io-attributes-summary}$, 113.75)
+			($G:\glssymbol{io-attributes-types-summary}$, 12.04)
 		};
 		\legend{$\mu_L$,$\mu_M$,$\mu_H$,$\mu_{VH}$}
 		\end{axis}
@@ -68,7 +68,7 @@
 %		\begin{tikzpicture}
 %		\begin{axis}[
 %		ybar,
-%		symbolic x coords={$\mathcal{S}_{ut}$,$\mathcal{S}_{t}$,$\mathcal{S}_{a}$,$\mathcal{S}_{at}$,$\mathcal{S}_{ioa}$,$\mathcal{S}_{ioat}$},
+%		symbolic x coords={\glssymbol{unique-type-summary},\glssymbol{typessummary},\glssymbol{attributes-summary},\glssymbol{attributes-types-summary},\glssymbol{io-attributes-summary},\glssymbol{io-attributes-types-summary}},
 %		enlargelimits=0.15,
 %		ylabel={Compression Ratio},
 %		x=2cm,
@@ -78,39 +78,39 @@
 %			anchor=north,legend columns=-1},
 %		]
 %		\addplot coordinates {
-%			($\mathcal{S}_{ut}$,1.89)
-%			($\mathcal{S}_{t}$,1.77)
-%			($\mathcal{S}_{a}$,81.73)
-%			($\mathcal{S}_{at}$,81.74)
-%			($\mathcal{S}_{ioa}$,89.57)
-%			($\mathcal{S}_{ioat}$,89.57)
+%			(\glssymbol{unique-type-summary},1.89)
+%			(\glssymbol{typessummary},1.77)
+%			(\glssymbol{attributes-summary},81.73)
+%			(\glssymbol{attributes-types-summary},81.74)
+%			(\glssymbol{io-attributes-summary},89.57)
+%			(\glssymbol{io-attributes-types-summary},89.57)
 %		};
 %
 %		\addplot coordinates {
-%			($\mathcal{S}_{ut}$,0.23)
-%			($\mathcal{S}_{t}$,0.22)
-%			($\mathcal{S}_{a}$,42.51)
-%			($\mathcal{S}_{at}$,53.37)
-%			($\mathcal{S}_{ioa}$,51.45)
-%			($\mathcal{S}_{ioat}$,62.68)
+%			(\glssymbol{unique-type-summary},0.23)
+%			(\glssymbol{typessummary},0.22)
+%			(\glssymbol{attributes-summary},42.51)
+%			(\glssymbol{attributes-types-summary},53.37)
+%			(\glssymbol{io-attributes-summary},51.45)
+%			(\glssymbol{io-attributes-types-summary},62.68)
 %		};
 %
 %		\addplot coordinates {
-%			($\mathcal{S}_{ut}$, 17.81)
-%			($\mathcal{S}_{t}$,17.60)
-%			($\mathcal{S}_{a}$,47.99)
-%			($\mathcal{S}_{at}$,62.55)
-%			($\mathcal{S}_{ioa}$,66.13)
-%			($\mathcal{S}_{ioat}$,79.45)
+%			(\glssymbol{unique-type-summary}, 17.81)
+%			(\glssymbol{typessummary},17.60)
+%			(\glssymbol{attributes-summary},47.99)
+%			(\glssymbol{attributes-types-summary},62.55)
+%			(\glssymbol{io-attributes-summary},66.13)
+%			(\glssymbol{io-attributes-types-summary},79.45)
 %		};
 %
 %		\addplot coordinates {
-%			($\mathcal{S}_{ut}$, 45.00)
-%			($\mathcal{S}_{t}$,51.81)
-%			($\mathcal{S}_{a}$,4.71)
-%			($\mathcal{S}_{at}$,59.10)
-%			($\mathcal{S}_{ioa}$,6.41)
-%			($\mathcal{S}_{ioat}$,60.56)
+%			(\glssymbol{unique-type-summary}, 45.00)
+%			(\glssymbol{typessummary},51.81)
+%			(\glssymbol{attributes-summary},4.71)
+%			(\glssymbol{attributes-types-summary},59.10)
+%			(\glssymbol{io-attributes-summary},6.41)
+%			(\glssymbol{io-attributes-types-summary},60.56)
 %		};
 %		\legend{$\mu_L$,$\mu_M$,$\mu_H$,$\mu_{VH}$}
 %		\end{axis}
