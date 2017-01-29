@@ -6,6 +6,9 @@
 \newglossaryentry{atype}{name={Type attribute},symbol={\ensuremath{\tau}},description={an edge label that defines the type of the source node, e.g., rdf:type},parent={edge-attribute}}
 \newglossaryentry{Glabel}{name={Dataset label},symbol={\ensuremath{l_G}},description={function that assigns a label to a graph $G$}}
 \newglossaryentry{types}{name={Types},description={set of labels of nodes that have the same source node and which edge label is a \gls{atype}}}
+\newglossaryentry{attributes}{name={Attributes},description={set of edge labels that are connected to a same node}}
+\newglossaryentry{incoming-attributes}{name={Incoming attributes},parent={attributes},description={set of edge labels that have the same target node}}
+\newglossaryentry{outgoing-attributes}{name={Outgoing attributes},parent={attributes},description={set of edge labels that have the same source node}}
 
 \newglossaryentry{MF}{name={MF ranking model},text={MF},description={generalisation of field-based ranking models for semi-structured data}}
 \newglossaryentry{BM25MF}{name={BM25MF},parent={MF},description={MF extension of the field-based ranking function BM25F}}

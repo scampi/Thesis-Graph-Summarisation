@@ -3,9 +3,9 @@
 
 The summary of a graph reflects the structure of that graph. Concretely, this means that all possible paths in the graph are also possible in its summary. However, this does not imply the converse, i.e., that all possible paths in a summary do exist in the graph it represents. The structure of the summary stems from the grouping of the nodes in the graph by the \gls{summarisation-relation}. Therefore, the question of the \emph{precision} of the summary with regards to the graph it represents is raised.
 
-We judge the precision of a summary by the difference of traversing a summary or the graph it represents. Our rationale is the larger the difference, the less precise the summary is. We consider the precision of a summary with regards to the graph it represents from two directions. Firstly, we are concerned with the existence of paths in the graph. Secondly, we consider whether combinations of attributes and/or \gls{types} in the summary do exist in the graph.
+We judge the precision of a summary by the difference of traversing a summary or the graph it represents. Our rationale is the larger the difference, the less precise the summary is. We consider the precision of a summary with regards to the graph it represents from two directions. Firstly, we are concerned with the existence of paths in the graph. Secondly, we consider whether combinations of \gls{attributes} and/or \gls{types} in the summary do exist in the graph.
 
-In this chapter, we present a model for measuring the precision of a summary with regards to the graph it was created from. The model rely on a summary that is set as the \emph{gold} standard, to which we compare both directions, i.e., the existence of paths and of attributes/\gls{types} combinations.
+In this chapter, we present a model for measuring the precision of a summary with regards to the graph it was created from. The model rely on a summary that is set as the \emph{gold} standard, to which we compare both directions, i.e., the existence of paths and of \gls{attributes}/\gls{types} combinations.
 %The quality of a summary depends on the summarisation relation used, which we discuss in terms of volume of the graph and of precision of the summarized data.
 
 \section{Graph Summarisation Lattice}
@@ -169,24 +169,24 @@ $$
 
 \subsubsection{Attribute Error $Err(R)_{attr}$}
 
-The attribute error captures edges from the summary error set $Err(R)$ that have an impact on the schema of the entity graph, due to additional attributes inferred by the summary. For example, the node $S^t_4$ in Figure~\ref{fig:classes-summary} implies the existence of a node in $G$ with edges $capital$ and $label$, which is however not the case. We define $Err(R)_{attr}$ as the set that contains edges of $Err(R)$ in which the attribute is not in the set $attributes(x)$ of the node $x$.
+The attribute error captures edges from the summary error set $Err(R)$ that have an impact on the schema of the entity graph, due to additional \gls{attributes} inferred by the summary. For example, the node $S^t_4$ in Figure~\ref{fig:classes-summary} implies the existence of a node in $G$ with edges $capital$ and $label$, which is however not the case. We define $Err(R)_{attr}$ as the set that contains edges of $Err(R)$ in which the attribute is not in the set $\gls{attributes}(x)$ of the node $x$.
 
 \begin{definition}[Attribute Error]
 	Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$. Let $Err(R)$ be the summary error of $\mathcal{S}$. We define the attribute error set $Err(R)_{attr}$ as follows:
 
 	$$
-	Err(R)_{attr} = \left\lbrace (x, \alpha, y) \in Err(R) \mid \alpha \not \in attributes(x) \right\rbrace
+	Err(R)_{attr} = \left\lbrace (x, \alpha, y) \in Err(R) \mid \alpha \not \in \gls{attributes}(x) \right\rbrace
 	$$
 	where
 	$$
-	attributes(x \in \mathcal{W}_{fbt}) = \left\lbrace \alpha \mid \exists y \in \mathcal{W}_{fbt} (x, \alpha, y) \in \mathcal{B}_{fbt} \right\rbrace
+	\gls{attributes}(x \in \mathcal{W}_{fbt}) = \left\lbrace \alpha \mid \exists y \in \mathcal{W}_{fbt} (x, \alpha, y) \in \mathcal{B}_{fbt} \right\rbrace
 	$$
 \end{definition}
 
 \subsubsection{Type Error $Err(R)_{type}$}
 
 The type error captures edges from the summary error set $Err(R)$ that impact on the schema of the entity graph, due to additional types inferred from the summary.
-For example, in the Figure~\ref{fig:attributes-summary} the node $S^a_2$ contains the nodes $\left\lbrace v_3, v_4, v_5 \right\rbrace$, since all three have the same set of attributes, i.e., $label$, $location$ and $a$. Then, we may infer from that node the possible existence of a node in $G$ with types $Place$ and $City$, which is however not the case. We define $Err(R)_{type}$ as the set that contains additional types inferred from $Err(R)$, i.e., a type attribute $(x, \glssymbol{atype}, y) \in Err(R)$, in which the target $y$ is not in the set $types(x)$ of the node $x$.
+For example, in the Figure~\ref{fig:attributes-summary} the node $S^a_2$ contains the nodes $\left\lbrace v_3, v_4, v_5 \right\rbrace$, since all three have the same set of \gls{attributes}, i.e., $label$, $location$ and $a$. Then, we may infer from that node the possible existence of a node in $G$ with types $Place$ and $City$, which is however not the case. We define $Err(R)_{type}$ as the set that contains additional types inferred from $Err(R)$, i.e., a type attribute $(x, \glssymbol{atype}, y) \in Err(R)$, in which the target $y$ is not in the set $types(x)$ of the node $x$.
 
 \begin{definition}[Type Error]
 	Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$. Let $Err(R)$ be the summary error of $\mathcal{S}$. We define the type error set $Err(R)_{type}$ as follows:
@@ -239,4 +239,4 @@ The sets $TP(x)$ and $FP(x)$ contain the true and false positive edges which sou
 
 The \emph{probability interpretation} of $Prec(R, x)$ is the probability that a randomly selected edge is correctly summarised. We note the recall is always equal to $1$, since there is no false negative edges in the presented \glspl{summarisation-relation}.\\
 
-We use $Prec(R, x)$ as the precision measure for each of the classification of errors. We note that for a same node, the edge precision may vary between the three categories. As an example, consider the node $S^{fbt}_0$ in Figure~\ref{fig:accuracy}. The edge attribute precision is equal to $0$, since the attributes in both \glssymbol{fbt-bisimulation-summary} and $\mathcal{I}(R_t)$ summaries for this node are $creator$ and $author$. However, the connectivity precision is equal to $\frac{3}{4}$.
+We use $Prec(R, x)$ as the precision measure for each of the classification of errors. We note that for a same node, the edge precision may vary between the three categories. As an example, consider the node $S^{fbt}_0$ in Figure~\ref{fig:accuracy}. The edge attribute precision is equal to $0$, since the \gls{attributes} in both \glssymbol{fbt-bisimulation-summary} and $\mathcal{I}(R_t)$ summaries for this node are $creator$ and $author$. However, the connectivity precision is equal to $\frac{3}{4}$.

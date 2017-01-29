@@ -33,7 +33,7 @@ We present in this section three dimensions we use for evaluating a summary, i.e
 
 	The \emph{unique type} summarisation relation $R_{ut}$ may assign several sumnode to a same node $u \in V$ when the set of \gls{types} is greater than one, i.e., when $\vert types(u) \vert > 1$. The order of a \gls{unique-type-summary} $\mathcal{S}_{ut} = \left\langle \mathcal{W}_{ut}, \mathcal{B}_{ut}, l_{\mathcal{W}_{ut}} \right\rangle$ is at most equal to the number of types in the graph, i.e., $\vert \mathcal{W}_{ut} \vert = \vert \{ l_{\mathcal{W}_{ut}}(c) \mid \forall (u, c) \in V^2_{ut}\; (u, \glssymbol{atype}, c) \in \mathcal{B}_{ut} \wedge \glssymbol{atype} in T \} \vert$. However, in the worst case, its size can equal $\vert \mathcal{B}_{ut} \vert = \vert \mathcal{W}_{ut} \vert ^d$, with $d$ being the diameter\footnote{The diameter $d$ of a graph $G$ is the maximum distance between any two nodes of the graph. The distance between two nodes is the number of edges in the shortest path that connects the two.} of the entity graph. Indeed, every node of the graph can be associated with every types. Therefore when applying the \emph{unique type} summarisation relation $R_{ut}$ over such a graph, we need for each path in $G$ to create an edge to each type for every node of the path. Figure~\ref{fig:unique-type-summary-size} depicts the size of the \gls{unique-type-summary} in the worst case scenario, where all nodes are both of types $A$ and $B$.
 
-	The summary is sensitive to heterogeneous entity graph. Indeed, there can be as many sumnodes in an \gls{attributes-summary} $\mathcal{S}_a = \left\langle \mathcal{W}_{a}, \mathcal{B}_{a}, l_{\mathcal{W}_{a}} \right\rangle$ as there is elements in the attribute powerset minus the empty set, i.e., $\vert \mathcal{W}_a \vert = \vert \mathbb{P} \left( \{ \alpha \mid \forall (u, v) \in \mathcal{W}_a\; (u, \alpha, v) \in \mathcal{W}_a \} \right) \vert - 1$. Such an order of the summary can be expected for any summarisation relation based on the set of attributes, i.e., the summarisation relations $R_{at}$, $R_{ioa}$, $R_{ioat}$, and $R_{fbt}$.\\
+	The summary is sensitive to heterogeneous entity graph. Indeed, there can be as many sumnodes in an \gls{attributes-summary} $\mathcal{S}_a = \left\langle \mathcal{W}_{a}, \mathcal{B}_{a}, l_{\mathcal{W}_{a}} \right\rangle$ as there is elements in the attribute powerset minus the empty set, i.e., $\vert \mathcal{W}_a \vert = \vert \mathbb{P} \left( \{ \alpha \mid \forall (u, v) \in \mathcal{W}_a\; (u, \alpha, v) \in \mathcal{W}_a \} \right) \vert - 1$. Such an order of the summary can be expected for any summarisation relation based on the set of \gls{attributes}, i.e., the summarisation relations $R_{at}$, $R_{ioa}$, $R_{ioat}$, and $R_{fbt}$.\\
 
 	We measure the amount of information from a given graph $G_1 = \left\langle V_1, A_1, l_{V_1} \right\rangle$ that is compressed into another graph $G_2 = \left\langle V_2, A_2, l_{V_2} \right\rangle$. To this end, we compare the size and order of $G_2$ against the size and order of $G_1$. We report this comparison as the ratio $G_2:G_1$:
 
@@ -121,7 +121,7 @@ For each dataset which raw data is reported in Table~\ref{tab:cpu-time}, the tim
 The \emph{unique type} $R_{ut}$ and types $R_t$ summarisation relations can have an undefined sumnode (Section~\ref{sec:undefined-sumnode}) due to some nodes having no type information. For performance reason, the undefined sumnode $\mathfrak{U}$ is filtered from the resulting summary. Therefore, reported run times in Table~\ref{tab:cpu-time} from $R_{ut}$ and $R_t$ cannot be compared to others.
 
 On the \emph{Medium}, \emph{High}, and \emph{Very High} datasets, the time taken by the $R_{ut}$ summarisation on the \hyperref[step-he]{Step~3} of the graph summary computation is higher than $R_t$. This highlights the property of the $R_{ut}$ summarisation of being a many-to-many binary relation rather than a many-to-one, i.e., it can assign a node to several sumnodes. As a consequence, we need to compute all the possible combinations of edges between the sumnodes.
-We note that the incoming attribute feature in $R_{ioa}$ and $R_{ioat}$ does not imply a higher runtime when compared to $R_{a}$ and $R_{at}$.
+We note that the \gls{incoming-attributes} feature in $R_{ioa}$ and $R_{ioat}$ does not imply a higher runtime when compared to $R_{a}$ and $R_{at}$.
 
 \input{05-summary-precision/exps/cpu-time}
 
@@ -153,13 +153,13 @@ The raw data is reported in Table~\ref{tab:precision-schema} of the Appendix sec
 The summarisation relations $R_{ut}$ and $R_t$ based on the type feature provide an attribute precision above at least $60\%$ for $P1$ ($\mu_M=0.5927$ for $\sim_{ut}$).
 On the contrary, the attribute feature reports a good type precision, reaching on average at least $90\%$ for $R_a$, i.e., $P1=0.9222$ on the \emph{Medium} datasets.
 
-Incoming attributes do not increase much the type precision, since the type precision of $R_a$ stays on par with $R_{ioa}$. The $R_{at}$ relation provides a perfect summarisation of the graph schema. Again, the significant differences between $P1$ and $P2$ suggests one more time that few nodes of the summary contains a high out-degree, creating a combinatorial explosion of false positive edges.
+\gls{incoming-attributes} do not increase much the type precision, since the type precision of $R_a$ stays on par with $R_{ioa}$. The $R_{at}$ relation provides a perfect summarisation of the graph schema. Again, the significant differences between $P1$ and $P2$ suggests one more time that few nodes of the summary contains a high out-degree, creating a combinatorial explosion of false positive edges.
 
 \input{05-summary-precision/exps/schema-precision}
 
 \minisec{Discussion}
 
-In conclusion, we observe that a combination of both type and attribute features is necessary to achieve a good precision. The results show that taking incoming attributes as a feature of the \gls{summarisation-relation} is important for the connectivity precision, but not for the schema.
+In conclusion, we observe that a combination of both type and attribute features is necessary to achieve a good precision. The results show that taking \gls{incoming-attributes} as a feature of the \gls{summarisation-relation} is important for the connectivity precision, but not for the schema.
 
 However, there is place for improvement for overall connectivity precision especially on certain datasets. We observe that the precision $P2$ leads to very low precision values which is caused by a few summary nodes with a high out-degree. This indicates that the model of $P2$ is not appropriate for measuring the precision of a summary in terms of connectivity and schema.
 

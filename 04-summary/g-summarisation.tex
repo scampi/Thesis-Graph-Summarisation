@@ -121,7 +121,7 @@ Figure~\ref{fig:basic-summary} depicts a possible summary for a graph. The dotte
 
 \paragraph{Features.}
 
-We denote as \emph{feature} elements of the graph on which the \gls{summarisation-relation} is based on. As an example, attributes is a feature of the \gls{attributes-summary} as defined in Definition~(\ref{def:a}).
+We denote as \emph{feature} elements of the graph on which the \gls{summarisation-relation} is based on. As an example, \gls{attributes} is a feature of the \gls{attributes-summary} as defined in Definition~(\ref{def:a}).
 
 \paragraph{Uniqueness.}
 
@@ -195,7 +195,7 @@ Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and $\mathcal{S} = \lef
 
 Let $p = (x_1, \alpha_1, x_2) \in \mathcal{B} \wedge \cdots \wedge (x_n, \alpha_n, x_{n+1}) \in \mathcal{B}$ be a path in the summary $\mathcal{S}$ with $(x_1, \cdots, x_{n+1}) \in \mathcal{W}^{n+1}$. Let the set $\{ u_1, \cdots, u_{n+1} \}$ be a summary path instance with $u_i \in V$.
 
-We say that the summary $\mathcal{S}$ is \emph{precise} if each instance of a summary path $p$ forms a path that does exist in the graph $G$ with regards to the attributes in $p$:
+We say that the summary $\mathcal{S}$ is \emph{precise} if each instance of a summary path $p$ forms a path that does exist in the graph $G$ with regards to the \gls{attributes} in $p$:
 $$
 \forall i \in [1, n ]\; \exists \left(u_i, \alpha_i, u_{i+1} \right) \in A
 $$
@@ -247,7 +247,7 @@ Two nodes $(u, v) \in V^2$ are said \emph{bisimilar} if $(u, v) \in \sim$.
 	\label{fig:bisimulation}
 \end{figure}
 
-The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same. Kaushik et al.~\cite{kaushik:2002:cib} propose the \emph{forward-and-backward} (f\&b)-bisimulation which extends the definition by considering incoming edges in addition to the outgoing ones. Since a summary deals with the structure of the graph given by the relationships of attributes and \gls{types}, we introduce the type as an additional requirement.
+The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same. Kaushik et al.~\cite{kaushik:2002:cib} propose the \emph{forward-and-backward} (f\&b)-bisimulation which extends the definition by considering incoming edges in addition to the outgoing ones. Since a summary deals with the structure of the graph given by the relationships of \gls{attributes} and \gls{types}, we introduce the type as an additional requirement.
 
 In addition to the requirements of a f\&b-bisimulation between two nodes, we consider their type information. We define the \emph{fbt-bisimulation} as the f\&b-bisimulation that ensures that nodes are equivalent with regards to their type as well.
 
@@ -433,7 +433,7 @@ The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in t
 
 \minisec{Summarisation Relation $R_a$}
 
-We define $R_a$ the relation that maps a node based on its set of attributes. We call the summary it generates the \emph{attributes} summary.
+We define $R_a$ the relation that maps a node based on its set of \gls{attributes}. We call the summary it generates the \emph{attributes} summary.
 The nodes $v_3$, $v_4$, and $v_5$ are $\sim_a$-equivalent because they share the same set of attributes, i.e., $\left\lbrace label, location, type \right\rbrace$. The graph in Figure~\ref{fig:attributes-summary} is the \gls{attributes-summary} of the graph in Figure~\ref{fig:graph}.
 
 \begin{definition}[Attributes Summary]
@@ -486,7 +486,7 @@ We note that the nodes that do not have any outgoing attributes are mapped to th
 
 \minisec{Summarisation Relation $R_{at}$}
 
-We define $R_{at}$ as the relation that maps a node based on its set of types and attributes. We call the summary it generates the \emph{attributes \& types} summary.
+We define $R_{at}$ as the relation that maps a node based on its set of \gls{types} and \gls{attributes}. We call the summary it generates the \emph{attributes \& types} summary.
 The nodes $v_1$ and $v_2$ are mapped to a same sumnode by $R_{at}$ because they are associated with the same type, i.e., \emph{Person}, and they have the same attributes, i.e., $\left\lbrace lives, name, type, works \right\rbrace$.
 
 \begin{definition}[Attributes \& Types Summary]
@@ -512,7 +512,7 @@ The nodes $v_1$ and $v_2$ are mapped to a same sumnode by $R_{at}$ because they 
 
 \minisec{Summarisation Relation $R_{ioa}$}
 
-We define $R_{ioa}$ the relation based on the set of incoming and outgoing attributes. We call the summary it generates the \emph{IO attributes} summary.
+We define $R_{ioa}$ the relation based on the set of incoming and outgoing \gls{attributes}. We call the summary it generates the \emph{IO attributes} summary.
 All three nodes $v_3$, $v_4$, and $v_5$ map to the same sumnode by the relation $R_a$. However with $R_{ioa}$, each is assigned to a separate sumnode, since all three have different incoming set of attributes, i.e., $\left\lbrace lives \right\rbrace$, $\left\lbrace works \right\rbrace$, and $\varnothing$, respectively.
 
 \begin{definition}[IO Attributes Summary]
@@ -540,7 +540,7 @@ All three nodes $v_3$, $v_4$, and $v_5$ map to the same sumnode by the relation 
 
 \minisec{Summarisation Relation $R_{ia}$}
 
-We define $R_{ia}$ as the relation based on the set of incoming attributes. We call the summary it generates the \emph{incoming attributes} summary.
+We define $R_{ia}$ as the relation based on the set of incoming \gls{attributes}. We call the summary it generates the \emph{incoming attributes} summary.
 
 \begin{definition}[Incoming Attributes Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{ia} = \left\langle \mathcal{W}_{ia}, \mathcal{B}_{ia}, l_{\mathcal{W}_{ia}} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
@@ -565,7 +565,7 @@ We note that the nodes that do not have any incoming attributes are mapped to th
 
 \minisec{Summarisation Relation $R_{iat}$}
 
-We define $R_{iat}$ as the relation based on the set of types and incoming attributes. We call the summary this relation generates the \emph{incoming attributes \& types} summary.
+We define $R_{iat}$ as the relation based on the set of \gls{types} and incoming \gls{attributes}. We call the summary this relation generates the \emph{incoming attributes \& types} summary.
 
 \begin{definition}[Incoming Attributes \& Types Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}_{iat} = \left\langle \mathcal{W}_{iat}, \mathcal{B}_{iat}, l_{\mathcal{W}_{iat}} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
@@ -591,7 +591,7 @@ We define $R_{iat}$ as the relation based on the set of types and incoming attri
 
 \minisec{Summarisation Relation $R_{ioat}$}
 
-The relation $R_{ioat}$ maps a node based on the set of \gls{types}, and the incoming and outgoing attributes sets. We call the summary this relation generates the \emph{IO attributes \& types} summary.
+The relation $R_{ioat}$ maps a node based on the set of \gls{types}, and the incoming and outgoing \gls{attributes} sets. We call the summary this relation generates the \emph{IO attributes \& types} summary.
 Although the nodes $v_1$ and $v_2$ are mapped to a same sumnode with $R_{at}$, that is not the case with the relation $R_{ioat}$, because only the node $v_2$ has the incoming attribute $creator$.
 % With $R_{ioa}$ and $R_{ioat}$, the incoming set of attributes is computed by reversing the direction of edges, i.e., the target becomes the source, and then grouping on the source node.
 %For these relations, the complexity is equal to $O\left(\vert A \vert\right)$, since we need to visit each edge in order to assign the node at the source of an edge to an equivalence class.
