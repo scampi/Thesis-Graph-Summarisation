@@ -75,7 +75,7 @@ A graph $G$ that is homomorphic to a graph $\mathcal{S}$ with regards to a binar
 
 \subparagraph{Sink sumnode: content abstraction.}
 
-The purpose of a summary is to highlight the \emph{structure} of the graph, which is defined by the properties and types. Content information does not pertain to the structure of the data, but only to individual entities. Therefore, we abstract the summary from the content in the graph, which are in general stored in sink nodes, i.e., nodes that have no outgoing edges. To do so, we map such nodes to a \emph{sink} sumnode that we identify as $\varnothing$. For example, the node labelled $Ireland$ in the Figure~\ref{fig:graph} is mapped to $\varnothing$. Also, we note that the nodes $S_2$ and $S_3$ in Figure~\ref{fig:basic-summary} are sink sumnodes.
+The purpose of a summary is to highlight the \emph{structure} of the graph, which is defined by the properties and \gls{types}. Content information does not pertain to the structure of the data, but only to individual entities. Therefore, we abstract the summary from the content in the graph, which are in general stored in sink nodes, i.e., nodes that have no outgoing edges. To do so, we map such nodes to a \emph{sink} sumnode that we identify as $\varnothing$. For example, the node labelled $Ireland$ in the Figure~\ref{fig:graph} is mapped to $\varnothing$. Also, we note that the nodes $S_2$ and $S_3$ in Figure~\ref{fig:basic-summary} are sink sumnodes.
 
 \begin{definition}[Sink Sumnode $\varnothing$]
 Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{W} \cup \{ \varnothing \}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be two graphs such that $G$ is homomorphic to $\mathcal{S}$ with regards to the binary relation $R \subseteq V \times \mathcal{W}$.
@@ -125,7 +125,7 @@ We denote as \emph{feature} elements of the graph on which the \gls{summarisatio
 
 \paragraph{Uniqueness.}
 
-Given a \gls{summarisation-relation}, each node in the graph is mapped to a set of sumnodes in the summary. If the mapping is \emph{deterministic}, then there exists a unique graph summary for a graph within the context of that \gls{summarisation-relation}. The \glspl{summarisation-relation} proposed in Section~\ref{sec:approximate} generate a unique summary for a given entity graph. Indeed, the conditions on which a mapping is based is deterministic. For example, the summarisation relation $R_t$ introduced in that section bases its mapping on the set of types associated to a node.
+Given a \gls{summarisation-relation}, each node in the graph is mapped to a set of sumnodes in the summary. If the mapping is \emph{deterministic}, then there exists a unique graph summary for a graph within the context of that \gls{summarisation-relation}. The \glspl{summarisation-relation} proposed in Section~\ref{sec:approximate} generate a unique summary for a given entity graph. Indeed, the conditions on which a mapping is based is deterministic. For example, the summarisation relation $R_t$ introduced in that section bases its mapping on the set of \gls{types} associated to a node.
 
 \begin{figure}
 	\centering
@@ -247,7 +247,7 @@ Two nodes $(u, v) \in V^2$ are said \emph{bisimilar} if $(u, v) \in \sim$.
 	\label{fig:bisimulation}
 \end{figure}
 
-The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same. Kaushik et al.~\cite{kaushik:2002:cib} propose the \emph{forward-and-backward} (f\&b)-bisimulation which extends the definition by considering incoming edges in addition to the outgoing ones. Since a summary deals with the structure of the graph given by the relationships of attributes and types, we introduce the type as an additional requirement.
+The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same. Kaushik et al.~\cite{kaushik:2002:cib} propose the \emph{forward-and-backward} (f\&b)-bisimulation which extends the definition by considering incoming edges in addition to the outgoing ones. Since a summary deals with the structure of the graph given by the relationships of attributes and \gls{types}, we introduce the type as an additional requirement.
 
 In addition to the requirements of a f\&b-bisimulation between two nodes, we consider their type information. We define the \emph{fbt-bisimulation} as the f\&b-bisimulation that ensures that nodes are equivalent with regards to their type as well.
 
@@ -389,12 +389,12 @@ We report in Table~\ref{tab:sumrel} a summary of the presented relations along w
 \minisec{Summarisation Relation $R_{ut}$}
 
 We define $R_{ut}$ as the summarisation relation that maps a node according to its type. We call the summary it generates the \gls{unique-type-summary}.
-The nodes $v_4$, $v_5$, $v_6$, and $v_7$ in the Figure~\ref{fig:graph} are mapped to a same sumnode since they all have \emph{Place} as a type. The $R_{ut}$ relation may map a node to multiple sumnodes since an entity may have several types. For instance, the nodes $v_6$ and $v_7$ are also mapped to another sumnode since they both share the type \emph{Country}.
+The nodes $v_4$, $v_5$, $v_6$, and $v_7$ in the Figure~\ref{fig:graph} are mapped to a same sumnode since they all have \emph{Place} as a type. The $R_{ut}$ relation may map a node to multiple sumnodes since an entity may have several \gls{types}. For instance, the nodes $v_6$ and $v_7$ are also mapped to another sumnode since they both share the type \emph{Country}.
 
 \begin{definition}[Unique Type Summary]
 Let $G=\left\langle V, A, l_V \right\rangle$ and $\glssymbol{unique-type-summary} = \left\langle \mathcal{W}_{ut}, \mathcal{B}_{ut}, l_{\mathcal{W}_{ut}} \right\rangle$ be two graphs.
 
-The set of nodes $\mathcal{W}_{ut}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ut} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ut} = \emptyset$, and it contains as many elements as there are types in the graph:
+The set of nodes $\mathcal{W}_{ut}$ is a subset of the source material disjoint from $V$, i.e., $\mathcal{W}_{ut} \subseteq \mathcal{Z}$ with $V \cap \mathcal{W}_{ut} = \emptyset$, and it contains as many elements as there are \gls{types} in the graph:
 $$
 \lvert \mathcal{W}_{ut} \rvert = \lvert \left\lbrace l_V(c) \mid \exists (u, \glssymbol{atype}, c) \in A \wedge \glssymbol{atype} \in T \right\rbrace \rvert
 $$
@@ -412,7 +412,7 @@ $$
 
 \minisec{Summarisation Relation $R_t$}
 
-We define $R_t$ the summarisation relation that maps a node based on its set of types. We call the summary it generates the \emph{types} summary.
+We define $R_t$ the summarisation relation that maps a node based on its set of \gls{types}. We call the summary it generates the \emph{types} summary.
 The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in the Figure~\ref{fig:graph}. The nodes $v_6$ and $v_7$ are mapped to the sumnode $S_4$ because they are both associated with the types \emph{Place} and \emph{Country}. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $v_1$ and $v_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. It differs from $R_{ut}$ since it considers the types of a node as \emph{set} rather than individually. Indeed, the node $v_6$ is mapped to two sumnodes under the relation $R_{ut}$.
 
 \begin{definition}[Types Summary]
@@ -503,7 +503,7 @@ The nodes $v_1$ and $v_2$ are mapped to a same sumnode by $R_{at}$ because they 
 	We call \glssymbol{attributes-types-summary} the attributes \& types summary of $G$ according to the summarisation relation $R_{at} \subseteq V \times \mathcal{W}_{at}$ defined as:
 	$$
 	\begin{aligned}
-	R_{at} = \{ (u, x) \in V \times \mathcal{W}_{at} \mid &\; types(u) = types(x) \\
+		R_{at} = \{ (u, x) \in V \times \mathcal{W}_{at} \mid &\; \gls{types}(u) = \gls{types}(x) \\
 	& \wedge attributes(u) = attributes(x) \}
 	\end{aligned}
 	$$
@@ -581,7 +581,7 @@ We define $R_{iat}$ as the relation based on the set of types and incoming attri
 	We call $\mathcal{S}_{iat}$ the incoming attributes \& types summary of $G$ according to the summarisation relation $R_{iat} \subseteq V \times \mathcal{W}_{iat}$ defined as:
 	$$
 	\begin{aligned}
-	R_{iat} = \{ (u, x) \in V \times \mathcal{W}_{iat} \mid &\; types(u) = types(x) \\
+		R_{iat} = \{ (u, x) \in V \times \mathcal{W}_{iat} \mid &\; \gls{types}(u) = \gls{types}(x) \\
 	& \wedge attributes^{-1}(u) = attributes^{-1}(x) \}
 	\end{aligned}
 	$$
@@ -591,7 +591,7 @@ We define $R_{iat}$ as the relation based on the set of types and incoming attri
 
 \minisec{Summarisation Relation $R_{ioat}$}
 
-The relation $R_{ioat}$ maps a node based on the set of types, and the incoming and outgoing attributes sets. We call the summary this relation generates the \emph{IO attributes \& types} summary.
+The relation $R_{ioat}$ maps a node based on the set of \gls{types}, and the incoming and outgoing attributes sets. We call the summary this relation generates the \emph{IO attributes \& types} summary.
 Although the nodes $v_1$ and $v_2$ are mapped to a same sumnode with $R_{at}$, that is not the case with the relation $R_{ioat}$, because only the node $v_2$ has the incoming attribute $creator$.
 % With $R_{ioa}$ and $R_{ioat}$, the incoming set of attributes is computed by reversing the direction of edges, i.e., the target becomes the source, and then grouping on the source node.
 %For these relations, the complexity is equal to $O\left(\vert A \vert\right)$, since we need to visit each edge in order to assign the node at the source of an edge to an equivalence class.
@@ -610,7 +610,7 @@ Although the nodes $v_1$ and $v_2$ are mapped to a same sumnode with $R_{at}$, t
 	We call \glssymbol{io-attributes-types-summary} the IO attributes \& types summary of $G$ according to the summarisation relation $R_{ioat} \subseteq V \times \mathcal{W}_{ioat}$ defined as:
 	$$
 	\begin{aligned}
-	R_{ioat} = \{ (u, x) \in V \times \mathcal{W}_{ioat} \mid &\; types(u) = types(x) \\
+		R_{ioat} = \{ (u, x) \in V \times \mathcal{W}_{ioat} \mid &\; \gls{types}(u) = \gls{types}(x) \\
 	& \wedge attributes(u) = attributes(x) \\
 	& \wedge attributes^{-1}(u) = attributes^{-1}(x) \}
 	\end{aligned}
