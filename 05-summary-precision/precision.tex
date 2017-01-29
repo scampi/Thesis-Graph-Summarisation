@@ -97,16 +97,16 @@ The graph summary highlights the \emph{structure} of the entity graph. Errors in
 %Let $\sim_1$ and $\sim_2$ be two equivalences on an entity graph $G$. There is a partial order $\sqsubseteq$ on the $\sim_1$ and $\sim_2$ summaries, noted $\sim_1 \sqsubseteq \sim_2$, if and only if: $\forall [x]^{\sim_1} \in V^{\sim_1}, \exists [x]^{\sim_2} \in V^{\sim_2}, [x]^{\sim_1} \subseteq [x]^{\sim_2}$.
 %\end{definition}
 
-As per the recursive definition of the bisimulation summarisation relation $R_{fbt}$ presented in Section~\ref{sec:bisim-summary}, a node in the bisimulation summary $\mathcal{S}_{fbt}$ refers to nodes of $G$ that share the same \emph{incoming} and \emph{outgoing} paths. Thus, the $\mathcal{S}_{fbt}$ summary is the most precise summary for an entity graph with regards to the structure, i.e., all paths in the summary do exist in the original entity graph.
+As per the recursive definition of the bisimulation summarisation relation $R_{fbt}$ presented in Section~\ref{sec:bisim-summary}, a node in the bisimulation summary \glssymbol{fbt-bisimulation-summary} refers to nodes of $G$ that share the same \emph{incoming} and \emph{outgoing} paths. Thus, the \glssymbol{fbt-bisimulation-summary} summary is the most precise summary for an entity graph with regards to the structure, i.e., all paths in the summary do exist in the original entity graph.
 
-According to the partial order $\sqsubseteq$, the bisimulation summary $\mathcal{S}_{fbt}$ of a graph $G$ is ``smaller'' than any of the other presented summaries on $G$, i.e., for any summarisation relation $R$ we have $R_{fbt} \sqsubseteq R$. Therefore, any edge on a summary can be inferred from the $\mathcal{S}_{fbt}$ summary. However, the converse is not necessarily true.\\
+According to the partial order $\sqsubseteq$, the bisimulation summary \glssymbol{fbt-bisimulation-summary} of a graph $G$ is ``smaller'' than any of the other presented summaries on $G$, i.e., for any summarisation relation $R$ we have $R_{fbt} \sqsubseteq R$. Therefore, any edge on a summary can be inferred from the \glssymbol{fbt-bisimulation-summary} summary. However, the converse is not necessarily true.\\
 % Relations between two $\sim$-equivalence classes can be inferred between the included $\sim_{fbt}$-equivalence classes.
 
-We define the set $Err(R)$ as the set of inferred edges that are erroneous, i.e., the edges that do exist in a summary, but not in the entity graph. Since the summary $\mathcal{S}_{fbt}$ is the most precise with regards to the structure of the entity graph, we use the summary $\mathcal{S}_{fbt}$ instead of the entity graph $G$ to define the set $Err(R)$.
+We define the set $Err(R)$ as the set of inferred edges that are erroneous, i.e., the edges that do exist in a summary, but not in the entity graph. Since the summary \glssymbol{fbt-bisimulation-summary} is the most precise with regards to the structure of the entity graph, we use the summary \glssymbol{fbt-bisimulation-summary} instead of the entity graph $G$ to define the set $Err(R)$.
 
 \begin{definition}[Summary Error $Err(R)$]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ the bisimulation summary generated with the relation $R_{fbt}$.
-The set $Err(R) \not \subset \mathcal{B}_{fbt}$ is the set of edges between nodes of $\mathcal{S}_{fbt}$ that are inferred from $\mathcal{S}$ as per the $\sqsubseteq$ relation, but that do not exist in the summary $\mathcal{S}_{fbt}$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ the bisimulation summary generated with the relation $R_{fbt}$.
+The set $Err(R) \not \subset \mathcal{B}_{fbt}$ is the set of edges between nodes of \glssymbol{fbt-bisimulation-summary} that are inferred from $\mathcal{S}$ as per the $\sqsubseteq$ relation, but that do not exist in the summary \glssymbol{fbt-bisimulation-summary}.
 \begin{equation*}
 \begin{split}
 Err(R) = \{ & (u, \alpha, v) \in \mathcal{W}_{fbt} \times \mathcal{L} \times \mathcal{W}_{fbt} \mid \\
@@ -117,21 +117,21 @@ Err(R) = \{ & (u, \alpha, v) \in \mathcal{W}_{fbt} \times \mathcal{L} \times \ma
 \end{definition}
 
 \begin{remark}
-The set $Err(R)$ is equal to all possible combinations of nodes pair on $G$, keeping only the ones that exists in the summary $\mathcal{S}$ but not in the bisimulation summary $\mathcal{S}_{fbt}$.
+The set $Err(R)$ is equal to all possible combinations of nodes pair on $G$, keeping only the ones that exists in the summary $\mathcal{S}$ but not in the bisimulation summary \glssymbol{fbt-bisimulation-summary}.
 \end{remark}
 
 \subsubsection{Inferred Graph $\mathcal{I}(R)$}
 
-We introduce the graph $\mathcal{I}(R)$ as the bisimulation summary $\mathcal{S}_{fbt}$ that is \emph{augmented} with inferred edges from the $Err(R)$ set. This graph is used for computing the set of true and false positive edges in Section~\ref{sec:edge-precision}.
+We introduce the graph $\mathcal{I}(R)$ as the bisimulation summary \glssymbol{fbt-bisimulation-summary} that is \emph{augmented} with inferred edges from the $Err(R)$ set. This graph is used for computing the set of true and false positive edges in Section~\ref{sec:edge-precision}.
 
 \begin{definition}[Inferred Graph]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$ such that $R_{fbt} \sqsubseteq R$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$ such that $R_{fbt} \sqsubseteq R$.
 
-We call the \emph{inferred graph} $\mathcal{I}(R) = \left\langle \mathcal{W}_{fbt}, \mathcal{C}, l_{\mathcal{W}_{fbt}} \right\rangle$ the graph which nodes and edges are those of the bisimulation summary $\mathcal{S}_{fbt}$, augmented with the edges in $Err(R)$, i.e., $\mathcal{C} = \mathcal{B}_{fbt} \cup Err(R)$.
+We call the \emph{inferred graph} $\mathcal{I}(R) = \left\langle \mathcal{W}_{fbt}, \mathcal{C}, l_{\mathcal{W}_{fbt}} \right\rangle$ the graph which nodes and edges are those of the bisimulation summary \glssymbol{fbt-bisimulation-summary}, augmented with the edges in $Err(R)$, i.e., $\mathcal{C} = \mathcal{B}_{fbt} \cup Err(R)$.
 \end{definition}
 
 The Figure~\ref{fig:accuracy} depicts the inferred graph $\mathcal{I}(R_t)$ according to the \gls{typessummary} $\mathcal{S}_t$ in Figure~\ref{fig:classes-summary}.
-Sink sumnodes are omitted for clarity. Sumnodes of the bisimulation summary $\mathcal{S}_{fbt}$ are depicted with solid lines, and sumnodes of the \gls{typessummary} $\mathcal{S}_t$ with dashed lines. Edges from the $Err(R_t)$ set are represented with grey dotted arrows, while we depict sumnodes of the \gls{typessummary} with dashed arrows.\\
+Sink sumnodes are omitted for clarity. Sumnodes of the bisimulation summary \glssymbol{fbt-bisimulation-summary} are depicted with solid lines, and sumnodes of the \gls{typessummary} $\mathcal{S}_t$ with dashed lines. Edges from the $Err(R_t)$ set are represented with grey dotted arrows, while we depict sumnodes of the \gls{typessummary} with dashed arrows.\\
 
 Given that $R_{fbt} \sqsubseteq R_t$, the nodes $S^{fbt}_1$ and $S^{fbt}_2$ are mapped to the node $S^t_1$. Similarly, the nodes $S^{fbt}_4$ and $S^{fbt}_5$ are mapped to the node $S^t_3$. Since we have that $(S^t_1, works, S^t_3) \in \mathcal{B}_t$, the edges $(S^{fbt}_1, works, S^{fbt}_5) \in Err(R_{fbt})$ and $(S^{fbt}_2, works, S^{fbt}_5) \in Err(R_{fbt})$ can be inferred, for example.
 
@@ -143,7 +143,7 @@ Edges from the $Err(R_t)$ set cause the nodes $S^{fbt}_1$, $S^{fbt}_5$, and $S^{
 		\input{05-summary-precision/figures/accuracy}
 	}
 	\caption[The inferred graph $\mathcal{I}(R_t)$ created from the comparison of the Types and Bisimulation summaries]{The inferred graph $\mathcal{I}(R_t)$ based on the summaries of Figures~\ref{fig:classes-summary} and \ref{fig:fbb-summary}.
-	Sink sumnodes are omitted for clarity. Sumnodes of the bisimulation summary $\mathcal{S}_{fbt}$ are depicted with solid lines, and sumnodes of the \gls{typessummary} $\mathcal{S}_t$ with dashed lines. Edges from the $Err(R_t)$ set are represented with grey dotted arrows, and sumedges from the \emph{Types} summary with dashed arrows.}
+	Sink sumnodes are omitted for clarity. Sumnodes of the bisimulation summary \glssymbol{fbt-bisimulation-summary} are depicted with solid lines, and sumnodes of the \gls{typessummary} $\mathcal{S}_t$ with dashed lines. Edges from the $Err(R_t)$ set are represented with grey dotted arrows, and sumedges from the \emph{Types} summary with dashed arrows.}
 	\label{fig:accuracy}
 \end{figure}
 
@@ -156,7 +156,7 @@ We illustrate the three categories in the following with regards to the \emph{Ty
 
 \subsubsection{Connectivity Error $Err(R)_{con}$}
 
-The connectivity error captures inferred paths that do not exists in the bisimulation summary $\mathcal{S}_{fbt}$ but that do in the summary. For example, the Figure~\ref{fig:accuracy} depicts the inferred path $creator$ from the node $S^{fbt}_0$ to $S^{fbt}_2$.
+The connectivity error captures inferred paths that do not exists in the bisimulation summary \glssymbol{fbt-bisimulation-summary} but that do in the summary. For example, the Figure~\ref{fig:accuracy} depicts the inferred path $creator$ from the node $S^{fbt}_0$ to $S^{fbt}_2$.
 We do not consider the sink sumnode $\varnothing$ in the connectivity error, since it doesn't provides any outgoing edge. We define $Err(R)_{con}$ as the set $Err(R)$ minus the edges leading to the sink sumnodes.
 
 \begin{definition}[Connectivity Error]
@@ -172,7 +172,7 @@ $$
 The attribute error captures edges from the summary error set $Err(R)$ that have an impact on the schema of the entity graph, due to additional attributes inferred by the summary. For example, the node $S^t_4$ in Figure~\ref{fig:classes-summary} implies the existence of a node in $G$ with edges $capital$ and $label$, which is however not the case. We define $Err(R)_{attr}$ as the set that contains edges of $Err(R)$ in which the attribute is not in the set $attributes(x)$ of the node $x$.
 
 \begin{definition}[Attribute Error]
-	Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$. Let $Err(R)$ be the summary error of $\mathcal{S}$. We define the attribute error set $Err(R)_{attr}$ as follows:
+	Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$. Let $Err(R)$ be the summary error of $\mathcal{S}$. We define the attribute error set $Err(R)_{attr}$ as follows:
 
 	$$
 	Err(R)_{attr} = \left\lbrace (x, \alpha, y) \in Err(R) \mid \alpha \not \in attributes(x) \right\rbrace
@@ -189,7 +189,7 @@ The type error captures edges from the summary error set $Err(R)$ that impact on
 For example, in the Figure~\ref{fig:attributes-summary} the node $S^a_2$ contains the nodes $\left\lbrace v_3, v_4, v_5 \right\rbrace$, since all three have the same set of attributes, i.e., $label$, $location$ and $a$. Then, we may infer from that node the possible existence of a node in $G$ with types $Place$ and $City$, which is however not the case. We define $Err(R)_{type}$ as the set that contains additional types inferred from $Err(R)$, i.e., a type attribute $(x, \glssymbol{atype}, y) \in Err(R)$, in which the target $y$ is not in the set $types(x)$ of the node $x$.
 
 \begin{definition}[Type Error]
-	Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$. Let $Err(R)$ be the summary error of $\mathcal{S}$. We define the type error set $Err(R)_{type}$ as follows:
+	Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$. Let $Err(R)$ be the summary error of $\mathcal{S}$. We define the type error set $Err(R)_{type}$ as follows:
 
 	$$
 	Err(R)_{type} = \left\lbrace (x, \glssymbol{atype}, y) \in Err(R) \mid y \not \in types(x) \right\rbrace
@@ -203,14 +203,14 @@ For example, in the Figure~\ref{fig:attributes-summary} the node $S^a_2$ contain
 \subsection{Sumedge Precision}
 \label{sec:edge-precision}
 
-If we were to traverse the inferred graph $\mathcal{I}(R)$, we can follow sumedges of the $\mathcal{B}_{fbt}$ set from the bisimulation summary $\mathcal{S}_{fbt}$, but also from the summary error set $Err(R)$. The former sumedges are \emph{true positive} sumedges, while the latter are \emph{false positive} sumedges.
+If we were to traverse the inferred graph $\mathcal{I}(R)$, we can follow sumedges of the $\mathcal{B}_{fbt}$ set from the bisimulation summary \glssymbol{fbt-bisimulation-summary}, but also from the summary error set $Err(R)$. The former sumedges are \emph{true positive} sumedges, while the latter are \emph{false positive} sumedges.
 
 Our rationale is that following sumedges from the first set can be reflected on the entity graph by following an instance of that summary path, hence it is a true positive sumedge. On the contrary, following a sumedge from the summary error set can not be reflected on the entity graph since there are no instances of that summary path that forms an existing edge.\\
 
 We define the true positive sumedges for a given sumnode as its outgoing sumedges that belong to the bisimulation summary.
 
 \begin{definition}[True Positive Sumedges]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to summarisation relation $R_{fbt}$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to summarisation relation $R_{fbt}$.
 The set of true positive sumedges is defined as follows:
 $$
 TP(x \in \mathcal{W}_{fbt}) = \{ (\alpha, y) \in \mathcal{L} \times \mathcal{W}_{fbt} \mid (x, \alpha, y) \in \mathcal{B}_{fbt} \}
@@ -220,7 +220,7 @@ $$
 We define the false positive sumedges for a given sumnode with regards to a summarisation relation $R$ as its outgoing sumedges that belong to the summary error set $Err(R)$.
 
 \begin{definition}[False Positive Sumedges]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$.
 $$
 FP(R, x \in \mathcal{W}_{fbt}) = \{ (\alpha, y) \in \mathcal{L} \times \mathcal{W}_{fbt} \mid (x, \alpha, y) \in Err(R) \}
 $$
@@ -229,14 +229,14 @@ $$
 We define $Prec(R, x)$ the \emph{edge precision} of a sumnode of the bisimulation summary $x \in \mathcal{W}_{fbt}$ with regards to a summarisation relation $R$ as the proportion of the true positives over all the positive sumedges.
 
 \begin{definition}[Sumedge Precision]
-Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\mathcal{S}_{fbt} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$.
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$.
 $$
 Prec(R, x) = \frac{\vert TP(x) \vert}{\vert TP(x) \bigcup FP(R, x) \vert}
 $$
 \end{definition}
 
-The sets $TP(x)$ and $FP(x)$ contain the true and false positive edges which source is $x$, respectively. For example, in Figure~\ref{fig:accuracy}, the edge $(S^{fbt}_0, creator, S^{fbt}_1)$ is in $TP(x)$, since it does exist in the bisimulation summary $\mathcal{S}_{fbt}$. The edge $(S^{fbt}_0, creator, S^{fbt}_2)$ is in $FP(x)$, since it does not exist in $\mathcal{S}_{fbt}$. In total, this results that $Prec\left(R, S^{fbt}_0\right) = \frac{3}{4}$.
+The sets $TP(x)$ and $FP(x)$ contain the true and false positive edges which source is $x$, respectively. For example, in Figure~\ref{fig:accuracy}, the edge $(S^{fbt}_0, creator, S^{fbt}_1)$ is in $TP(x)$, since it does exist in the bisimulation summary \glssymbol{fbt-bisimulation-summary}. The edge $(S^{fbt}_0, creator, S^{fbt}_2)$ is in $FP(x)$, since it does not exist in \glssymbol{fbt-bisimulation-summary}. In total, this results that $Prec\left(R, S^{fbt}_0\right) = \frac{3}{4}$.
 
 The \emph{probability interpretation} of $Prec(R, x)$ is the probability that a randomly selected edge is correctly summarised. We note the recall is always equal to $1$, since there is no false negative edges in the presented \glspl{summarisation-relation}.\\
 
-We use $Prec(R, x)$ as the precision measure for each of the classification of errors. We note that for a same node, the edge precision may vary between the three categories. As an example, consider the node $S^{fbt}_0$ in Figure~\ref{fig:accuracy}. The edge attribute precision is equal to $0$, since the attributes in both $\mathcal{S}_{fbt}$ and $\mathcal{I}(R_t)$ summaries for this node are $creator$ and $author$. However, the connectivity precision is equal to $\frac{3}{4}$.
+We use $Prec(R, x)$ as the precision measure for each of the classification of errors. We note that for a same node, the edge precision may vary between the three categories. As an example, consider the node $S^{fbt}_0$ in Figure~\ref{fig:accuracy}. The edge attribute precision is equal to $0$, since the attributes in both \glssymbol{fbt-bisimulation-summary} and $\mathcal{I}(R_t)$ summaries for this node are $creator$ and $author$. However, the connectivity precision is equal to $\frac{3}{4}$.
