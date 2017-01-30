@@ -37,3 +37,12 @@ Graph summarisation offers a solution to the problem of data heterogeneity and u
 \end{description}
 
 It is our belief that the work achieved in this thesis answers a growing need; that is, to get a better understanding of datasets structure. This knowledge is key for we assume a large number of applications. The concept of graph summarisation presented in this thesis applied to Web Data opens the door to better and new applications, and raises as well novel challenges as outlined in this section.
+
+\section{Current Limitations}
+
+In this thesis, the following points were not pursued but would be interesting to follow:
+\begin{itemize}
+	\item implement the graph summarisation algorithms with an in-memory framework such as Spark\footnote{Spark: \url{http://spark.apache.org/}};
+	\item use the bisimulation summary presented in Section~\ref{sec:bisim-summary} instead of the FT-Bisimulation summary that was used in the precision evaluation in Section~\ref{sec:eval}. The additional \emph{backward} bisimulation clause would produce more accurate precision measurements;
+	\item evaluate the graph ranking presented in Section~\ref{chap:tree-ranking:mf-model} with textual data (e.g., the ``Billion Triple Challenge''\footnote{Billion Triple Challenge: \url{http://vmlion25.deri.ie}} (BTC) dataset) and over more complex graphs than the entities limited to nodes 1-hop away, as is the case for the evaluation in Section~\ref{sec:experiments}.
+\end{itemize}

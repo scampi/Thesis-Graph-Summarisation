@@ -4,9 +4,9 @@
   \resizebox{\textwidth}{!}{
     \begin{tabular}{lc@{\hs}rrc@{\hs}rrc@{\hs}rrc@{\hs}r}
       \toprule
-      Dataset & \phantom{a} & \multicolumn{2}{c}{Schema} & \phantom{a} & \multicolumn{2}{c}{$G$} & \phantom{a} & \multicolumn{2}{c}{$\mathcal{S}_{fb}$} & \phantom{a} & $G:\mathcal{S}_{fb}$ \\
+      Dataset & \phantom{a} & \multicolumn{2}{c}{Schema} & \phantom{a} & \multicolumn{2}{c}{$G$} & \phantom{a} & \multicolumn{2}{c}{\glssymbol{ft-bisimulation-summary}} & \phantom{a} & $G:\glssymbol{ft-bisimulation-summary}$ \\
       \cmidrule{3-4} \cmidrule{6-7} \cmidrule{9-10} \cmidrule{12-12}
-      & \phantom{a} & Types & Attributes & \phantom{a} & $\vert V \vert$ & $\vert A \vert$ & \phantom{a} & $\vert \mathcal{W}_{fb} \vert$ & $\vert \mathcal{B}_{fb} \vert$ & \phantom{a} &
+      & \phantom{a} & Types & Attributes & \phantom{a} & $\vert V \vert$ & $\vert A \vert$ & \phantom{a} & $\vert \mathcal{W}_{ft} \vert$ & $\vert \mathcal{B}_{ft} \vert$ & \phantom{a} &
       \\
       {\bfseries \underline{Very High}} \\
       \texttt{dbpedia} \cite{dbpedia}
@@ -46,7 +46,7 @@
       \bottomrule
     \end{tabular}
   }
-  \caption[Descriptive statistics of the datasets used in the evaluation of a graph summary precision]{Descriptive statistics of the datasets. The Schema column reports the number in $G$ of unique edges labels and types. The column $G$ reports the order and the size of the entity graph. The column $\mathcal{S}_{fb}$ reports the order and the size of the bisimulation summary $\mathcal{S}_{fb}$ of the graph $G$. The $G:\mathcal{S}_{fb}$ column reports the compression ratio of the graph $G$ when the bisimulation summarisation is used.}
+  \caption[Descriptive statistics of the datasets used in the evaluation of a graph summary precision]{Descriptive statistics of the datasets. The Schema column reports the number in $G$ of unique edges labels and types. The column $G$ reports the order and the size of the entity graph. The column \glssymbol{ft-bisimulation-summary} reports the order and the size of the bisimulation summary \glssymbol{ft-bisimulation-summary} of the graph $G$. The $G:\glssymbol{ft-bisimulation-summary}$ column reports the compression ratio of the graph $G$ when the bisimulation summarisation is used.}
   \label{tab:datasets}
 \end{table}
 

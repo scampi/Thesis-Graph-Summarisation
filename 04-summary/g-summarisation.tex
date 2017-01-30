@@ -247,13 +247,17 @@ Two nodes $(u, v) \in V^2$ are said \emph{bisimilar} if $(u, v) \in \sim$.
 	\label{fig:bisimulation}
 \end{figure}
 
-The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same. Kaushik et al.~\cite{kaushik:2002:cib} propose the \emph{forward-and-backward} (f\&b)-bisimulation which extends the definition by considering incoming edges in addition to the outgoing ones. Since a summary deals with the structure of the graph given by the relationships of \gls{attributes} and \gls{types}, we introduce the type as an additional requirement.
+The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same.
+
+\paragraph{Forward/Backward bisimulation.}
+
+Kaushik et al.~\cite{kaushik:2002:cib} propose the \emph{forward-and-backward} (f\&b)-bisimulation which extends the definition by considering incoming edges in addition to the outgoing ones. Since a summary deals with the structure of the graph given by the relationships of \gls{attributes} and \gls{types}, we introduce the type as an additional requirement.
 
 In addition to the requirements of a f\&b-bisimulation between two nodes, we consider their type information. We define the \emph{fbt-bisimulation} as the f\&b-bisimulation that ensures that nodes are equivalent with regards to their type as well.
 
 \begin{definition}[FBT-Bisimulation]
 Let $G=\left\langle V, A, l_V \right\rangle$ be a graph and $(\sim_f, \sim_b, \sim_t) \subseteq (V \times V)^3$ be three equivalence relations on $V$.
-The relation $\approx_t \subseteq V \times V$ on $V$ is a fbt-bisimulation if $\forall (x,y) \in\; \approx_t$, we have $(x,y) \in\; \sim_f$, $(x,y) \in\; \sim_b$ and $(x,y) \in\; \sim_t$ such that:
+The relation $\approx_{fbt} \subseteq V \times V$ on $V$ is a fbt-bisimulation if $\forall (x,y) \in\; \approx_{fbt}$, we have $(x,y) \in\; \sim_f$, $(x,y) \in\; \sim_b$ and $(x,y) \in\; \sim_t$ such that:
 \begin{enumerate}
 \item $\sim_f$ is a forward bisimulation such that:
 $$
@@ -282,17 +286,44 @@ $$
 \end{enumerate}
 \end{definition}
 
+\paragraph{Forward bisimulation.}
+
+We define the \emph{ft-bisimulation} as the summarisation relation based on the bisimulation relation and on the type feature. Therefore with this relation, we consider only the \emph{forward} paths in the bisimulation.
+
+\begin{definition}[FT-Bisimulation]
+Let $G=\left\langle V, A, l_V \right\rangle$ be a graph and $(\sim_f, \sim_t) \subseteq (V \times V)^2$ be two equivalence relations on $V$.
+The relation $\approx_{ft} \subseteq V \times V$ on $V$ is a ft-bisimulation if $\forall (x,y) \in\; \approx_{ft}$, we have $(x,y) \in\; \sim_f$ and $(x,y) \in\; \sim_t$ such that:
+\begin{enumerate}
+\item $\sim_f$ is a forward bisimulation such that:
+$$
+\begin{aligned}
+\forall (x, \alpha, x') \in A&\; \exists (y, \alpha, y') \in A \wedge (x',y') \in\; \sim_f \\
+\text{conversely,}\;\; \forall (y, \alpha, y') \in A&\; \exists (x, \alpha, x') \in A \wedge (x',y') \in\; \sim_f
+\end{aligned}
+$$
+
+\item $\sim_t$ preserves the types such that:
+$$
+\begin{aligned}
+\forall (x, \glssymbol{atype}, t) \in A&\; \exists (y, \glssymbol{atype}, t) \in A \\
+\text{conversely,}\;\; \forall (y, \glssymbol{atype}, t) \in A&\; \exists (x, \glssymbol{atype}, t) \in A
+\end{aligned}
+$$
+
+\end{enumerate}
+\end{definition}
+
 \subsubsection{Bisimulation Summary}
 \label{sec:bisim-summary}
 
 Since the bisimulation is an equivalence relation, we can create equivalence classes defined as $[x] = \left\lbrace x \in V \mid y \in V,\; x \sim y \right\rbrace$; a class is the set of nodes that are bisimilar. An equivalence class is then exactly a sumnode of the summary. The \gls{summarisation-relation} is in this case a one-to-one mapping of the equivalence class to the sumnode.
 
 \begin{definition}[Bisimulation Summary]
-Let $G=\left\langle V, A, l_V \right\rangle$ and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be two graphs. Let $\approx_t \subseteq V \times V$ be a fbt-bisimulation relation.
+Let $G=\left\langle V, A, l_V \right\rangle$ and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be two graphs. Let $\approx_{fbt} \subseteq V \times V$ be a fbt-bisimulation relation.
 
 The set of nodes $\mathcal{W}_{fbt} \subseteq \mathcal{Z}$ contains as many elements as there are equivalence classes as per the fbt-bisimulation relation:
 $$
-\lvert \mathcal{W}_{fbt} \rvert = \lvert \left\lbrace [x] \mid \exists y \in V\; x \approx_t y \right\rbrace \rvert
+\lvert \mathcal{W}_{fbt} \rvert = \lvert \left\lbrace [x] \mid \exists y \in V\; x \approx_{fbt} y \right\rbrace \rvert
 $$
 
 We call \glssymbol{fbt-bisimulation-summary} the bisimulation summary of $G$ according to the summarisation relation $R_{fbt} \subseteq V \times \mathcal{W}_{fbt}$ defined as a one-to-one mapping between the set of equivalence classes and the set $\mathcal{W}_{fbt}$:
@@ -304,14 +335,31 @@ R_{fbt} = \{ \left( u, x \right) \in V \times \mathcal{W}_{fbt} \mid & \forall v
 $$
 \end{definition}
 
-\begin{remark}
-We note as $R_f$ and $R_b$ the summarisation relations which equivalence classes are based on the forward $\sim_f$ and backward $\sim_b$ bisimulations, respectively.
-\end{remark}
-
 The summary depicted on the Figure~\ref{fig:fbb-summary} with the bisimulation $R_{fbt}$ assigns an equivalence class to \emph{each} node of the graph in Figure~\ref{fig:graph}. In the running example, the only difference of the summary with the entity graph is the content abstraction, e.g., the node \emph{Ireland} is represented by the node $\varnothing$.
 
 In order to compute this summary, the algorithm proposed in \cite{Paige:1987:TPR:37185.37186} is generally used. It offers a $O\left( \vert A \vert \times log\left( \vert V \vert \right) \right)$ complexity for the computation of the bisimulation. We note that the algorithm starts from an existing partitioning of the graph. Then, the partitions are refined iteratively until all nodes in a partition are bisimilar.% The computation of the $\sim_{fbt}$-summary is achieved by applying over the $\sim_{fb}$ graph a slightly modified version of the \cite{Paige:1987:TPR:37185.37186} algorithm, in order to account for the incoming edges in the $\sim_{bb}$ definition. We remark that the complexity of all other algorithms are lower than the complexity of $\sim_{b}$.
 %In addition, the \cite{Paige:1987:TPR:37185.37186} algorithm requires more than one iteration over the entity graph, the number of iterations equal to the entity graph diameter in the worst case. Iterative algorithms are sub-optimal for shared-nothing infrastructures, e.g., MapReduce. The reason is the entity graph needs to be read and written at each iteration, leading to an important IO load. Therefore, one pass algorithms can better scale to large and heterogeneous entity graphs using shared-nothing infrastructures.
+
+\paragraph{Forward bisimulation summary.}
+
+We define as \emph{FT-Bisimulation summary} \glssymbol{ft-bisimulation-summary} the summary of $G$ according to the \emph{ft-bisimulation} as the summarisation relation. Unlike the previous bisimulation summary, this graph summary considers only the \emph{forward} paths.
+
+\begin{definition}[FT-Bisimulation Summary]
+Let $G=\left\langle V, A, l_V \right\rangle$ and $\glssymbol{ft-bisimulation-summary} = \left\langle \mathcal{W}_{ft}, \mathcal{B}_{ft}, l_{\mathcal{W}_{ft}} \right\rangle$ be two graphs. Let $\approx_{ft} \subseteq V \times V$ be a ft-bisimulation relation.
+
+The set of nodes $\mathcal{W}_{ft} \subseteq \mathcal{Z}$ contains as many elements as there are equivalence classes as per the ft-bisimulation relation:
+$$
+\lvert \mathcal{W}_{ft} \rvert = \lvert \left\lbrace [x] \mid \exists y \in V\; x \approx_{ft} y \right\rbrace \rvert
+$$
+
+We call \glssymbol{ft-bisimulation-summary} the ft-bisimulation summary of $G$ according to the summarisation relation $R_{ft} \subseteq V \times \mathcal{W}_{ft}$ defined as a one-to-one mapping between the set of equivalence classes and the set $\mathcal{W}_{ft}$:
+$$
+\begin{aligned}
+R_{ft} = \{ \left( u, x \right) \in V \times \mathcal{W}_{ft} \mid & \forall v \in [u]\; \left( v, x \right) \in V \times \mathcal{W}_{ft} \\
+& \wedge \forall y \in \mathcal{W}_{ft}\; x \neq y\; (v, y) \not \in V \times \mathcal{W}_{ft} \}
+\end{aligned}
+$$
+\end{definition}
 
 \begin{figure}
 	\centering
