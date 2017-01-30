@@ -1,8 +1,16 @@
 \section{Evaluation}
 \label{sec:eval}
 
-In this section, we evaluate the trade-off between the performance of an implementation of a \gls{summarisation-relation}, the compression ratio, and the precision of the graph summary.
-In this evaluation, we consider the following:
+In this section, we evaluate the graph summarisation under three different aspects:
+\begin{description}
+	\item[Performance] the amount of computational power needed by the implementation of a \gls{summarisation-relation} for generating a summary;
+	\item[Compression] the ability of the graph summarisation to reduce the number of nodes and edges needed for describing the graph's structure; and
+	\item[Precision] the precision of a generated graph summary with regards to the original graph, as measured by the \gls{precision}.
+\end{description}
+We present those three dimensions of the evaluation in Section~\ref{sec:eval:design}.
+In order to give ground to the study of the graph summarisation under those three dimensions, we consider a collection of 14 datasets described in Section~\ref{sec:eval:datasets} of varying size and complexity. The size of a graph to summarise will impact on the performance and compression of a summarisation implementation, while the complexity in terms of vocabulary (i.e., the use of \gls{types} and \gls{attributes} and combinations thereof) will manifest itself on the precision of a summary.\\
+
+In this evaluation, we consider the following parameters:
 \begin{itemize}
 	\item we want to summarise a graph $G=\left\langle V, A, l_V \right\rangle$;
 	\item the result of summarising the graph $G$ is the summary graph $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ according to the summarisation relation $R$;
@@ -17,7 +25,7 @@ We describe in this section the design of the evaluation. We first present the e
 
 \subsubsection{Environment}
 
-The bisimulation summary \glssymbol{fbt-bisimulation-summary} presented in Section~\ref{chap:summary:bisim} is the most precise summary of the entity graph, since all incoming and outgoing (and combination of) paths in the summary do exist in the entity graph $G$. In this evaluation, we use as the \emph{gold standard} summary of an entity graph the \gls{ft-bisimulation-summary} instead of the \gls{fbt-bisimulation-summary} for performance reason. This gold standard summary ensures that all outgoing paths do exist. The presented \glspl{summarisation-relation} have been implemented using the Hadoop\footnote{Hadoop: \url{http://hadoop.apache.org/}} MapReduce framework.
+The bisimulation summary \glssymbol{fbt-bisimulation-summary} presented in Section~\ref{chap:summary:bisim} is the most precise summary of the entity graph, since all incoming and outgoing (and combination of) paths in the summary do exist in the entity graph $G$. In this evaluation, we use as the \emph{gold standard} summary of an entity graph the \gls{ft-bisimulation-summary} instead of the \gls{fbt-bisimulation-summary} for performance reason. This gold standard summary ensures that all outgoing paths do exist. The presented \glspl{summarisation-relation} have been implemented using the Hadoop\footnote{Hadoop: \url{http://hadoop.apache.org/}} MapReduce framework according to the algorithm outlined in Section~\ref{sec:mapreduce}.
 % Our Hadoop cluster is composed of 10 machines.
 
 \subsubsection{Evaluation Dimensions}

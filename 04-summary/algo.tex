@@ -349,6 +349,7 @@ GROUP BY ?s
 \end{figure}
 
 \subsubsection{MapReduce Implementation}
+\label{sec:mapreduce}
 
 In this section, we describe an implementation of the graph summarisation algorithm based on MapReduce~\cite{dean:2004:msd}, which is a batch-processing framework that eases distributed operations over massive amount of data. The unit of work in MapReduce, called a \emph{job}, is composed of two operations: a \emph{mapper} and a \emph{reducer}. The mapper emits key-value pairs, and the reducer receives all the pairs associated to a same key.
 

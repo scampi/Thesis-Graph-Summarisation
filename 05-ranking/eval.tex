@@ -12,10 +12,19 @@ While there are other ways to perform entity ranking on the Web of Data, e.g., o
 The datasets we are using in our experiments are the following:
 \begin{description}
   \item[INEX09] a dataset of 2,491,134 triples from DBpedia containing the description of entities in English, and converted for the INEX evaluation framework~\cite{Perez-Aguera:2010:UBS};
-  \item[SS10] the ``Billion Triple Challenge''\footnote{Billion Triple Challenge: \url{http://vmlion25.deri.ie}} (BTC) dataset, containing more than one billion triples, with the assessments (a file containing relevance judgments on a sample of query answers) of the SemSearch2010\footnote{SemSearch2010: \url{http://km.aifb.kit.edu/ws/semsearch10}} challenge;
-  \item[SS11] the BTC dataset with the assessments of the ``Entity Search track'' of the SemSearch2011\footnote{SemSearch2011: \url{http://km.aifb.kit.edu/ws/semsearch11/}} challenge.
+  \item[SS10] the ``Billion Triple Challenge''\footnote{Billion Triple Challenge: \url{http://vmlion25.deri.ie}} (BTC) dataset, containing more than one billion triples, with the assessments (a file containing relevance judgments on a sample of query answers) of the SemSearch2010\footnote{\label{ss10}SemSearch2010: \url{http://km.aifb.kit.edu/ws/semsearch10}} challenge;
+  \item[SS11] the BTC dataset with the assessments of the ``Entity Search track'' of the SemSearch2011\footnote{\label{ss11}SemSearch2011: \url{http://km.aifb.kit.edu/ws/semsearch11/}} challenge.
 \end{description}
 The INEX09 dataset is significantly different than the other two based on BTC. Indeed, BTC is a heterogeneous dataset, created from web crawls of several search engines. INEX09 is a highly curated dataset from DBpedia.
+
+\paragraph{Pre-processing.}
+
+In order to extract the entities from those datasets that are to be ranked, we performed the following operations:
+\begin{enumerate}
+	\item extracted the \glspl{edesc} consisting of the outgoing edges and nodes that are 1-hop away;
+	\item analysed\footnote{The analysis of a text consists in splitting on a separator character such as whitespace, in order to produce tokens to be indexed. In the case of URIs, additional separators such as slashes `/' and dots `.' are also used. See \cite{McCandless:2010:LAS,buttcher:2016:information} for further details.} each description so that it may be retrieved based on a query that is pre-defined by the SemSearch\footnote{See footnotes \ref{ss10} and \ref{ss11}} challenges; and
+	\item ranked the retrieved entities according to a ranking model to evaluate. The quality of this ranking is the subject matter in the following sections.
+\end{enumerate}
 
 %\subsection{Effectiveness of the \gls{MF} Ranking Model}
 %\label{sec:mv-fields-effectiveness}
