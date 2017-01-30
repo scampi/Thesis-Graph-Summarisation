@@ -195,6 +195,10 @@ Graph summarisation produces a \emph{summary} of the structure of the graph, pro
 \item[\emph{Browsing of a dataset's structure.}] The information gathered during the graph summarisation process of a dataset is made available for browsing in Section~\ref{sec:web-data-inspector}. This enables a user to learn about the internals of a dataset: its structure, the kind of information it carries, the relationships between concepts, or its connections to other datasets. With such knowledge, the user may identify problems with the data, e.g., missing attributes.
 \end{labeling}
 
+\section{Scientific Methodology}
+
+The work in this thesis inscribes itself into the Sindice~\cite{delbru:jws:entity} project: creating an Information Retrieval search engine for Web Data. That engine had already collected a significant amount of data, but then with this came the challenge of writing meaningful queries. To help with this need, a good ranking is needed which was investigated in~\cite{delbru:2010:hierarchical} and continued with the MF ranking model (Chapter~\ref{chap:tree-ranking}). Difficulty to understand what was inside the collected data, but also the challenge with writing queries motivated the research into graph summarisation (Chapter~\ref{chap:summary}).
+
 \section{Outline}
 
 The thesis is divided in three parts. This first part \emph{Background} contains the introduction to the thesis, and presents fundamental concepts and models that will be reused throughout the rest of the thesis. We introduce in the second part \emph{Methods} new techniques for generating and evaluating graph summaries, as well as a new ranking model for semi-structured data. In the final part \emph{Putting the Pieces Together}, we describe applications of the presented methods.
