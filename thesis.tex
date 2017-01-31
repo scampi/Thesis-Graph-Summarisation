@@ -3,6 +3,11 @@
 \documentclass[12pt,chapterprefix=true]{scrbook}
 %\documentclass[12pt,chapterprefix=true,listof=totoc]{scrbook}
 
+\usepackage{xparse}
+\DeclareDocumentEnvironment{centeremph}{O{.4cm}m}
+  {\vspace{#1}\begin{addmargin}[1.5cm]{1.5cm}\textbf{#2. } }{\newline\end{addmargin}}
+% \newenvironment{centeremph}[2][.4cm]{2}{\vspace{#1}\begin{addmargin}[1.2cm]{1cm}\textbf{#2. } }{\end{addmargin}}
+
 \usepackage{setspace}
 \usepackage[table]{xcolor}
 \usepackage{array}
