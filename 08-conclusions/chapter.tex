@@ -36,13 +36,12 @@ Graph summarisation offers a solution to the problem of data heterogeneity and u
 	\item[Entity Graph Ranking] We generalised \gls{field}-based ranking models to directed acyclic graphs with the introduction of our \gls{MF} ranking model. Entities found in Web Data are modeled differently from one dataset to the other. Indeed, an entity may be represented as a star-graph in a dataset, while showing in another a more complex structure with a graph having few hops. With the help of graph summaries of the datasets to try and reconcile different modeling, is it then possible to rank entities having different representations ?
 \end{description}
 
-It is our belief that the work achieved in this thesis answers a growing need; that is, to get a better understanding of datasets structure. This knowledge is key for we assume a large number of applications. The concept of graph summarisation presented in this thesis applied to Web Data opens the door to better and new applications, and raises as well novel challenges as outlined in this section.
+It is our belief that the work achieved in this thesis answers a growing need; that is, to get a better understanding of datasets structure. This knowledge is key for we assume a large number of applications such as data discovery, query optimisation, and data integration. The concept of graph summarisation presented in this thesis applied to Web Data opens the door to better and new applications, and raises as well novel challenges as outlined in this section.
 
 \section{Current Limitations}
 
-In this thesis, the following points were not pursued but would be interesting to follow:
-\begin{itemize}
-	\item implement the graph summarisation algorithms with an in-memory framework such as Spark\footnote{Spark: \url{http://spark.apache.org/}};
-	\item use the bisimulation summary presented in Section~\ref{sec:bisim-summary} instead of the FT-Bisimulation summary that was used in the precision evaluation in Section~\ref{sec:eval}. The additional \emph{backward} bisimulation clause would produce more accurate precision measurements;
-	\item evaluate the graph ranking presented in Section~\ref{chap:tree-ranking:mf-model} with textual data (e.g., the ``Billion Triple Challenge''\footnote{Billion Triple Challenge: \url{http://vmlion25.deri.ie}} (BTC) dataset) and over more complex graphs than the entities limited to nodes 1-hop away, as is the case for the evaluation in Section~\ref{sec:experiments}.
-\end{itemize}
+We acknowledge the following limitations with regards to the work done in this thesis:
+\begin{description}
+	\item[Expressivity of Summarisation Relations] The graph summarisation framework proposed in Chapter~\ref{chap:summary} assumes that the assignment of a node in the graph to a node of the summary is deterministic. Therefore, graph summarisations that have an undeterministic assignment, e.g., subject to an heuristic, as the one proposed in~\cite{navlakha:2008:gsb} cannot be expressed in our framework.
+	\item[Approximate Summaries] The loss of \gls{connectivity} precision by approximate sumaries outlined in Section~\ref{sec:approximate} would most impact applications that rely heavily on the exactness of paths information. Such applications would need to rely on a summarisation relation that iterates over the graph (e.g., \gls{fbt-bisimulation-summary}), which is however a costly operation on large graphs within shared-nothing environments (e.g., Hadoop\footnote{Hadoop: \url{http://hadoop.apache.org/}}).
+\end{description}
