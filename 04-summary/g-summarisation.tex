@@ -52,6 +52,14 @@ From this point on, we shall differentiate between the nodes and edges of the en
 	\label{fig:homomorphism}
 \end{figure}
 
+\paragraph{Features.}
+
+We denote as \emph{feature} elements of the graph on which the relation of the graph homomorphism is based on. As an example, \gls{attributes} is a feature of the \gls{attributes-summary} as defined in Definition~(\ref{def:a}). In this thesis, we focus on the following features but others may be used:
+\begin{itemize}
+\item attribute, whether incoming or outgoing of a node; and
+\item type.
+\end{itemize}
+
 \paragraph{Source material.}
 
 A graph and its summary do not share the same set of nodes. The nodes of the summary are taken from a set that is distinct from the set of nodes in the graph. We refer to that set as the \emph{source material} which we denote as $\mathcal{Z}$. We define in the following paragraphs two nodes of the summary that are used in its creation, i.e., the undefined sumnode and the sink sumnode.
@@ -77,6 +85,10 @@ A graph $G$ that is homomorphic to a graph $\mathcal{S}$ with regards to a binar
 
 The purpose of a summary is to highlight the \emph{structure} of the graph, which is defined by the properties and \gls{types}. Content information does not pertain to the structure of the data, but only to individual entities. Therefore, we abstract the summary from the content in the graph, which are in general stored in sink nodes, i.e., nodes that have no outgoing edges. To do so, we map such nodes to a \emph{sink} sumnode that we identify as $\varnothing$. For example, the node labelled $Ireland$ in the Figure~\ref{fig:graph} is mapped to $\varnothing$. Also, we note that the nodes $S_2$ and $S_3$ in Figure~\ref{fig:basic-summary} are sink sumnodes.
 
+\begin{remark}
+	Features of the graph summarisation are not subject to content abstraction, in order for the summary to retain the vocabulary of the original graph.
+\end{remark}
+
 \begin{definition}[Sink Sumnode $\varnothing$]
 Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{W} \cup \{ \varnothing \}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be two graphs such that $G$ is homomorphic to $\mathcal{S}$ with regards to the binary relation $R \subseteq V \times \mathcal{W}$.
 Let $P \subseteq V \times \{ \varnothing \}$ be a binary relation.
@@ -86,10 +98,6 @@ u \in V\; \forall \alpha \in \mathcal{L}\; \forall v \in V\; (u, \alpha, v) \not
 $$
 \label{def:sink-sumnode}
 \end{definition}
-
-\begin{remark}
-	In RDF graphs, literals are mapped to the sink sumnode.
-\end{remark}
 
 \subsubsection{Graph Summary}
 
@@ -118,10 +126,6 @@ Figure~\ref{fig:basic-summary} depicts a possible summary for a graph. The dotte
 	\caption[A graph and a possible summary]{A graph and a possible summary. Dotted lines labelled $R$ represent the \gls{summarisation-relation} that maps nodes in the graph $G$ to sumnodes in $\mathcal{S}$.}
 	\label{fig:basic-summary}
 \end{figure}
-
-\paragraph{Features.}
-
-We denote as \emph{feature} elements of the graph on which the \gls{summarisation-relation} is based on. As an example, \gls{attributes} is a feature of the \gls{attributes-summary} as defined in Definition~(\ref{def:a}).
 
 \paragraph{Uniqueness.}
 
