@@ -41,7 +41,7 @@ we expand the graph so that each label becomes a leaf. To do so, we transform th
 	\begin{subfigure}{.3\textwidth}
 		\centering
 		\resizebox{\textwidth}{!}{
-			\input{05-ranking/figures/tikz/concept-tree}
+			\input{06-ranking/figures/tikz/concept-tree}
 		}
 		\caption{An entity description represented as a DAG. The root of the entity is the node $v_0$}
 		\label{fig:concept-tree}
@@ -50,7 +50,7 @@ we expand the graph so that each label becomes a leaf. To do so, we transform th
 	\begin{subfigure}{.3\textwidth}
 		\centering
 		\resizebox{\textwidth}{!}{
-			\input{05-ranking/figures/tikz/expanded-graph1}
+			\input{06-ranking/figures/tikz/expanded-graph1}
 		}
 		\caption{The graph of the entity in Figure~\ref{fig:concept-tree} where each label --- of a node and an edge alike --- becomes a node}
 		\label{fig:expanded-graph1}
@@ -59,7 +59,7 @@ we expand the graph so that each label becomes a leaf. To do so, we transform th
 	\begin{subfigure}{.7\textwidth}
 		\centering
 		\resizebox{\textwidth}{!}{
-			\input{05-ranking/figures/tikz/expanded-graph2}
+			\input{06-ranking/figures/tikz/expanded-graph2}
 		}
 		\caption{The expanded graph of the entity in Figure~\ref{fig:concept-tree} where each node of the graph in Figure~\ref{fig:expanded-graph1} becomes a leaf. Nodes labelled with $*$ depict aggregations.}
 		\label{fig:expanded-graph2}
@@ -99,28 +99,28 @@ The first normalisation is applied on the \emph{leaf} nodes of the DAG. The seco
 %    \centering
 %%    \begin{subfigure}{0.3\textwidth}
 %%    	\centering
-%%      	\input{05-ranking/figures/tikz/concept-tree}
+%%      	\input{06-ranking/figures/tikz/concept-tree}
 %%    	\caption{An entity represented as a tree with varying degree.}
 %%		\label{fig:concept-tree}
 %%    \end{subfigure}
 %%  	\quad
 %  	\begin{subfigure}{0.3\textwidth}
 %  		\centering
-%  		\input{05-ranking/figures/tikz/field-model}
+%  		\input{06-ranking/figures/tikz/field-model}
 %  		\caption{Field-based ranking model for the entity. The $*$ symbolises the aggregation of the contribution of each child node, here a field.}
 %		\label{fig:field-model}
 %  	\end{subfigure}
 %  	\quad
 %  	\begin{subfigure}{0.3\textwidth}
 %  		\centering
-%  		\input{05-ranking/figures/tikz/mf-model}
+%  		\input{06-ranking/figures/tikz/mf-model}
 %  		\caption{The \gls{MF} ranking model for the entity. A square symbolizes where the contribution of a query term is performed. Red dashed squares represents internal nodes in the entity tree that were transformed into a leaf.}
 %		\label{fig:mf-model}
 %  	\end{subfigure}
 %  	\quad
 %  	\begin{subfigure}{\textwidth}
 %  		\centering
-%	  	\input{05-ranking/figures/tikz/mf-ranking}
+%	  	\input{06-ranking/figures/tikz/mf-ranking}
 %  		\caption{Normalized term frequency computation in the \gls{MF} ranking for the entity.}
 %  		\label{fig:mf-ranking}
 %  	\end{subfigure}

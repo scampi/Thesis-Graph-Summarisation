@@ -4,12 +4,12 @@
 
 Table~\ref{tab:ranking-cmp-results} reports the evaluation results of comparing \gls{MF} extensions \gls{BM25MF} and \gls{PL2MF} against several state-of-the-art ranking functions. The $p$-Value is computed with the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, where a statistically significant difference at level $0.10$ is marked with one star $*$ and at level $0.05$ with two stars $**$. \gls{BM25MF} and \gls{PL2MF} are used as a baseline in this test. $\Delta\%$ indicates the difference in percentage between the two MAP values compared in that test.
 
-\input{05-ranking/figures/experiments/ranking-comparison}
+\input{06-ranking/figures/experiments/ranking-comparison}
 
 
 Table~\ref{tab:mf-effect} reports the MAP scores of \gls{BM25MF} and \gls{PL2MF} combined with each weight individually and using the normalisation parameters values from the Table~\ref{tab:norm-param}. Apart from the row ``Without Attribute Label'', all runs consider the attribute label as an additional value as in the previous experiments.
 
-\input{05-ranking/figures/experiments/weights-cmp}
+\input{06-ranking/figures/experiments/weights-cmp}
 
 \section{Graph Summary Ranking}
 \label{app:summary-ranking}
