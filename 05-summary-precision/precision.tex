@@ -130,7 +130,7 @@ Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\la
 We call the \emph{inferred graph} $\mathcal{I}(R) = \left\langle \mathcal{W}_{fbt}, \mathcal{C}, l_{\mathcal{W}_{fbt}} \right\rangle$ the graph which nodes and edges are those of the bisimulation summary \glssymbol{fbt-bisimulation-summary}, augmented with the edges in $Err(R)$, i.e., $\mathcal{C} = \mathcal{B}_{fbt} \cup Err(R)$.
 \end{definition}
 
-The Figure~\ref{fig:accuracy} depicts the inferred graph $\mathcal{I}(R_t)$ according to the \gls{typessummary} $\mathcal{S}_t$ in Figure~\ref{fig:classes-summary}.
+The Figure~\ref{chap5:precision:fig:accuracy} depicts the inferred graph $\mathcal{I}(R_t)$ according to the \gls{typessummary} $\mathcal{S}_t$ in Figure~\ref{fig:classes-summary}.
 Sink sumnodes are omitted for clarity. Sumnodes of the bisimulation summary \glssymbol{fbt-bisimulation-summary} are depicted with solid lines, and sumnodes of the \gls{typessummary} $\mathcal{S}_t$ with dashed lines. Edges from the $Err(R_t)$ set are represented with grey dotted arrows, while we depict sumnodes of the \gls{typessummary} with dashed arrows.\\
 
 Given that $R_{fbt} \sqsubseteq R_t$, the nodes $S^{fbt}_1$ and $S^{fbt}_2$ are mapped to the node $S^t_1$. Similarly, the nodes $S^{fbt}_4$ and $S^{fbt}_5$ are mapped to the node $S^t_3$. Since we have that $(S^t_1, works, S^t_3) \in \mathcal{B}_t$, the edges $(S^{fbt}_1, works, S^{fbt}_5) \in Err(R_{fbt})$ and $(S^{fbt}_2, works, S^{fbt}_5) \in Err(R_{fbt})$ can be inferred, for example.
@@ -156,7 +156,7 @@ We illustrate the three categories in the following with regards to the \emph{Ty
 
 \subsubsection{Connectivity Error $Err(R)_{con}$}
 
-The connectivity error captures inferred paths that do not exists in the bisimulation summary \glssymbol{fbt-bisimulation-summary} but that do in the summary. For example, the Figure~\ref{fig:accuracy} depicts the inferred path $creator$ from the node $S^{fbt}_0$ to $S^{fbt}_2$.
+The connectivity error captures inferred paths that do not exists in the bisimulation summary \glssymbol{fbt-bisimulation-summary} but that do in the summary. For example, the Figure~\ref{chap5:precision:fig:accuracy} depicts the inferred path $creator$ from the node $S^{fbt}_0$ to $S^{fbt}_2$.
 We do not consider the sink sumnode $\varnothing$ in the connectivity error, since it doesn't provides any outgoing edge. We define $Err(R)_{con}$ as the set $Err(R)$ minus the edges leading to the sink sumnodes.
 
 \begin{definition}[Connectivity Error]
@@ -235,8 +235,8 @@ Prec(R, x) = \frac{\vert TP(x) \vert}{\vert TP(x) \bigcup FP(R, x) \vert}
 $$
 \end{definition}
 
-The sets $TP(x)$ and $FP(x)$ contain the true and false positive edges which source is $x$, respectively. For example, in Figure~\ref{fig:accuracy}, the edge $(S^{fbt}_0, creator, S^{fbt}_1)$ is in $TP(x)$, since it does exist in the bisimulation summary \glssymbol{fbt-bisimulation-summary}. The edge $(S^{fbt}_0, creator, S^{fbt}_2)$ is in $FP(x)$, since it does not exist in \glssymbol{fbt-bisimulation-summary}. In total, this results that $Prec\left(R, S^{fbt}_0\right) = \frac{3}{4}$.
+The sets $TP(x)$ and $FP(x)$ contain the true and false positive edges which source is $x$, respectively. For example, in Figure~\ref{chap5:precision:fig:accuracy}, the edge $(S^{fbt}_0, creator, S^{fbt}_1)$ is in $TP(x)$, since it does exist in the bisimulation summary \glssymbol{fbt-bisimulation-summary}. The edge $(S^{fbt}_0, creator, S^{fbt}_2)$ is in $FP(x)$, since it does not exist in \glssymbol{fbt-bisimulation-summary}. In total, this results that $Prec\left(R, S^{fbt}_0\right) = \frac{3}{4}$.
 
 The \emph{probability interpretation} of $Prec(R, x)$ is the probability that a randomly selected edge is correctly summarised. We note the recall is always equal to $1$, since there is no false negative edges in the presented \glspl{summarisation-relation}.\\
 
-We use $Prec(R, x)$ as the precision measure for each of the classification of errors. We note that for a same node, the edge precision may vary between the three categories. As an example, consider the node $S^{fbt}_0$ in Figure~\ref{fig:accuracy}. The edge attribute precision is equal to $0$, since the \gls{attributes} in both \glssymbol{fbt-bisimulation-summary} and $\mathcal{I}(R_t)$ summaries for this node are $creator$ and $author$. However, the connectivity precision is equal to $\frac{3}{4}$.
+We use $Prec(R, x)$ as the precision measure for each of the classification of errors. We note that for a same node, the edge precision may vary between the three categories. As an example, consider the node $S^{fbt}_0$ in Figure~\ref{chap5:precision:fig:accuracy}. The edge attribute precision is equal to $0$, since the \gls{attributes} in both \glssymbol{fbt-bisimulation-summary} and $\mathcal{I}(R_t)$ summaries for this node are $creator$ and $author$. However, the connectivity precision is equal to $\frac{3}{4}$.
