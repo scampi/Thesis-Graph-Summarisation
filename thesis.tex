@@ -6,7 +6,6 @@
 \usepackage{xparse}
 \DeclareDocumentEnvironment{centeremph}{O{.4cm}m}
   {\vspace{#1}\begin{addmargin}[1.5cm]{1.5cm}\textbf{#2. } }{\newline\end{addmargin}}
-% \newenvironment{centeremph}[2][.4cm]{2}{\vspace{#1}\begin{addmargin}[1.2cm]{1cm}\textbf{#2. } }{\end{addmargin}}
 
 \usepackage{setspace}
 \usepackage[table]{xcolor}
@@ -16,7 +15,6 @@
 \usepackage[T1]{fontenc}
 
 % http://www.khirevich.com/latex/microtype/
-%\usepackage[activate={true,nocompatibility},factor=1100,final,tracking=true, kerning=true, spacing=true,stretch=10, shrink=10]{microtype}
 \usepackage[activate={true,nocompatibility},factor=1100,final,tracking=true, kerning=true, spacing=true,stretch=0, shrink=0]{microtype}
 
 \usepackage[vlined,linesnumbered,titlenumbered,algoruled]{algorithm2e}
@@ -159,7 +157,6 @@ linewidth=4pt
 \listoffigures
 \listoftables
 \listoftheorems[ignoreall,show={definition},numwidth=3.5em]
-%\printglossaries
 \cleardoubleoddpage
 \pagenumbering{arabic}
 
@@ -167,13 +164,7 @@ linewidth=4pt
 
 \input{01-introduction/introduction}
 
-%\part{Foundations}
-
 \input{02-foundations/ssd}
-
-%\input{02-foundations/ranking}
-
-%\input{02-foundations/summary}
 
 \part{Methods}
 
@@ -190,10 +181,6 @@ linewidth=4pt
 \input{04-summary/algo}
 
 \input{04-summary/conclusion}
-
-%\input{04-summary/eval-summary}
-
-%\input{04-summary/updates}
 
 \input{05-summary-precision/precision}
 
@@ -217,11 +204,6 @@ linewidth=4pt
 \input{06-ranking/conclusion}
 
 %%
-%% summary ranking
-%%
-%\input{06-summary-ranking/chapter}
-
-%%
 %% system
 %%
 \part{Putting the Pieces Together}
@@ -235,12 +217,6 @@ linewidth=4pt
 \input{07-systems/wlv/web-linkage-validator}
 
 \input{07-systems/conclusion}
-
-%\input{07-systems/stats/stats}
-
-%\input{07-systems/gagg/gagg}
-
-%\part{Conclusions}
 
 \input{08-conclusions/chapter}
 
@@ -258,9 +234,6 @@ linewidth=4pt
 \bibliography{biblio,01-introduction/introduction,02-foundations/foundations,04-summary/bibliography,06-ranking/bibliography}
 
 \cleardoubleoddpage
-%\listoffigures
-%\listoftables
-%\listoftheorems[ignoreall,show={definition},numwidth=3.5em]
 \printglossaries
 
 \end{document}
