@@ -232,7 +232,7 @@ OLAP (online analytical processing) is a technique for answering analytical quer
 Several works investigate the use of OLAP over graphs: data records analysed through OLAP are now related to each other. The main difference between traditional OLAP and graph-OLAP is the \emph{measure} which traditionally is a number becomes a \emph{graph}. Compared to \cite{tian:sigmod:2008} discussed in Section~\ref{chap03:review:graph-exploration}, the works presented here are anchored in a OLAP background, rather than being a bridge to OLAP from the graph exploration domain.
 
 \begin{centeremph}{Observation}
-	Among the possible OLAP operations, \emph{rollup} and \emph{drill-down} control the level of details presented to the user about the graph. With regards to our graph summarisation presented in Chapter~\ref{chap:summary}, each level is actually a summary. Therefore, the approaches of OLAP over graphs are orthogonal to ours.
+	Among the possible OLAP operations, \emph{rollup} and \emph{drill-down} control the level of details presented to the user about the graph. With regards to our graph summarisation presented in Chapter~\ref{chap4:summary}, each level is actually a summary. Therefore, the approaches of OLAP over graphs are orthogonal to ours.
 \end{centeremph}
 
 Chen et. al propose in \cite{chen:icdm:2008} two OLAP frameworks \emph{I-OLAP} and \emph{T-OLAP} for analysing graphs. The I-OLAP aggregation is aimed at summarising several graphs representing a same entity. It is then a merge of the graphs that keeps the entity layer, while we rather consider the summarisation of the structure of the graph which is a different view on the graph. The T-OLAP framework, which is further investigated in \cite{qu:dasfaa:2011}, modifies the \emph{topology} of the graph. T-OLAP maps nodes into sumnodes according to their attributes' value, and computes a statistic for the sumnode using an aggregate function, e.g., \emph{count}.
@@ -327,7 +327,7 @@ Riondato et al. \cite{riondato:2014:gsq} present a graph summarisation approach 
 
 \section{Summary}
 
-In this Chapter, we reviewed the literature related to graph summarisation and compared it with our framework that we present in Chapter~\ref{chap:summary}. We outline in this section the core differences between our and the presented approaches to graph summarisation.
+In this Chapter, we reviewed the literature related to graph summarisation and compared it with our framework that we present in Chapter~\ref{chap4:summary}. We outline in this section the core differences between our and the presented approaches to graph summarisation.
 
 \begin{labeling}{\textbf{Expressiveness.}}
 	\item[\textbf{Expressiveness.}] The presented graph summarisation algorithms are designed for specific applications, and can then be difficult to port. We present a flexible and expressive graph summarisation based on graph \emph{homomorphism}.
