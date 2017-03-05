@@ -34,13 +34,13 @@ In order to extract the entities from those datasets that are to be ranked, we p
 \subsection{\emph{The Normalisation Parameters}}
 \label{sec:norm-exp}
 
-In this section, we study the impact on the ranking of the normalisation parameters. In addition to the length normalisation of field-based ranking function (Normalisation~\ref{norm:content}), the \gls{MF} ranking model offers an additional normalisation on the attribute's cardinality (Normalisation~\ref{norm:degree}). The effectiveness of the PRF and DFR frameworks depends on finding the right values for the normalisation parameters. However, these parameters are highly dependent on the dataset.\\
+In this section, we study the impact on the ranking of the normalisation parameters. In addition to the length normalisation of field-based ranking function (Normalisation~\ref{chap6:ranking:norm:content}), the \gls{MF} ranking model offers an additional normalisation on the attribute's cardinality (Normalisation~\ref{chap6:ranking:norm:degree}). The effectiveness of the PRF and DFR frameworks depends on finding the right values for the normalisation parameters. However, these parameters are highly dependent on the dataset.\\
 
-Figures~\ref{chap6:ranking:fig:bm25mf-norm} and~\ref{chap6:ranking:fig:pl2mf-norm} depict the impact of the normalisation parameters on the ranking performance of \gls{BM25MF} and \gls{PL2MF}, respectively. For all three datasets, the figures depict on the \textbf{Y} axis the Mean Average Precision (MAP) scores, and on the \textbf{X} axis the Normalisation~\ref{norm:content}, i.e., with parameter $b_v$ in Figure~\ref{chap6:ranking:fig:bm25mf-norm} (resp., parameter $c_v$ in Figure~\ref{chap6:ranking:fig:pl2mf-norm}). Each curve plots the results with a fixed Normalisation~\ref{norm:degree} parameter, i.e., $b_a$ in Figure~\ref{chap6:ranking:fig:bm25mf-norm} and $c_a$ in Figure~\ref{chap6:ranking:fig:pl2mf-norm}.
+Figures~\ref{chap6:ranking:fig:bm25mf-norm} and~\ref{chap6:ranking:fig:pl2mf-norm} depict the impact of the normalisation parameters on the ranking performance of \gls{BM25MF} and \gls{PL2MF}, respectively. For all three datasets, the figures depict on the \textbf{Y} axis the Mean Average Precision (MAP) scores, and on the \textbf{X} axis the Normalisation~\ref{chap6:ranking:norm:content}, i.e., with parameter $b_v$ in Figure~\ref{chap6:ranking:fig:bm25mf-norm} (resp., parameter $c_v$ in Figure~\ref{chap6:ranking:fig:pl2mf-norm}). Each curve plots the results with a fixed Normalisation~\ref{chap6:ranking:norm:degree} parameter, i.e., $b_a$ in Figure~\ref{chap6:ranking:fig:bm25mf-norm} and $c_a$ in Figure~\ref{chap6:ranking:fig:pl2mf-norm}.
 
 The grid of parameters values in Figure~\ref{chap6:ranking:fig:bm25mf-norm} ranges from $0$ to $1$ with a step of $0.1$. In Figure~\ref{chap6:ranking:fig:pl2mf-norm}, the grid ranges from $0.5$ to $10.5$ with a step of $1$. Although these parameters can be attribute and value-specific, this experiment considers a constant parameter in order to reduce the number of combinations and to lower the variability of the results. Dashed lines depict the MAP scores of BM25F and PL2F and solid lines the scores of their \gls{MF} extension, \gls{BM25MF} and \gls{PL2MF} respectively.\\
 
-These plots show that Normalisation~\ref{norm:degree}, the normalisation introduced with the \gls{MF} ranking model, improves the performance. Indeed, the Normalisation~\ref{norm:content} parameters $b_v$ and $c_v$, which are traditional to the field-based ranking model, do not grasp completely the heterogeneity in the data, which results in lower performance when compared to the \gls{MF} extensions. This indicates that the distinction between leaves within an attribute has a positive effect on the ranking.
+These plots show that Normalisation~\ref{chap6:ranking:norm:degree}, the normalisation introduced with the \gls{MF} ranking model, improves the performance. Indeed, the Normalisation~\ref{chap6:ranking:norm:content} parameters $b_v$ and $c_v$, which are traditional to the field-based ranking model, do not grasp completely the heterogeneity in the data, which results in lower performance when compared to the \gls{MF} extensions. This indicates that the distinction between leaves within an attribute has a positive effect on the ranking.
 
 \begin{figure}
 	\centering
@@ -447,11 +447,11 @@ A straightforward approach consists in summing up all the statistics available t
 
 %\subparagraph{Field-based approach.}
 
-%In this approach, we apply the Normalisation~\ref{norm:content}. The consequence in Figure~\ref{chap6:ranking:fig:sparql-solution} is that the \emph{average cardinality} of the attribute ``dbp:owner'' is taken into consideration.
+%In this approach, we apply the Normalisation~\ref{chap6:ranking:norm:content}. The consequence in Figure~\ref{chap6:ranking:fig:sparql-solution} is that the \emph{average cardinality} of the attribute ``dbp:owner'' is taken into consideration.
 
 \subparagraph{MF-based approach.}
 
-In this approach, we apply both normalisations available with the \gls{MF} ranking model, i.e., Normalisations~\ref{norm:content} and~\ref{norm:degree}. The difference of this approach with previous is that the \emph{average cardinality} of every node is considered.
+In this approach, we apply both normalisations available with the \gls{MF} ranking model, i.e., Normalisations~\ref{chap6:ranking:norm:content} and~\ref{chap6:ranking:norm:degree}. The difference of this approach with previous is that the \emph{average cardinality} of every node is considered.
 
 \subsection{Evaluation}
 \label{sec:summary-ranking:eval}
@@ -527,14 +527,14 @@ We compare in this paragraph the performance of both ranking functions when appl
 
 \subparagraph{Normalisation parameters impact.}
 
-Figures~\ref{chap6:ranking:fig:summary-ranking-norm} depict the impact of the Normalisation~\ref{norm:content} and~\ref{norm:degree} parameters on the ranking of graphs. On the X axis we vary the value of the parameter $b_a$ for Normalisation~\ref{norm:degree}. Each curve corresponds to a value of the parameter $b_v$ fro Normalisation~\ref{norm:content}. On the Y axis we report the MAP measurement for the \gls{MF}-based ranking approach. The raw results of the curves are available in Appendix~\ref{tab:summary-ranking-norm}.\\
+Figures~\ref{chap6:ranking:fig:summary-ranking-norm} depict the impact of the Normalisation~\ref{chap6:ranking:norm:content} and~\ref{chap6:ranking:norm:degree} parameters on the ranking of graphs. On the X axis we vary the value of the parameter $b_a$ for Normalisation~\ref{chap6:ranking:norm:degree}. Each curve corresponds to a value of the parameter $b_v$ fro Normalisation~\ref{chap6:ranking:norm:content}. On the Y axis we report the MAP measurement for the \gls{MF}-based ranking approach. The raw results of the curves are available in Appendix~\ref{tab:summary-ranking-norm}.\\
 
 In this experiment, we divided the queries into two categories: simple graphs and complex graphs. Simple graphs indicate queries that have only one star, i.e., the queries from the complexity categories 10, 9, 6, 5, 4, 3, and 2. Complex graphs represents queries that contain more than one star, i.e., the queries with complexity categories 1-1-4, 1-1-3, 1-1-2, 3-4, 2-2, 1-5, 1-4, 1-3, 1-2, and 1-1.
 
 Figure~\ref{chap6:ranking:fig:summary-ranking-norm-simple} depicts the \emph{average} of the MAP measurements from the seven queries classes of the simple category. Figure~\ref{chap6:ranking:fig:summary-ranking-norm-complex} depicts the \emph{average} of the MAP measurements from the ten queries classes within the complex category.\\
 
-We observe that with simple graphs in Figure~\ref{chap6:ranking:fig:summary-ranking-norm-simple} the parameter $b_a$ for Normalisation~\ref{norm:degree} reported on the X axis has little effect on the ranking. On the contrary, we see it has a positive impact in Figure~\ref{chap6:ranking:fig:summary-ranking-norm-complex} for complex graphs.
-The parameter $b_v$ for Normalisation~\ref{norm:content} increases the performance of the ranking as its value reaches $1$.
+We observe that with simple graphs in Figure~\ref{chap6:ranking:fig:summary-ranking-norm-simple} the parameter $b_a$ for Normalisation~\ref{chap6:ranking:norm:degree} reported on the X axis has little effect on the ranking. On the contrary, we see it has a positive impact in Figure~\ref{chap6:ranking:fig:summary-ranking-norm-complex} for complex graphs.
+The parameter $b_v$ for Normalisation~\ref{chap6:ranking:norm:content} increases the performance of the ranking as its value reaches $1$.
 This shows the normalisation parameters introduced with the \gls{MF} ranking model allow a fine tuning of the ranking to the data at hand.
 
 \input{06-ranking/figures/summary-group-norm}
@@ -545,7 +545,7 @@ Given the outcome of the previous experiment, we set to $1.0$ the parameters of 
 
 Table~\ref{tab:summary-ranking-cmp} reports the MAP values of the basic and \gls{MF}-based approaches over the \gls{typessummary} of Dbpedia. We write the MAP value in bold for the approach that has the greatest. We observe that for a majority of the query complexities, the \gls{MF}-based approach provides a better ranking than the basic approach.
 
-This shows the benefits of the \gls{MF} ranking model of normalising the data over two levels: the Normalisation~\ref{norm:content} allows to compare several solutions to a query regardless of different statistics they might have; with the Normalisation~\ref{norm:degree}, it is possible to rank solutions to a query that have different degree of a same attribute.
+This shows the benefits of the \gls{MF} ranking model of normalising the data over two levels: the Normalisation~\ref{chap6:ranking:norm:content} allows to compare several solutions to a query regardless of different statistics they might have; with the Normalisation~\ref{chap6:ranking:norm:degree}, it is possible to rank solutions to a query that have different degree of a same attribute.
 
 \input{06-ranking/figures/summary-ranking-comp}
 

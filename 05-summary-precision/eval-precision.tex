@@ -39,7 +39,7 @@ We present in this section three dimensions we use for evaluating a summary, i.e
 
 	Apart from the \gls{unique-type-summary} $R_{ut}$, the presented \glspl{summarisation-relation} in Section~\ref{sec:approximate} create a summary which is always smaller or equal to the graph, since there is a one-to-one mapping from the entity graph to the summary.
 
-	The \emph{unique type} summarisation relation $R_{ut}$ may assign several sumnode to a same node $u \in V$ when the set of \gls{types} is greater than one, i.e., when $\vert types(u) \vert > 1$. The order of a \gls{unique-type-summary} $\mathcal{S}_{ut} = \left\langle \mathcal{W}_{ut}, \mathcal{B}_{ut}, l_{\mathcal{W}_{ut}} \right\rangle$ is at most equal to the number of types in the graph, i.e., $\vert \mathcal{W}_{ut} \vert = \vert \{ l_{\mathcal{W}_{ut}}(c) \mid \forall (u, c) \in V^2_{ut}\; (u, \glssymbol{atype}, c) \in \mathcal{B}_{ut} \wedge \glssymbol{atype} in T \} \vert$. However, in the worst case, its size can equal $\vert \mathcal{B}_{ut} \vert = \vert \mathcal{W}_{ut} \vert ^d$, with $d$ being the diameter\footnote{The diameter $d$ of a graph $G$ is the maximum distance between any two nodes of the graph. The distance between two nodes is the number of edges in the shortest path that connects the two.} of the entity graph. Indeed, every node of the graph can be associated with every types. Therefore when applying the \emph{unique type} summarisation relation $R_{ut}$ over such a graph, we need for each path in $G$ to create an edge to each type for every node of the path. Figure~\ref{fig:unique-type-summary-size} depicts the size of the \gls{unique-type-summary} in the worst case scenario, where all nodes are both of types $A$ and $B$.
+	The \emph{unique type} summarisation relation $R_{ut}$ may assign several sumnode to a same node $u \in V$ when the set of \gls{types} is greater than one, i.e., when $\vert types(u) \vert > 1$. The order of a \gls{unique-type-summary} $\mathcal{S}_{ut} = \left\langle \mathcal{W}_{ut}, \mathcal{B}_{ut}, l_{\mathcal{W}_{ut}} \right\rangle$ is at most equal to the number of types in the graph, i.e., $\vert \mathcal{W}_{ut} \vert = \vert \{ l_{\mathcal{W}_{ut}}(c) \mid \forall (u, c) \in V^2_{ut}\; (u, \glssymbol{atype}, c) \in \mathcal{B}_{ut} \wedge \glssymbol{atype} in T \} \vert$. However, in the worst case, its size can equal $\vert \mathcal{B}_{ut} \vert = \vert \mathcal{W}_{ut} \vert ^d$, with $d$ being the diameter\footnote{The diameter $d$ of a graph $G$ is the maximum distance between any two nodes of the graph. The distance between two nodes is the number of edges in the shortest path that connects the two.} of the entity graph. Indeed, every node of the graph can be associated with every types. Therefore when applying the \emph{unique type} summarisation relation $R_{ut}$ over such a graph, we need for each path in $G$ to create an edge to each type for every node of the path. Figure~\ref{chap5:precision:fig:unique-type-summary-size} depicts the size of the \gls{unique-type-summary} in the worst case scenario, where all nodes are both of types $A$ and $B$.
 
 	The summary is sensitive to heterogeneous entity graph. Indeed, there can be as many sumnodes in an \gls{attributes-summary} $\mathcal{S}_a = \left\langle \mathcal{W}_{a}, \mathcal{B}_{a}, l_{\mathcal{W}_{a}} \right\rangle$ as there is elements in the attribute powerset minus the empty set, i.e., $\vert \mathcal{W}_a \vert = \vert \mathbb{P} \left( \{ \alpha \mid \forall (u, v) \in \mathcal{W}_a\; (u, \alpha, v) \in \mathcal{W}_a \} \right) \vert - 1$. Such an order of the summary can be expected for any summarisation relation based on the set of \gls{attributes}, i.e., the summarisation relations $R_{at}$, $R_{ioa}$, $R_{ioat}$, and $R_{fbt}$.\\
 
@@ -83,7 +83,7 @@ We present in this section three dimensions we use for evaluating a summary, i.e
 		\input{05-summary-precision/figures/unique-type-summary-size}
 	}
 	\caption{Size of the \gls{unique-type-summary} $\mathcal{S}_{ut}$}
-	\label{fig:unique-type-summary-size}
+	\label{chap5:precision:fig:unique-type-summary-size}
 \end{figure}
 \subsection{Datasets}
 \label{sec:eval:datasets}
@@ -173,17 +173,17 @@ However, there is place for improvement for overall connectivity precision espec
 
 \subsubsection{Trade-Offs}
 
-We report in Figure~\ref{fig:trade-conn-volume} the trade-off between the average connectivity precision and the average compression ratio across all datasets among all the relations. We can distinguish two groups of relations, the type-based \glspl{summarisation-relation}, i.e., the types $R_t$ and the \emph{unique type} $R_{ut}$ summarisation relation, and the attribute-based ones, i.e., the attributes relation $R_a$, the attributes \& types relation $R_{at}$, the IO attributes relation $R_{ioa}$, and the IO attributes \& types relation $R_{ioat}$.\\
+We report in Figure~\ref{chap5:precision:fig:trade-conn-volume} the trade-off between the average connectivity precision and the average compression ratio across all datasets among all the relations. We can distinguish two groups of relations, the type-based \glspl{summarisation-relation}, i.e., the types $R_t$ and the \emph{unique type} $R_{ut}$ summarisation relation, and the attribute-based ones, i.e., the attributes relation $R_a$, the attributes \& types relation $R_{at}$, the IO attributes relation $R_{ioa}$, and the IO attributes \& types relation $R_{ioat}$.\\
 
 The type-based relations provide the best compression ratio, but also the worst precision. In the attribute group, the compression ratio among relations is close to each others, but their precision differs greatly, with $R_{ioat}$ ahead.
 
 This suggests that in terms of trade-off between connectivity precision and compression ratio, $R_{ioat}$ is the best candidate.\\
 
-We report in Figure~\ref{fig:trade-schema-volume} the trade-off between the average schema precision and the average compression ratio across all datasets among all the relations. Again we can distinguish the same two groups. However, in the attribute group, the precision does not differ as much among the candidates, each one being either equal or very close to $1$. In the type group, the \emph{Types} summarisation relation $R_t$ provides a reasonable precision for a good compression ratio.
+We report in Figure~\ref{chap5:precision:fig:trade-schema-volume} the trade-off between the average schema precision and the average compression ratio across all datasets among all the relations. Again we can distinguish the same two groups. However, in the attribute group, the precision does not differ as much among the candidates, each one being either equal or very close to $1$. In the type group, the \emph{Types} summarisation relation $R_t$ provides a reasonable precision for a good compression ratio.
 
 This suggests that if the precision is primordial, the \emph{Attributes \& Types} relation $R_{at}$ is the best candidate, providing a perfect schema precision for the best compression ratio. However, if the compression is primordial instead and that some imperfection can be tolerated, then the \emph{Types} summarisation relation $R_t$ is the best candidate.\\
 
-We report in Figure~\ref{fig:trade-conn-cpu} (respectively, \ref{fig:trade-schema-cpu}) the trade-off between the average connectivity precision (respectively, average schema precision) and the average CPU time across all datasets among all the \glspl{summarisation-relation}. Among the attribute-based algorithms $R_a$, $R_{at}$, $R_{ioa}$ and $R_{ioat}$, the latter is the one that achieves the best runtime with the highest precision. Among the type-based algorithms, the \emph{Types} summarisation $R_t$ achieves a lower runtime and a higher precision than the \emph{Unique Type} relation $R_{ut}$.
+We report in Figure~\ref{chap5:precision:fig:trade-conn-cpu} (respectively, \ref{chap5:precision:fig:trade-schema-cpu}) the trade-off between the average connectivity precision (respectively, average schema precision) and the average CPU time across all datasets among all the \glspl{summarisation-relation}. Among the attribute-based algorithms $R_a$, $R_{at}$, $R_{ioa}$ and $R_{ioat}$, the latter is the one that achieves the best runtime with the highest precision. Among the type-based algorithms, the \emph{Types} summarisation $R_t$ achieves a lower runtime and a higher precision than the \emph{Unique Type} relation $R_{ut}$.
 
 If the schema precision is primordial and a low connectivity precision can be tolerated, the \emph{Types} summarisation $R_t$ is the best candidate as it provides a high schema precision, with the best CPU time. On the contrary, if the connectivity is primordial, the summarisation relation $R_{ioat}$ is the best candidate, but this at the cost of a longer runtime.
 
@@ -194,7 +194,7 @@ If the schema precision is primordial and a low connectivity precision can be to
 			\input{04-summary/experiments/tradeoff-volume*conn}
 		}
 		\caption{Connectivity precision versus compression ratio.}
-		\label{fig:trade-conn-volume}
+		\label{chap5:precision:fig:trade-conn-volume}
 	\end{subfigure}
 	\qquad
 	\begin{subfigure}[t]{0.46\textwidth}
@@ -202,7 +202,7 @@ If the schema precision is primordial and a low connectivity precision can be to
 			\input{04-summary/experiments/tradeoff-volume*schema}
 		}
 		\caption{Schema precision versus compression ratio.}
-		\label{fig:trade-schema-volume}
+		\label{chap5:precision:fig:trade-schema-volume}
 	\end{subfigure}
 	\qquad%
 	\begin{subfigure}[t]{0.46\textwidth}
@@ -210,7 +210,7 @@ If the schema precision is primordial and a low connectivity precision can be to
 			\input{04-summary/experiments/tradeoff-cpu*conn}
 		}
 		\caption{Connectivity precision versus summarisation performance.}
-		\label{fig:trade-conn-cpu}
+		\label{chap5:precision:fig:trade-conn-cpu}
 	\end{subfigure}
 	\qquad%
 	\begin{subfigure}[t]{0.46\textwidth}
@@ -218,7 +218,7 @@ If the schema precision is primordial and a low connectivity precision can be to
 			\input{04-summary/experiments/tradeoff-cpu*schema}
 		}
 		\caption{Schema precision versus summarisation performance.}
-		\label{fig:trade-schema-cpu}
+		\label{chap5:precision:fig:trade-schema-cpu}
 	\end{subfigure}
 	\caption{Efficiency and precision trade-offs of the candidate \glspl{summarisation-relation}. The values are taken as the average across all dataset categories.}
 \end{figure}

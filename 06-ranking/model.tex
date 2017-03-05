@@ -89,9 +89,9 @@ With traditional field-based ranking models, there is one level of normalisation
 We can provide an additional normalisation, making two possible levels of normalisations with the \gls{MF} ranking model:
 \begin{enumerate}
 	\item a normalisation on the \emph{content} level to account for the variability of a node's length within a dataset; and
-	\label{norm:content}
+	\label{chap6:ranking:norm:content}
 	\item a normalisation of the outgoing \emph{degree} of a node.
-	\label{norm:degree}
+	\label{chap6:ranking:norm:degree}
 \end{enumerate}
 The first normalisation is applied on the \emph{leaf} nodes of the DAG. The second normalisation is applied on the \emph{internal} nodes during the aggregation step. This additional level of normalisation allows a finer tuning of the ranking function.
 
@@ -138,14 +138,14 @@ We present first the features needed for the \gls{MF} ranking model and then def
 
 The \gls{MF} model introduces two levels of normalisations. In order to implement them, the following features are needed:
 
-\subparagraph{Features for Normalisation~\ref{norm:content}.}
+\subparagraph{Features for Normalisation~\ref{chap6:ranking:norm:content}.}
 
 \begin{labeling}{\textbf{average leaf length:}}
   \item[\textbf{leaf length:}] refers to the number of terms in the label of a leaf;
   \item[\textbf{average leaf length:}] is the mean of the \emph{leaf length} of sibling nodes for a particular attribute;
 \end{labeling}
 
-\subparagraph{Features for Normalisation~\ref{norm:degree}.}
+\subparagraph{Features for Normalisation~\ref{chap6:ranking:norm:degree}.}
 
 \begin{labeling}{\textbf{average attribute cardinality:}}
   \item[\textbf{attribute cardinality:}] is equal to the number of values an attribute possesses;
@@ -159,7 +159,7 @@ BM25F is extended by adapting the Equation (\ref{chap6:ranking:eq:bm25f_1}). The
 The computation of the entity score with \gls{BM25MF} consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively.\\
 
 The \gls{BM25MF} ranking function is defined following the two levels of normalisations.
-The $f_{t,L}$ function implements the Normalisation~\ref{norm:content} on the content and is defined as follows:
+The $f_{t,L}$ function implements the Normalisation~\ref{chap6:ranking:norm:content} on the content and is defined as follows:
 \begin{equation}
 \label{chap6:ranking:bm25mf_v}
 f_{t,L} = \frac{\alpha_v\times F_t}{1+b_v\times\left(\frac{l}{l_a}-1\right)}
@@ -170,10 +170,10 @@ in which the following notations are used:
 	\item $l$ is the \emph{leaf length} of the leaf; and
 	\item $l_a$ is the \emph{average leaf length}.
 	\item $\alpha_v$ is a weight specific to a leaf; and
-	\item $b_v$ where $b_v \in \left[0,1\right]$ is a parameter of the Normalisation~\ref{norm:content}.
+	\item $b_v$ where $b_v \in \left[0,1\right]$ is a parameter of the Normalisation~\ref{chap6:ranking:norm:content}.
 \end{itemize}
 
-After applying the $f_{t,L}$ function, results from the leaves are summed up on the parent nodes. Then, a parent node applies the function $f_{t,I}$ over the sum. This process is repeated until the root of the DAG is reached. The $f_{t,I}$ function implements the Normalisation~\ref{norm:degree} on the degree of an internal node. This function is defined as follows:
+After applying the $f_{t,L}$ function, results from the leaves are summed up on the parent nodes. Then, a parent node applies the function $f_{t,I}$ over the sum. This process is repeated until the root of the DAG is reached. The $f_{t,I}$ function implements the Normalisation~\ref{chap6:ranking:norm:degree} on the degree of an internal node. This function is defined as follows:
 \begin{equation}
 \label{chap6:ranking:bm25mf_a}
 f_{t,I} = \frac{\alpha_a \times \sum{f_{t,L}} }{ 1 + b_a \times \left(\frac{ \left|{a}\right|_e }{ \left|{a}\right| } - 1\right) }
@@ -183,7 +183,7 @@ in which the following notations are used:
 \item $\left|{a}\right|_e$ is the \emph{attribute cardinality} of the attribute $a$ in the entity $e$;
 \item $\left|{a}\right|$ is the \emph{average attribute cardinality} of the attribute $a$;
 \item $\alpha_a$ is a weight specific to an internal node; and
-\item $b_a$ where $b_a \in \left[0,1\right]$ is a parameter of the Normalisation~\ref{norm:degree}.
+\item $b_a$ where $b_a \in \left[0,1\right]$ is a parameter of the Normalisation~\ref{chap6:ranking:norm:degree}.
 \end{itemize}
 
 \paragraph{Example.}
@@ -211,14 +211,14 @@ PL2F is extended by adapting the Equation (\ref{chap6:ranking:eq:pl2f}). The res
 Similarly to the \gls{BM25MF} extension, the computation of the entity score with \gls{PL2MF} consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively. We reuse the same notation as the ones from the previous section.\\ 
 
 The \gls{PL2MF} ranking function is defined following the two levels of normalisations. The notation used in the following two functions are similar to the one introduced in Section~\ref{sec:bm25mf-function} for the \gls{BM25MF} extension.
-The $f_{t,L}$ function implements the Normalisation~\ref{norm:content} on the content and is defined as follows:
+The $f_{t,L}$ function implements the Normalisation~\ref{chap6:ranking:norm:content} on the content and is defined as follows:
 \begin{equation}
 \label{chap6:ranking:eq:pl2mf_v}
 f_{t,L} = \alpha_v\times F_t \times log_2\left(1+c_v\times\frac{l_a}{l}\right)
 \end{equation}
 where $c_v$ is a parameter particular to the PL2F ranking function applied on leaves, with $c_v \in\; ]0,+\infty[$.
 
-The $f_{t,I}$ function implements the Normalisation~\ref{norm:degree} on the degree of an internal node. This function is defined as follows:
+The $f_{t,I}$ function implements the Normalisation~\ref{chap6:ranking:norm:degree} on the degree of an internal node. This function is defined as follows:
 \begin{equation}
 \label{chap6:ranking:eq:pl2mf_a}
 f_{t,I} = \alpha_a \times log_2\left(1+c_a\times\frac{\left|{a}\right|}{\left|{a}\right|_e}\right) \times \sum{f_{t,L}}

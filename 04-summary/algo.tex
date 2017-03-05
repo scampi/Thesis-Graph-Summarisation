@@ -373,7 +373,7 @@ Thanks to the dictionaries, the computation load over the two expensive join ope
 
 \minisec{Step 1}
 
-The computation of a sumnode identifier requires all the information about an entity. Since the input data consist of an edge per tuple, we need to compute the entity description \glssymbol{edesc} which is depicted by the Step~1 in the Figure~\ref{fig:va-cascading}. After parsing the input data, we aggregate the tuples based on the entity $u$. Cascading provides the \emph{GroupBy} operator to do so.
+The computation of a sumnode identifier requires all the information about an entity. Since the input data consist of an edge per tuple, we need to compute the entity description \glssymbol{edesc} which is depicted by the Step~1 in the Figure~\ref{chap4:summary:fig:va-cascading}. After parsing the input data, we aggregate the tuples based on the entity $u$. Cascading provides the \emph{GroupBy} operator to do so.
 %In the case of summarising a collection of datasets, we include the dataset label as the group key, in order to handle correctly the statement authority.
 
 Depending on the \gls{summarisation-relation}, more or less information about an entity is needed. In the relations presented in this thesis such as the \emph{IO Attributes} relation $R_{ioa}$, attributes of \emph{incoming} edges are required. We retrieve such information with no extra MapReduce job compared to others. The difference is in the amount of data aggregated.
@@ -464,7 +464,7 @@ We end both Step~3a and Step~3b with a grouping operation. In Step~3a, we group 
 			\input{04-summary/figures/flow}
 		}
 		\caption{Sumedge and sumnode creation}
-		\label{fig:va-cascading}
+		\label{chap4:summary:fig:va-cascading}
 	\end{subfigure}
 	\caption[Graph summarisation using the Cascading framework]{Graph summarisation using the Cascading framework. A node represent an operation over the incoming tuples, which if superscripted with GB involves an aggregate operation, i.e., there is a \texttt{GROUP BY} operation. The $*$ superscript over the RDF nodes indicates that the dictionary is used for mapping the data back into plain text. The triangle-shaped nodes represent points in the flow where the data is written to or read from.}
 	\label{chap4:summary:fig:summary-cascading}

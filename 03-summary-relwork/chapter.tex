@@ -98,7 +98,7 @@ In the rest of this chapter, we discuss the graph summarisation literature with 
 %% present here the different kinds of approaches
 The concept of graph summarisation has been explored for diverse use cases in the literature. In Section~\ref{chap3:review:graph-exploration}, we present some research where it has been employed for aiding a user in exploring an unknown graph. In Section~\ref{chap3:review:query-profiling}, a summary of the graph is used for profiling the data, i.e., gathering some statistics about the graph so to analyse it with regards to upstream applications such as data integration. Graph summarisation is also used for analysing the \emph{content} of the graph by computing aggregates, which research is discussed in Section~\ref{chap3:review:data-analytics}. As discussed in Section~\ref{chap3:review:query-optim}, graph summarisation has been used for the purpose of optimising the query evaluation by outlining what paths exist in the graph and creating indices over the summary.\\
 
-Figure~\ref{fig:timeline} depicts a time-line of the literature presented in this chapter. The main use case of each work is indicated with a trapeze having its own colour and stripes; a trapeze reflects the sections outlined in the previous paragraph. From the time-line, we observe that graph summarisation was at first used for optimising query evaluation through indices; a new direction later appeared where the summary is used for analysing and exploring a graph. This new direction might be linked with the emergence of Web Data, since users generally interact with graphs which structure is (partially) unknown.
+Figure~\ref{chap3:review:fig:timeline} depicts a time-line of the literature presented in this chapter. The main use case of each work is indicated with a trapeze having its own colour and stripes; a trapeze reflects the sections outlined in the previous paragraph. From the time-line, we observe that graph summarisation was at first used for optimising query evaluation through indices; a new direction later appeared where the summary is used for analysing and exploring a graph. This new direction might be linked with the emergence of Web Data, since users generally interact with graphs which structure is (partially) unknown.
 
 \paragraph{Graph clustering versus graph summarisation.}
 
@@ -115,13 +115,13 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, the process of graph s
 		\input{03-summary-relwork/figures/timeline}
 	}
 	\caption{Time-line of the research on graph summarisation}
-	\label{fig:timeline}
+	\label{chap3:review:fig:timeline}
 \end{figure}
 
 \section{Graph Exploration}
 \label{chap3:review:graph-exploration}
 
-Graph summarisation techniques can be used for exploring a graph. In this scenario, the structure of the graph is (partially) unknown; it is necessary however to know it in order to compose queries over the graph. The user leverage the summary to learn what attributes are used, what types, and how they relate with each other. In the time-line, the research works for this application are depicted with a red horizontally-striped trapeze in Figure~\ref{fig:timeline}.\\
+Graph summarisation techniques can be used for exploring a graph. In this scenario, the structure of the graph is (partially) unknown; it is necessary however to know it in order to compose queries over the graph. The user leverage the summary to learn what attributes are used, what types, and how they relate with each other. In the time-line, the research works for this application are depicted with a red horizontally-striped trapeze in Figure~\ref{chap3:review:fig:timeline}.\\
 
 Tian et. al \cite{tian:sigmod:2008} propose the use of graph summarisation for exploring a graph: by grouping nodes that share some pre-defined criteria, the ``general'' structure of the graph is brought out. The coarseness of the grouping can also be tuned so to retain more or less details about the graph. This work is a bridge to the OLAP (online analytical processing) world, since it allows OLAP-style exploration of the graph by providing drill-down and rollup operations. The user can drill-down, i.e., view more details about the structure of the graph, and rollup, i.e., browse a more abstract view of the structure of the graph. This is made possible by showing a \emph{summary} of the graph at each level of detail in the drill-down/rollup exploration.
 
@@ -187,7 +187,7 @@ Each layer of the proposed index provides views of the LOD graph with varying gr
 \section{Data Profiling}
 \label{chap3:review:query-profiling}
 
-A graph summarisation algorithm can be used for providing insights into a graph by accumulating some statistics during the summary construction process. In the time-line of Figure~\ref{fig:timeline}, literature pertaining to this use case are depicted with a red dotted-trapeze.\\
+A graph summarisation algorithm can be used for providing insights into a graph by accumulating some statistics during the summary construction process. In the time-line of Figure~\ref{chap3:review:fig:timeline}, literature pertaining to this use case are depicted with a red dotted-trapeze.\\
 
 Khatchadourian et. al \cite{khatchadourian:2010:eswc} describe the structure of the graph along with statistics thanks to summaries. The proposed summary is built using the bisimulation equivalence, which is described in Section~\ref{chap4:summary:bisim}.
 
@@ -227,7 +227,7 @@ A sumedge indicates in this approach that all nodes that are mapped to the adjac
 \section{Data Analytics}
 \label{chap3:review:data-analytics}
 
-OLAP (online analytical processing) is a technique for answering analytical queries over multi-dimensional data. Through different kind of operations it allows a user to analyse the data from different perspectives. Each perspective is called a \emph{cube}, obtained by aggregating the values of some dimensions. In the time-line of Figure~\ref{fig:timeline}, the research works that pertain to this use case are depicted with a plain grey trapeze.\\
+OLAP (online analytical processing) is a technique for answering analytical queries over multi-dimensional data. Through different kind of operations it allows a user to analyse the data from different perspectives. Each perspective is called a \emph{cube}, obtained by aggregating the values of some dimensions. In the time-line of Figure~\ref{chap3:review:fig:timeline}, the research works that pertain to this use case are depicted with a plain grey trapeze.\\
 
 Several works investigate the use of OLAP over graphs: data records analysed through OLAP are now related to each other. The main difference between traditional OLAP and graph-OLAP is the \emph{measure} which traditionally is a number becomes a \emph{graph}. Compared to \cite{tian:sigmod:2008} discussed in Section~\ref{chap3:review:graph-exploration}, the works presented here are anchored in a OLAP background, rather than being a bridge to OLAP from the graph exploration domain.
 
@@ -295,7 +295,7 @@ Rudolf et al. \cite{rudolf:2013:slg} propose a framework for analysing graphs th
 \section{Query Optimisation}
 \label{chap3:review:query-optim}
 
-The purpose of the graph summarisation is to create a graph that share the same structure as the original, but is significantly smaller. Hence, that summary can be used in place of the original in order to improve the speed of query optimisation. In the time-line of Figure~\ref{fig:timeline}, the literature that pertain to this application of the summary are depicted with a blue vertically-striped trapeze.\\
+The purpose of the graph summarisation is to create a graph that share the same structure as the original, but is significantly smaller. Hence, that summary can be used in place of the original in order to improve the speed of query optimisation. In the time-line of Figure~\ref{chap3:review:fig:timeline}, the literature that pertain to this application of the summary are depicted with a blue vertically-striped trapeze.\\
 
 DataGuides \cite{goldman1997dataguides} is the first work to improve the query execution through the use of an index on the summary of the structure of the graph. The summary is built with the requirement that every path in the summary is \emph{unique}; this would allow to spend less time searching through each different path. In the presence of a graph with a complex structure, the size of the summary can be as large as the graph, or even larger. This issue is discussed in \cite{goldman1999approximate}, where some constraints of DataGuides are relaxed, e.g., the existence of a path in the entity graph.\\
 
