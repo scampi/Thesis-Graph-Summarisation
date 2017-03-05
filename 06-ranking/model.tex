@@ -1,5 +1,5 @@
 \section{MF Ranking Model}
-\label{chap:tree-ranking:mf-model}
+\label{chap6:ranking:mf-model}
 
 In general, an entity contains some structure which provides relevant information about its content. For example, an entity that describes a book would be divided into chapters, each chapter into sections, each section into a set of paragraphs. In order to retain this structure for later use in the ranking, we generalize \gls{field}-based approaches with the ``MF'' ranking model for Directed Acyclic Graphs (DAG) by integrating the complete graph structure into its model.
 
@@ -74,7 +74,7 @@ The score of an entity with regards to a query is computed with a bottom-up appr
 For instance, we compute the contribution of the leaves ``$d$'', ``$v_5$'', and ``$v_4$'', which are aggregated on the parent node. The aggregated value is then combined with its sibling nodes, i.e., ``$b$'' and ``$v_2$''. These operations are repeated until the root of the tree is reached.
 
 \paragraph{MF Model Normalisations.}
-\label{chap:tree-ranking:mf-model:norm}
+\label{chap6:ranking:mf-model:norm}
 
 Ranking models use statistics garnered from the entity to estimate its relevance with regards to a query. For instance, the frequency of a term can be used as an indicator for its importance in describing the entity. However, the entity is part of a dataset and the significance of the frequency as a measure varies between entities. This variability may be due to several factors, e.g., the writing style: two entities can provide the same amount of information about a certain topic, but one uses twice as much terms as the other.
 
