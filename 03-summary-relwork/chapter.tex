@@ -1,5 +1,5 @@
 \chapter{Graph Summarisation: Related Work}
-\label{chap:graph-summary:related-work}
+\label{chap3:review}
 
 In many Computer Science areas, the information is represented as and is analysed through graphs. Graphs are used to capture the social relationship between people, to represent processes and their transition in concurrency, or to structure data in a flexible way, e.g., using the Object Exchange Model \cite{papakonstantinou:1995:oea} or, more recently, the Resource Description Framework \cite{rdfconcepts}.\\
 
@@ -128,13 +128,13 @@ Tian et. al \cite{tian:sigmod:2008} propose the use of graph summarisation for e
 The proposed approach creates a summary graph by mapping each node of the graph into exactly one sumnode; several nodes can map to a same sumnode in the summary. Two nodes are mapped to a same sumnode if they share the same
 \begin{inparaenum}[(a)]
 	\item attributes' value; and
-	\label{acompatible}
+	\label{chap3:review:acompatible}
 	\item incident sumnodes of a node maps to.
-	\label{rcompatible}
+	\label{chap3:review:rcompatible}
 \end{inparaenum}
-The algorithm first partition the graph in order to achieve (\ref{acompatible}), then iteratively splits each block (sumnode) in the partition until each node in a sumnode fulfils (\ref{rcompatible}). The latter step relies on the incident matrix between nodes in the graph and sumnodes in the summary to decide whether to split a sumnode or not; there is one such matrix per attribute. A cell $a_{i,j}$ of the matrix is equal to $1$ if a node on row $i$ maps to a sumnode which is a neighbour of the sumnode on column $j$, otherwise it is equal to $0$.
+The algorithm first partition the graph in order to achieve (\ref{chap3:review:acompatible}), then iteratively splits each block (sumnode) in the partition until each node in a sumnode fulfils (\ref{chap3:review:rcompatible}). The latter step relies on the incident matrix between nodes in the graph and sumnodes in the summary to decide whether to split a sumnode or not; there is one such matrix per attribute. A cell $a_{i,j}$ of the matrix is equal to $1$ if a node on row $i$ maps to a sumnode which is a neighbour of the sumnode on column $j$, otherwise it is equal to $0$.
 
-The algorithm requires several passes over the graph in order to fulfill (\ref{rcompatible}). For large graphs that do not fit in memory, this becomes a challenge in itself. Indeed, if some part of the graph is not in memory, it needs to be retrieved, e.g., from disk, which would impact negatively on the algorithm performance.
+The algorithm requires several passes over the graph in order to fulfill (\ref{chap3:review:rcompatible}). For large graphs that do not fit in memory, this becomes a challenge in itself. Indeed, if some part of the graph is not in memory, it needs to be retrieved, e.g., from disk, which would impact negatively on the algorithm performance.
 
 The authors extend this work in \cite{zhang:2010:ddg} where a measure for the ``interestingness'' of a graph summary is proposed. The aim of this measure is to quantify how easy it is for a person to visualise and understand the high-level structural characteristics of the graph. 
 
