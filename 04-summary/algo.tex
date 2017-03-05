@@ -241,7 +241,7 @@ The Algorithm~\ref{chap4:summary:alg:id-summary} takes a collections graphs from
 
 \subparagraph{Example.}
 
-In Figure~\ref{tab:id-algo-ex} we depict the summarisation $R_t$ of two inter-linked datasets, \textbf{A} and \textbf{B}, where a person in the former is related to a person in the latter. The resulting \emph{Types} summary is depicted on the Figure~\ref{fig:id-algo-ex}, where the edges follows the same representation of the datasets, i.e., those which provenance is \textbf{A} are solid red, and those which provenance is \textbf{B} are dashed blue.
+In Figure~\ref{tab:id-algo-ex} we depict the summarisation $R_t$ of two inter-linked datasets, \textbf{A} and \textbf{B}, where a person in the former is related to a person in the latter. The resulting \emph{Types} summary is depicted on the Figure~\ref{chap4:summary:fig:id-algo-ex}, where the edges follows the same representation of the datasets, i.e., those which provenance is \textbf{A} are solid red, and those which provenance is \textbf{B} are dashed blue.
 
 The type features \emph{Student} and \emph{Person} of the node \texttt{e2} are shared between the datasets \textbf{A} and \textbf{B}, respectively. Since that node ownership is dataset \textbf{B}, the feature which provenance is \textbf{B} has authority, i.e., \emph{Person}, while the other in \textbf{A}, i.e., \emph{Student}, has not. In order to retain the information provided by dataset \textbf{A} about that node without corrupting the information gathered by the summary, we map the node \texttt{e2} according to the provenance information:
 \begin{itemize}
@@ -266,7 +266,7 @@ The type features \emph{Student} and \emph{Person} of the node \texttt{e2} are s
 			\input{04-summary/figures/fig-id-algo-ex}
 		}
 		\caption{Depiction of the \emph{Types} summary created in Figure~\ref{tab:id-algo-ex}. The edges which provenance is A are solid red, and those which provenance is B are dashed blue.}
-		\label{fig:id-algo-ex}
+		\label{chap4:summary:fig:id-algo-ex}
 	\end{subfigure}
 	\caption{Example of the \emph{Types} summarisation $R_t$ in the case of inter-linked datasets.}
 \end{figure}
@@ -345,7 +345,7 @@ GROUP BY ?s
 		\label{fig:sparql-gs}
 	\end{subfigure}
 	\caption{SPARQL-based graph summarisation over a single dataset}
-	\label{fig:gs-sparql-all}
+	\label{chap4:summary:fig:gs-sparql-all}
 \end{figure}
 
 \subsubsection{MapReduce Implementation}

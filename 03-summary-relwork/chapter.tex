@@ -27,7 +27,7 @@ In this section, we present three dimensions through which we discuss the litera
 \item the \emph{size} of its summary; and
 \item the impact of the graph's \emph{heterogeneity} on the summary.
 \end{enumerate}
-The Figure~\ref{fig:gs-axis} depicts the dimensions which form a three-dimensional space, within which a graph summarisation approach is located. For example, an approach might produce a summary which size increases as the graph gets more heterogeneous.
+The Figure~\ref{chap3:review:fig:gs-axis} depicts the dimensions which form a three-dimensional space, within which a graph summarisation approach is located. For example, an approach might produce a summary which size increases as the graph gets more heterogeneous.
 
 \begin{figure}
 	\centering
@@ -35,7 +35,7 @@ The Figure~\ref{fig:gs-axis} depicts the dimensions which form a three-dimension
 		\input{03-summary-relwork/figures/axis}
 	}
 	\caption{Graph summarisation dimensions}
-	\label{fig:gs-axis}
+	\label{chap3:review:fig:gs-axis}
 \end{figure}
 
 \paragraph{Size of the graph.}
@@ -60,15 +60,15 @@ We consider a graph to be heterogeneous when it is not consistent with regards t
 \end{inparaenum}
 Our rationale is that the more heterogeneous an entity graph is, the more difficult it is to create a \emph{precise} and \emph{concise} summary of that graph. By precise, we mean a summary which description of the entity structure of the graph is accurate. By concise, we mean a summary of small size.
 
-For example, we can imagine a dataset describing people in which the attributes are not consistent from a person to another: in one the phone number is missing, while in another it is the birth place. The Figure~\ref{fig:graph-hetero} illustrates the two scenari of graph heterogeneity, where we depict possibles graph summarisation with a \textit{dashed} graph.
+For example, we can imagine a dataset describing people in which the attributes are not consistent from a person to another: in one the phone number is missing, while in another it is the birth place. The Figure~\ref{chap3:review:fig:graph-heterogeneous} illustrates the two scenari of graph heterogeneity, where we depict possibles graph summarisation with a \textit{dashed} graph.
 
 \subparagraph{Heterogeneity of the graph structure.}
 
-Figure~\ref{fig:hetero-struct} depicts a graph in which the structure is inconsistent. The node $a_0$ has two incoming edges and a single outgoing edge, while for the node $b_0$ it is the opposite: a single incoming edge and two outgoing. Although the depicted summary in dashed lines may be considered sufficient, it loses some \emph{information} about the graph. We may record the in/out-degrees as \emph{metadata} but this requires additional storage space.
+Figure~\ref{chap3:review:fig:hetero-struct} depicts a graph in which the structure is inconsistent. The node $a_0$ has two incoming edges and a single outgoing edge, while for the node $b_0$ it is the opposite: a single incoming edge and two outgoing. Although the depicted summary in dashed lines may be considered sufficient, it loses some \emph{information} about the graph. We may record the in/out-degrees as \emph{metadata} but this requires additional storage space.
 
 \subparagraph{Heterogeneity of the vocabulary.}
 
-Considering our previous example of the people dataset, a graph can be seen as heterogeneous if it uses different attributes for each entity within. Figure~\ref{fig:hetero-voc} depicts a graph in which this is the case: entities $a_1$, $\cdots$, $a_n$ have a different attribute each. A possible summarisation would be to create an isomorphic graph, i.e., edges of both graphs can be mapped to one another, but then the summarisation purpose --- to substitute the graph with another more manageable --- is lost. Another summarisation is depicted on the right as a dashed graph, where two nodes $s_a$ and $s_b$ are linked with all $n$ attributes. Although this reduces the number of nodes from $2 \times n$ to $2$, we loose the original distribution of the attributes.\\
+Considering our previous example of the people dataset, a graph can be seen as heterogeneous if it uses different attributes for each entity within. Figure~\ref{chap3:review:fig:hetero-voc} depicts a graph in which this is the case: entities $a_1$, $\cdots$, $a_n$ have a different attribute each. A possible summarisation would be to create an isomorphic graph, i.e., edges of both graphs can be mapped to one another, but then the summarisation purpose --- to substitute the graph with another more manageable --- is lost. Another summarisation is depicted on the right as a dashed graph, where two nodes $s_a$ and $s_b$ are linked with all $n$ attributes. Although this reduces the number of nodes from $2 \times n$ to $2$, we loose the original distribution of the attributes.\\
 
 In the rest of this chapter, we discuss the graph summarisation literature with regards to those three dimensions.
 
@@ -79,7 +79,7 @@ In the rest of this chapter, we discuss the graph summarisation literature with 
 			\input{03-summary-relwork/figures/structure-heterogeneity}
 		}
 		\caption{Graph structure heterogeneity}
-		\label{fig:hetero-struct}
+		\label{chap3:review:fig:hetero-struct}
 	\end{subfigure}
 	\qquad
 	\begin{subfigure}{.42\textwidth}
@@ -87,10 +87,10 @@ In the rest of this chapter, we discuss the graph summarisation literature with 
 			\input{03-summary-relwork/figures/voc-heterogeneity}
 		}
 		\caption{Graph vocabulary heterogeneity}
-		\label{fig:hetero-voc}
+		\label{chap3:review:fig:hetero-voc}
 	\end{subfigure}
 	\caption{Graph heterogeneity where the dashed graphs represent possible summaries of the graph}
-	\label{fig:graph-hetero}
+	\label{chap3:review:fig:graph-heterogeneous}
 \end{figure}
 
 \section{Graph Summarisation Approaches}
@@ -253,7 +253,7 @@ The summary in \cite{zhao:sigmod:2011} is defined based on an equivalence relati
 	We propose instead a framework based on graph homomorphism which is more expressive in the definition of the summary.
 \end{centeremph}
 
-Figure~\ref{fig:graph-cube} depicts the summarisation of a graph as per \cite{zhao:sigmod:2011}; it presents three sumnodes $S_1$, $S_2$, and $S_3$, in which nodes of the graph they are associated with are represented as a cross. Every node in a sumnode is equivalent to one another; however, this does not affect the connectivity between the sumnodes as $S_2$ and $S_3$ are linked although only two of their nodes out of five actually are.
+Figure~\ref{chap3:review:fig:graph-cube} depicts the summarisation of a graph as per \cite{zhao:sigmod:2011}; it presents three sumnodes $S_1$, $S_2$, and $S_3$, in which nodes of the graph they are associated with are represented as a cross. Every node in a sumnode is equivalent to one another; however, this does not affect the connectivity between the sumnodes as $S_2$ and $S_3$ are linked although only two of their nodes out of five actually are.
 
 \begin{centeremph}{Our contribution}
 	In our framework, conditions affecting the connectivity in the summary can be defined explicitly if needed. Furthermore, the graph homomorphism is also a more natural definition of the summary, since homomorphism is an operation that retain the structure of the graph.
@@ -265,7 +265,7 @@ Figure~\ref{fig:graph-cube} depicts the summarisation of a graph as per \cite{zh
 		\input{03-summary-relwork/figures/graph-cube}
 	}
 	\caption{Graph summarisation based on equivalence relation as in \cite{zhao:sigmod:2011}}
-	\label{fig:graph-cube}
+	\label{chap3:review:fig:graph-cube}
 \end{figure}
 
 Colazzo et al. \cite{colazzo:www:2014} describe a framework for using OLAP over RDF data. Each cube represents a summary and is built based on SPARQL queries which define sumnodes and sumedges. This analytical framework is flexible enough to accommodate many kinds of analysis, since the aggregate function is also based on a SPARQL query. Although the analysis of the data is done through its cubes by a user, the computation of a cube is always done over the original data.

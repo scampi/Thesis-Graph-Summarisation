@@ -28,7 +28,7 @@ These properties of a summary are fulfilled by defining the graph summarisation 
 \subsubsection{Graph Homomorphism}
 
 A graph is homomorphic to another one if there exists a mapping of nodes that matches \emph{edges} from the first to the second graph. This ensures that the structure of the first graph is kept.
-The Figure~\ref{fig:homomorphism} depicts two graphs, where there exists a relation $R$ that maps nodes of the left graph to nodes of the right graph. The edges of the left graph are also kept in the right graph. Indeed, there is an edge from nodes $2$ and $3$ to $1$, and as well there is an edge between their mapped nodes --- nodes $a$ and $b$ respectively.
+The Figure~\ref{chap4:summary:fig:homomorphism} depicts two graphs, where there exists a relation $R$ that maps nodes of the left graph to nodes of the right graph. The edges of the left graph are also kept in the right graph. Indeed, there is an edge from nodes $2$ and $3$ to $1$, and as well there is an edge between their mapped nodes --- nodes $a$ and $b$ respectively.
 
 \begin{definition}[Graph Homomorphism]
 Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \mathcal{W}, \mathcal{B}, l_\mathcal{W} \right\rangle$ be two graphs. Let $R \subseteq V \times \mathcal{W}$ be a binary relation.
@@ -49,7 +49,7 @@ From this point on, we shall differentiate between the nodes and edges of the en
 	\centering
 	\input{04-summary/figures/homomorphism}
 	\caption[Graph homomorphism]{Graph homomorphism. There is a relation $R$ that maps nodes of the left graph to the nodes of the right graph which keeps the connection of the right graph.}
-	\label{fig:homomorphism}
+	\label{chap4:summary:fig:homomorphism}
 \end{figure}
 
 \paragraph{Features.}
@@ -173,9 +173,9 @@ Given a \gls{summarisation-relation}, each node in the graph is mapped to a set 
 
 The purpose of a summary is to mirror the structure of the graph while being significantly smaller. Therefore, the summary can substitute the graph and improve the performance of applications. How well the summary mirrors the graph is then of high importance. From a structural perspective, a summary is precise if it is indiscernible from the entity graph, which we define in this section.
 
-Although the structure of the graph is preserved in the summary by definition of graph homomorphism, the structure of the summary may not exactly reflect the structure of the graph. Indeed, a summary may have paths that are not present in the entity graph $G$, as depicted in the Figure~\ref{fig:homomorphism}.
+Although the structure of the graph is preserved in the summary by definition of graph homomorphism, the structure of the summary may not exactly reflect the structure of the graph. Indeed, a summary may have paths that are not present in the entity graph $G$, as depicted in the Figure~\ref{chap4:summary:fig:homomorphism}.
 
-Indeed, we remark that although the structure of the graph $G$ is kept in the summary, the inverse may not hold true. The Figure~\ref{fig:homomorphism} depicts a loop on the $b$ node; although there is an edge from $1$ to $4$, there is no edge in the opposite direction.\\
+Indeed, we remark that although the structure of the graph $G$ is kept in the summary, the inverse may not hold true. The Figure~\ref{chap4:summary:fig:homomorphism} depicts a loop on the $b$ node; although there is an edge from $1$ to $4$, there is no edge in the opposite direction.\\
 %In Section~\ref{chap5:precision} we study the precision of an \emph{approximate} graph summary.
 
 A summary is built from a graph based on a \gls{summarisation-relation} that maps each node of that graph to a sumnode, i.e., a node of the summary. An edge $(u, \alpha, v) \in A$ is mapped to a sumedge by definition of the graph homomorphism. Several paths in the graph may be mapped to a same path on the summary. We introduce the \emph{summary path instance} as the set of nodes in the graph which mappings form a path in the summary. For example, if we consider the summary in Figure~\ref{chap4:summary:fig:classes-summary} built with the summarisation relation $R_t$, the set $\{v_1, v_3, v_6\}$ in an instance of the path $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in that summary; indeed, we have $(v_1, S_1) \in R_t$, $(v_3, S_2) \in R_t$, and $(v_6, S_4) \in R_t$.

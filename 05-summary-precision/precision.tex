@@ -55,7 +55,7 @@ We use the binary relation $\sqsubseteq$ to order the \glspl{summarisation-relat
 	Therefore, the binary relation $\sqsubseteq$ is a partial order.
 \end{proof}
 
-The set of \glspl{summarisation-relation} can then be ordered according to $\sqsubseteq$. The Figure~\ref{fig:lattice} depicts the lattice that is formed by the partial order $\sqsubseteq$ for the \glspl{summarisation-relation} introduced in Section~\ref{sec:approximate}. For example, we remark that the \gls{typessummary} $R_t$ is smaller than the \gls{io-attributes-types-summary} $R_{ioat}$, i.e., $R_{ioat} \sqsubseteq R_t$.
+The set of \glspl{summarisation-relation} can then be ordered according to $\sqsubseteq$. The Figure~\ref{chap5:precision:fig:lattice} depicts the lattice that is formed by the partial order $\sqsubseteq$ for the \glspl{summarisation-relation} introduced in Section~\ref{sec:approximate}. For example, we remark that the \gls{typessummary} $R_t$ is smaller than the \gls{io-attributes-types-summary} $R_{ioat}$, i.e., $R_{ioat} \sqsubseteq R_t$.
 
 \begin{remark}
 The graph lattice depicts that all summaries presented in Section~\ref{sec:approximate} can be generated from the \gls{io-attributes-types-summary} $R_{ioat}$. In cases where the \gls{io-attributes-types-summary} has significantly less edges and nodes than the entity graph, this allows a more efficient computation of all summaries which summarisation relation $R$ are smaller than the latter summary, i.e., $R_{ioat} \sqsubseteq R$.
@@ -65,7 +65,7 @@ The graph lattice depicts that all summaries presented in Section~\ref{sec:appro
 	\centering
 	\input{05-summary-precision/figures/lattice}
 	\caption{Lattice of the \glspl{summarisation-relation} set according to the partial order $\sqsubseteq$}
-	\label{fig:lattice}
+	\label{chap5:precision:fig:lattice}
 \end{figure}
 
 \paragraph{Example.}
