@@ -155,7 +155,7 @@ The \gls{MF} model introduces two levels of normalisations. In order to implemen
 \subsubsection{BM25MF}
 \label{sec:bm25mf-function}
 
-BM25F is extended by adapting the Equation (\ref{eq:bm25f_1}). The resulting normalised term frequency is then passed to the saturation function in the Equation (\ref{eq:bm25f_2}).
+BM25F is extended by adapting the Equation (\ref{chap6:ranking:eq:bm25f_1}). The resulting normalised term frequency is then passed to the saturation function in the Equation (\ref{chap6:ranking:eq:bm25f_2}).
 The computation of the entity score with \gls{BM25MF} consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively.\\
 
 The \gls{BM25MF} ranking function is defined following the two levels of normalisations.
@@ -202,36 +202,36 @@ If we are given the query ``\textit{dog}'', the Equation~(\ref{chap6:ranking:bm2
 \end{labeling}
 On the parent node, those three values are summed up and passed to the Equation~(\ref{chap6:ranking:bm25mf_a}). We get the result of $f_{t,I} = \frac{4 + 2}{1 + (\frac{3}{2} - 1)} = 4$ with $\alpha_a=b_a=1$, $\left|{a}\right|_e=3$, and $\left|{a}\right| = 2$; we assume that the \emph{average attribute cardinality} for the attribute $d$ is $2$.
 
-The result of the $f_{t,I}$ function is then passed to the parent node; it is summed with the outputs of the $f_{t,L}$ function on the leaves $b$ and $v_2$. The same process is applied on each branch until the root entity is reached, where we finally assigns a score to the entity using Equation~(\ref{eq:bm25f_2}) that represents its relevance with regards to the query.
+The result of the $f_{t,I}$ function is then passed to the parent node; it is summed with the outputs of the $f_{t,L}$ function on the leaves $b$ and $v_2$. The same process is applied on each branch until the root entity is reached, where we finally assigns a score to the entity using Equation~(\ref{chap6:ranking:eq:bm25f_2}) that represents its relevance with regards to the query.
 
 \subsubsection{PL2MF}
 \label{sec:pl2mf-function}
 
-PL2F is extended by adapting the Equation (\ref{eq:pl2f}). The resulting normalised term frequency is then passed to the normalisation function (\ref{eq:dfr-prisk}).
+PL2F is extended by adapting the Equation (\ref{chap6:ranking:eq:pl2f}). The resulting normalised term frequency is then passed to the normalisation function (\ref{chap6:ranking:eq:dfr-prisk}).
 Similarly to the \gls{BM25MF} extension, the computation of the entity score with \gls{PL2MF} consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively. We reuse the same notation as the ones from the previous section.\\ 
 
 The \gls{PL2MF} ranking function is defined following the two levels of normalisations. The notation used in the following two functions are similar to the one introduced in Section~\ref{sec:bm25mf-function} for the \gls{BM25MF} extension.
 The $f_{t,L}$ function implements the Normalisation~\ref{norm:content} on the content and is defined as follows:
 \begin{equation}
-\label{eq:pl2mf_v}
+\label{chap6:ranking:eq:pl2mf_v}
 f_{t,L} = \alpha_v\times F_t \times log_2\left(1+c_v\times\frac{l_a}{l}\right)
 \end{equation}
 where $c_v$ is a parameter particular to the PL2F ranking function applied on leaves, with $c_v \in\; ]0,+\infty[$.
 
 The $f_{t,I}$ function implements the Normalisation~\ref{norm:degree} on the degree of an internal node. This function is defined as follows:
 \begin{equation}
-\label{eq:pl2mf_a}
+\label{chap6:ranking:eq:pl2mf_a}
 f_{t,I} = \alpha_a \times log_2\left(1+c_a\times\frac{\left|{a}\right|}{\left|{a}\right|_e}\right) \times \sum{f_{t,L}}
 \end{equation}
 where $c_a$ is a parameter particular to the PL2F ranking function applied on internal nodes, with $c_a \in\; ]0,+\infty[$.
 
 \subsubsection{Generalisation}
 
-With both extensions in Equations (\ref{chap6:ranking:bm25mf_v}) and (\ref{eq:pl2mf_v}), we normalize the term frequency $F_t$ based on the \emph{average field length} $l_a$. In Equations (\ref{chap6:ranking:bm25mf_a}) and (\ref{eq:pl2mf_a}), we further normalize the term frequency based on the \emph{average attribute cardinality} $\left|{a}\right|$.
+With both extensions in Equations (\ref{chap6:ranking:bm25mf_v}) and (\ref{chap6:ranking:eq:pl2mf_v}), we normalize the term frequency $F_t$ based on the \emph{average field length} $l_a$. In Equations (\ref{chap6:ranking:bm25mf_a}) and (\ref{chap6:ranking:eq:pl2mf_a}), we further normalize the term frequency based on the \emph{average attribute cardinality} $\left|{a}\right|$.
 In addition to attribute-specific weights $\alpha_a$, the \gls{MF} ranking model allows value-specific weights in its implementations with the parameter $\alpha_v$. We present value and attribute specific weights in the next section.\\
 
-If we assume a single value per attribute to match field-based ranking models, then the Equations (\ref{chap6:ranking:bm25mf_v}) and (\ref{chap6:ranking:bm25mf_a}) are transformed into the Equation (\ref{eq:bm25f_2}), with $\alpha_a\times\alpha_v$ as the BM25F's attribute weight, and $b_v$ as the attribute normalisation parameter. \gls{BM25MF} is under this condition equivalent to BM25F.
+If we assume a single value per attribute to match field-based ranking models, then the Equations (\ref{chap6:ranking:bm25mf_v}) and (\ref{chap6:ranking:bm25mf_a}) are transformed into the Equation (\ref{chap6:ranking:eq:bm25f_2}), with $\alpha_a\times\alpha_v$ as the BM25F's attribute weight, and $b_v$ as the attribute normalisation parameter. \gls{BM25MF} is under this condition equivalent to BM25F.
 
-Under the same assumption, the Equations (\ref{eq:pl2mf_v}) and (\ref{eq:pl2mf_a}) are transformed into the Equation (\ref{eq:pl2f}), with $\alpha_a\times\alpha_v\times log_2(1+c_a)$ as the PL2F's attribute weight. \gls{PL2MF} is under this condition equivalent to PL2F.\\
+Under the same assumption, the Equations (\ref{chap6:ranking:eq:pl2mf_v}) and (\ref{chap6:ranking:eq:pl2mf_a}) are transformed into the Equation (\ref{chap6:ranking:eq:pl2f}), with $\alpha_a\times\alpha_v\times log_2(1+c_a)$ as the PL2F's attribute weight. \gls{PL2MF} is under this condition equivalent to PL2F.\\
 
 Therefore, the \gls{MF} model is a generalisation of field-based models for directed acyclic graphs.

@@ -135,7 +135,7 @@ The first step consist in computing the normalised term frequency $\bar{f}_{t,e,
 
 \begin{equation}
 \bar{f}_{t,e,a} = \frac{\alpha_a\times f_{t,e,a}}{1+b_a\times\left(\frac{l_{e,a}}{l_a}-1\right)}
-\label{eq:bm25f_1}
+\label{chap6:ranking:eq:bm25f_1}
 \end{equation}
 where:
 \begin{itemize}
@@ -151,7 +151,7 @@ In a second step, we sum up the \emph{normalised} term frequency from all fields
 
 \begin{equation}
 tfn_e = \frac{\sum_{a \in e}{\bar{f}_{t,e,a}}\times(k_1+1)}{\sum_{a \in e}{\bar{f}_{t,e,a}}+k_1}
-\label{eq:bm25f_2}
+\label{chap6:ranking:eq:bm25f_2}
 \end{equation}
 where $k_1$ is the saturation parameter.\\
 
@@ -159,7 +159,7 @@ In a third step, we combine the contribution of each query term, weighted by the
 
 \begin{equation}
 Score(e,q) = \alpha_e\times\sum_{t\in q}{q_t\times tfn_e \times \omega_t}
-\label{eq:tfidf-score}
+\label{chap6:ranking:eq:tfidf-score}
 \end{equation}
 where:
 \begin{itemize}
@@ -188,7 +188,7 @@ Using PL2F~\cite{macdonald:2005:clef} we show in this section how to compute the
 In the first step, the term frequency normalisation model used is the\emph{normalisation 2F}. Given a query term $t$ in the entity $e$, this model is a per-field normalisation of the term frequency and is defined as follows:
 \begin{equation}
 	\bar{f}_{t,e,a} = \alpha_a\times f_{t,e,a} \times log_2\left(1+c_a\times\frac{l_a}{l_{e,a}}\right)
-	\label{eq:pl2f}
+	\label{chap6:ranking:eq:pl2f}
 \end{equation}
 where:
 \begin{itemize}
@@ -205,13 +205,13 @@ In the second step, we apply the other two components of PL2F over the sum $tfn_
 	\item[\underline{information gain:}] the Laplace after-effect model $P_{risk}$ is used to estimate the information gain $1-P_{risk}$:
 	\begin{equation}
 		P_{risk} = \frac{tfn_e}{1+tfn}
-		\label{eq:dfr-prisk}
+		\label{chap6:ranking:eq:dfr-prisk}
 	\end{equation}
 
 	\item[\underline{randomness model:}] the Poisson distribution $P_P$ is used to model the randomness:
 	\begin{equation}
 		P_{P} = \frac{\lambda^{tfn_e}}{tfn!}\times e^{-\lambda} \:\text{ where }\: \lambda=\frac{F}{N}
-		\label{eq:dfr:rand-poisson}
+		\label{chap6:ranking:eq:dfr:rand-poisson}
 	\end{equation}
 	where $F$ is equal to the frequency of the term $t$ in the dataset, and $N$ the number of entities in the dataset.
 	The factorial is approximated with the Stirling's formula:
@@ -223,12 +223,12 @@ In the second step, we apply the other two components of PL2F over the sum $tfn_
 The weight $w_{e,t}$ of the query term $t$ in the entity $e$ is computed by combining the three components:
 \begin{equation}
 	w_{e,t} = \left(1-P_{risk}\right) \times \left(-log_2\left(P_{P}\right)\right)
-	\label{eq:dfr-term-weight}
+	\label{chap6:ranking:eq:dfr-term-weight}
 \end{equation}
 
 In the third step, we combine the weight of each query term for the entity to compute the score $Score(e,q)$:
 \begin{equation}
 	Score(e,q) = \alpha_e\times\sum_{t\in q}{qtw \times w_{e,t}}
-	\label{eq:dfr-score}
+	\label{chap6:ranking:eq:dfr-score}
 \end{equation}
 where $qtw=\frac{q_t}{q_{t,max}}$ is the weight of the query $q$ for the term $t$ with $q_{t,max}$ the maximum of $q_t$ in $q$.

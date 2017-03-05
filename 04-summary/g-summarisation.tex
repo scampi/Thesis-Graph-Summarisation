@@ -83,7 +83,7 @@ A graph $G$ that is homomorphic to a graph $\mathcal{S}$ with regards to a binar
 
 \subparagraph{Sink sumnode: content abstraction.}
 
-The purpose of a summary is to highlight the \emph{structure} of the graph, which is defined by the properties and \gls{types}. Content information does not pertain to the structure of the data, but only to individual entities. Therefore, we abstract the summary from the content in the graph, which are in general stored in sink nodes, i.e., nodes that have no outgoing edges. To do so, we map such nodes to a \emph{sink} sumnode that we identify as $\varnothing$. For example, the node labelled $Ireland$ in the Figure~\ref{fig:graph} is mapped to $\varnothing$. Also, we note that the nodes $S_2$ and $S_3$ in Figure~\ref{fig:basic-summary} are sink sumnodes.
+The purpose of a summary is to highlight the \emph{structure} of the graph, which is defined by the properties and \gls{types}. Content information does not pertain to the structure of the data, but only to individual entities. Therefore, we abstract the summary from the content in the graph, which are in general stored in sink nodes, i.e., nodes that have no outgoing edges. To do so, we map such nodes to a \emph{sink} sumnode that we identify as $\varnothing$. For example, the node labelled $Ireland$ in the Figure~\ref{fig:graph} is mapped to $\varnothing$. Also, we note that the nodes $S_2$ and $S_3$ in Figure~\ref{chap4:summary:fig:basic-summary} are sink sumnodes.
 
 \begin{remark}
 	Features of the graph summarisation are not subject to content abstraction, in order for the summary to retain the vocabulary of the original graph.
@@ -116,7 +116,7 @@ Let $G=\left\langle V, A, l_V \right\rangle$ and $\mathcal{S}=\left\langle \math
 We call the graph $\mathcal{S}$ a summary of $G$ with respect to $R$ --- which we refer to as the \gls{summarisation-relation} --- if $G$ is homomorphic to $\mathcal{S}$ with respect to $R$.
 \end{definition}
 
-Figure~\ref{fig:basic-summary} depicts a possible summary for a graph. The dotted lines illustrate the \gls{summarisation-relation} $R$, where we have for example $(a, S_1) \in R$ and $(John, S_3) \in R$.
+Figure~\ref{chap4:summary:fig:basic-summary} depicts a possible summary for a graph. The dotted lines illustrate the \gls{summarisation-relation} $R$, where we have for example $(a, S_1) \in R$ and $(John, S_3) \in R$.
 
 \begin{figure}
 	\centering
@@ -124,7 +124,7 @@ Figure~\ref{fig:basic-summary} depicts a possible summary for a graph. The dotte
 		\input{04-summary/figures/basic-summary}
 	}
 	\caption[A graph and a possible summary]{A graph and a possible summary. Dotted lines labelled $R$ represent the \gls{summarisation-relation} that maps nodes in the graph $G$ to sumnodes in $\mathcal{S}$.}
-	\label{fig:basic-summary}
+	\label{chap4:summary:fig:basic-summary}
 \end{figure}
 
 \paragraph{Uniqueness.}
@@ -215,7 +215,7 @@ A bisimulation is a binary relation on $V$ that relates two nodes of the graph i
 
 If we consider two nodes $(u, v) \in V$, a simulation $R$ is a relation that states that for every edge $(u, \alpha, x) \in A$, there exists an edge $(v,\alpha, y) \in A$ such that there is also a simulation between the nodes $x$ and $y$. Intuitively, $(u,v) \in R$ communicates that the node $v$ can \emph{substitute} the node $u$ since all the outgoing paths from $u$ match those from $v$. A bisimulation is stronger as it states that the relation must be \emph{symmetric} as well, thus ensuring that either node may substitute the other.
 
-Figure~\ref{fig:bisimulation} depicts the simulation relation $R$ between nodes $v_0$ and $v'_0$ such that $(v_0, v'_0) \in R$; this illustrates that:
+Figure~\ref{chap4:summary:fig:bisimulation} depicts the simulation relation $R$ between nodes $v_0$ and $v'_0$ such that $(v_0, v'_0) \in R$; this illustrates that:
 \begin{enumerate}
 	\item for every outgoing edge from $(v_0,\alpha_i,v_i)$, there is also an edge with the same label from $v'_0$; and
 	\item there is a simulation between the nodes thus reached $v_i$ and $v'_i$, i.e., $(v_i, v'_i) \in R$.
@@ -248,7 +248,7 @@ Two nodes $(u, v) \in V^2$ are said \emph{bisimilar} if $(u, v) \in \sim$.
 		\input{04-summary/figures/simulation-relation}
 	}
 	\caption{Illustration of the conditions for a node $v'_0$ to substitute a node $v_0$, as per the simulation $R$. If the reverse is also true, i.e., that the node $v_0$ can substitute $v'_0$, then the nodes $v_0$ and $v'_0$ are said to be bisimilar.}
-	\label{fig:bisimulation}
+	\label{chap4:summary:fig:bisimulation}
 \end{figure}
 
 The coinductive aspect of the definition ensures that two nodes are bisimilar if their \emph{outgoing} paths are the same.

@@ -36,9 +36,9 @@ In order to extract the entities from those datasets that are to be ranked, we p
 
 In this section, we study the impact on the ranking of the normalisation parameters. In addition to the length normalisation of field-based ranking function (Normalisation~\ref{norm:content}), the \gls{MF} ranking model offers an additional normalisation on the attribute's cardinality (Normalisation~\ref{norm:degree}). The effectiveness of the PRF and DFR frameworks depends on finding the right values for the normalisation parameters. However, these parameters are highly dependent on the dataset.\\
 
-Figures~\ref{fig:bm25mf-norm} and~\ref{fig:pl2mf-norm} depict the impact of the normalisation parameters on the ranking performance of \gls{BM25MF} and \gls{PL2MF}, respectively. For all three datasets, the figures depict on the \textbf{Y} axis the Mean Average Precision (MAP) scores, and on the \textbf{X} axis the Normalisation~\ref{norm:content}, i.e., with parameter $b_v$ in Figure~\ref{fig:bm25mf-norm} (resp., parameter $c_v$ in Figure~\ref{fig:pl2mf-norm}). Each curve plots the results with a fixed Normalisation~\ref{norm:degree} parameter, i.e., $b_a$ in Figure~\ref{fig:bm25mf-norm} and $c_a$ in Figure~\ref{fig:pl2mf-norm}.
+Figures~\ref{chap6:ranking:fig:bm25mf-norm} and~\ref{fig:pl2mf-norm} depict the impact of the normalisation parameters on the ranking performance of \gls{BM25MF} and \gls{PL2MF}, respectively. For all three datasets, the figures depict on the \textbf{Y} axis the Mean Average Precision (MAP) scores, and on the \textbf{X} axis the Normalisation~\ref{norm:content}, i.e., with parameter $b_v$ in Figure~\ref{chap6:ranking:fig:bm25mf-norm} (resp., parameter $c_v$ in Figure~\ref{fig:pl2mf-norm}). Each curve plots the results with a fixed Normalisation~\ref{norm:degree} parameter, i.e., $b_a$ in Figure~\ref{chap6:ranking:fig:bm25mf-norm} and $c_a$ in Figure~\ref{fig:pl2mf-norm}.
 
-The grid of parameters values in Figure~\ref{fig:bm25mf-norm} ranges from $0$ to $1$ with a step of $0.1$. In Figure~\ref{fig:pl2mf-norm}, the grid ranges from $0.5$ to $10.5$ with a step of $1$. Although these parameters can be attribute and value-specific, this experiment considers a constant parameter in order to reduce the number of combinations and to lower the variability of the results. Dashed lines depict the MAP scores of BM25F and PL2F and solid lines the scores of their \gls{MF} extension, \gls{BM25MF} and \gls{PL2MF} respectively.\\
+The grid of parameters values in Figure~\ref{chap6:ranking:fig:bm25mf-norm} ranges from $0$ to $1$ with a step of $0.1$. In Figure~\ref{fig:pl2mf-norm}, the grid ranges from $0.5$ to $10.5$ with a step of $1$. Although these parameters can be attribute and value-specific, this experiment considers a constant parameter in order to reduce the number of combinations and to lower the variability of the results. Dashed lines depict the MAP scores of BM25F and PL2F and solid lines the scores of their \gls{MF} extension, \gls{BM25MF} and \gls{PL2MF} respectively.\\
 
 These plots show that Normalisation~\ref{norm:degree}, the normalisation introduced with the \gls{MF} ranking model, improves the performance. Indeed, the Normalisation~\ref{norm:content} parameters $b_v$ and $c_v$, which are traditional to the field-based ranking model, do not grasp completely the heterogeneity in the data, which results in lower performance when compared to the \gls{MF} extensions. This indicates that the distinction between leaves within an attribute has a positive effect on the ranking.
 
@@ -49,14 +49,14 @@ These plots show that Normalisation~\ref{norm:degree}, the normalisation introdu
 		\input{06-ranking/figures/tikz/norm-exp-bm25mf}
 		\addtocounter{subfigure}{-1}
 		\caption{Evaluation of BM25MF normalisation parameters. A curve plots a fixed $b_v$ value (Equation~(\ref{chap6:ranking:bm25mf_v})) with $b_a$ (Equation~(\ref{chap6:ranking:bm25mf_a})) varying from $0$ to $1$ with a precision step of $0.1$.}
-		\label{fig:bm25mf-norm}
+		\label{chap6:ranking:fig:bm25mf-norm}
 	\end{subfigure}
 	\qquad
 	\begin{subfigure}{\textwidth}
 		\centering
 		\input{06-ranking/figures/tikz/norm-exp-pl2mf}
 		\addtocounter{subfigure}{-1}
-		\caption{Evaluation of PL2MF normalisation parameters. A curve plots a fixed $c_v$ value (Equation~(\ref{eq:pl2mf_v})) with $c_a$ (Equation~(\ref{eq:pl2mf_a})) varying from $0.5$ to $10.5$ with a precision step of $1$.}
+		\caption{Evaluation of PL2MF normalisation parameters. A curve plots a fixed $c_v$ value (Equation~(\ref{chap6:ranking:eq:pl2mf_v})) with $c_a$ (Equation~(\ref{chap6:ranking:eq:pl2mf_a})) varying from $0.5$ to $10.5$ with a precision step of $1$.}
 		\label{fig:pl2mf-norm}
 	\end{subfigure}
 	\caption[Impact of the normalisation parameters on the MF ranking functions]{Impact of the normalisation parameters on the \gls{MF} ranking functions. The figures report the MAP values of the respective datasets on the Y axis. On the X axis and with each curve, we vary the values of normalisation parameters.}
@@ -70,25 +70,25 @@ In this section, we evaluate and compare the performance of the BM25 and PL2 ran
 We outline below the ranking functions that are used in the experiments. We reuse the terminology for the equations that was presented in the previous section.
 
 \begin{labeling}{\emph{BM25~\cite{robertson:1994:sigir}}}
-  \item[\emph{TF-IDF}] is a logarithmic function of the term frequency and defines the Equation (\ref{eq:tfidf-score}) as
+  \item[\emph{TF-IDF}] is a logarithmic function of the term frequency and defines the Equation (\ref{chap6:ranking:eq:tfidf-score}) as
   $
   tfn_e=log(F_t)+1
   $,
   where $F_t$ is the number of occurrences of the term $t$ in the entity.
   \item[\emph{BM25~\cite{robertson:1994:sigir}}] considers the document as a simple bag of words. It is a function of the term frequency derived from a two-Poisson model and it uses an entity-length normalisation. The entity length is computed as the sum of the \emph{field length} defined in the Section~\ref{sec:ranking-wod}.
 
-  It defines the Equation (\ref{eq:tfidf-score}) as
+  It defines the Equation (\ref{chap6:ranking:eq:tfidf-score}) as
   $
   tfn_e=\frac{F_t\times(k_1+1)}{F_t+k_1\times \left(1+b\times\left(\frac{l_e}{l_{avg}}-1\right)\right)}
   $,
 where $l_e$ is the \emph{entity length} of the entity $e$, $l_{avg}$ is the average of the \emph{entity length} in the collection and $b$ is a normalisation parameter.
-  \item[\emph{BM25F}] is defined in Equation (\ref{eq:tfidf-score}). It considers documents as composed of fields, each field being a bag of words.
-  \item[\emph{PL2~\cite{amati:2002:acm}}] considers the document as a simple bag of words. It is a model derived from the DFR framework, with the Equation (\ref{eq:pl2f}) formulated as
+  \item[\emph{BM25F}] is defined in Equation (\ref{chap6:ranking:eq:tfidf-score}). It considers documents as composed of fields, each field being a bag of words.
+  \item[\emph{PL2~\cite{amati:2002:acm}}] considers the document as a simple bag of words. It is a model derived from the DFR framework, with the Equation (\ref{chap6:ranking:eq:pl2f}) formulated as
   $
   tfn_e=F_t\times log_2\left(1+c\times\frac{l_{avg}}{l_e}\right)
   $,
   where $c$ is a normalisation parameter.
-  \item[\emph{PL2F}] is defined in Equation (\ref{eq:dfr-score}). It considers a document as a set of fields, each field being a bag of words.
+  \item[\emph{PL2F}] is defined in Equation (\ref{chap6:ranking:eq:dfr-score}). It considers a document as a set of fields, each field being a bag of words.
 \end{labeling}
 
 The Table~\ref{tab:norm-param} reports the values of normalisation parameters for each ranking function. For a given function and dataset, the parameter value that maximises the Mean Average Precision (MAP) is found through a constrained particle swarm optimisation~\cite{xiaohui:2002:sci}. The optimisation is run on ranking functions that have all their weights equal to one, i.e., $\alpha_e = \alpha_a = \alpha_v = 1$. The reason is to limit what may impact the performance of a ranking function, thus invalidating the optimisation.\\
@@ -134,7 +134,7 @@ We observe in Figure~\ref{fig:mf-qc} that the QC weight improves the retrieval p
 \subsubsection{\emph{Leaf Coverage Weight}}
 \label{sec:lc-weight-effect}
 
-The evaluation of the leaf coverage weight LC investigates its efficiency with and without the \emph{control} function (\ref{eq:lc-norm}), where we depict the results in Figure~\ref{fig:mf-lc}.
+The evaluation of the leaf coverage weight LC investigates its efficiency with and without the \emph{control} function (\ref{chap6:ranking:eq:lc-norm}), where we depict the results in Figure~\ref{fig:mf-lc}.
 
 We provide for each dataset the best performing parameters described in Section~\ref{sec:leaf-coverage} for the control function. For the three datasets regardless of the \gls{MF} extension, the values are as follows:
 \begin{description}
@@ -142,7 +142,7 @@ We provide for each dataset the best performing parameters described in Section~
 	\item[SS10:] $n=2\;\;\alpha=0.4$; and
 	\item[SS11:] $n=1\;\;\alpha=0.9$.
 \end{description}
-We can observe that the LC weight, with the control function (\ref{eq:lc-norm}) applied, improves slightly the retrieval performance on SS10 and SS11. The reason is that without this function, LC assigns a low weight to leaves containing many terms, even if they have occurrences of all query terms.
+We can observe that the LC weight, with the control function (\ref{chap6:ranking:eq:lc-norm}) applied, improves slightly the retrieval performance on SS10 and SS11. The reason is that without this function, LC assigns a low weight to leaves containing many terms, even if they have occurrences of all query terms.
 
 \subsubsection{\emph{Attribute and Entity Labels Weights}}
 \label{sec:ael-weight-effect}
@@ -204,7 +204,7 @@ On INEX09 their combination decreases slightly the performance for \gls{PL2MF}. 
 		\resizebox{\textwidth}{!}{
 			\input{06-ranking/figures/experiments/cmp-lc}
 		}
-		\caption{Leaf coverage weight LC, tested with and without the control function in Equation~(\ref{eq:lc-norm})}
+		\caption{Leaf coverage weight LC, tested with and without the control function in Equation~(\ref{chap6:ranking:eq:lc-norm})}
 		\label{fig:mf-lc}
 	\end{subfigure}
 	\quad
@@ -285,7 +285,7 @@ Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{L}$ be the se
 A triple pattern is a tuple $t= \langle s, p, o \rangle$ where $t \in (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var) \times (\mathcal{L} \cup Var)$.
 The components of a triple pattern $t$ are denoted $subject(t)$, $predicate(t)$ and $object(t)$, respectively.
 An edge $(x,\alpha,y) \in A$ of the graph $G$ is a match for a triple pattern $t$ if and only if the non-variable components of $t$ are equal to those of the edge $(x, \alpha, y)$.
-\label{def:triple-pattern}
+\label{chap6:ranking:def:triple-pattern}
 \end{definition}
 
 In this operation, we discard any component of the SPARQL query that is not a BGP, e.g., filters.

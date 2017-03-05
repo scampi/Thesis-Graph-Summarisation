@@ -83,7 +83,7 @@ On line~5 we retrieve the sumnode of $v$ only if it is not a type, since we cons
 \subparagraph{Example.}
 
 In the Figure~\ref{tab:algo-ex}, we depict the \emph{Types} summarisation $R_t$ of a graph showing people and documents. We group the edges describing a same node in \hyperref[step-ed]{Step 1}. In \hyperref[step-hn]{Step 2} we assign the sumnode \emph{h1} to the nodes (i.e., \emph{:e1} and \emph{:e3}) of type \emph{:Person}, and \emph{h2} to the node (i.e., \emph{:e2}) of type \emph{:Document}. In \hyperref[step-he]{Step 3}, we join the edges of the input graph with the table created in \hyperref[step-hn]{Step 2} in order to retrieve the sumnodes.
-It is possible to gather statistics about the summarisation in \hyperref[step-stats]{Step 4} by, e.g., grouping over the sumnodes and counting the number of rows in a group. Figure~\ref{fig:algo-ex} depicts the \emph{Types} summary that is the output of the algorithm which execution is depicted in Figure~\ref{tab:algo-ex}.
+It is possible to gather statistics about the summarisation in \hyperref[step-stats]{Step 4} by, e.g., grouping over the sumnodes and counting the number of rows in a group. Figure~\ref{chap4:summary:fig:algo-ex} depicts the \emph{Types} summary that is the output of the algorithm which execution is depicted in Figure~\ref{tab:algo-ex}.
 
 \begin{figure}
 	\centering
@@ -102,7 +102,7 @@ It is possible to gather statistics about the summarisation in \hyperref[step-st
 			\input{04-summary/figures/fig-algo-ex}
 		}
 		\caption{Depiction of the \emph{Types} summary created in Figure~\ref{tab:algo-ex}.}
-		\label{fig:algo-ex}
+		\label{chap4:summary:fig:algo-ex}
 	\end{subfigure}
 	\caption{Example of the \emph{Types} summarisation $R_t$ in the case of a single dataset.}
 \end{figure}
@@ -165,7 +165,7 @@ The authority of an edge combines the concepts of provenance and ownership, in o
 	In RDF, an edge which source node is a blank node has authority implicitly, since it is local to the dataset it originates from.
 \end{remark}
 
-The Figure~\ref{fig:authority} depicts three cases of authority. A dataset is represented by a colour and a line type, i.e., there are three datasets {\bfseries A}, {\bfseries B}, and {\bfseries C} which are dotted red, solid blue, and dashed green, respectively. The provenance of an edge determines its colour and line type. The ownership of a node is determined visually by the dataset it is in. We refer to the graphs in datasets \textbf{A}, \textbf{B}, \textbf{C} as $G_A$, $G_B$, and $G_C$, respectively.\\
+The Figure~\ref{chap4:summary:fig:authority} depicts three cases of authority. A dataset is represented by a colour and a line type, i.e., there are three datasets {\bfseries A}, {\bfseries B}, and {\bfseries C} which are dotted red, solid blue, and dashed green, respectively. The provenance of an edge determines its colour and line type. The ownership of a node is determined visually by the dataset it is in. We refer to the graphs in datasets \textbf{A}, \textbf{B}, \textbf{C} as $G_A$, $G_B$, and $G_C$, respectively.\\
 
 The ownership of the nodes $a_1$ and $a_2$ is dataset {\bfseries A}, and it is dataset {\bfseries B} for the node $b_1$. Both edges $(a_1, \alpha, a_2)$ and $\left(a_1, \beta, b_1 \right)$ have \emph{authority} since
 \begin{inparaenum}[(1)]
@@ -180,7 +180,7 @@ The edge $\left(a_2, \gamma, b_1\right)$ does not have authority, since its prov
 	\centering
 	\input{04-summary/figures/authority}
 	\caption[Edge authority]{Edge authority. A dataset is represented by a colour and a line type. The provenance of an edge determines its colour and line type. The ownership of a node is determined visually by the dataset it is in.}
-	\label{fig:authority}
+	\label{chap4:summary:fig:authority}
 \end{figure}
 
 \subparagraph{Algorithm.}
