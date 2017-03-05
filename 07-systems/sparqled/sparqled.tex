@@ -5,7 +5,7 @@ When a user formulates a SPARQL query, the user is in fact trying to summarise h
 
 To save the user from such a tedious work we present the \emph{Assisted SPARQL Editor}, an application that leverages the graph summary to help the user into effectively formulating complex SPARQL queries, even without prior knowledge about the structure and vocabulary of the data sources.\\
 
-In this section, we first give an overview of the possible recommendations supported by the SPARQL editor, and then, we introduce some of the main concepts in SPARQL. The summary is RDFied using the model presented in Section~\ref{chap03:sec:wd-mgnt} so that it can be queried: we describe how the current state of the SPARQL query is used to query the graph summary. The \emph{Full} reification of the summary is used. The results from the summary are then recommended to the user as possible structural query elements.
+In this section, we first give an overview of the possible recommendations supported by the SPARQL editor, and then, we introduce some of the main concepts in SPARQL. The summary is RDFied using the model presented in Section~\ref{chap7:applications:wdm} so that it can be queried: we describe how the current state of the SPARQL query is used to query the graph summary. The \emph{Full} reification of the summary is used. The results from the summary are then recommended to the user as possible structural query elements.
 
 \subsection{Overview of SPARQL Recommendations}
 
@@ -102,7 +102,7 @@ Similarly to triple patterns, summary patterns may be used to build more complex
 
 \subsection{From Entity Graph to Graph Summary}
 
-In order to suggest the possible structural elements to the user with respect to the current state of his query, we need to \emph{normalise} the AST of the query to match the RDF data model of the summary introduced in Section~\ref{chap03:sec:wd-mgnt}. The normalised AST is then evaluated on the graph summary and the possible structural elements are retrieved and presented to the user.
+In order to suggest the possible structural elements to the user with respect to the current state of his query, we need to \emph{normalise} the AST of the query to match the RDF data model of the summary introduced in Section~\ref{chap7:applications:wdm}. The normalised AST is then evaluated on the graph summary and the possible structural elements are retrieved and presented to the user.
 
 The AST normalisation is performed in three steps:
 \begin{enumerate}
@@ -177,7 +177,7 @@ SELECT ?POF WHERE {
 \paragraph{Step 3 --- \emph{Mapping}.}
 
 The third step consists of mapping each triple pattern to a summary pattern according to the following two rules.
-The RDF data model of the summary this operation maps to is described in Section~\ref{chap03:sec:wd-mgnt}.
+The RDF data model of the summary this operation maps to is described in Section~\ref{chap7:applications:wdm}.
 
 \begin{enumerate}
 	\item If the triple pattern $\langle ?s,\; p,\; o \rangle$ is a CTP, then it is replaced with the following BGP:
