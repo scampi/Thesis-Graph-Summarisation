@@ -161,7 +161,7 @@ The computation of the entity score with \gls{BM25MF} consists of applying two f
 The \gls{BM25MF} ranking function is defined following the two levels of normalisations.
 The $f_{t,L}$ function implements the Normalisation~\ref{norm:content} on the content and is defined as follows:
 \begin{equation}
-\label{bm25mf_v}
+\label{chap6:ranking:bm25mf_v}
 f_{t,L} = \frac{\alpha_v\times F_t}{1+b_v\times\left(\frac{l}{l_a}-1\right)}
 \end{equation}
 in which the following notations are used:
@@ -175,7 +175,7 @@ in which the following notations are used:
 
 After applying the $f_{t,L}$ function, results from the leaves are summed up on the parent nodes. Then, a parent node applies the function $f_{t,I}$ over the sum. This process is repeated until the root of the DAG is reached. The $f_{t,I}$ function implements the Normalisation~\ref{norm:degree} on the degree of an internal node. This function is defined as follows:
 \begin{equation}
-\label{bm25mf_a}
+\label{chap6:ranking:bm25mf_a}
 f_{t,I} = \frac{\alpha_a \times \sum{f_{t,L}} }{ 1 + b_a \times \left(\frac{ \left|{a}\right|_e }{ \left|{a}\right| } - 1\right) }
 \end{equation}
 in which the following notations are used:
@@ -194,13 +194,13 @@ If we consider the Figure~\ref{fig:expanded-graph2} for instance with the follow
 	\item the node labelled $v_5$ is replaced with the sentence ``\textit{This dog runs like the wind blows.}''; and
 	\item the node labelled $d$ is replaced with ``\textit{description}''.
 \end{itemize}
-If we are given the query ``\textit{dog}'', the Equation~(\ref{bm25mf_v}) over the leaves $d$, $v_5$, and $v_4$ outputs the following:
+If we are given the query ``\textit{dog}'', the Equation~(\ref{chap6:ranking:bm25mf_v}) over the leaves $d$, $v_5$, and $v_4$ outputs the following:
 \begin{labeling}{\textit{\underline{Node labelled $v_4$:}}}
 	\item[\textit{\underline{Node labelled $v_4$:}}] $f_{t,L} = \frac{2}{1 + (\frac{7}{14} - 1)} = 4$ with $\alpha_v=1$, $b_v=1$, $F_t=2$, $l=7$, and $l_a=14$. Here, we assume that the \emph{average leaf length} $l_a$ for the attribute $d$ is $14$.
 	\item[\textit{\underline{Node labelled $v_5$:}}] $f_{t,L} = \frac{1}{1 + (\frac{7}{14} - 1)} = 2$ with $\alpha_v=1$, $b_v=1$, $F_t=1$, $l=7$, and $l_a=14$.
 	\item[\textit{\underline{Node labelled $d$:}}] $f_{t,L} = 0$.
 \end{labeling}
-On the parent node, those three values are summed up and passed to the Equation~(\ref{bm25mf_a}). We get the result of $f_{t,I} = \frac{4 + 2}{1 + (\frac{3}{2} - 1)} = 4$ with $\alpha_a=b_a=1$, $\left|{a}\right|_e=3$, and $\left|{a}\right| = 2$; we assume that the \emph{average attribute cardinality} for the attribute $d$ is $2$.
+On the parent node, those three values are summed up and passed to the Equation~(\ref{chap6:ranking:bm25mf_a}). We get the result of $f_{t,I} = \frac{4 + 2}{1 + (\frac{3}{2} - 1)} = 4$ with $\alpha_a=b_a=1$, $\left|{a}\right|_e=3$, and $\left|{a}\right| = 2$; we assume that the \emph{average attribute cardinality} for the attribute $d$ is $2$.
 
 The result of the $f_{t,I}$ function is then passed to the parent node; it is summed with the outputs of the $f_{t,L}$ function on the leaves $b$ and $v_2$. The same process is applied on each branch until the root entity is reached, where we finally assigns a score to the entity using Equation~(\ref{eq:bm25f_2}) that represents its relevance with regards to the query.
 
@@ -227,10 +227,10 @@ where $c_a$ is a parameter particular to the PL2F ranking function applied on in
 
 \subsubsection{Generalisation}
 
-With both extensions in Equations (\ref{bm25mf_v}) and (\ref{eq:pl2mf_v}), we normalize the term frequency $F_t$ based on the \emph{average field length} $l_a$. In Equations (\ref{bm25mf_a}) and (\ref{eq:pl2mf_a}), we further normalize the term frequency based on the \emph{average attribute cardinality} $\left|{a}\right|$.
+With both extensions in Equations (\ref{chap6:ranking:bm25mf_v}) and (\ref{eq:pl2mf_v}), we normalize the term frequency $F_t$ based on the \emph{average field length} $l_a$. In Equations (\ref{chap6:ranking:bm25mf_a}) and (\ref{eq:pl2mf_a}), we further normalize the term frequency based on the \emph{average attribute cardinality} $\left|{a}\right|$.
 In addition to attribute-specific weights $\alpha_a$, the \gls{MF} ranking model allows value-specific weights in its implementations with the parameter $\alpha_v$. We present value and attribute specific weights in the next section.\\
 
-If we assume a single value per attribute to match field-based ranking models, then the Equations (\ref{bm25mf_v}) and (\ref{bm25mf_a}) are transformed into the Equation (\ref{eq:bm25f_2}), with $\alpha_a\times\alpha_v$ as the BM25F's attribute weight, and $b_v$ as the attribute normalisation parameter. \gls{BM25MF} is under this condition equivalent to BM25F.
+If we assume a single value per attribute to match field-based ranking models, then the Equations (\ref{chap6:ranking:bm25mf_v}) and (\ref{chap6:ranking:bm25mf_a}) are transformed into the Equation (\ref{eq:bm25f_2}), with $\alpha_a\times\alpha_v$ as the BM25F's attribute weight, and $b_v$ as the attribute normalisation parameter. \gls{BM25MF} is under this condition equivalent to BM25F.
 
 Under the same assumption, the Equations (\ref{eq:pl2mf_v}) and (\ref{eq:pl2mf_a}) are transformed into the Equation (\ref{eq:pl2f}), with $\alpha_a\times\alpha_v\times log_2(1+c_a)$ as the PL2F's attribute weight. \gls{PL2MF} is under this condition equivalent to PL2F.\\
 

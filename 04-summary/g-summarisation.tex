@@ -176,7 +176,7 @@ The purpose of a summary is to mirror the structure of the graph while being sig
 Although the structure of the graph is preserved in the summary by definition of graph homomorphism, the structure of the summary may not exactly reflect the structure of the graph. Indeed, a summary may have paths that are not present in the entity graph $G$, as depicted in the Figure~\ref{fig:homomorphism}.
 
 Indeed, we remark that although the structure of the graph $G$ is kept in the summary, the inverse may not hold true. The Figure~\ref{fig:homomorphism} depicts a loop on the $b$ node; although there is an edge from $1$ to $4$, there is no edge in the opposite direction.\\
-%In Section~\ref{chap03:sec:quality} we study the precision of an \emph{approximate} graph summary.
+%In Section~\ref{chap5:precision} we study the precision of an \emph{approximate} graph summary.
 
 A summary is built from a graph based on a \gls{summarisation-relation} that maps each node of that graph to a sumnode, i.e., a node of the summary. An edge $(u, \alpha, v) \in A$ is mapped to a sumedge by definition of the graph homomorphism. Several paths in the graph may be mapped to a same path on the summary. We introduce the \emph{summary path instance} as the set of nodes in the graph which mappings form a path in the summary. For example, if we consider the summary in Figure~\ref{fig:classes-summary} built with the summarisation relation $R_t$, the set $\{v_1, v_3, v_6\}$ in an instance of the path $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in that summary; indeed, we have $(v_1, S_1) \in R_t$, $(v_3, S_2) \in R_t$, and $(v_6, S_4) \in R_t$.
 
@@ -398,7 +398,7 @@ $$
 \subsection{Approximate Graph Summary}
 \label{sec:approximate}
 
-%A graph summary is built so that it describes the structure of the graph, providing similar benefits as a relational schema does for a database, which we discuss in Section~\ref{chap03:sec:gschema}.
+%A graph summary is built so that it describes the structure of the graph, providing similar benefits as a relational schema does for a database, which we discuss in Section~\ref{chap7:applications:wdm:graph-schema}.
 In general, we find in Web Data a heterogeneous use of vocabularies, where several different ontologies can be used within the same dataset, in ways that might not have been intended for. A reasonable explanation is that each person has own way of modelling data, thus making it difficult to fit a pre-defined ontology. Web Data presents a complex graph structure that varies greatly from dataset to dataset.
 
 In addition, Web Data is composed of user-created content which quality is not assessed, e.g., use of an appropriate ontology, typographic errors when editing, incorrect description of an entity, etc. This quality issue, combined with the heterogeneity of the graph, is an obstacle towards the generation of a precise summary. Indeed, attempting to record every single path would require a summary so large that its benefits would be nullified. Therefore, we present in this section \emph{approximate} graph summaries.

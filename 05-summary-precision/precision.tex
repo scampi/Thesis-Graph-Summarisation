@@ -1,5 +1,5 @@
 \chapter{Graph Summary Precision}
-\label{chap03:sec:quality}
+\label{chap5:precision}
 
 The summary of a graph reflects the structure of that graph. Concretely, this means that all possible paths in the graph are also possible in its summary. However, this does not imply the converse, i.e., that all possible paths in a summary do exist in the graph it represents. The structure of the summary stems from the grouping of the nodes in the graph by the \gls{summarisation-relation}. Therefore, the question of the \emph{precision} of the summary with regards to the graph it represents is raised.
 
@@ -14,7 +14,7 @@ We have introduced in Chapter~\ref{chap4:summary} a framework for defining graph
 
 In order to answer these questions, we propose a \gls{precision} which measures the amount of \emph{errors} in a summary. This model relies on the ordering of the summaries. We present in this section a partial order relation on the summaries.\\
 
-%There exists several possible summarisation relations, each resulting in a graph summary that exhibits different properties. In the Section~\ref{chap03:sec:quality}, we discuss the impact of the relation on the \emph{precision} of a graph summary with regards to the entity graph. There is no graph summary that fits all use cases, a summary suitable for one might not be for another. In this section, we describe how various summarisation relations can be ordered into a \emph{lattice}. Thus, we can reuse previous computations where a graph summary can result from another one, instead from the entity graph.
+%There exists several possible summarisation relations, each resulting in a graph summary that exhibits different properties. In the Section~\ref{chap5:precision}, we discuss the impact of the relation on the \emph{precision} of a graph summary with regards to the entity graph. There is no graph summary that fits all use cases, a summary suitable for one might not be for another. In this section, we describe how various summarisation relations can be ordered into a \emph{lattice}. Thus, we can reuse previous computations where a graph summary can result from another one, instead from the entity graph.
 
 We denote with $\sqsubseteq$ a binary relation on the set of \glspl{summarisation-relation}. It relates two summarisation relations if one can be expressed as a composition of the other.
 

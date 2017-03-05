@@ -3,10 +3,10 @@
 
 The graph summary highlights the structure of a graph, which in the case of RDF data consists in the use of predicates, classes, and their relationships. As such, a graph summary exhibits a similar purpose as a \emph{schema} in relational database management systems. In comparison to the VoID~\cite{alexander:2009:dld} approach, the use of a graph summary as a schema provides additional information, e.g., which predicates co-occur, or how are the classes in a dataset inter-connected.
 
-We define a graph schema model on top of a graph summary in Section~\ref{chap03:sec:gschema}. We describe an RDF model for a graph summary in Section~\ref{chap03:summary-rdf}.
+We define a graph schema model on top of a graph summary in Section~\ref{chap7:applications:wdm:graph-schema}. We describe an RDF model for a graph summary in Section~\ref{chap03:summary-rdf}.
 
 \subsection{Graph Schema}
-\label{chap03:sec:gschema}
+\label{chap7:applications:wdm:graph-schema}
 
 In order to use the information in a graph effectively, it is necessary to have a schema of that graph. The schema provides a description of the structure of the entity graph. Given a graph schema~\cite{buneman:1997:asu,kunii1983graph}, it is then possible to understand how the data is structured so that it is possible to perform meaningful operations such as querying, optimising query execution, or partitioning data.% \todo{add refs}
 
@@ -69,7 +69,7 @@ This can be achieved by using a \gls{summarisation-relation}. Indeed, a graph su
 There is a need for schemas of varying granularity. It is common for database schemas to be large and therefore difficult for users to understand. The authors in \cite{yu:2006:schema-summarization,yang:2011:summary-graphs} proposed methods for summarizing the information in schemas in order to highlight the ``important'' parts. This shows that applications having different degree of interactivity with the data require different parts to be focused, while others can be hidden. We call this notion the \emph{granularity level} of the schema.
 
 %By altering the mappings in the graph homomorphism, the resulting schema is then more or less coarse, i.e., it carries more or less information about the data. For instance in Figure~\ref{fig:introduction:graph}, if the two nodes $a$ and $b$ were mapped to different nodes in the schema, the latter would be finer grained than the schema in Figure~\ref{fig:introduction:homomorph}, since the path from node 2 to 3 via node 1 would not exist.
-A varying level of granularity can be achieved by modifying appropriately the \gls{summarisation-relation} of a graph summary. By altering the mappings of the relation, the resulting schema is then more or less coarse, i.e., it carries more or less information about the data. The granularity can be varied through the use of the presented \glspl{summarisation-relation} in Section~\ref{sec:approximate}. How coarse a granularity is can be measured thanks to the graph summary precision model introduced in Chapter~\ref{chap03:sec:quality}.
+A varying level of granularity can be achieved by modifying appropriately the \gls{summarisation-relation} of a graph summary. By altering the mappings of the relation, the resulting schema is then more or less coarse, i.e., it carries more or less information about the data. The granularity can be varied through the use of the presented \glspl{summarisation-relation} in Section~\ref{sec:approximate}. How coarse a granularity is can be measured thanks to the graph summary precision model introduced in Chapter~\ref{chap5:precision}.
 
 %\subsection{Abstract Model}
 %\label{sec:gschema:abstract-model}

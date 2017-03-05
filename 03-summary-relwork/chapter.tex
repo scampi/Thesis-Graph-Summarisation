@@ -139,7 +139,7 @@ The algorithm requires several passes over the graph in order to fulfill (\ref{c
 The authors extend this work in \cite{zhang:2010:ddg} where a measure for the ``interestingness'' of a graph summary is proposed. The aim of this measure is to quantify how easy it is for a person to visualise and understand the high-level structural characteristics of the graph. 
 
 \begin{centeremph}{Our contribution}
-In Chapter~\ref{chap03:sec:quality}, we argue that the interestingness of a summary actually depends on the application it is used for. In \cite{zhang:2010:ddg} the authors also investigate how to summarise numeric data; while this is an important aspect of graph summarisation in some application, we focus in this thesis on summarising the structure of the graph.
+In Chapter~\ref{chap5:precision}, we argue that the interestingness of a summary actually depends on the application it is used for. In \cite{zhang:2010:ddg} the authors also investigate how to summarise numeric data; while this is an important aspect of graph summarisation in some application, we focus in this thesis on summarising the structure of the graph.
 \end{centeremph}
 
 Liu et. al \cite{zheng:ipsj:2011} propose a graph summarisation that \emph{approximates} the information in the entity graph, i.e., the structure of the graph and the attributes' value associated with a node. The authors aim to construct a summary that is \emph{homogeneous}, i.e., each node mapped to a sumnode of the summary are consistent with one another. Three criteria that measure different aspect of the summary homogeneity are introduced:
@@ -283,7 +283,7 @@ Wang et al. generalise the concept of OLAP over graphs in \cite{zhengkui:2014:pp
 The generalised graph OLAP approach \cite{zhengkui:2014:ppg} is implemented over a MapReduce \cite{dean:2008:msd} framework. It leverage the lattice graph of all the possible summaries in order to generate several summaries in a single task in the MapReduce framework. A best execution plan for the series of MapReduce jobs is found using a cost model.
 
 \begin{centeremph}{Our contribution}
-	In this thesis, we show how the \gls{lattice} graph can also be used for the purpose of evaluating the precision of a summary in Section~\ref{chap03:sec:quality}.
+	In this thesis, we show how the \gls{lattice} graph can also be used for the purpose of evaluating the precision of a summary in Section~\ref{chap5:precision}.
 \end{centeremph}
 
 Rudolf et al. \cite{rudolf:2013:slg} propose a framework for analysing graphs through \emph{templates}. The graph is summarised given user-defined graph \emph{patterns}, which are then matched over the graph. An aggregation function is finally applied over the set of matched sub-graphs, e.g., a \emph{count} function.

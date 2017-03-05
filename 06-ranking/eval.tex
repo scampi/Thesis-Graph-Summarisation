@@ -48,7 +48,7 @@ These plots show that Normalisation~\ref{norm:degree}, the normalisation introdu
 		\centering
 		\input{06-ranking/figures/tikz/norm-exp-bm25mf}
 		\addtocounter{subfigure}{-1}
-		\caption{Evaluation of BM25MF normalisation parameters. A curve plots a fixed $b_v$ value (Equation~(\ref{bm25mf_v})) with $b_a$ (Equation~(\ref{bm25mf_a})) varying from $0$ to $1$ with a precision step of $0.1$.}
+		\caption{Evaluation of BM25MF normalisation parameters. A curve plots a fixed $b_v$ value (Equation~(\ref{chap6:ranking:bm25mf_v})) with $b_a$ (Equation~(\ref{chap6:ranking:bm25mf_a})) varying from $0$ to $1$ with a precision step of $0.1$.}
 		\label{fig:bm25mf-norm}
 	\end{subfigure}
 	\qquad
@@ -463,11 +463,11 @@ We present first the ranking paradigm that we follow, before describing the expe
 
 \paragraph{Ranking paradigm.}
 
-Given a SPARQL query, its solutions retrieved from a graph summary can be erroneous as expressed in Chapter~\ref{chap03:sec:quality}; indeed, a summary path from a solution might have no instance that form a path in the entity graph as well. A good solution is then a subgraph of the summary that does exist in the entity graph. Therefore, a ranking algorithm should rank first such solutions.
+Given a SPARQL query, its solutions retrieved from a graph summary can be erroneous as expressed in Chapter~\ref{chap5:precision}; indeed, a summary path from a solution might have no instance that form a path in the entity graph as well. A good solution is then a subgraph of the summary that does exist in the entity graph. Therefore, a ranking algorithm should rank first such solutions.
 
 \paragraph{Experimental setting.}
 
-Due to imprecisions in a summary as discussed in Chapter~\ref{chap03:sec:quality}, a query can return solutions that do not have any actual \emph{summary instance} in the entity graph. We the present the following experimental setting in order to evaluate the performance of the \gls{MF} extension with regards to the ranking paradigm.\\
+Due to imprecisions in a summary as discussed in Chapter~\ref{chap5:precision}, a query can return solutions that do not have any actual \emph{summary instance} in the entity graph. We the present the following experimental setting in order to evaluate the performance of the \gls{MF} extension with regards to the ranking paradigm.\\
 
 Given a SPARQL query extracted from the USEWOD2013 query logs of DBpedia, we replace with a variable that we denote as ``\emph{?POF}'' a term of the query, one at a time. A term is either a predicate or an object of a triple pattern. The resulting query is then executed over a graph summary of DBpedia.\\
 
