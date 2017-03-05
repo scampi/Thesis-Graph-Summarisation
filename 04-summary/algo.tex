@@ -365,7 +365,7 @@ The Figure~\ref{fig:summary-cascading} depicts the Cascading flow of the graph s
 
 Read and write (I/O) operations on disk are a major cause of performance degradation of MapReduce jobs. In order to avoid moving the data across the MapReduce cluster, we compute a set of \emph{dictionaries} that map a \emph{unique number} to a vocabulary term, i.e., either an attribute or a type. We then use this unique number throughout the graph summary computation, decreasing the amount of data copied across the cluster, but also improving operations such as joins.
 
-The Figure~\ref{fig:dict-cascading} depicts the Cascading flow for creating the dictionaries. The edges $(u, \alpha, v) \in A$ of the graph $G$ are parsed, then a fork is done with regards to the attribute. We use the HFile~\cite{hfile} data structure as the dictionary backend. In our experiments, this marked a significant performance improvement compared to the Hadoop's MapFile~\cite{mapfile}. We use the DistributedCache\footnote{\url{https://hadoop.apache.org/docs/r1.2.1/api/org/apache/hadoop/filecache/DistributedCache.html}} in order to make the dictionaries accessible to all nodes of the MapReduce cluster.
+The Figure~\ref{chap4:summary:fig:dict-cascading} depicts the Cascading flow for creating the dictionaries. The edges $(u, \alpha, v) \in A$ of the graph $G$ are parsed, then a fork is done with regards to the attribute. We use the HFile~\cite{hfile} data structure as the dictionary backend. In our experiments, this marked a significant performance improvement compared to the Hadoop's MapFile~\cite{mapfile}. We use the DistributedCache\footnote{\url{https://hadoop.apache.org/docs/r1.2.1/api/org/apache/hadoop/filecache/DistributedCache.html}} in order to make the dictionaries accessible to all nodes of the MapReduce cluster.
 
 The unique number a dictionary uses is computed using the MurmurHash3~\cite{murmurhash3-gcode,murmurhash3-blog} hash function. To further improve the performance of the summarisation, we hash the identifier of the nodes, i.e., the URI in the case of RDF data. A majority of the computation involves comparisons against these identifiers; thus using numbers instead of plain text improves shuffling operations in the MapReduce framework. In order to reduce potential hash collisions, we use the \emph{128bit} version of MurmurHash3.
 
@@ -455,7 +455,7 @@ We end both Step~3a and Step~3b with a grouping operation. In Step~3a, we group 
 			\input{04-summary/figures/dict}
 		}
 		\caption{Dictionary computation}
-		\label{fig:dict-cascading}
+		\label{chap4:summary:fig:dict-cascading}
 	\end{subfigure}
 	\qquad
 	\begin{subfigure}{\textwidth}

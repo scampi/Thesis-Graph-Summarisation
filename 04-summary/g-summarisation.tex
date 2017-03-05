@@ -67,7 +67,7 @@ A graph and its summary do not share the same set of nodes. The nodes of the sum
 \subparagraph{Undefined sumnode.}
 \label{sec:undefined-sumnode}
 
-Depending on the definition of the binary relation $R$ used in a graph homomorphism, some nodes of the graph do not have any mapping. For example, the node $v_0$ in Figure~\ref{fig:graph} does not have a $type$ edge; it has then no mapping for a gls{summarisation-relation} that considers the type of a node as depicted in the Figure~\ref{fig:classes-summary}.
+Depending on the definition of the binary relation $R$ used in a graph homomorphism, some nodes of the graph do not have any mapping. For example, the node $v_0$ in Figure~\ref{chap2:semi-structured-data:fig:graph} does not have a $type$ edge; it has then no mapping for a gls{summarisation-relation} that considers the type of a node as depicted in the Figure~\ref{chap4:summary:fig:classes-summary}.
 We map such a node of the graph to a sumnode $\mathfrak{U} \in \mathcal{Z}$ that we say to be \emph{undefined} for the binary relation $R$.
 
 \begin{definition}[Undefined Sumnode $\mathfrak{U}$]
@@ -83,7 +83,7 @@ A graph $G$ that is homomorphic to a graph $\mathcal{S}$ with regards to a binar
 
 \subparagraph{Sink sumnode: content abstraction.}
 
-The purpose of a summary is to highlight the \emph{structure} of the graph, which is defined by the properties and \gls{types}. Content information does not pertain to the structure of the data, but only to individual entities. Therefore, we abstract the summary from the content in the graph, which are in general stored in sink nodes, i.e., nodes that have no outgoing edges. To do so, we map such nodes to a \emph{sink} sumnode that we identify as $\varnothing$. For example, the node labelled $Ireland$ in the Figure~\ref{fig:graph} is mapped to $\varnothing$. Also, we note that the nodes $S_2$ and $S_3$ in Figure~\ref{chap4:summary:fig:basic-summary} are sink sumnodes.
+The purpose of a summary is to highlight the \emph{structure} of the graph, which is defined by the properties and \gls{types}. Content information does not pertain to the structure of the data, but only to individual entities. Therefore, we abstract the summary from the content in the graph, which are in general stored in sink nodes, i.e., nodes that have no outgoing edges. To do so, we map such nodes to a \emph{sink} sumnode that we identify as $\varnothing$. For example, the node labelled $Ireland$ in the Figure~\ref{chap2:semi-structured-data:fig:graph} is mapped to $\varnothing$. Also, we note that the nodes $S_2$ and $S_3$ in Figure~\ref{chap4:summary:fig:basic-summary} are sink sumnodes.
 
 \begin{remark}
 	Features of the graph summarisation are not subject to content abstraction, in order for the summary to retain the vocabulary of the original graph.
@@ -154,8 +154,8 @@ Given a \gls{summarisation-relation}, each node in the graph is mapped to a set 
 			\bottomrule
 		\end{tabular}
 	\end{minipage}
-	\caption[\gls{typessummary} of a graph]{Summary of the graph in Figure~\ref{fig:graph} with the summarisation relation $R_t$. The table indicates the mappings by $R_t$. The content in $G$ is abstracted by the sumnode $\varnothing$.}
-	\label{fig:classes-summary}
+	\caption[\gls{typessummary} of a graph]{Summary of the graph in Figure~\ref{chap2:semi-structured-data:fig:graph} with the summarisation relation $R_t$. The table indicates the mappings by $R_t$. The content in $G$ is abstracted by the sumnode $\varnothing$.}
+	\label{chap4:summary:fig:classes-summary}
 \end{figure}
 
 %We define the \emph{sink equivalence class} as the set of sink nodes, e.g., the node labelled $Ireland$ in the Figure~\ref{fig:graph} is part of this set. We remark that in the RDF data model, \emph{literals} are part of the sink equivalence class.
@@ -163,7 +163,7 @@ Given a \gls{summarisation-relation}, each node in the graph is mapped to a set 
 %The set of sink nodes in $G$ is represented by the sink equivalence class $[\emptyset]=\left\lbrace x \in V : \not \exists (x, \alpha, y) \in A \right\rbrace$ in $G^\sim$.
 %\end{definition}
 %
-%Depending on the $\sim$-equivalence, there can be nodes that do not have the required features to be assigned to a $\sim$-equivalence class. We define $B^\sim$ the \emph{blank $\sim$-equivalence class} as the set of such nodes of $G$, e.g., the node $v_0$ in the Figure~\ref{fig:graph} is assigned to the node $B^{\sim_t}$ in the Figure~\ref{fig:classes-summary}.
+%Depending on the $\sim$-equivalence, there can be nodes that do not have the required features to be assigned to a $\sim$-equivalence class. We define $B^\sim$ the \emph{blank $\sim$-equivalence class} as the set of such nodes of $G$, e.g., the node $v_0$ in the Figure~\ref{fig:graph} is assigned to the node $B^{\sim_t}$ in the Figure~\ref{chap4:summary:fig:classes-summary}.
 %\begin{definition}[Blank $\sim$-Equivalence Class]
 %The set of nodes in $G$ for which there is no $\sim$-equivalent class is equal to the blank $\sim$-equivalence class $B^\sim$, i.e., $B^\sim=\left\lbrace x \in V : \forall y \in V, x \not \sim y \right\rbrace$.
 %\end{definition}
@@ -178,7 +178,7 @@ Although the structure of the graph is preserved in the summary by definition of
 Indeed, we remark that although the structure of the graph $G$ is kept in the summary, the inverse may not hold true. The Figure~\ref{fig:homomorphism} depicts a loop on the $b$ node; although there is an edge from $1$ to $4$, there is no edge in the opposite direction.\\
 %In Section~\ref{chap5:precision} we study the precision of an \emph{approximate} graph summary.
 
-A summary is built from a graph based on a \gls{summarisation-relation} that maps each node of that graph to a sumnode, i.e., a node of the summary. An edge $(u, \alpha, v) \in A$ is mapped to a sumedge by definition of the graph homomorphism. Several paths in the graph may be mapped to a same path on the summary. We introduce the \emph{summary path instance} as the set of nodes in the graph which mappings form a path in the summary. For example, if we consider the summary in Figure~\ref{fig:classes-summary} built with the summarisation relation $R_t$, the set $\{v_1, v_3, v_6\}$ in an instance of the path $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in that summary; indeed, we have $(v_1, S_1) \in R_t$, $(v_3, S_2) \in R_t$, and $(v_6, S_4) \in R_t$.
+A summary is built from a graph based on a \gls{summarisation-relation} that maps each node of that graph to a sumnode, i.e., a node of the summary. An edge $(u, \alpha, v) \in A$ is mapped to a sumedge by definition of the graph homomorphism. Several paths in the graph may be mapped to a same path on the summary. We introduce the \emph{summary path instance} as the set of nodes in the graph which mappings form a path in the summary. For example, if we consider the summary in Figure~\ref{chap4:summary:fig:classes-summary} built with the summarisation relation $R_t$, the set $\{v_1, v_3, v_6\}$ in an instance of the path $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in that summary; indeed, we have $(v_1, S_1) \in R_t$, $(v_3, S_2) \in R_t$, and $(v_6, S_4) \in R_t$.
 
 \begin{definition}[Summary Path Instance]
 \label{chap4:summary:def:summary-path-instance}
@@ -191,7 +191,7 @@ $$
 $$
 \end{definition}
 
-In the previous example, we remark that the summary path instance $\{v_1, v_3, v_6\}$ given for $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in Figure~\ref{fig:classes-summary} is not the only one. Indeed, there are three more instances possible, i.e., $\{v_1, v_3, v_7\}$, $\{v_2, v_3, v_6\}$, and $\{v_2, v_3, v_7\}$. However, two out of those four do not form a path in the graph in Figure~\ref{fig:graph}, i.e., the sets $\{v_1, v_3, v_7\}$ and $\{v_2, v_3, v_7\}$. We call a summary \emph{precise} if there is no such case.
+In the previous example, we remark that the summary path instance $\{v_1, v_3, v_6\}$ given for $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in Figure~\ref{chap4:summary:fig:classes-summary} is not the only one. Indeed, there are three more instances possible, i.e., $\{v_1, v_3, v_7\}$, $\{v_2, v_3, v_6\}$, and $\{v_2, v_3, v_7\}$. However, two out of those four do not form a path in the graph in Figure~\ref{chap2:semi-structured-data:fig:graph}, i.e., the sets $\{v_1, v_3, v_7\}$ and $\{v_2, v_3, v_7\}$. We call a summary \emph{precise} if there is no such case.
 
 \begin{definition}[Precise Graph Summary]
 \label{chap4:summary:def:precise-summary}
@@ -339,7 +339,7 @@ R_{fbt} = \{ \left( u, x \right) \in V \times \mathcal{W}_{fbt} \mid & \forall v
 $$
 \end{definition}
 
-The summary depicted on the Figure~\ref{fig:fbb-summary} with the bisimulation $R_{fbt}$ assigns an equivalence class to \emph{each} node of the graph in Figure~\ref{fig:graph}. In the running example, the only difference of the summary with the entity graph is the content abstraction, e.g., the node \emph{Ireland} is represented by the node $\varnothing$.
+The summary depicted on the Figure~\ref{chap4:summary:fig:fbb-summary} with the bisimulation $R_{fbt}$ assigns an equivalence class to \emph{each} node of the graph in Figure~\ref{chap2:semi-structured-data:fig:graph}. In the running example, the only difference of the summary with the entity graph is the content abstraction, e.g., the node \emph{Ireland} is represented by the node $\varnothing$.
 
 In order to compute this summary, the algorithm proposed in \cite{Paige:1987:TPR:37185.37186} is generally used. It offers a $O\left( \vert A \vert \times log\left( \vert V \vert \right) \right)$ complexity for the computation of the bisimulation. We note that the algorithm starts from an existing partitioning of the graph. Then, the partitions are refined iteratively until all nodes in a partition are bisimilar.% The computation of the $\sim_{fbt}$-summary is achieved by applying over the $\sim_{fb}$ graph a slightly modified version of the \cite{Paige:1987:TPR:37185.37186} algorithm, in order to account for the incoming edges in the $\sim_{bb}$ definition. We remark that the complexity of all other algorithms are lower than the complexity of $\sim_{b}$.
 %In addition, the \cite{Paige:1987:TPR:37185.37186} algorithm requires more than one iteration over the entity graph, the number of iterations equal to the entity graph diameter in the worst case. Iterative algorithms are sub-optimal for shared-nothing infrastructures, e.g., MapReduce. The reason is the entity graph needs to be read and written at each iteration, leading to an important IO load. Therefore, one pass algorithms can better scale to large and heterogeneous entity graphs using shared-nothing infrastructures.
@@ -391,8 +391,8 @@ $$
 			\bottomrule
 		\end{tabular}
 	\end{minipage}
-	\caption{Summary of the graph in Figure~\ref{fig:graph} with bisimulation $R_{fbt}$ as the summarisation relation. The table indicates the mappings by $R_{fbt}$. The content in $G$ is abstracted by the sumnode $\varnothing$.}
-	\label{fig:fbb-summary}
+	\caption{Summary of the graph in Figure~\ref{chap2:semi-structured-data:fig:graph} with bisimulation $R_{fbt}$ as the summarisation relation. The table indicates the mappings by $R_{fbt}$. The content in $G$ is abstracted by the sumnode $\varnothing$.}
+	\label{chap4:summary:fig:fbb-summary}
 \end{figure}
 
 \subsection{Approximate Graph Summary}
@@ -441,7 +441,7 @@ We report in Table~\ref{tab:sumrel} a summary of the presented relations along w
 \minisec{Summarisation Relation $R_{ut}$}
 
 We define $R_{ut}$ as the summarisation relation that maps a node according to its type. We call the summary it generates the \gls{unique-type-summary}.
-The nodes $v_4$, $v_5$, $v_6$, and $v_7$ in the Figure~\ref{fig:graph} are mapped to a same sumnode since they all have \emph{Place} as a type. The $R_{ut}$ relation may map a node to multiple sumnodes since an entity may have several \gls{types}. For instance, the nodes $v_6$ and $v_7$ are also mapped to another sumnode since they both share the type \emph{Country}.
+The nodes $v_4$, $v_5$, $v_6$, and $v_7$ in the Figure~\ref{chap2:semi-structured-data:fig:graph} are mapped to a same sumnode since they all have \emph{Place} as a type. The $R_{ut}$ relation may map a node to multiple sumnodes since an entity may have several \gls{types}. For instance, the nodes $v_6$ and $v_7$ are also mapped to another sumnode since they both share the type \emph{Country}.
 
 \begin{definition}[Unique Type Summary]
 Let $G=\left\langle V, A, l_V \right\rangle$ and $\glssymbol{unique-type-summary} = \left\langle \mathcal{W}_{ut}, \mathcal{B}_{ut}, l_{\mathcal{W}_{ut}} \right\rangle$ be two graphs.
@@ -465,7 +465,7 @@ $$
 \minisec{Summarisation Relation $R_t$}
 
 We define $R_t$ the summarisation relation that maps a node based on its set of \gls{types}. We call the summary it generates the \emph{types} summary.
-The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in the Figure~\ref{fig:graph}. The nodes $v_6$ and $v_7$ are mapped to the sumnode $S_4$ because they are both associated with the types \emph{Place} and \emph{Country}. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $v_1$ and $v_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. It differs from $R_{ut}$ since it considers the types of a node as \emph{set} rather than individually. Indeed, the node $v_6$ is mapped to two sumnodes under the relation $R_{ut}$.
+The Figure~\ref{chap4:summary:fig:classes-summary} depicts the $R_t$ summary of the graph in the Figure~\ref{chap2:semi-structured-data:fig:graph}. The nodes $v_6$ and $v_7$ are mapped to the sumnode $S_4$ because they are both associated with the types \emph{Place} and \emph{Country}. The table indicates the mappings by $R_t$ of the nodes in $V$, e.g., the nodes $v_1$ and $v_2$ are mapped to the sumnode $S_1$ since both connect to $Person$ via the type attribute. It differs from $R_{ut}$ since it considers the types of a node as \emph{set} rather than individually. Indeed, the node $v_6$ is mapped to two sumnodes under the relation $R_{ut}$.
 
 \begin{definition}[Types Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\glssymbol{typessummary} = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
@@ -486,7 +486,7 @@ The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in t
 \minisec{Summarisation Relation $R_a$}
 
 We define $R_a$ the relation that maps a node based on its set of \gls{attributes}. We call the summary it generates the \emph{attributes} summary.
-The nodes $v_3$, $v_4$, and $v_5$ are $\sim_a$-equivalent because they share the same set of attributes, i.e., $\left\lbrace label, location, type \right\rbrace$. The graph in Figure~\ref{chap4:summary:fig:attributes-summary} is the \gls{attributes-summary} of the graph in Figure~\ref{fig:graph}.
+The nodes $v_3$, $v_4$, and $v_5$ are $\sim_a$-equivalent because they share the same set of attributes, i.e., $\left\lbrace label, location, type \right\rbrace$. The graph in Figure~\ref{chap4:summary:fig:attributes-summary} is the \gls{attributes-summary} of the graph in Figure~\ref{chap2:semi-structured-data:fig:graph}.
 
 \begin{definition}[Attributes Summary]
 	Let $G=\left\langle V, A, l_V \right\rangle$ and $\glssymbol{attributes-summary} = \left\langle \mathcal{W}_a, \mathcal{B}_a, l_{\mathcal{W}_a} \right\rangle$ be two graphs. Let $\mathbb{P}(S)$ be the powerset of the set $S$, i.e., it is the set of all subsets of $S$, including the empty set and $S$ itself.
@@ -531,7 +531,7 @@ We note that the nodes that do not have any outgoing attributes are mapped to th
 			\bottomrule
 		\end{tabular}}
 	\end{minipage}
-	\caption{Summary of the graph in Figure~\ref{fig:graph} with $R_a$. The table indicates the mappings by $R_a$. The content in $G$ is abstracted by the sumnode $\varnothing$.}
+	\caption{Summary of the graph in Figure~\ref{chap2:semi-structured-data:fig:graph} with $R_a$. The table indicates the mappings by $R_a$. The content in $G$ is abstracted by the sumnode $\varnothing$.}
 	\label{chap4:summary:fig:attributes-summary}
 \end{figure}
 \vspace{.5cm}

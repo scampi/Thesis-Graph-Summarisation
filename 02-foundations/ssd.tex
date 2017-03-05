@@ -35,7 +35,7 @@ Any kind of data can generally be modelled using a graph, since it is versatile 
 
 We consider the data as being a labelled directed graph and build methods based on this model. Therefore, the findings presented in this work can be applied to any domain where a graph is used as data representation.
 
-We describe in this Section a graph data model based on the work of \cite{delbru:jws:entity}. The graph is represented with two layers that depict the data at two extremes: the \emph{dataset} and the \emph{entity} layers. We formally introduce the concepts of entity and dataset in Sections~\ref{sec:entity-description} and~\ref{sec:ssd:dataset}, respectively. The Figure~\ref{fig:gdm} depicts the layers of the model, where the dataset layer is depicted at the top, and the entity layer at the bottom.
+We describe in this Section a graph data model based on the work of \cite{delbru:jws:entity}. The graph is represented with two layers that depict the data at two extremes: the \emph{dataset} and the \emph{entity} layers. We formally introduce the concepts of entity and dataset in Sections~\ref{sec:entity-description} and~\ref{sec:ssd:dataset}, respectively. The Figure~\ref{chap2:semi-structured-data:fig:gdm} depicts the layers of the model, where the dataset layer is depicted at the top, and the entity layer at the bottom.
 \begin{labeling}{\textbf{Dataset Layer:}}
 	\item[\textbf{Dataset Layer:}] A dataset represents a collection of entities; the dataset layer is the ensemble of entities' collections. This layer provides coarse information about the data: the focus of this layer is the relationships between datasets. In the figure, the dataset \emph{D1} connects to the dataset \emph{D2} via the link \emph{p1}, and \emph{D2} is connected to \emph{D1} via two links, i.e., \emph{p2} and \emph{p3}.
 	\item[\textbf{Entity Layer:}] The entity layer contains information about entities. Of the two layers, this one provides the finer details about the data: attributes about an entity, and also relationships between entities. In the figure, the entity layer provides additional information about the dataset layer, showing which entities are actually connected within --- and between --- datasets.
@@ -53,13 +53,13 @@ Regardless of the layer, we represent the information using a node and edge labe
 		\input{02-foundations/figures/graph-abstract-model}
 	}
 	\caption{The graph data abstract model}
-	\label{fig:gdm}
+	\label{chap2:semi-structured-data:fig:gdm}
 \end{figure}
 
 \section{Formal Model}
 \label{sec:gdm:formal-model}
 
-In the following we formally define a directed labelled graph that we call simply a graph henceforth, and introduce concepts used in the rest of the thesis. We use a graph as a generic representation of (semi-)structured and unstructured data on the Web of Data. A graph is defined as a tuple consisting of a set of nodes $V$ and a set $A$ of directed edges labelled $a$. We consider edge and node labels to come from a set that we denote with $\mathcal{L}$. Figure~\ref{fig:graph} depicts a graph of people and places along with their connections.
+In the following we formally define a directed labelled graph that we call simply a graph henceforth, and introduce concepts used in the rest of the thesis. We use a graph as a generic representation of (semi-)structured and unstructured data on the Web of Data. A graph is defined as a tuple consisting of a set of nodes $V$ and a set $A$ of directed edges labelled $a$. We consider edge and node labels to come from a set that we denote with $\mathcal{L}$. Figure~\ref{chap2:semi-structured-data:fig:graph} depicts a graph of people and places along with their connections.
 
 \begin{definition}[Graph]
 	Let $V$ be a set of nodes and $\mathcal{L}$ a set of labels. The set of directed labelled edges is defined as $A \subseteq \left\lbrace (x, \alpha, y) \mid (x, y) \in V^2, \alpha \in \mathcal{L} \right\rbrace$.
@@ -74,7 +74,7 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, we introduce below ter
 
 	\item[\textbf{Path}] We call a \emph{path} a sequence of edges label $\alpha_1.\cdots.\alpha_n$. A path exists in the graph $G$ if there is a sequence of nodes $\left\lbrace v_1, \cdots, v_{n+1} \right\rbrace \subseteq V$ connected with such labelled edges.
 
-	In Figure~\ref{fig:graph} the path $author.lives$ exists in that graph as it connects the nodes $\left\lbrace v_0, v_2, v_3 \right\rbrace$.
+	In Figure~\ref{chap2:semi-structured-data:fig:graph} the path $author.lives$ exists in that graph as it connects the nodes $\left\lbrace v_0, v_2, v_3 \right\rbrace$.
 
 	\item[\textbf{Attribute}] We call \gls{edge-attribute} the label of an edge.
 
@@ -97,13 +97,13 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, we introduce below ter
 		\input{02-foundations/figures/graph}
 	}
 	\caption{An entity graph describing people, places, and their relationships.}
-	\label{fig:graph}
+	\label{chap2:semi-structured-data:fig:graph}
 \end{figure}
 
 \subsection{Type Attribute}
 \label{sec:ssd:type}
 
-Attributes and node labels can be used in a graph for describing the content. For example in Figure~\ref{fig:graph}, we can expect that the value of the edge labelled ``name'' represents a textual identification of the node $v_1$. In addition, a set of nodes may represent a same concept, e.g., the nodes $v_1$ and $v_2$ represent a person. We call, e.g., ``person'', the \emph{type} of a node, and that node is an \emph{instance} of that type.
+Attributes and node labels can be used in a graph for describing the content. For example in Figure~\ref{chap2:semi-structured-data:fig:graph}, we can expect that the value of the edge labelled ``name'' represents a textual identification of the node $v_1$. In addition, a set of nodes may represent a same concept, e.g., the nodes $v_1$ and $v_2$ represent a person. We call, e.g., ``person'', the \emph{type} of a node, and that node is an \emph{instance} of that type.
 
 We model this in a graph thanks to an edge where
 \begin{inparaenum}[(1)]
@@ -113,7 +113,7 @@ We model this in a graph thanks to an edge where
 \end{inparaenum}
 That certain attribute is used to indicate that the target of the edge represents a type; in RDF, it is commonly the \emph{rdf:type}\footnote{RDF type attribute: \url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#type}} attribute.
 
-Since there may be several attributes that can hold this function, we refer to them as the \emph{type attributes}. For example in Figure~\ref{fig:graph}, the edge $(v_1, \tau, \text{Person})$ indicates that the node $v_1$ is an instance of type \emph{Person}.
+Since there may be several attributes that can hold this function, we refer to them as the \emph{type attributes}. For example in Figure~\ref{chap2:semi-structured-data:fig:graph}, the edge $(v_1, \tau, \text{Person})$ indicates that the node $v_1$ is an instance of type \emph{Person}.
 We define $T$ as the set of \emph{type attributes}, and we denote an element of that set with $\tau$.%, in order to abstract from the actual type attribute used.
 
 \begin{definition}[Type Attributes Set $T$]
@@ -127,16 +127,16 @@ $$
 types(x\in V) = \left\lbrace l_V(c) \mid \exists c \in V\; \exists \glssymbol{atype} \in T: (x, \glssymbol{atype}, c) \in A \right\rbrace
 $$
 
-For instance, we have $types\left(v_6\right) = \left\{ \text{Country}, \text{Place} \right\}$ in Figure~\ref{fig:graph} as the set of type values for the node $v_6$.
+For instance, we have $types\left(v_6\right) = \left\{ \text{Country}, \text{Place} \right\}$ in Figure~\ref{chap2:semi-structured-data:fig:graph} as the set of type values for the node $v_6$.
 
 \subsection{Entity description}
 \label{sec:entity-description}
 
-The Web Data represents a graph of interconnected \emph{entities}, where an entity may be a person, a place, or an organisation, \ldots. We call an \emph{entity description} the pieces of informations in the graph that are about that entity. For instance, we can consider ``Galway'' to be part of the entity description of $v_3$ in Figure~\ref{fig:graph}, but not ``Rome''.
+The Web Data represents a graph of interconnected \emph{entities}, where an entity may be a person, a place, or an organisation, \ldots. We call an \emph{entity description} the pieces of informations in the graph that are about that entity. For instance, we can consider ``Galway'' to be part of the entity description of $v_3$ in Figure~\ref{chap2:semi-structured-data:fig:graph}, but not ``Rome''.
 
 There exists several ways to define which parts of the graph describe an entity. One may consider all the edges, incoming and outgoing, to form the entity description. For some graphs, edges that are two-hops away might be part of it too.
 
-We illustrate this in Figure~\ref{fig:edesc} where we might consider the entity description to consist of edges 1-hop away from the node given the graph in Figure~\ref{fig:edesc1}, although it is more adapted to extend it to 2-hops with the graph in Figure~\ref{fig:edesc2}. The reason for the design in the latter graph might be to add more information about a person's label, e.g., the honorific.
+We illustrate this in Figure~\ref{chap2:semi-structured-data:fig:edesc} where we might consider the entity description to consist of edges 1-hop away from the node given the graph in Figure~\ref{chap2:semi-structured-data:fig:edesc1}, although it is more adapted to extend it to 2-hops with the graph in Figure~\ref{chap2:semi-structured-data:fig:edesc2}. The reason for the design in the latter graph might be to add more information about a person's label, e.g., the honorific.
 
 \begin{figure}
 	\centering
@@ -145,7 +145,7 @@ We illustrate this in Figure~\ref{fig:edesc} where we might consider the entity 
 			\input{02-foundations/figures/edesc1}
 		}
 		\caption{1-hop entity description}
-		\label{fig:edesc1}
+		\label{chap2:semi-structured-data:fig:edesc1}
 	\end{subfigure}
 	\quad
 	\begin{subfigure}[b]{.45\textwidth}
@@ -153,10 +153,10 @@ We illustrate this in Figure~\ref{fig:edesc} where we might consider the entity 
 			\input{02-foundations/figures/edesc2}
 		}
 		\caption{2-hops entity description}
-		\label{fig:edesc2}
+		\label{chap2:semi-structured-data:fig:edesc2}
 	\end{subfigure}
 	\caption{Interpretation of the entity description dependent on the graph structure.}
-	\label{fig:edesc}
+	\label{chap2:semi-structured-data:fig:edesc}
 \end{figure}
 
 %In this thesis, we do not attempt to find the most appropriate entity description for a given graph. We choose the approach taken in Delbru et. al.~\cite{delbru:jws:entity}, where an entity description consists of the \emph{outgoing} edges adjacent to a node. This forms then what we call a \emph{star graph}.
