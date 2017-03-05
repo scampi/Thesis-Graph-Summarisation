@@ -194,7 +194,7 @@ $$
 In the previous example, we remark that the summary path instance $\{v_1, v_3, v_6\}$ given for $(S_1, lives, S_2) \in \mathcal{W} \wedge (S_2, lives, S_4) \in \mathcal{W}$ in Figure~\ref{fig:classes-summary} is not the only one. Indeed, there are three more instances possible, i.e., $\{v_1, v_3, v_7\}$, $\{v_2, v_3, v_6\}$, and $\{v_2, v_3, v_7\}$. However, two out of those four do not form a path in the graph in Figure~\ref{fig:graph}, i.e., the sets $\{v_1, v_3, v_7\}$ and $\{v_2, v_3, v_7\}$. We call a summary \emph{precise} if there is no such case.
 
 \begin{definition}[Precise Graph Summary]
-\label{def:precise-summary}
+\label{chap4:summary:def:precise-summary}
 Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, and $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to the summarisation relation $R \subseteq V \times \mathcal{W}$.
 
 Let $p = (x_1, \alpha_1, x_2) \in \mathcal{B} \wedge \cdots \wedge (x_n, \alpha_n, x_{n+1}) \in \mathcal{B}$ be a path in the summary $\mathcal{S}$ with $(x_1, \cdots, x_{n+1}) \in \mathcal{W}^{n+1}$. Let the set $\{ u_1, \cdots, u_{n+1} \}$ be a summary path instance with $u_i \in V$.
@@ -700,4 +700,4 @@ Although the nodes $v_1$ and $v_2$ are mapped to a same sumnode with $R_{at}$, t
 	\label{tab:sumrel}
 \end{table}
 
-We note that the presented \emph{approximate} \glspl{summarisation-relation} are indeed not precise, because they do not fulfill the Definition~\ref{def:precise-summary}. Indeed, it is possible to find a path in the approximate summary for which an instance as per Definition~\ref{def:summary-path-instance} does not form a path in the graph. For instance, the set $\{v_1, v_5, v_6\}$ is an instance of the summary path $works \cdot location \cdot capital$; however, there is no path that connects all three nodes $v_1$, $v_5$, and $v_6$ with the attributes $works$, $location$, and $capital$.
+We note that the presented \emph{approximate} \glspl{summarisation-relation} are indeed not precise, because they do not fulfill the Definition~\ref{chap4:summary:def:precise-summary}. Indeed, it is possible to find a path in the approximate summary for which an instance as per Definition~\ref{def:summary-path-instance} does not form a path in the graph. For instance, the set $\{v_1, v_5, v_6\}$ is an instance of the summary path $works \cdot location \cdot capital$; however, there is no path that connects all three nodes $v_1$, $v_5$, and $v_6$ with the attributes $works$, $location$, and $capital$.

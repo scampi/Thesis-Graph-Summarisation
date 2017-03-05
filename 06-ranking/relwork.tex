@@ -64,7 +64,7 @@ However, all these approaches are an adaptation of the field-based ranking model
 
 We describe in this section vocabulary terms that will be reused throughout this chapter. We consider here a dataset to be a collection of entities, each entity being a graph. An entity may represent a person, a place, or an organisation. The \emph{unit of information} which is retrieved and ranked is an entity.
 
-We consider an entity to be a graph centered around a node, that we call the root, where each edge provides some description of that node. We define a rooted entity as the \emph{entity description} (Definition~\ref{def:entity-description}) of a \emph{root} node, where every node in the entity description is reachable from that root node.
+We consider an entity to be a graph centered around a node, that we call the root, where each edge provides some description of that node. We define a rooted entity as the \emph{entity description} (Definition~\ref{semi-structured-data:entity-description}) of a \emph{root} node, where every node in the entity description is reachable from that root node.
 
 \begin{definition}[Rooted Entity]
 Let $G = \left\langle V, A, l_V \right\rangle$ be a graph, and let $\glssymbol{edesc}(u \in V) \subseteq A$ be the entity description of the node $u$. We call the entity description \glssymbol{edesc}(u) a rooted entity in $u$ if and only if there is a path from $u$ to every node in $\glssymbol{edesc}(u)$.
