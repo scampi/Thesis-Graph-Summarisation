@@ -175,7 +175,7 @@ Viewing the graph summary as an RDF graph requires the creation of URIs for iden
 	where ``:se'' is the URI for that sumedge, the first triple describes the source, the second the target, the third the label of the sumedge, and the fourth the statistic associated to that triple.
 \end{remark}
 
-We depict in Figures~\ref{fig:rdf-node}~and~\ref{fig:rdf-edge} the ontology of the summary RDF model of the sumnode and sumedge respectively, where the label of a node indicates the type of that node. For example, the range of the origin predicate is \emph{xsd:anyURI}. In Figure~\ref{fig:rdf-node} the dot represents an intermediate node, which can be translated into a blank node in the RDF model. We describe in the Table~\ref{tab:rdf-terms} the vocabulary terms.\\
+We depict in Figures~\ref{chap7:applications:fig:rdf-node}~and~\ref{chap7:applications:fig:rdf-edge} the ontology of the summary RDF model of the sumnode and sumedge respectively, where the label of a node indicates the type of that node. For example, the range of the origin predicate is \emph{xsd:anyURI}. In Figure~\ref{chap7:applications:fig:rdf-node} the dot represents an intermediate node, which can be translated into a blank node in the RDF model. We describe in the Table~\ref{tab:rdf-terms} the vocabulary terms.\\
 
 In the case where a summary describes a collection of inter-linked datasets, we record the provenance of the summarised edges at the sumnode (resp., sumedge) level using the predicate \emph{origin}. The predicate \emph{label} indicates the type or attribute associated to a sumnode (resp., sumedge). We record the features of the \gls{summarisation-relation}, e.g., a type for the \emph{Types} summary $R_t$, using the predicate \emph{feature}. In case of a \gls{summarisation-relation} that is based on the type feature, we record as well the attribute type that defined that type.
 
@@ -191,7 +191,7 @@ In the case where a summary describes a collection of inter-linked datasets, we 
 			\input{07-systems/wdm/figures/rdf-summary-node}
 		}
 		\caption{Node class}
-		\label{fig:rdf-node}
+		\label{chap7:applications:fig:rdf-node}
 	\end{subfigure}
 	\quad
 	\begin{subfigure}[b]{.35\textwidth}
@@ -200,7 +200,7 @@ In the case where a summary describes a collection of inter-linked datasets, we 
 			\input{07-systems/wdm/figures/rdf-summary-edge}
 		}
 		\caption{Edge class}
-		\label{fig:rdf-edge}
+		\label{chap7:applications:fig:rdf-edge}
 	\end{subfigure}
 	\qquad
 	\begin{subfigure}[b]{\textwidth}
@@ -228,7 +228,7 @@ In the case where a summary describes a collection of inter-linked datasets, we 
 		\label{tab:rdf-terms}
 	\end{subfigure}
 	\caption{RDF reification of the graph summary}
-	\label{fig:rdf-summary}
+	\label{chap7:applications:fig:rdf-summary}
 \end{figure}
 
 \subsubsection{Levels of Reification}
@@ -239,7 +239,7 @@ Depending on the use of the graph summary, a subset of the presented vocabulary 
 
 In this level of reification, we use all vocabulary terms presented in the previous section. We note nonetheless that the \emph{origin} predicate is optional, since it is not needed for summarising a single dataset.\\
 
-Due to the RDF reification of the summary, there exists a case which might cause the summary to be larger than the original. Indeed, if the \gls{summarisation-relation} is a \emph{one-to-one} mapping from the entity graph to the summary, the number of RDF statements used to describe the summary might be greater than for the entity graph. A single statement in the entity graph requires six statements for describing the corresponding sumedge, i.e., the five triples depicted in the Figure~\ref{fig:rdf-edge} plus one for the type attribute.
+Due to the RDF reification of the summary, there exists a case which might cause the summary to be larger than the original. Indeed, if the \gls{summarisation-relation} is a \emph{one-to-one} mapping from the entity graph to the summary, the number of RDF statements used to describe the summary might be greater than for the entity graph. A single statement in the entity graph requires six statements for describing the corresponding sumedge, i.e., the five triples depicted in the Figure~\ref{chap7:applications:fig:rdf-edge} plus one for the type attribute.
 
 In addition to those six statements, we must also account for the statements describing the adjacent sumnodes. Depending on the application of the graph summary, the full description of the graph summary can be excessive.\\
 

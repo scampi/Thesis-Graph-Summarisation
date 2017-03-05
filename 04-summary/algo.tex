@@ -116,7 +116,7 @@ The Web Data is a collection of semi-structured data that hail from a variety of
 
 The information about an entity, e.g., a person, a place, an organisation, \ldots, can be spread across several datasets. In the Web of Data this happens when a same entity URI is reused across datasets. The \hyperref[step-hn]{Step 2} of the graph summarisation relies on the entity description \glssymbol{edesc} in order to create the corresponding sumnode. Some edges of the description might be erroneous, which would then impact negatively on the summary. A solution is to keep track of the \emph{origin} of an edge and act accordingly during the summarisation process.
 
-In Figure~\ref{fig:sum-issue} we depict the summarisation of a graph which edges are spread over the datasets \emph{D1} and \emph{D2}. The former contains the edges $\{ (v_1, a, Person), (v_1, name, John) \}$, while the latter contains $\{ (v_1, a, Book), (v_1, title, Rama) \}$. Since the same node $v_1$ is used in \emph{D1} and \emph{D2}, all four edges contribute to the \gls{summarisation-relation}. That node is then mapped to the sumnode $T_1$ according to the \emph{Types} summarisation relation $R_t$.
+In Figure~\ref{chap4:summary:fig:sum-issue} we depict the summarisation of a graph which edges are spread over the datasets \emph{D1} and \emph{D2}. The former contains the edges $\{ (v_1, a, Person), (v_1, name, John) \}$, while the latter contains $\{ (v_1, a, Book), (v_1, title, Rama) \}$. Since the same node $v_1$ is used in \emph{D1} and \emph{D2}, all four edges contribute to the \gls{summarisation-relation}. That node is then mapped to the sumnode $T_1$ according to the \emph{Types} summarisation relation $R_t$.
 Due to the overlap over \emph{D1} and \emph{D2} of $v_1$'s entity description, the sumnode reports that it is of both types \emph{Person} and \emph{Book}, as well as both \gls{attributes} \emph{name} and \emph{title}.
 
 Therefore, information about an entity within a dataset can be erroneous since it is unlikely that a same node is typed both a \emph{Person} and a \emph{Book}. It is likely that either the graph in \emph{D1} or in \emph{D2} is incorrect; this leads to a misleading graph summary.
@@ -128,7 +128,7 @@ In order to prevent this issue, we need to differentiate edges within \emph{D1} 
 		\input{04-summary/figures/summary-ild}
 	}
 	\caption[Challenge in summarising heterogeneous data sources with the \emph{Types} summarisation relation $R_t$]{Challenge in summarising heterogeneous data sources with the \emph{Types} summarisation relation $R_t$. The datasets D1 and D2 contain edges that describe a same node labelled $v_1$.}
-	\label{fig:sum-issue}
+	\label{chap4:summary:fig:sum-issue}
 \end{figure}
 
 \subparagraph{Edge authority.}
@@ -285,7 +285,7 @@ We present in this section two implementations of the graph summarisation, a fir
 \subsubsection{SPARQL implementation}
 
 In this section, we describe an implementation of the graph summarisation algorithm based on SPARQL. The SPARQL query language is rich enough for us to only rely on it for the summary generation.
-The Figure~\ref{fig:sparql-gs} shows the SPARQL query for generating a graph summary, and the query in Figure~\ref{fig:relation-sparql} is an example of a \gls{summarisation-relation}, i.e., \emph{Types} summarisation relation $R_t$.
+The Figure~\ref{chap4:summary:fig:sparql-gs} shows the SPARQL query for generating a graph summary, and the query in Figure~\ref{chap4:summary:fig:relation-sparql} is an example of a \gls{summarisation-relation}, i.e., \emph{Types} summarisation relation $R_t$.
 
 \minisec{Operators}
 
@@ -293,11 +293,11 @@ SPARQL provides the operator \texttt{GROUP BY} which can be used to group data o
 
 \minisec{Step 1 and Step 2}
 
-In the Figure~\ref{fig:relation-sparql}, we extract the features relevant for the relation, e.g., the type values in this example. We note the use of the \texttt{ORDER BY} in the Figure~\ref{fig:relation-sparql} so to ensure that an unique ``identifier'' is created for the set of features thanks to the built-in hash function \texttt{SHA1}. We use the aggregate \texttt{GROUP\_CONCAT} in order to pass a single literal to SHA1, since an entity can be associated with multiple types.
+In the Figure~\ref{chap4:summary:fig:relation-sparql}, we extract the features relevant for the relation, e.g., the type values in this example. We note the use of the \texttt{ORDER BY} in the Figure~\ref{chap4:summary:fig:relation-sparql} so to ensure that an unique ``identifier'' is created for the set of features thanks to the built-in hash function \texttt{SHA1}. We use the aggregate \texttt{GROUP\_CONCAT} in order to pass a single literal to SHA1, since an entity can be associated with multiple types.
 
 \minisec{Step 3}
 
-In the Figure~\ref{fig:sparql-gs}, the lines 4-7 (resp., lines 14-17) represent the \gls{summarisation-relation}, of which the Figure~\ref{fig:relation-sparql} is an example. The first block associates a sumnode to the variable on the subject position \emph{?s}, and the second block to the variable on the object position \emph{?o}, changing the name of projected variables appropriately for the object in the query of Figure~\ref{fig:relation-sparql}.
+In the Figure~\ref{chap4:summary:fig:sparql-gs}, the lines 4-7 (resp., lines 14-17) represent the \gls{summarisation-relation}, of which the Figure~\ref{chap4:summary:fig:relation-sparql} is an example. The first block associates a sumnode to the variable on the subject position \emph{?s}, and the second block to the variable on the object position \emph{?o}, changing the name of projected variables appropriately for the object in the query of Figure~\ref{chap4:summary:fig:relation-sparql}.
 
 The sumedge materialisation is done on the line~11: the sumnode of the source node is retrieved thanks to the variable \emph{?s} that is projected by the sub-query in line~6; similarly for the target node thanks to the variable \emph{?o} returned by the sub-query line~16.
 On lines 9 and 19, we create a URI for the source and target sumnodes, respectively.
@@ -333,7 +333,7 @@ GROUP BY ?s
 			\end{minted}
 		}
 		\caption{Summarisation relation $R_t$}
-		\label{fig:relation-sparql}
+		\label{chap4:summary:fig:relation-sparql}
 	\end{subfigure}
 	\qquad
 	\begin{subfigure}{\textwidth}
@@ -342,7 +342,7 @@ GROUP BY ?s
 			\input{04-summary/figures/sparql.tex}
 		}
 		\caption{SPARQL query that generates the graph summary in the \texttt{CONSTRUCT} clause}
-		\label{fig:sparql-gs}
+		\label{chap4:summary:fig:sparql-gs}
 	\end{subfigure}
 	\caption{SPARQL-based graph summarisation over a single dataset}
 	\label{chap4:summary:fig:gs-sparql-all}
@@ -359,7 +359,7 @@ We developed the solution using Cascading\footnote{\url{http://www.cascading.org
 
 A Cascading flow is defined as a pipeline of such operators that connects data ``sources'' to ``sinks'' outputs. A flow can be composed of several ``pipes'', which represent a set of operations. The Cascading flow forms a directed acyclic graph, which is then converted into a sequence of MapReduce jobs that can be executed on the cluster.
 
-The Figure~\ref{fig:summary-cascading} depicts the Cascading flow of the graph summarisation. A node represent an operation over the incoming tuples, which if superscripted with \emph{GB} involves an aggregate operation. An aggregate function combines multiple tuples into a single one; the function may be to count the tuples that were aggregated in order to add statistics about the graph to the summary for example. The triangle-shaped nodes represent points in the flow where the data is written to or read from.
+The Figure~\ref{chap4:summary:fig:summary-cascading} depicts the Cascading flow of the graph summarisation. A node represent an operation over the incoming tuples, which if superscripted with \emph{GB} involves an aggregate operation. An aggregate function combines multiple tuples into a single one; the function may be to count the tuples that were aggregated in order to add statistics about the graph to the summary for example. The triangle-shaped nodes represent points in the flow where the data is written to or read from.
 
 \minisec{Dictionaries}
 
@@ -467,12 +467,12 @@ We end both Step~3a and Step~3b with a grouping operation. In Step~3a, we group 
 		\label{fig:va-cascading}
 	\end{subfigure}
 	\caption[Graph summarisation using the Cascading framework]{Graph summarisation using the Cascading framework. A node represent an operation over the incoming tuples, which if superscripted with GB involves an aggregate operation, i.e., there is a \texttt{GROUP BY} operation. The $*$ superscript over the RDF nodes indicates that the dictionary is used for mapping the data back into plain text. The triangle-shaped nodes represent points in the flow where the data is written to or read from.}
-	\label{fig:summary-cascading}
+	\label{chap4:summary:fig:summary-cascading}
 \end{figure}
 
 \subsubsection{Discussion}
 
-Apart from the use of machine expensive operators such as \texttt{ORDER BY} or \texttt{GROUP\_CONCAT}, we remark that the SPARQL query of the \gls{summarisation-relation} is duplicated two times. Therefore, this is an inefficient part of the query depicted in Figure~\ref{fig:sparql-gs}. Depending on the query planner of the SPARQL engine, this duplication might be spotted so to avoid computing twice the same pattern.
+Apart from the use of machine expensive operators such as \texttt{ORDER BY} or \texttt{GROUP\_CONCAT}, we remark that the SPARQL query of the \gls{summarisation-relation} is duplicated two times. Therefore, this is an inefficient part of the query depicted in Figure~\ref{chap4:summary:fig:sparql-gs}. Depending on the query planner of the SPARQL engine, this duplication might be spotted so to avoid computing twice the same pattern.
 
 In comparison, the MapReduce-based one allows the summarisation to scale to much larger graphs. Indeed, in our experiments the SPARQL-based implementation is able to summarise graphs up to 20M edges only. A major obstacle to scale to larger graphs are the constraints imposed by SPARQL endpoints, e.g., limiting the number of rows returned by a \texttt{SELECT} query form, or query execution time-outs. Instead, the MapReduce implementation is able to scale to billions of edges, e.g., 2B with Freebase\footnote{\url{https://www.freebase.com/}} or even 30B with the Sindice dataset.
 

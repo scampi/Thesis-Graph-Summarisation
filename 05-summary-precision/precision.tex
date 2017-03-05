@@ -34,12 +34,12 @@ We denote with $\sqsubseteq$ a binary relation on the set of \glspl{summarisatio
 		\input{05-summary-precision/figures/lattice-partial-order}
 	}
 	\caption{Summarisation relations $R_1$ and $R_2$ ordered with the binary relation $\sqsubseteq$ in Definition (\ref{chap5:precision:def:partial-order})}
-	\label{fig:partial-order}
+	\label{chap5:precision:fig:partial-order}
 \end{figure}
 
 A \gls{lattice} is a \emph{partially ordered} set that contains an \emph{infimum} and a \emph{supremum}. The infimum is an element of the set that is ``smaller'', according to the partial order, than all other elements. Conversely, a supremum is an element that is ``larger'' than any other element.
 
-We use the binary relation $\sqsubseteq$ to order the \glspl{summarisation-relation} based on their definition: two summarisation relations can be ordered if one can be expressed with the other. Figure~\ref{fig:partial-order} is a depiction of the binary relation $\sqsubseteq$ used for ordering summarisation relations. In this set, the infimum is the identity relation that maps the graph to itself, and the supremum is the relation that maps all nodes to a single sumnode.
+We use the binary relation $\sqsubseteq$ to order the \glspl{summarisation-relation} based on their definition: two summarisation relations can be ordered if one can be expressed with the other. Figure~\ref{chap5:precision:fig:partial-order} is a depiction of the binary relation $\sqsubseteq$ used for ordering summarisation relations. In this set, the infimum is the identity relation that maps the graph to itself, and the supremum is the relation that maps all nodes to a single sumnode.
 
 \begin{theorem}[Graph Summarisation Lattice]
 	The binary relation $\sqsubseteq$ is a \gls{partial-order}. The set of \glspl{summarisation-relation} with the partial order $\sqsubseteq$ forms a \emph{lattice} that we denote as the graph summarisation lattice.
@@ -70,7 +70,7 @@ The graph lattice depicts that all summaries presented in Section~\ref{sec:appro
 
 \paragraph{Example.}
 
-The Figure~\ref{fig:rel-order} depicts the sumnodes built from two summarisation relations over the graph on Figure~\ref{chap2:semi-structured-data:fig:graph}, i.e., the Types summarisation relation $R_t$ as dotted lines, and the Attributes \& Types summarisation relation $R_{at}$ as dashed lines. The solid lines represent a relation $S \subseteq \mathcal{W}_{at} \times \mathcal{W}_t$, where $\mathcal{W}_{at}$ is the set of sumnodes in the \gls{attributes-types-summary}, and $\mathcal{W}_{t}$ the sumnodes in the \gls{typessummary}.
+The Figure~\ref{chap5:precision:fig:rel-order} depicts the sumnodes built from two summarisation relations over the graph on Figure~\ref{chap2:semi-structured-data:fig:graph}, i.e., the Types summarisation relation $R_t$ as dotted lines, and the Attributes \& Types summarisation relation $R_{at}$ as dashed lines. The solid lines represent a relation $S \subseteq \mathcal{W}_{at} \times \mathcal{W}_t$, where $\mathcal{W}_{at}$ is the set of sumnodes in the \gls{attributes-types-summary}, and $\mathcal{W}_{t}$ the sumnodes in the \gls{typessummary}.
 Using the binary relation $S$, we have the order $R_{at} \sqsubseteq R_t$ between the two summarisation relations.
 
 With the $R_{at}$ relation, the nodes $v_6$ and $v_7$ belong to different sumnodes, while they belong to the same with the $R_t$ relation. The same $R_t$ summary is built from the entity graph and from the $R_{at}$ summary. The partial order allows then to leverage pre-computed summaries in order to generate a new one.
@@ -79,7 +79,7 @@ With the $R_{at}$ relation, the nodes $v_6$ and $v_7$ belong to different sumnod
 	\centering
 	\input{05-summary-precision/figures/relations-order}
 	\caption[Ordering of graph summaries]{Sumnodes of \glspl{summarisation-relation} $R_t$ and $R_{at}$ for the graph in Figure~\ref{chap2:semi-structured-data:fig:graph}. The dashed lines represent the $R_{at}$ relation, the dotted lines the $R_t$ relation, and the solid lines the relation derived from the partial order $\sqsubseteq$, i.e., $R_{at} \sqsubseteq R_t$. The nodes with superscript $t$ belong to the summary built from $R_t$, while the nodes with superscript $at$ belong to the summary built from $R_{at}$.}
-	\label{fig:rel-order}
+	\label{chap5:precision:fig:rel-order}
 \end{figure}
 
 \section{Summary Error}
