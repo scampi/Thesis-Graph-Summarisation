@@ -5,7 +5,7 @@ Web Data contains a large amount of structured data spanning over many different
 
 In order to make sense of this deluge of data, summarisation techniques are available for different levels of the data. For example, all the information related to an entity can be summarised so to highlight the important parts. In this section, we are interested in the summarisation of the \emph{structure} of graphs. In the context of Web Data, the structure of a graph is defined by the use of predicates and classes.
 
-We present first a model for graph summarisation in Section~\ref{sec:summary:model}. Then in Section~\ref{sec:precise-summary}, we introduce a model for a \emph{precise} summary. Finally, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data in many cases in Section~\ref{sec:approximate}.% Finally, we describe how inter-linked datasets can be summarised.
+We present first a model for graph summarisation in Section~\ref{sec:summary:model}. Then in Section~\ref{sec:precise-summary}, we introduce a model for a \emph{precise} summary. Finally, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data in many cases in Section~\ref{chap4:summary:approximate}.% Finally, we describe how inter-linked datasets can be summarised.
 
 \subsection{Model}
 \label{sec:summary:model}
@@ -129,7 +129,7 @@ Figure~\ref{chap4:summary:fig:basic-summary} depicts a possible summary for a gr
 
 \paragraph{Uniqueness.}
 
-Given a \gls{summarisation-relation}, each node in the graph is mapped to a set of sumnodes in the summary. If the mapping is \emph{deterministic}, then there exists a unique graph summary for a graph within the context of that \gls{summarisation-relation}. The \glspl{summarisation-relation} proposed in Section~\ref{sec:approximate} generate a unique summary for a given entity graph. Indeed, the conditions on which a mapping is based is deterministic. For example, the summarisation relation $R_t$ introduced in that section bases its mapping on the set of \gls{types} associated to a node.
+Given a \gls{summarisation-relation}, each node in the graph is mapped to a set of sumnodes in the summary. If the mapping is \emph{deterministic}, then there exists a unique graph summary for a graph within the context of that \gls{summarisation-relation}. The \glspl{summarisation-relation} proposed in Section~\ref{chap4:summary:approximate} generate a unique summary for a given entity graph. Indeed, the conditions on which a mapping is based is deterministic. For example, the summarisation relation $R_t$ introduced in that section bases its mapping on the set of \gls{types} associated to a node.
 
 \begin{figure}
 	\centering
@@ -396,7 +396,7 @@ $$
 \end{figure}
 
 \subsection{Approximate Graph Summary}
-\label{sec:approximate}
+\label{chap4:summary:approximate}
 
 %A graph summary is built so that it describes the structure of the graph, providing similar benefits as a relational schema does for a database, which we discuss in Section~\ref{chap7:applications:wdm:graph-schema}.
 In general, we find in Web Data a heterogeneous use of vocabularies, where several different ontologies can be used within the same dataset, in ways that might not have been intended for. A reasonable explanation is that each person has own way of modelling data, thus making it difficult to fit a pre-defined ontology. Web Data presents a complex graph structure that varies greatly from dataset to dataset.
