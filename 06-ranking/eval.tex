@@ -257,7 +257,7 @@ Let $I$ and $O$ be two SPARQL queries. Let $qe$ be a function that consists of t
 	\item discard any solution modifiers.
 \end{enumerate}
 The application of the function $qe$ on the query $I$ outputs the query $O$ that is independent of any entity.
-\label{def:query-extraction-function}
+\label{chap6:ranking:def:query-extraction-function}
 \end{definition}
 
 In the following, we describe each operation of the function $qe$ and consider the query below as an ongoing example of the effect of an operation on the query:
@@ -367,7 +367,7 @@ Such a classification scheme allows to capture two aspects of a graph summary th
 
 \subsubsection{Observations of Queries in the Dataset}
 
-We process the queries from the logs in the USEWOD2013 dataset using the function $qe$ from Definition~(\ref{def:query-extraction-function}).
+We process the queries from the logs in the USEWOD2013 dataset using the function $qe$ from Definition~(\ref{chap6:ranking:def:query-extraction-function}).
 Once the operations from the function $qe$ are performed, we have then a collection of queries that are only concerned about the structure of the graph queried.
 
 Table~\ref{tab:usewod2013-queries} reports general statistics about the queries extracted from the USEWOD2013 DBpedia~3.3 logs using the function $qe$. The full list of queries is available in the Appendix~\ref{appendix:ranking}. For each category of complexity as defined in the previous section, we report in the table
