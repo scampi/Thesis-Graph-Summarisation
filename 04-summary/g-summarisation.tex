@@ -54,7 +54,7 @@ From this point on, we shall differentiate between the nodes and edges of the en
 
 \paragraph{Features.}
 
-We denote as \emph{feature} elements of the graph on which the relation of the graph homomorphism is based on. As an example, \gls{attributes} is a feature of the \gls{attributes-summary} as defined in Definition~(\ref{def:a}). In this thesis, we focus on the following features but others may be used:
+We denote as \emph{feature} elements of the graph on which the relation of the graph homomorphism is based on. As an example, \gls{attributes} is a feature of the \gls{attributes-summary} as defined in Definition~(\ref{chap4:summary:def:attributes}). In this thesis, we focus on the following features but others may be used:
 \begin{itemize}
 \item attribute, whether incoming or outgoing of a node; and
 \item type.
@@ -458,7 +458,7 @@ R_{ut} = \{ (u, x) \in V \times \mathcal{W}_{ut} \mid &\; \exists (v, y) \in V \
 	& (u,\glssymbol{atype},v) \in A \wedge (x,\glssymbol{atype},y) \wedge l_V(v) = l_\mathcal{W_{ut}}(y) \wedge \glssymbol{atype} \in T \}
 \end{aligned}
 $$
-\label{def:st}
+\label{chap4:summary:def:unique-type}
 \end{definition}
 \vspace{.5cm}
 
@@ -479,7 +479,7 @@ The Figure~\ref{fig:classes-summary} depicts the $R_t$ summary of the graph in t
 	$$
 	R_t = \left\lbrace (u, x) \in V \times \mathcal{W}_t \mid types(u) = types(x) \right\rbrace
 	$$
-	\label{def:t}
+	\label{chap4:summary:def:types}
 \end{definition}
 \vspace{.5cm}
 
@@ -500,7 +500,7 @@ The nodes $v_3$, $v_4$, and $v_5$ are $\sim_a$-equivalent because they share the
 	$$
 	R_a = \left\lbrace (u, x) \in V \times \mathcal{W}_a \mid attributes(u) = attributes(x) \right\rbrace
 	$$
-	\label{def:a}
+	\label{chap4:summary:def:attributes}
 \end{definition}
 
 \begin{remark}
@@ -559,7 +559,7 @@ The nodes $v_1$ and $v_2$ are mapped to a same sumnode by $R_{at}$ because they 
 	& \wedge attributes(u) = attributes(x) \}
 	\end{aligned}
 	$$
-	\label{def:at}
+	\labelchap4:summary:def:attributes-types}
 \end{definition}
 
 \minisec{Summarisation Relation $R_{ioa}$}
@@ -585,7 +585,7 @@ All three nodes $v_3$, $v_4$, and $v_5$ map to the same sumnode by the relation 
 	\}
 	\end{aligned}
 	$$
-	\label{def:ioa}
+	\label{chap4:summary:def:incoming--outgoing-attributes}
 \end{definition}
 
 \vspace{.5cm}
@@ -606,7 +606,7 @@ We define $R_{ia}$ as the relation based on the set of incoming \gls{attributes}
 	$$
 	R_{ia} = \left\lbrace (u, x) \in V \times \mathcal{W}_{ia} \mid attributes^{-1}(u) = attributes^{-1}(x) \right\rbrace
 	$$
-	\label{def:ia}
+	\label{chap4:summary:def:incoming-attributes}
 \end{definition}
 
 \begin{remark}
@@ -637,7 +637,7 @@ We define $R_{iat}$ as the relation based on the set of \gls{types} and incoming
 	& \wedge attributes^{-1}(u) = attributes^{-1}(x) \}
 	\end{aligned}
 	$$
-	\label{def:iat}
+	\label{chap4:summary:def:incoming-attributes-types}
 \end{definition}
 \vspace{.5cm}
 
@@ -667,7 +667,7 @@ Although the nodes $v_1$ and $v_2$ are mapped to a same sumnode with $R_{at}$, t
 	& \wedge attributes^{-1}(u) = attributes^{-1}(x) \}
 	\end{aligned}
 	$$
-	\label{def:ioat}
+	\label{chap4:summary:def:incoming--outgoing-attributes-types}
 \end{definition}
 \vspace{.5cm}
 
@@ -678,21 +678,21 @@ Although the nodes $v_1$ and $v_2$ are mapped to a same sumnode with $R_{at}$, t
 	\toprule
 	 & \phantom{a} & \multicolumn{1}{c}{Notation} & \phantom{a} & \multicolumn{1}{c}{Summarisation Relation} \\
 	\cmidrule{3-3} \cmidrule{5-5}
-	\emph{Unique Type} & \phantom{a} & $\glssymbol{unique-type-summary} = \left\langle \mathcal{W}_{ut}, \mathcal{B}_{ut}, l_{\mathcal{W}_{ut}} \right\rangle$ & \phantom{a} & Definition (\ref{def:st}) \\
+	\emph{Unique Type} & \phantom{a} & $\glssymbol{unique-type-summary} = \left\langle \mathcal{W}_{ut}, \mathcal{B}_{ut}, l_{\mathcal{W}_{ut}} \right\rangle$ & \phantom{a} & Definition (\ref{chap4:summary:def:unique-type}) \\
 
-	\emph{Types} & \phantom{a} & $\glssymbol{typessummary} = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ & \phantom{a} & Definition (\ref{def:t}) \\
+	\emph{Types} & \phantom{a} & $\glssymbol{typessummary} = \left\langle \mathcal{W}_t, \mathcal{B}_t, l_{\mathcal{W}_t} \right\rangle$ & \phantom{a} & Definition (\ref{chap4:summary:def:types}) \\
 
-	\emph{Attributes} & \phantom{a} & $\glssymbol{attributes-summary} = \left\langle \mathcal{W}_a, \mathcal{B}_a, l_{\mathcal{W}_a} \right\rangle$ & \phantom{a} & Definition (\ref{def:a}) \\
+	\emph{Attributes} & \phantom{a} & $\glssymbol{attributes-summary} = \left\langle \mathcal{W}_a, \mathcal{B}_a, l_{\mathcal{W}_a} \right\rangle$ & \phantom{a} & Definition (\ref{chap4:summary:def:attributes}) \\
 
-	\emph{Attributes \& Types} & \phantom{a} & $\glssymbol{attributes-types-summary} = \left\langle \mathcal{W}_{at}, \mathcal{B}_{at}, l_{\mathcal{W}_{at}} \right\rangle$ & \phantom{a} & Definition (\ref{def:at}) \\
+	\emph{Attributes \& Types} & \phantom{a} & $\glssymbol{attributes-types-summary} = \left\langle \mathcal{W}_{at}, \mathcal{B}_{at}, l_{\mathcal{W}_{at}} \right\rangle$ & \phantom{a} & Definition (\refchap4:summary:def:attributes-types}) \\
 
-	\emph{IO Attributes} & \phantom{a} & $\glssymbol{io-attributes-summary} = \left\langle \mathcal{W}_{ioa}, \mathcal{B}_{ioa}, l_{\mathcal{W}_{ioa}} \right\rangle$ & \phantom{a} & Definition (\ref{def:ioa}) \\
+	\emph{IO Attributes} & \phantom{a} & $\glssymbol{io-attributes-summary} = \left\langle \mathcal{W}_{ioa}, \mathcal{B}_{ioa}, l_{\mathcal{W}_{ioa}} \right\rangle$ & \phantom{a} & Definition (\ref{chap4:summary:def:incoming--outgoing-attributes}) \\
 
-	\emph{IO Attributes \& Types} & \phantom{a} & $\glssymbol{io-attributes-types-summary} = \left\langle \mathcal{W}_{ioat}, \mathcal{B}_{ioat}, l_{\mathcal{W}_{ioat}} \right\rangle$ & \phantom{a} & Definition (\ref{def:ioat}) \\
+	\emph{IO Attributes \& Types} & \phantom{a} & $\glssymbol{io-attributes-types-summary} = \left\langle \mathcal{W}_{ioat}, \mathcal{B}_{ioat}, l_{\mathcal{W}_{ioat}} \right\rangle$ & \phantom{a} & Definition (\ref{chap4:summary:def:incoming--outgoing-attributes-types}) \\
 
-	\emph{Incoming Attributes} & \phantom{a} & $\mathcal{S}_{ia} = \left\langle \mathcal{W}_{ia}, \mathcal{B}_{ia}, l_{\mathcal{W}_{ia}} \right\rangle$ & \phantom{a} & Definition (\ref{def:ia}) \\
+	\emph{Incoming Attributes} & \phantom{a} & $\mathcal{S}_{ia} = \left\langle \mathcal{W}_{ia}, \mathcal{B}_{ia}, l_{\mathcal{W}_{ia}} \right\rangle$ & \phantom{a} & Definition (\ref{chap4:summary:def:incoming-attributes}) \\
 
-	\emph{Incoming Attributes \& Types} & \phantom{a} & $\mathcal{S}_{iat} = \left\langle \mathcal{W}_{iat}, \mathcal{B}_{iat}, l_{\mathcal{W}_{iat}} \right\rangle$ & \phantom{a} & Definition (\ref{def:iat}) \\
+	\emph{Incoming Attributes \& Types} & \phantom{a} & $\mathcal{S}_{iat} = \left\langle \mathcal{W}_{iat}, \mathcal{B}_{iat}, l_{\mathcal{W}_{iat}} \right\rangle$ & \phantom{a} & Definition (\ref{chap4:summary:def:incoming-attributes-types}) \\
 
 	\bottomrule
 	\end{tabular}}
