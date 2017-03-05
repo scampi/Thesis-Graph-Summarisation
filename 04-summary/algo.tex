@@ -108,7 +108,7 @@ It is possible to gather statistics about the summarisation in \hyperref[step-st
 \end{figure}
 
 \subsubsection{Graph Summarisation of Inter-Linked Datasets}
-\label{chap03:summary:impl:inter-datasets}
+\label{chap4:summary:impl:inter-datasets}
 
 The Web Data is a collection of semi-structured data that hail from a variety of sources. Sources may provide overlapping information and reference each other. In such an environment, questions of trust about the legality of information arise, e.g., whether some description associated to a node in the graph is accurate or not. Since the graph summary is built from (inter-linked) data, it may present a structure of the graph that is not expected for a given dataset. We discuss in the next paragraph challenges presented in summarising inter-lined datasets.
 
@@ -311,7 +311,7 @@ This works only if the ontology is not inside the processed dataset, since the t
 
 \minisec{Step 4}
 
-It is possible to assign some statistics about the summarisation when generating the sumnodes and sumedges. This requires again additional \texttt{GROUP BY} operations that are not depicted in the figure. However, we need then to reify the statistics in RDF since we use the \texttt{CONSTRUCT} operator in the query. This is further discussed in the Section~\ref{chap03:summary-rdf}.
+It is possible to assign some statistics about the summarisation when generating the sumnodes and sumedges. This requires again additional \texttt{GROUP BY} operations that are not depicted in the figure. However, we need then to reify the statistics in RDF since we use the \texttt{CONSTRUCT} operator in the query. This is further discussed in the Section~\ref{chap7:applications:wdm:summary-rdf}.
 
 \begin{remark}
 If we use \texttt{CONSTRUCT} as the query form and we want to keep statistics about the summarisation, we need first to wrap the query into another one in which the aggregation is done. Then, we apply the \texttt{CONSTRUCT} query form on top. The reason is that that query form does not allow for aggregation operators such as \texttt{COUNT} in its clause.

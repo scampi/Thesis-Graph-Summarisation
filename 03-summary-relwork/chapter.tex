@@ -96,7 +96,7 @@ In the rest of this chapter, we discuss the graph summarisation literature with 
 \section{Graph Summarisation Approaches}
 
 %% present here the different kinds of approaches
-The concept of graph summarisation has been explored for diverse use cases in the literature. In Section~\ref{chap03:review:graph-exploration}, we present some research where it has been employed for aiding a user in exploring an unknown graph. In Section~\ref{chap03:review:query-profiling}, a summary of the graph is used for profiling the data, i.e., gathering some statistics about the graph so to analyse it with regards to upstream applications such as data integration. Graph summarisation is also used for analysing the \emph{content} of the graph by computing aggregates, which research is discussed in Section~\ref{chap03:review:data-analytics}. As discussed in Section~\ref{chap03:review:query-optim}, graph summarisation has been used for the purpose of optimising the query evaluation by outlining what paths exist in the graph and creating indices over the summary.\\
+The concept of graph summarisation has been explored for diverse use cases in the literature. In Section~\ref{chap3:review:graph-exploration}, we present some research where it has been employed for aiding a user in exploring an unknown graph. In Section~\ref{chap3:review:query-profiling}, a summary of the graph is used for profiling the data, i.e., gathering some statistics about the graph so to analyse it with regards to upstream applications such as data integration. Graph summarisation is also used for analysing the \emph{content} of the graph by computing aggregates, which research is discussed in Section~\ref{chap3:review:data-analytics}. As discussed in Section~\ref{chap3:review:query-optim}, graph summarisation has been used for the purpose of optimising the query evaluation by outlining what paths exist in the graph and creating indices over the summary.\\
 
 Figure~\ref{fig:timeline} depicts a time-line of the literature presented in this chapter. The main use case of each work is indicated with a trapeze having its own colour and stripes; a trapeze reflects the sections outlined in the previous paragraph. From the time-line, we observe that graph summarisation was at first used for optimising query evaluation through indices; a new direction later appeared where the summary is used for analysing and exploring a graph. This new direction might be linked with the emergence of Web Data, since users generally interact with graphs which structure is (partially) unknown.
 
@@ -119,7 +119,7 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, the process of graph s
 \end{figure}
 
 \section{Graph Exploration}
-\label{chap03:review:graph-exploration}
+\label{chap3:review:graph-exploration}
 
 Graph summarisation techniques can be used for exploring a graph. In this scenario, the structure of the graph is (partially) unknown; it is necessary however to know it in order to compose queries over the graph. The user leverage the summary to learn what attributes are used, what types, and how they relate with each other. In the time-line, the research works for this application are depicted with a red horizontally-striped trapeze in Figure~\ref{fig:timeline}.\\
 
@@ -185,7 +185,7 @@ Each layer of the proposed index provides views of the LOD graph with varying gr
 %\end{itemize}
 
 \section{Data Profiling}
-\label{chap03:review:query-profiling}
+\label{chap3:review:query-profiling}
 
 A graph summarisation algorithm can be used for providing insights into a graph by accumulating some statistics during the summary construction process. In the time-line of Figure~\ref{fig:timeline}, literature pertaining to this use case are depicted with a red dotted-trapeze.\\
 
@@ -198,7 +198,7 @@ Khatchadourian et. al \cite{khatchadourian:2010:eswc} describe the structure of 
 
 	The labelling scheme proposed in \cite{khatchadourian:2010:eswc} of sumnodes and sumedges is limiting, since it considers only parts of the resources' URI in the entity graph, e.g., the localname. The set of labels thus constructed is too small for finely controlling how much information from the graph is retained. To add more flexibility, we decouple the definition of a node from the creation of its label, where the former is discussed in Section~\ref{chap4:summary:model} and the latter in Section~\ref{chap4:summary:algo}.
 
-	The authors discuss the summarisation of \emph{inter-linked} datasets through the use of specific labelled edges, i.e., \emph{owl:sameAs} edges. Instead, we consider in this scenario the dataset label, which we detail in Section~\ref{chap03:summary:impl:inter-datasets}.
+	The authors discuss the summarisation of \emph{inter-linked} datasets through the use of specific labelled edges, i.e., \emph{owl:sameAs} edges. Instead, we consider in this scenario the dataset label, which we detail in Section~\ref{chap4:summary:impl:inter-datasets}.
 \end{centeremph}
 
 Navlakha et. al \cite{navlakha:2008:gsb} propose a graph summarisation approach based on Information Theory. The result of the approach is the creation of two data structures, i.e., the summary graph and a set of corrections. The set of corrections allows to rebuild the entity graph by correcting any error in the summary graph, e.g., an instance of a sumedge links two \emph{disconnected} nodes in the entity graph. The algorithm is based on the minimum description length \cite{grunwald:2007:mdl} principle which aims to minimise the cost of the summary representation of the graph, i.e., the sum of the summary's size and of the corrections' set size.
@@ -225,11 +225,11 @@ A sumedge indicates in this approach that all nodes that are mapped to the adjac
 %\end{itemize}
 
 \section{Data Analytics}
-\label{chap03:review:data-analytics}
+\label{chap3:review:data-analytics}
 
 OLAP (online analytical processing) is a technique for answering analytical queries over multi-dimensional data. Through different kind of operations it allows a user to analyse the data from different perspectives. Each perspective is called a \emph{cube}, obtained by aggregating the values of some dimensions. In the time-line of Figure~\ref{fig:timeline}, the research works that pertain to this use case are depicted with a plain grey trapeze.\\
 
-Several works investigate the use of OLAP over graphs: data records analysed through OLAP are now related to each other. The main difference between traditional OLAP and graph-OLAP is the \emph{measure} which traditionally is a number becomes a \emph{graph}. Compared to \cite{tian:sigmod:2008} discussed in Section~\ref{chap03:review:graph-exploration}, the works presented here are anchored in a OLAP background, rather than being a bridge to OLAP from the graph exploration domain.
+Several works investigate the use of OLAP over graphs: data records analysed through OLAP are now related to each other. The main difference between traditional OLAP and graph-OLAP is the \emph{measure} which traditionally is a number becomes a \emph{graph}. Compared to \cite{tian:sigmod:2008} discussed in Section~\ref{chap3:review:graph-exploration}, the works presented here are anchored in a OLAP background, rather than being a bridge to OLAP from the graph exploration domain.
 
 \begin{centeremph}{Observation}
 	Among the possible OLAP operations, \emph{rollup} and \emph{drill-down} control the level of details presented to the user about the graph. With regards to our graph summarisation presented in Chapter~\ref{chap4:summary}, each level is actually a summary. Therefore, the approaches of OLAP over graphs are orthogonal to ours.
@@ -293,7 +293,7 @@ Rudolf et al. \cite{rudolf:2013:slg} propose a framework for analysing graphs th
 \end{centeremph}
 
 \section{Query Optimisation}
-\label{chap03:review:query-optim}
+\label{chap3:review:query-optim}
 
 The purpose of the graph summarisation is to create a graph that share the same structure as the original, but is significantly smaller. Hence, that summary can be used in place of the original in order to improve the speed of query optimisation. In the time-line of Figure~\ref{fig:timeline}, the literature that pertain to this application of the summary are depicted with a blue vertically-striped trapeze.\\
 
@@ -323,7 +323,7 @@ Riondato et al. \cite{riondato:2014:gsq} present a graph summarisation approach 
 %\section{Graph Schema Creation via Graph Summarisation}
 %
 %\section{Large-scale Computation}
-%\label{chap03:review:large-scale-comp}
+%\label{chap3:review:large-scale-comp}
 
 \section{Summary}
 

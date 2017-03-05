@@ -3,7 +3,7 @@
 
 The graph summary highlights the structure of a graph, which in the case of RDF data consists in the use of predicates, classes, and their relationships. As such, a graph summary exhibits a similar purpose as a \emph{schema} in relational database management systems. In comparison to the VoID~\cite{alexander:2009:dld} approach, the use of a graph summary as a schema provides additional information, e.g., which predicates co-occur, or how are the classes in a dataset inter-connected.
 
-We define a graph schema model on top of a graph summary in Section~\ref{chap7:applications:wdm:graph-schema}. We describe an RDF model for a graph summary in Section~\ref{chap03:summary-rdf}.
+We define a graph schema model on top of a graph summary in Section~\ref{chap7:applications:wdm:graph-schema}. We describe an RDF model for a graph summary in Section~\ref{chap7:applications:wdm:summary-rdf}.
 
 \subsection{Graph Schema}
 \label{chap7:applications:wdm:graph-schema}
@@ -156,7 +156,7 @@ A varying level of granularity can be achieved by modifying appropriately the \g
 %The schema graph in Figure~\ref{fig:sg2} depicts two nodes, one with type \emph{Place} and the other with \emph{Country}. For both, it reports \emph{capital} and \emph{label} as attributes. However, there is no entity in the data depicted in Figure~\ref{fig:graph} of either type that have both attributes. The reason is that both nodes represent the aggregation of several entities, i.e., $v_4$, $v_5$, $v_6$, and $v_7$ for the one typed \emph{Place}, and $v_6$, $v_7$ for the other.
 
 \subsection{Representation of Graph Summaries}
-\label{chap03:summary-rdf}
+\label{chap7:applications:wdm:summary-rdf}
 
 In this section, we present an RDF model for describing a graph summary. This allows the summary to be queried as any other RDF graph, ultimately so it can be used in conjunction with the entity graph.
 
