@@ -1,5 +1,5 @@
 \chapter{Introduction}
-\label{chap:introduction}
+\label{chap1:introduction}
 
 Since the advent of the Internet, people and companies exchange information on the Web. There is now an abundance of information about a wide range of domains such as science, commerce, leisure, etc. Although the Web browsed by Humans mainly contains unstructured data such as text, a significant amount of structured data exists.
 
@@ -19,9 +19,9 @@ The inter-connected data is at the ``scale of the Web'', consisting of thousands
 
 In order to account for the variety of data about a subject, a ``Data Mashup'' technique is needed as a mean for reading through all different things being said about that subject. Also, within the context of a data mashup, one may be more interested in aggregated measures rather than specific details.\\
 
-Data exploration ultimately requires some knowledge about the \emph{structure} of the (graph) data. There is a need to know what attributes a piece of information contains along with their semantics, so to enable one to search for relevant data. Such knowledge about the structure requires techniques for \emph{managing} the data. In Section~\ref{chap:introduction:data-mgmt}, we present two data management approaches that are suited to different kinds of data.
+Data exploration ultimately requires some knowledge about the \emph{structure} of the (graph) data. There is a need to know what attributes a piece of information contains along with their semantics, so to enable one to search for relevant data. Such knowledge about the structure requires techniques for \emph{managing} the data. In Section~\ref{chap1:introduction:data-mgmt}, we present two data management approaches that are suited to different kinds of data.
 
-The data exploration endeavour is challenged by the scale, heterogeneity, and quality of the data itself. The Web of Data is composed of at least a thousand\footnote{Datahub portal: \url{http://datahub.io/dataset?tags=lod}} of datasets, spanning over a variety of topics. Web Data presents a structure that changes from a dataset to the other, evolving over time. The amount of information about a topic varies from data sources, some being more complete in one aspect and less in another. To overcome these challenges, there is a need for \emph{ranking} the data so that relevant results to an information need are accessed first. This calls for a novel ranking mechanism that leverage the rich structured information of the Web Data; we ponder this in Section~\ref{chap:introduction:ranking}.\\
+The data exploration endeavour is challenged by the scale, heterogeneity, and quality of the data itself. The Web of Data is composed of at least a thousand\footnote{Datahub portal: \url{http://datahub.io/dataset?tags=lod}} of datasets, spanning over a variety of topics. Web Data presents a structure that changes from a dataset to the other, evolving over time. The amount of information about a topic varies from data sources, some being more complete in one aspect and less in another. To overcome these challenges, there is a need for \emph{ranking} the data so that relevant results to an information need are accessed first. This calls for a novel ranking mechanism that leverage the rich structured information of the Web Data; we ponder this in Section~\ref{chap1:introduction:ranking}.\\
 
 Throughout this thesis, we present methodologies designed at shedding light on the structure of Web Data. We propose methods that take into account the shifting nature of the Web Data. We develop then an approach which highlights the ``skeleton'' (structure) of datasets. We leverage the rich structure of the Web of Data in a novel ranking model for (semi-)structured data. We finally present how these techniques can be combined for a more effective exploration of datasets.
 
@@ -30,7 +30,7 @@ In this thesis, we use \emph{Web of Data} to refer to the infrastructure that ma
 %Throughout this thesis, we present methodologies designed at shedding light on the structure of Web of Data. The methods take into account the shifting nature of the Web of Data. We develop then an approach which highlights the ``skeleton'' of datasets. We leverage the rich structure of the Web of Data in a novel ranking model for semi-structured data. We finally present how these techniques can be combined for a more effective exploration of datasets.
 
 \section{Motivation}
-\label{chap:introduction:motivation}
+\label{chap1:introduction:motivation}
 
 %- difficulty of formulating queries and data integration from multiple sources
 %	- unknown data structure: what vocabulary(ies), what predicate is used, which predicate is relevant
@@ -66,7 +66,7 @@ As the query construction progresses, the user needs to know which predicates/ty
 With the Eunis dataset having at least 500 types and 1500 predicates, the user is left with the challenge of deciding which one to use. Are the ones most used the more relevant for the user ? Does the predicate label, e.g., \url{http://xmlns.com/foaf/0.1/name}, give some indication about the semantic of that predicate ? One may dereference it and read its description, but this demands yet additional work for the user. \textit{How can a user decide which type/predicate to use ?}
 
 \section{Data Management}
-\label{chap:introduction:data-mgmt}
+\label{chap1:introduction:data-mgmt}
 
 Web Data is composed of a variety of data about many entities, for example which can be a person\footnote{\url{https://en.wikipedia.org/wiki/Buzz_Aldrin}}, a country\footnote{\url{https://en.wikipedia.org/wiki/Ireland}}, an event\footnote{\url{https://en.wikipedia.org/wiki/Moon_landing}}, etc.
 The decentralised nature of the Web has the effect that information about a same \emph{entity} is available on several web pages. Data sources can be complementary in some aspects, and redundant in others. Furthermore, each source has its own take on data modelling. Sources may label an attribute of an entity differently although what is described is the same. Sources may also represent an attribute differently, e.g., the name of a person as two properties with first and last name, versus a single property which is a concatenation of the two. These facts highlight the \emph{heterogeneity} of the data on the Web, which stands as a challenge when managing data.\\
@@ -122,7 +122,7 @@ Given that the first point cannot be achieved in the Web of Data context, we pro
 %The exploration of data can be performed at different levels of abstraction. At the lowest level, the browsing focuses on the resources. At the highest level, the browsing is done over datasets, where a dataset represents a sub-graph of the Web of Data. At that level, information about a single resource is of little to no importance. The information need in this case is a concept that refers to a group of resources. Metadata information about datasets is then needed to understand their content or what kind of information they have available. Different approaches have been proposed for describing the content and structure of datasets~\cite{alexander:2009:dld,konrath:2012:schemex}. which can then be used to facilitate the discovery of datasets \cite{akar:2012:ldow,konrath:2012:schemex}.
 
 \section{Ranking of Web Data}
-\label{chap:introduction:ranking}
+\label{chap1:introduction:ranking}
 
 With the growth of the Web in the early days of The Internet, the use of web search engines to sift through the mass of documents marked a significant milestone in the interaction of people with regards to data. Then, the ability of search engines not only to retrieve but also to \emph{rank} the data by relevance to a query marked another milestone: the possibility to find a needle in the haystack.
 
