@@ -40,7 +40,7 @@ The creation of a graph summary is decomposed into four steps. These steps are c
 
 We present here the graph summarisation algorithm that is aimed at processing a single dataset.
 %The Figure~\ref{fig:gs-algo} depicts the overall algorithm for generating a graph summary.
-The Algorithm~\ref{alg:summary} outlines the flow of the graph summarisation which takes a graph as input and outputs its summary for a given \gls{summarisation-relation}.
+The Algorithm~\ref{chap4:summary:alg:summary} outlines the flow of the graph summarisation which takes a graph as input and outputs its summary for a given \gls{summarisation-relation}.
 
 The \gls{summarisation-relation} is first materialised into a table where each row report two elements: a node and its corresponding sumnode as per the \gls{summarisation-relation}.
 For each edge of the graph, the algorithm first retrieves the sumnodes corresponding to the source and target nodes thanks to the \texttt{GetSumnode} function. This function performs a lookup on the previous materialised table. We note that since the summary of a graph is unique for a given \gls{summarisation-relation}, the sumnode can be retrieved deterministically.
@@ -77,7 +77,7 @@ On line~5 we retrieve the sumnode of $v$ only if it is not a type, since we cons
 		$\mathcal{B} \gets \mathcal{B} \cup \{ (S_u, \alpha, S_v) \}$ \;
 	}
 	\caption{Graph summarisation of a single dataset}
-	\label{alg:summary}
+	\label{chap4:summary:alg:summary}
 \end{algorithm}
 
 \subparagraph{Example.}
@@ -190,10 +190,10 @@ The edge $\left(a_2, \gamma, b_1\right)$ does not have authority, since its prov
 %Step3
 %Although this would duplicate some elements of the list of tuples, the various data sources for an entity forces it. This occurs whenever datasets link to each other.
 
-In order to summarize a collection of inter-linked datasets, we extend the Algorithm~\ref{alg:summary} with the dataset label information.
+In order to summarize a collection of inter-linked datasets, we extend the Algorithm~\ref{chap4:summary:alg:summary} with the dataset label information.
 %We augment the edges of the input graphs with their provenance.
-%The Algorithm~\ref{alg:id-summary} modifies the function \texttt{GetSumnode} so to make it aware of the dataset label component.
-The Algorithm~\ref{alg:id-summary} modifies the function \texttt{GetSumnode} so to implement the edge authority.
+%The Algorithm~\ref{chap4:summary:alg:id-summary} modifies the function \texttt{GetSumnode} so to make it aware of the dataset label component.
+The Algorithm~\ref{chap4:summary:alg:id-summary} modifies the function \texttt{GetSumnode} so to implement the edge authority.
 We name it as \texttt{GetSumnode\textsubscript{i}} to mark this change, where the subscript \emph{i} denotes the dataset label.
 We extract the features for the \gls{summarisation-relation} from the edges in the entity description \glssymbol{edesc} only if one of the following conditions is met:
 \begin{enumerate}
@@ -202,7 +202,7 @@ We extract the features for the \gls{summarisation-relation} from the edges in t
 \end{enumerate}
 By doing so, we retain the summarisation features from each dataset. This ensures we can summarise a dataset that uses a node which ownership is external to it, without corrupting the information about that node.% The features which have authority are always used in order to support the case where a dataset reuses a node it didn't provide the necessary summarisation features for (e.g., types).
 
-The Algorithm~\ref{alg:id-summary} takes a collections graphs from $n$ datasets, and outputs a summary that describes the structure of graphs within and between datasets. This algorithm is the same as the Algorithm~\ref{alg:summary}, but with the redefined \texttt{GetSumnode\textsubscript{i}} function. Given a node $u \in V$, that function considers the edges from its entity description and filters out those that do not have authority (lines~3-4).
+The Algorithm~\ref{chap4:summary:alg:id-summary} takes a collections graphs from $n$ datasets, and outputs a summary that describes the structure of graphs within and between datasets. This algorithm is the same as the Algorithm~\ref{chap4:summary:alg:summary}, but with the redefined \texttt{GetSumnode\textsubscript{i}} function. Given a node $u \in V$, that function considers the edges from its entity description and filters out those that do not have authority (lines~3-4).
 
 \begin{algorithm}
 	\DontPrintSemicolon
@@ -236,7 +236,7 @@ The Algorithm~\ref{alg:id-summary} takes a collections graphs from $n$ datasets,
 		}
 	}
 	\caption{Graph summarisation of a inter-linked datasets}
-	\label{alg:id-summary}
+	\label{chap4:summary:alg:id-summary}
 \end{algorithm}
 
 \subparagraph{Example.}
@@ -256,7 +256,7 @@ The type features \emph{Student} and \emph{Person} of the node \texttt{e2} are s
 		\resizebox{\textwidth}{!}{
 			\input{04-summary/figures/id-algo-ex}
 		}
-		\caption{The input data is a set of edges, one per row. The column ``Prov'' indicates the provenance of the edge. The columns $u_\mathcal{W}$ and $v_\mathcal{W}$ represents the sumnodes associated with the node $u$ and $v$, respectively. The ownership of \texttt{e1} is A, and the dataset B owns \texttt{e2}. The Step~2 assigns the sumnodes according to the function \texttt{GetSumnode\textsubscript{i}} in Algorithm~\ref{alg:id-summary}.}
+		\caption{The input data is a set of edges, one per row. The column ``Prov'' indicates the provenance of the edge. The columns $u_\mathcal{W}$ and $v_\mathcal{W}$ represents the sumnodes associated with the node $u$ and $v$, respectively. The ownership of \texttt{e1} is A, and the dataset B owns \texttt{e2}. The Step~2 assigns the sumnodes according to the function \texttt{GetSumnode\textsubscript{i}} in Algorithm~\ref{chap4:summary:alg:id-summary}.}
 		\label{tab:id-algo-ex}
 	\end{subfigure}
 	\quad
@@ -274,7 +274,7 @@ The type features \emph{Student} and \emph{Person} of the node \texttt{e2} are s
 \subsection{Implementations}
 \label{sec:summary-impl}
 
-We present in this section two implementations of the graph summarisation, a first one based on SPARQL and then a second based on MapReduce~\cite{dean:2004:msd}. We present only the implementations of the Algorithm~\ref{alg:summary} for the summarisation of a single dataset, since they can be easily extended to the Algorithm~\ref{alg:id-summary}. We outline below the required operators of the graph summarisation algorithm.
+We present in this section two implementations of the graph summarisation, a first one based on SPARQL and then a second based on MapReduce~\cite{dean:2004:msd}. We present only the implementations of the Algorithm~\ref{chap4:summary:alg:summary} for the summarisation of a single dataset, since they can be easily extended to the Algorithm~\ref{chap4:summary:alg:id-summary}. We outline below the required operators of the graph summarisation algorithm.
 \begin{labeling}{\textbf{\underline{Step 1:}}}
 \item[\textbf{\underline{Step 1:}}] In this step, we need a \emph{group} operator in order to build the entity description \glssymbol{edesc}.
 \item[\textbf{\underline{Step 2:}}] In this step we create the sumnode associated to a node according to its entity description. Therefore, we need a \emph{projection} operator in order to extract the features of the \gls{summarisation-relation}. We note that a feature can be multi-valued, which needs to be taken into account as well. The creation of the sumnode from the extracted features requires an \emph{object invention}~\cite{hull:1989:usi} operator.
@@ -302,7 +302,7 @@ In the Figure~\ref{fig:sparql-gs}, the lines 4-7 (resp., lines 14-17) represent 
 The sumedge materialisation is done on the line~11: the sumnode of the source node is retrieved thanks to the variable \emph{?s} that is projected by the sub-query in line~6; similarly for the target node thanks to the variable \emph{?o} returned by the sub-query line~16.
 On lines 9 and 19, we create a URI for the source and target sumnodes, respectively.
 
-On line 22, we consider the case when there is no sumnode associated with the object variable. This can happen if the object is a literal, or if no feature can be extracted for the resource. Since we are concerned with the graph structure with the graph summary, we need to keep the type value. Therefore, we add the condition on line 25 which corresponds to the line~4 in Algorithm~\ref{alg:summary}.
+On line 22, we consider the case when there is no sumnode associated with the object variable. This can happen if the object is a literal, or if no feature can be extracted for the resource. Since we are concerned with the graph structure with the graph summary, we need to keep the type value. Therefore, we add the condition on line 25 which corresponds to the line~4 in Algorithm~\ref{chap4:summary:alg:summary}.
 The empty string in the \emph{else} clause represents the sumnode $\varnothing$ in the graph summary.
 
 \begin{remark}
@@ -378,7 +378,7 @@ The computation of a sumnode identifier requires all the information about an en
 
 Depending on the \gls{summarisation-relation}, more or less information about an entity is needed. In the relations presented in this thesis such as the \emph{IO Attributes} relation $R_{ioa}$, attributes of \emph{incoming} edges are required. We retrieve such information with no extra MapReduce job compared to others. The difference is in the amount of data aggregated.
 
-The Algorithm~\ref{alg:inv-edge} describes the mapper function of the entity description creation to which we add the incoming edges. The mapper function takes the edge as input, and emits a tuple containing three elements. The underlined element represents the \emph{key} of the tuple. In the reducer function, we collect all the edges having the same hash key. If necessary, we can differentiate between incoming and outgoing edge thanks to the emitted flag.
+The Algorithm~\ref{chap4:summary:alg:inv-edge} describes the mapper function of the entity description creation to which we add the incoming edges. The mapper function takes the edge as input, and emits a tuple containing three elements. The underlined element represents the \emph{key} of the tuple. In the reducer function, we collect all the edges having the same hash key. If necessary, we can differentiate between incoming and outgoing edge thanks to the emitted flag.
 
 \begin{algorithm}
 	\DontPrintSemicolon
@@ -400,14 +400,14 @@ The Algorithm~\ref{alg:inv-edge} describes the mapper function of the entity des
 		\emit{\{ \underline{\hash{$v$}}, 1, $(v, \alpha, u)$ \}}\;
 	}
 	\caption{Entity description expanded with incoming edges}
-	\label{alg:inv-edge}
+	\label{chap4:summary:alg:inv-edge}
 \end{algorithm}
 
 \minisec{Step 2}
 
 In order to generate unique identifiers for sumnodes, we extract features relevant to the \gls{summarisation-relation} from the entity description. For instance, we need the type values for the relation $R_t$, and for $R_a$ we are interested in the attributes. The projection operator as well as the handling of multi-valued feature are then performed programmatically, using a \emph{mapper}.
 
-The Algorithm~\ref{alg:mapper-rt} describes the implementation of the $R_t$ relation, which stands as an example of Step~2 in the figure. We retrieve the type values associated with the node $u$ on lines~2-5. The object invention is performed on line~6, where we emit the input tuple to which we add the identifier of the sumnode, i.e., the hash of the set of types.
+The Algorithm~\ref{chap4:summary:alg:mapper-rt} describes the implementation of the $R_t$ relation, which stands as an example of Step~2 in the figure. We retrieve the type values associated with the node $u$ on lines~2-5. The object invention is performed on line~6, where we emit the input tuple to which we add the identifier of the sumnode, i.e., the hash of the set of types.
 
 \begin{algorithm}
 	\DontPrintSemicolon
@@ -433,13 +433,13 @@ The Algorithm~\ref{alg:mapper-rt} describes the implementation of the $R_t$ rela
 		\emit{$\{ \hash{\types}, \hash{u}, \glssymbol{edesc}(u) \}$}\;
 	}
 	\caption{\emph{Types} summarisation relation $R_t$}
-	\label{alg:mapper-rt}
+	\label{chap4:summary:alg:mapper-rt}
 \end{algorithm}
 
 \minisec{Step 3}
-\label{chap03:algo:edge-materialisation}
+\label{chap4:summary:algo:edge-materialisation}
 
-We materialise the sumedges in two distinct processes, depicted by the Step~3a and Step~3b in the figure. The reason is to decrease the amount of data joined with the sumnode mappings from Step~2. To do so, we filter out in Step~3b the edges which target node is a sink --- in RDF, this means to remove the edges which object is a \emph{literal}. Also, we filter edges which have the type attribute. The reason is that the target node, which here is the type value, does not represent an entity. This is represented by the line~4 of the Algorithm~\ref{alg:summary}.
+We materialise the sumedges in two distinct processes, depicted by the Step~3a and Step~3b in the figure. The reason is to decrease the amount of data joined with the sumnode mappings from Step~2. To do so, we filter out in Step~3b the edges which target node is a sink --- in RDF, this means to remove the edges which object is a \emph{literal}. Also, we filter edges which have the type attribute. The reason is that the target node, which here is the type value, does not represent an entity. This is represented by the line~4 of the Algorithm~\ref{chap4:summary:alg:summary}.
 
 In Step~3a, we create the sumedges which \emph{target} sumnode is $\varnothing$. In Step~3b instead, we consider the sumedges which target might be defined --- it may not be if the target node is not mapped to any sumnode (Step~2 in the figure). We remark that the Step~3a requires no join. Indeed, we keep the entity description along with the sumnode identifier as a result of the Step~2 processing.
 

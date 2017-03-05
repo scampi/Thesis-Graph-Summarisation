@@ -56,7 +56,7 @@ We present in this section three dimensions we use for evaluating a summary, i.e
 	%\item a \emph{mapping} step, where we assign a node of the entity graph to its $\sim$-equivalence class; and
 	%\item a \emph{edges} step, where we compute the edges of $G^\sim$.
 	%\end{inparaenum}
-	We evaluate the computational performance of a \gls{summarisation-relation} by analysing the CPU time\footnote{The accumulated CPU time as reported with the \texttt{CPU\_MILLISECONDS} counter of Hadoop.} on the \hyperref[step-he]{Step 3} of the graph summary computation, as described in Section~\ref{chap03:algo:edge-materialisation} for the MapReduce case. We do not report on the \hyperref[step-hn]{Step 2} because the evaluated \glspl{summarisation-relation} have the same complexity, achieving similar times on this step.
+	We evaluate the computational performance of a \gls{summarisation-relation} by analysing the CPU time\footnote{The accumulated CPU time as reported with the \texttt{CPU\_MILLISECONDS} counter of Hadoop.} on the \hyperref[step-he]{Step 3} of the graph summary computation, as described in Section~\ref{chap4:summary:algo:edge-materialisation} for the MapReduce case. We do not report on the \hyperref[step-hn]{Step 2} because the evaluated \glspl{summarisation-relation} have the same complexity, achieving similar times on this step.
 
 	\item[\emph{Summary precision.}]
 
@@ -123,7 +123,7 @@ We can conclude that a sparse usage of attributes with a type creates an explosi
 
 \subsubsection{Performance of the Summarisation Relation}
 
-Figure~\ref{fig:cpu-time-bar} depicts the average CPU time in $ms$ for each category of complexity. This time accounts for the \hyperref[step-he]{Step~3} (Section~\ref{chap03:algo:edge-materialisation}) in the graph summarisation computation.
+Figure~\ref{fig:cpu-time-bar} depicts the average CPU time in $ms$ for each category of complexity. This time accounts for the \hyperref[step-he]{Step~3} (Section~\ref{chap4:summary:algo:edge-materialisation}) in the graph summarisation computation.
 For each dataset which raw data is reported in Table~\ref{tab:cpu-time}, the times are the average of two runs of a summarisation relation.
 
 The \emph{unique type} $R_{ut}$ and types $R_t$ summarisation relations can have an undefined sumnode (Section~\ref{sec:undefined-sumnode}) due to some nodes having no type information. For performance reason, the undefined sumnode $\mathfrak{U}$ is filtered from the resulting summary. Therefore, reported run times in Table~\ref{tab:cpu-time} from $R_{ut}$ and $R_t$ cannot be compared to others.
