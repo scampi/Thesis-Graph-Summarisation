@@ -97,7 +97,7 @@ The graph summary highlights the \emph{structure} of the entity graph. Errors in
 %Let $\sim_1$ and $\sim_2$ be two equivalences on an entity graph $G$. There is a partial order $\sqsubseteq$ on the $\sim_1$ and $\sim_2$ summaries, noted $\sim_1 \sqsubseteq \sim_2$, if and only if: $\forall [x]^{\sim_1} \in V^{\sim_1}, \exists [x]^{\sim_2} \in V^{\sim_2}, [x]^{\sim_1} \subseteq [x]^{\sim_2}$.
 %\end{definition}
 
-As per the recursive definition of the bisimulation summarisation relation $R_{fbt}$ presented in Section~\ref{sec:bisim-summary}, a node in the bisimulation summary \glssymbol{fbt-bisimulation-summary} refers to nodes of $G$ that share the same \emph{incoming} and \emph{outgoing} paths. Thus, the \glssymbol{fbt-bisimulation-summary} summary is the most precise summary for an entity graph with regards to the structure, i.e., all paths in the summary do exist in the original entity graph.
+As per the recursive definition of the bisimulation summarisation relation $R_{fbt}$ presented in Section~\ref{chap4:summary:bisim-summary}, a node in the bisimulation summary \glssymbol{fbt-bisimulation-summary} refers to nodes of $G$ that share the same \emph{incoming} and \emph{outgoing} paths. Thus, the \glssymbol{fbt-bisimulation-summary} summary is the most precise summary for an entity graph with regards to the structure, i.e., all paths in the summary do exist in the original entity graph.
 
 According to the partial order $\sqsubseteq$, the bisimulation summary \glssymbol{fbt-bisimulation-summary} of a graph $G$ is ``smaller'' than any of the other presented summaries on $G$, i.e., for any summarisation relation $R$ we have $R_{fbt} \sqsubseteq R$. Therefore, any edge on a summary can be inferred from the \glssymbol{fbt-bisimulation-summary} summary. However, the converse is not necessarily true.\\
 % Relations between two $\sim$-equivalence classes can be inferred between the included $\sim_{fbt}$-equivalence classes.
@@ -122,7 +122,7 @@ The set $Err(R)$ is equal to all possible combinations of nodes pair on $G$, kee
 
 \subsubsection{Inferred Graph $\mathcal{I}(R)$}
 
-We introduce the graph $\mathcal{I}(R)$ as the bisimulation summary \glssymbol{fbt-bisimulation-summary} that is \emph{augmented} with inferred edges from the $Err(R)$ set. This graph is used for computing the set of true and false positive edges in Section~\ref{sec:edge-precision}.
+We introduce the graph $\mathcal{I}(R)$ as the bisimulation summary \glssymbol{fbt-bisimulation-summary} that is \emph{augmented} with inferred edges from the $Err(R)$ set. This graph is used for computing the set of true and false positive edges in Section~\ref{chap5:precision:edge-precision}.
 
 \begin{definition}[Inferred Graph]
 Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ be the summary of $G$ according to $R \subseteq V \times \mathcal{W}$, and $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ be the bisimulation summary of $G$ according to $R_{fbt}$ such that $R_{fbt} \sqsubseteq R$.
@@ -148,7 +148,7 @@ Edges from the $Err(R_t)$ set cause the nodes $S^{fbt}_1$, $S^{fbt}_5$, and $S^{
 \end{figure}
 
 \subsection{Classification of Errors}
-\label{sec:error-classification}
+\label{chap5:precision:error-classification}
 
 Depending on the kind of edge in the set $Err(R)$, we identify three categories: \gls{connectivity}, \gls{attribute}, and \gls{type}. The \emph{connectivity} category reflects errors of a summary with regards to the structure of the entity graph, while the \emph{attribute} and \emph{type} categories with regards to its schema.
 
@@ -201,7 +201,7 @@ For example, in the Figure~\ref{chap4:summary:fig:attributes-summary} the node $
 \end{definition}
 
 \subsection{Sumedge Precision}
-\label{sec:edge-precision}
+\label{chap5:precision:edge-precision}
 
 If we were to traverse the inferred graph $\mathcal{I}(R)$, we can follow sumedges of the $\mathcal{B}_{fbt}$ set from the bisimulation summary \glssymbol{fbt-bisimulation-summary}, but also from the summary error set $Err(R)$. The former sumedges are \emph{true positive} sumedges, while the latter are \emph{false positive} sumedges.
 

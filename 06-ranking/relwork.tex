@@ -3,9 +3,9 @@
 
 The Web of Data consists of a wide range of heterogeneous datasets, where the schema and the ontology can vary from one to the other. To overcome this diversity of attributes, different approaches for defining the \glspl{field} of an entity have been proposed.\\
 
-From an RDF perspective, the authors consider in \cite{Perez-Aguera:2010:UBS} five weighted fields to represent the structure of an entity: literals (textual values), keywords extracted from the root's label, i.e., the subject URI, keywords extracted from the incoming links, the entity's \gls{types} and keywords extracted from object URIs. Compared to the BM25F and PL2F field-based approaches defined in \ref{sec:ranking-wod}, this approach is not able to grasp the rich structure of the data since attributes are discarded.
+From an RDF perspective, the authors consider in \cite{Perez-Aguera:2010:UBS} five weighted fields to represent the structure of an entity: literals (textual values), keywords extracted from the root's label, i.e., the subject URI, keywords extracted from the incoming links, the entity's \gls{types} and keywords extracted from object URIs. Compared to the BM25F and PL2F field-based approaches defined in \ref{chap6:ranking:ranking-wod}, this approach is not able to grasp the rich structure of the data since attributes are discarded.
 
-The BM25F and PL2F approaches we use in our experiments Section~\ref{sec:experiments} are similar in nature to the BM25F adaptation proposed in \cite{blanco:2011:iswc}, where the authors consider one field per attribute in the data collection and can assign a different weight to each attribute. However, they restrict their approach to attributes with literal values, discarding those with URI values. In contrast to \cite{blanco:2011:iswc}, we consider attributes both with literal and URI values. URIs in an RDF graph carry relevant keywords, with regards to
+The BM25F and PL2F approaches we use in our experiments Section~\ref{chap6:ranking:experiments} are similar in nature to the BM25F adaptation proposed in \cite{blanco:2011:iswc}, where the authors consider one field per attribute in the data collection and can assign a different weight to each attribute. However, they restrict their approach to attributes with literal values, discarding those with URI values. In contrast to \cite{blanco:2011:iswc}, we consider attributes both with literal and URI values. URIs in an RDF graph carry relevant keywords, with regards to
 \begin{inparaenum}[(1)]
 	\item the entity in general when considering the subject URI;
 	\item the attribute when considering the predicate URI; and
@@ -88,7 +88,7 @@ We define here some vocabulary used in the rest of the chapter:
 \end{description}
 
 \section{Field-Based Ranking Models}
-\label{sec:ranking-wod}
+\label{chap6:ranking:ranking-wod}
 
 In this section, we explain how to adapt two existing \gls{field}-based ranking frameworks to the graph model described in Chapter~\ref{chap2:semi-structured-data}.
 A field-based ranking model views a graph as composed of multiple normalized weighted fields. For example, a field can be the title, the author or the body of the document.\\

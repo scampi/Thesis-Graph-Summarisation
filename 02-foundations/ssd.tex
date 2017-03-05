@@ -35,7 +35,7 @@ Any kind of data can generally be modelled using a graph, since it is versatile 
 
 We consider the data as being a labelled directed graph and build methods based on this model. Therefore, the findings presented in this work can be applied to any domain where a graph is used as data representation.
 
-We describe in this Section a graph data model based on the work of \cite{delbru:jws:entity}. The graph is represented with two layers that depict the data at two extremes: the \emph{dataset} and the \emph{entity} layers. We formally introduce the concepts of entity and dataset in Sections~\ref{sec:entity-description} and~\ref{sec:ssd:dataset}, respectively. The Figure~\ref{chap2:semi-structured-data:fig:gdm} depicts the layers of the model, where the dataset layer is depicted at the top, and the entity layer at the bottom.
+We describe in this Section a graph data model based on the work of \cite{delbru:jws:entity}. The graph is represented with two layers that depict the data at two extremes: the \emph{dataset} and the \emph{entity} layers. We formally introduce the concepts of entity and dataset in Sections~\ref{chap2:semi-structured-data:entity-description} and~\ref{sec:ssd:dataset}, respectively. The Figure~\ref{chap2:semi-structured-data:fig:gdm} depicts the layers of the model, where the dataset layer is depicted at the top, and the entity layer at the bottom.
 \begin{labeling}{\textbf{Dataset Layer:}}
 	\item[\textbf{Dataset Layer:}] A dataset represents a collection of entities; the dataset layer is the ensemble of entities' collections. This layer provides coarse information about the data: the focus of this layer is the relationships between datasets. In the figure, the dataset \emph{D1} connects to the dataset \emph{D2} via the link \emph{p1}, and \emph{D2} is connected to \emph{D1} via two links, i.e., \emph{p2} and \emph{p3}.
 	\item[\textbf{Entity Layer:}] The entity layer contains information about entities. Of the two layers, this one provides the finer details about the data: attributes about an entity, and also relationships between entities. In the figure, the entity layer provides additional information about the dataset layer, showing which entities are actually connected within --- and between --- datasets.
@@ -57,7 +57,7 @@ Regardless of the layer, we represent the information using a node and edge labe
 \end{figure}
 
 \section{Formal Model}
-\label{sec:gdm:formal-model}
+\label{chap2:semi-structured-data:gdm:formal-model}
 
 In the following we formally define a directed labelled graph that we call simply a graph henceforth, and introduce concepts used in the rest of the thesis. We use a graph as a generic representation of (semi-)structured and unstructured data on the Web of Data. A graph is defined as a tuple consisting of a set of nodes $V$ and a set $A$ of directed edges labelled $a$. We consider edge and node labels to come from a set that we denote with $\mathcal{L}$. Figure~\ref{chap2:semi-structured-data:fig:graph} depicts a graph of people and places along with their connections.
 
@@ -130,7 +130,7 @@ $$
 For instance, we have $types\left(v_6\right) = \left\{ \text{Country}, \text{Place} \right\}$ in Figure~\ref{chap2:semi-structured-data:fig:graph} as the set of type values for the node $v_6$.
 
 \subsection{Entity description}
-\label{sec:entity-description}
+\label{chap2:semi-structured-data:entity-description}
 
 The Web Data represents a graph of interconnected \emph{entities}, where an entity may be a person, a place, or an organisation, \ldots. We call an \emph{entity description} the pieces of informations in the graph that are about that entity. For instance, we can consider ``Galway'' to be part of the entity description of $v_3$ in Figure~\ref{chap2:semi-structured-data:fig:graph}, but not ``Rome''.
 

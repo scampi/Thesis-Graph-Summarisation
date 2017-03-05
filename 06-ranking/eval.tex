@@ -1,5 +1,5 @@
 \section{Experiments}
-\label{sec:experiments}
+\label{chap6:ranking:experiments}
 
 In order to evaluate the \gls{MF} model, we perform several experiments using three different datasets. We start by experimenting on the normalisation parameters in order to study their impact on the effectiveness of the approach. We then compare the \gls{MF} ranking functions against other traditional ones. We finally discuss the consequence of \textbf{not} considering the attribute label as a source of potential relevant terms and demonstrate the effectiveness of the proposed weights.
 
@@ -7,7 +7,6 @@ While there are other ways to perform entity ranking on the Web of Data, e.g., o
 %\footnote{SemSearch2011: \url{http://km.aifb.kit.edu/ws/semsearch11}}
 
 \subsection{Datasets}
-\label{sec:datasets}
 
 The datasets we are using in our experiments are the following:
 \begin{description}
@@ -32,7 +31,6 @@ In order to extract the entities from those datasets that are to be ranked, we p
 % Next we perform a comparison between the \gls{MF} extensions, i.e., BM25MF and PL2MF, against other ranking approaches.
 
 \subsection{\emph{The Normalisation Parameters}}
-\label{sec:norm-exp}
 
 In this section, we study the impact on the ranking of the normalisation parameters. In addition to the length normalisation of field-based ranking function (Normalisation~\ref{chap6:ranking:norm:content}), the \gls{MF} ranking model offers an additional normalisation on the attribute's cardinality (Normalisation~\ref{chap6:ranking:norm:degree}). The effectiveness of the PRF and DFR frameworks depends on finding the right values for the normalisation parameters. However, these parameters are highly dependent on the dataset.\\
 
@@ -63,7 +61,6 @@ These plots show that Normalisation~\ref{chap6:ranking:norm:degree}, the normali
 \end{figure}
 
 \subsection{Comparison between MF and Field-Based Models}
-\label{sec:mf-field-cmp}
 
 In this section, we evaluate and compare the performance of the BM25 and PL2 ranking models against their \gls{MF} extensions, \gls{BM25MF} and PL2F respectively, and show the superiority of the \gls{MF} model. The TF-IDF function is used as a baseline.
 
@@ -75,7 +72,7 @@ We outline below the ranking functions that are used in the experiments. We reus
   tfn_e=log(F_t)+1
   $,
   where $F_t$ is the number of occurrences of the term $t$ in the entity.
-  \item[\emph{BM25~\cite{robertson:1994:sigir}}] considers the document as a simple bag of words. It is a function of the term frequency derived from a two-Poisson model and it uses an entity-length normalisation. The entity length is computed as the sum of the \emph{field length} defined in the Section~\ref{sec:ranking-wod}.
+  \item[\emph{BM25~\cite{robertson:1994:sigir}}] considers the document as a simple bag of words. It is a function of the term frequency derived from a two-Poisson model and it uses an entity-length normalisation. The entity length is computed as the sum of the \emph{field length} defined in the Section~\ref{chap6:ranking:ranking-wod}.
 
   It defines the Equation (\ref{chap6:ranking:eq:tfidf-score}) as
   $
@@ -125,18 +122,16 @@ In this section, we investigate the consequence of \textbf{not} considering the 
 Figure~\ref{chap6:ranking:fig:mf-att} depicts the results, where we observe that removing the attribute label lowers the performance of the ranking with a statistical significance on INEX09 with \gls{BM25MF} and \gls{PL2MF}, and on SS11 with \gls{PL2MF} only. This shows that the attribute labels can be a source of possible relevant terms.
 
 \subsubsection{\emph{Query Coverage Weight}}
-\label{sec:qc-weight-effect}
 
 In order to evaluate the benefit of the query coverage weight QC, we first analyse its effect separately when applied as an entity, an attribute or a value-specific weight. Then we study the consequence of applying it on all nodes at the same time.
 
 We observe in Figure~\ref{chap6:ranking:fig:mf-qc} that the QC weight improves the retrieval performance when applied on the attribute node, with a statistical significance on SS10 and SS11.
 
 \subsubsection{\emph{Leaf Coverage Weight}}
-\label{sec:lc-weight-effect}
 
 The evaluation of the leaf coverage weight LC investigates its efficiency with and without the \emph{control} function (\ref{chap6:ranking:eq:lc-norm}), where we depict the results in Figure~\ref{chap6:ranking:fig:mf-lc}.
 
-We provide for each dataset the best performing parameters described in Section~\ref{sec:leaf-coverage} for the control function. For the three datasets regardless of the \gls{MF} extension, the values are as follows:
+We provide for each dataset the best performing parameters described in Section~\ref{chap6:ranking:leaf-coverage} for the control function. For the three datasets regardless of the \gls{MF} extension, the values are as follows:
 \begin{description}
 	\item[INEX09:] $n=1\;\;\alpha=0.7$;
 	\item[SS10:] $n=2\;\;\alpha=0.4$; and
@@ -165,7 +160,6 @@ We note that the Attribute Label weight gives significant benefits to the rankin
 Except for INEX09, using both weights at the same time increases the performance of \gls{MF} ranking functions noticeably.
 
 \subsubsection{\emph{Combination of Weights}}
-\label{sec:combi-weight-effect}
 
 In this section, we investigate the retrieval performance when all four weights are used together. We depict results in Figure~\ref{chap6:ranking:fig:mf-all}, with the weights configuration
 \begin{enumerate}
@@ -363,7 +357,7 @@ We classify a query according to the complexity of a pattern. The complexity is 
 
 A star-shaped pattern --- or \emph{star} in short --- is a BGP where the \emph{subject} of all triple patterns is the same. The size of such a pattern is determined by the number of triple patterns it contains. For instance, the BGP ``?s rdfs:label ?label . ?s foaf:name ?name .'' is a star of size 2, since the subject of both triple patterns is ``?s''.
 
-Such a classification scheme allows to capture two aspects of a graph summary that have an impact on its \emph{precision} introduced in Section~\ref{sec:error-classification}. The size of a star in a query pertains to the attribute and type error. In addition, the number of stars in a query pertains to the \gls{connectivity} error.
+Such a classification scheme allows to capture two aspects of a graph summary that have an impact on its \emph{precision} introduced in Section~\ref{chap5:precision:error-classification}. The size of a star in a query pertains to the attribute and type error. In addition, the number of stars in a query pertains to the \gls{connectivity} error.
 
 \subsubsection{Observations of Queries in the Dataset}
 
@@ -415,7 +409,6 @@ Using the process outlined above, a total of 293 queries spanning over 17 catego
 \end{table}
 
 \subsection{Graph Summary Ranking}
-\label{sec:graph-summary-ranking}
 
 While creating a summary of a given graph, one may accumulate several statistics. We generate a summary with the following statistics:
 \begin{enumerate}
@@ -514,7 +507,7 @@ Consider the SPARQL query taken as an example in the previous section. We replac
 
 We consider two aspects of the ranking in this evaluation:
 \begin{enumerate}
-	\item whether a solution that provides bindings for the \emph{?POF} variable that are part of the error set (Section~\ref{sec:error-classification}) is ranked lower that one that does not; and
+	\item whether a solution that provides bindings for the \emph{?POF} variable that are part of the error set (Section~\ref{chap5:precision:error-classification}) is ranked lower that one that does not; and
 	\item the more a solution returns elements from the error set, the lower ranked it is.
 \end{enumerate}
 In order to achieve this, we use the Mean Average Precision~\cite{manning:2008:iir} (MAP) as the measure of ranking performance.

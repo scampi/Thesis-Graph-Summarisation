@@ -5,7 +5,7 @@ Web Data contains a large amount of structured data spanning over many different
 
 In order to make sense of this deluge of data, summarisation techniques are available for different levels of the data. For example, all the information related to an entity can be summarised so to highlight the important parts. In this section, we are interested in the summarisation of the \emph{structure} of graphs. In the context of Web Data, the structure of a graph is defined by the use of predicates and classes.
 
-We present first a model for graph summarisation in Section~\ref{sec:summary:model}. Then in Section~\ref{sec:precise-summary}, we introduce a model for a \emph{precise} summary. Finally, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data in many cases in Section~\ref{chap4:summary:approximate}.% Finally, we describe how inter-linked datasets can be summarised.
+We present first a model for graph summarisation in Section~\ref{sec:summary:model}. Then in Section~\ref{chap4:summary:precise-summary}, we introduce a model for a \emph{precise} summary. Finally, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data in many cases in Section~\ref{chap4:summary:approximate}.% Finally, we describe how inter-linked datasets can be summarised.
 
 \subsection{Model}
 \label{sec:summary:model}
@@ -169,7 +169,7 @@ Given a \gls{summarisation-relation}, each node in the graph is mapped to a set 
 %\end{definition}
 
 \subsection{Precise Graph Summary}
-\label{sec:precise-summary}
+\label{chap4:summary:precise-summary}
 
 The purpose of a summary is to mirror the structure of the graph while being significantly smaller. Therefore, the summary can substitute the graph and improve the performance of applications. How well the summary mirrors the graph is then of high importance. From a structural perspective, a summary is precise if it is indiscernible from the entity graph, which we define in this section.
 
@@ -318,7 +318,7 @@ $$
 \end{definition}
 
 \subsubsection{Bisimulation Summary}
-\label{sec:bisim-summary}
+\label{chap4:summary:bisim-summary}
 
 Since the bisimulation is an equivalence relation, we can create equivalence classes defined as $[x] = \left\lbrace x \in V \mid y \in V,\; x \sim y \right\rbrace$; a class is the set of nodes that are bisimilar. An equivalence class is then exactly a sumnode of the summary. The \gls{summarisation-relation} is in this case a one-to-one mapping of the equivalence class to the sumnode.
 

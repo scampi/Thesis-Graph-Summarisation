@@ -129,7 +129,6 @@ The first normalisation is applied on the \emph{leaf} nodes of the DAG. The seco
 %\end{figure}
 
 \subsection{MF Ranking Functions}
-\label{sec:mf-function}
 
 In this section, we describe \emph{\gls{BM25MF}} and \emph{\gls{PL2MF}}, the \gls{MF} extensions of BM25F~\cite{zaragoza:2004:microsoft} and PL2F~\cite{macdonald:2005:clef}, respectively.
 We present first the features needed for the \gls{MF} ranking model and then define both extensions.
@@ -153,7 +152,7 @@ The \gls{MF} model introduces two levels of normalisations. In order to implemen
 \end{labeling}
 
 \subsubsection{BM25MF}
-\label{sec:bm25mf-function}
+\label{chap6:ranking:bm25mf-function}
 
 BM25F is extended by adapting the Equation (\ref{chap6:ranking:eq:bm25f_1}). The resulting normalised term frequency is then passed to the saturation function in the Equation (\ref{chap6:ranking:eq:bm25f_2}).
 The computation of the entity score with \gls{BM25MF} consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively.\\
@@ -205,12 +204,11 @@ On the parent node, those three values are summed up and passed to the Equation~
 The result of the $f_{t,I}$ function is then passed to the parent node; it is summed with the outputs of the $f_{t,L}$ function on the leaves $b$ and $v_2$. The same process is applied on each branch until the root entity is reached, where we finally assigns a score to the entity using Equation~(\ref{chap6:ranking:eq:bm25f_2}) that represents its relevance with regards to the query.
 
 \subsubsection{PL2MF}
-\label{sec:pl2mf-function}
 
 PL2F is extended by adapting the Equation (\ref{chap6:ranking:eq:pl2f}). The resulting normalised term frequency is then passed to the normalisation function (\ref{chap6:ranking:eq:dfr-prisk}).
 Similarly to the \gls{BM25MF} extension, the computation of the entity score with \gls{PL2MF} consists of applying two functions, $f_{t,L}$ and $f_{t,I}$, applied on a leaf and on an internal node, respectively. We reuse the same notation as the ones from the previous section.\\ 
 
-The \gls{PL2MF} ranking function is defined following the two levels of normalisations. The notation used in the following two functions are similar to the one introduced in Section~\ref{sec:bm25mf-function} for the \gls{BM25MF} extension.
+The \gls{PL2MF} ranking function is defined following the two levels of normalisations. The notation used in the following two functions are similar to the one introduced in Section~\ref{chap6:ranking:bm25mf-function} for the \gls{BM25MF} extension.
 The $f_{t,L}$ function implements the Normalisation~\ref{chap6:ranking:norm:content} on the content and is defined as follows:
 \begin{equation}
 \label{chap6:ranking:eq:pl2mf_v}

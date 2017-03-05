@@ -9,7 +9,6 @@ In this section, we introduce several weights for the \gls{MF} model. Those weig
 Next, we describe the \emph{Attribute} and \emph{Entity Labels} query-independent weights.
 
 \subsection{The Query Coverage Weight}
-\label{sec:kw-factor}
 
 The purpose of the Query Coverage (QC) weight is to lower the importance given to an entity, an attribute or a value with respect to the number of query terms it covers. This weight is combined with the ranking function using the parameters $\alpha_e$, $\alpha_a$ and $\alpha_v$. For example, given a query composed of three terms, if a value contains only occurrences of one query term, this value will then weight less than a value containing occurrences of more than one query term.\\
 
@@ -21,7 +20,7 @@ $$
 where $X$ is either a value, an attribute set or the entity and $q$ is the query.
 
 \subsection{The Leaf Coverage Weight}
-\label{sec:leaf-coverage}
+\label{chap6:ranking:leaf-coverage}
 
 Values part of a multi-valued attribute share a common topic, described by said attribute. However, the relevancy of each value with regard to the query is different. We can assume that, given a same attribute, an entity where two terms occur in a single value is more relevant than another entity where each term occurs in two values. This can be seen as a way to integrate some kind of term proximity measure in the retrieval model, i.e., two words are considered close to each other when they occur in the same value. Reflecting this difference into the importance of a term using an appropriate value-specific weight can improve the ranking efficiency.
 

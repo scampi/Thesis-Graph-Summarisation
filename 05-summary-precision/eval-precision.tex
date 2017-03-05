@@ -1,5 +1,5 @@
 \section{Evaluation}
-\label{sec:eval}
+\label{chap5:precision:eval}
 
 In this section, we evaluate the graph summarisation under three different aspects:
 \begin{description}
@@ -7,25 +7,25 @@ In this section, we evaluate the graph summarisation under three different aspec
 	\item[Compression] the ability of the graph summarisation to reduce the number of nodes and edges needed for describing the graph's structure; and
 	\item[Precision] the precision of a generated graph summary with regards to the original graph, as measured by the \gls{precision}.
 \end{description}
-We present those three dimensions of the evaluation in Section~\ref{sec:eval:design}.
-In order to give ground to the study of the graph summarisation under those three dimensions, we consider a collection of 14 datasets described in Section~\ref{sec:eval:datasets} of varying size and complexity. The size of a graph to summarise will impact on the performance and compression of a summarisation implementation, while the complexity in terms of vocabulary (i.e., the use of \gls{types} and \gls{attributes} and combinations thereof) will manifest itself on the precision of a summary.\\
+We present those three dimensions of the evaluation in Section~\ref{chap5:precision:eval:design}.
+In order to give ground to the study of the graph summarisation under those three dimensions, we consider a collection of 14 datasets described in Section~\ref{chap5:precision:eval:datasets} of varying size and complexity. The size of a graph to summarise will impact on the performance and compression of a summarisation implementation, while the complexity in terms of vocabulary (i.e., the use of \gls{types} and \gls{attributes} and combinations thereof) will manifest itself on the precision of a summary.\\
 
 In this evaluation, we consider the following parameters:
 \begin{itemize}
 	\item we want to summarise a graph $G=\left\langle V, A, l_V \right\rangle$;
 	\item the result of summarising the graph $G$ is the summary graph $\mathcal{S} = \left\langle \mathcal{W}, \mathcal{B}, l_{\mathcal{W}} \right\rangle$ according to the summarisation relation $R$;
-	\item with regards to the classification in Section~\ref{sec:error-classification}, we measure the error in the created summary by comparing it to the bisimulation summary \glssymbol{fbt-bisimulation-summary} of $G$, i.e., $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ according to the summarisation relation $R_{fbt}$; and
+	\item with regards to the classification in Section~\ref{chap5:precision:error-classification}, we measure the error in the created summary by comparing it to the bisimulation summary \glssymbol{fbt-bisimulation-summary} of $G$, i.e., $\glssymbol{fbt-bisimulation-summary} = \left\langle \mathcal{W}_{fbt}, \mathcal{B}_{fbt}, l_{\mathcal{W}_{fbt}} \right\rangle$ according to the summarisation relation $R_{fbt}$; and
 	\item The bisimulation \gls{summarisation-relation} described in Section~\ref{chap4:summary:bisim} maps nodes of the graph to a same sumnode if they all share the same outgoing and incoming paths. The bisimulation summarisation relation is smaller with regards to the partial order \glssymbol{partial-order} than any of the approximate graph summarisation presented in Section~\ref{chap4:summary:approximate} since its summarisation relation is more restrictive. Therefore, we assume the existence of a relation $S \subseteq \mathcal{W}_{fbt} \times \mathcal{W}$ that maps the bisimulation summary to a summary generated from the summarisation relation $R$, i.e., such that $R_{fbt} \sqsubseteq R$.
 \end{itemize}
 
 \subsection{Design}
-\label{sec:eval:design}
+\label{chap5:precision:eval:design}
 
 We describe in this section the design of the evaluation. We first present the environment of our experimental framework. Then, we describe the dimensions of our evaluation.
 
 \subsubsection{Environment}
 
-The bisimulation summary \glssymbol{fbt-bisimulation-summary} presented in Section~\ref{chap4:summary:bisim} is the most precise summary of the entity graph, since all incoming and outgoing (and combination of) paths in the summary do exist in the entity graph $G$. In this evaluation, we use as the \emph{gold standard} summary of an entity graph the \gls{ft-bisimulation-summary} instead of the \gls{fbt-bisimulation-summary} for performance reason. This gold standard summary ensures that all outgoing paths do exist. The presented \glspl{summarisation-relation} have been implemented using the Hadoop\footnote{Hadoop: \url{http://hadoop.apache.org/}} MapReduce framework according to the algorithm outlined in Section~\ref{sec:mapreduce}.
+The bisimulation summary \glssymbol{fbt-bisimulation-summary} presented in Section~\ref{chap4:summary:bisim} is the most precise summary of the entity graph, since all incoming and outgoing (and combination of) paths in the summary do exist in the entity graph $G$. In this evaluation, we use as the \emph{gold standard} summary of an entity graph the \gls{ft-bisimulation-summary} instead of the \gls{fbt-bisimulation-summary} for performance reason. This gold standard summary ensures that all outgoing paths do exist. The presented \glspl{summarisation-relation} have been implemented using the Hadoop\footnote{Hadoop: \url{http://hadoop.apache.org/}} MapReduce framework according to the algorithm outlined in Section~\ref{chap4:summary:mapreduce}.
 % Our Hadoop cluster is composed of 10 machines.
 
 \subsubsection{Evaluation Dimensions}
@@ -86,7 +86,7 @@ We present in this section three dimensions we use for evaluating a summary, i.e
 	\label{chap5:precision:fig:unique-type-summary-size}
 \end{figure}
 \subsection{Datasets}
-\label{sec:eval:datasets}
+\label{chap5:precision:eval:datasets}
 
 We use in this evaluation several datasets of varying complexity. We list in the Table~\ref{tab:datasets} the datasets along with some descriptive statistics. The datasets are grouped according to their complexity into four categories, i.e., \emph{Low}, \emph{Medium}, \emph{High}, and \emph{Very High}. We determine the complexity with regards to the number of nodes and edges in a graph, as well as with the number of unique types and attributes it possesses.
 
@@ -97,7 +97,7 @@ The $G:\mathcal{S}_{fb}$ column reports the compression ratio of the graph $G$ w
 \input{04-summary/experiments/datasets}
 
 \subsection{Results}
-\label{sec:eval:results}
+\label{chap5:precision:eval:results}
 
 We evaluate and compare in this section the different graph \glspl{summarisation-relation} according to the compression ratio, the computational complexity, and the precision of the generated summary. Then, we discuss the trade-offs with respect to these three dimensions.
 We note the mean of measurements in a category, i.e., \emph{Low}, \emph{Medium}, \emph{High}, and \emph{Very High}, as $\mu_{L}$, $\mu_{M}$, $\mu_{H}$, and $\mu_{VH}$, respectively.
