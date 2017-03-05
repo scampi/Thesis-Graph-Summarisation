@@ -35,7 +35,7 @@ Any kind of data can generally be modelled using a graph, since it is versatile 
 
 We consider the data as being a labelled directed graph and build methods based on this model. Therefore, the findings presented in this work can be applied to any domain where a graph is used as data representation.
 
-We describe in this Section a graph data model based on the work of \cite{delbru:jws:entity}. The graph is represented with two layers that depict the data at two extremes: the \emph{dataset} and the \emph{entity} layers. We formally introduce the concepts of entity and dataset in Sections~\ref{chap2:semi-structured-data:entity-description} and~\ref{sec:ssd:dataset}, respectively. The Figure~\ref{chap2:semi-structured-data:fig:gdm} depicts the layers of the model, where the dataset layer is depicted at the top, and the entity layer at the bottom.
+We describe in this Section a graph data model based on the work of \cite{delbru:jws:entity}. The graph is represented with two layers that depict the data at two extremes: the \emph{dataset} and the \emph{entity} layers. We formally introduce the concepts of entity and dataset in Sections~\ref{chap2:semi-structured-data:entity-description} and~\ref{chap2:semi-structured-data:dataset}, respectively. The Figure~\ref{chap2:semi-structured-data:fig:gdm} depicts the layers of the model, where the dataset layer is depicted at the top, and the entity layer at the bottom.
 \begin{labeling}{\textbf{Dataset Layer:}}
 	\item[\textbf{Dataset Layer:}] A dataset represents a collection of entities; the dataset layer is the ensemble of entities' collections. This layer provides coarse information about the data: the focus of this layer is the relationships between datasets. In the figure, the dataset \emph{D1} connects to the dataset \emph{D2} via the link \emph{p1}, and \emph{D2} is connected to \emph{D1} via two links, i.e., \emph{p2} and \emph{p3}.
 	\item[\textbf{Entity Layer:}] The entity layer contains information about entities. Of the two layers, this one provides the finer details about the data: attributes about an entity, and also relationships between entities. In the figure, the entity layer provides additional information about the dataset layer, showing which entities are actually connected within --- and between --- datasets.
@@ -101,7 +101,7 @@ Given a graph $G = \left\langle V, A, l_V \right\rangle$, we introduce below ter
 \end{figure}
 
 \subsection{Type Attribute}
-\label{sec:ssd:type}
+\label{chap2:semi-structured-data:type}
 
 Attributes and node labels can be used in a graph for describing the content. For example in Figure~\ref{chap2:semi-structured-data:fig:graph}, we can expect that the value of the edge labelled ``name'' represents a textual identification of the node $v_1$. In addition, a set of nodes may represent a same concept, e.g., the nodes $v_1$ and $v_2$ represent a person. We call, e.g., ``person'', the \emph{type} of a node, and that node is an \emph{instance} of that type.
 
@@ -183,7 +183,7 @@ $$
 $$
 
 \subsection{Dataset}
-\label{sec:ssd:dataset}
+\label{chap2:semi-structured-data:dataset}
 
 In the Web of Data, a dataset~\cite{alexander:2009:dld} represents a collection of \emph{edges} which, e.g., are located in a same website, or share a common topic. A dataset can be a \emph{dump} in RDF, or the embedded metadata of pages in a website.
 %A dataset can refer to graphs from a collection of sources, e.g., several websites.

@@ -90,7 +90,7 @@ Similar to triple patterns in SPARQL, summary patterns are the building blocks t
 	\label{chap4:summary:def:summary-triple-pattern}
 \end{definition}
 
-We call \emph{class triple pattern} (CTP) a triple pattern which predicate is a type attribute (Section~\ref{sec:ssd:type}).
+We call \emph{class triple pattern} (CTP) a triple pattern which predicate is a type attribute (Section~\ref{chap2:semi-structured-data:type}).
 
 \begin{definition}[Class Triple Pattern]
 	Let $G=\left\langle V, A, l_V \right\rangle$ be a graph, $\mathcal{L}$ be the set of labels, and $Var$ an infinite set of variables.
@@ -249,7 +249,7 @@ In this section, we present two angles into improving the interaction. First, we
 
 \subsubsection{Recommendation Ranking}
 
-In Section~\ref{sec:summary-ranking}, we discussed the ranking of solutions to a SPARQL query executed on a graph summary. For the purpose of improving the user interaction, it is possible to rank the recommendations using the \gls{MF} ranking model. As reported by the experiment in Section~\ref{sec:summary-ranking:eval}, the \gls{MF} model provides noticeable benefits over a simple ranking.
+In Section~\ref{chap6:ranking:summary-ranking}, we discussed the ranking of solutions to a SPARQL query executed on a graph summary. For the purpose of improving the user interaction, it is possible to rank the recommendations using the \gls{MF} ranking model. As reported by the experiment in Section~\ref{chap6:ranking:summary-ranking:eval}, the \gls{MF} model provides noticeable benefits over a simple ranking.
 
 Applying the \gls{MF} model to rank recommendations allow us to present first to the user the recommendations that are most likely not part of the error set. Thus, we reduce the chances of a user to be frustrated over a recommendation that yields no result.
 

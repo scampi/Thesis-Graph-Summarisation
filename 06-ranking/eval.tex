@@ -224,7 +224,7 @@ On INEX09 their combination decreases slightly the performance for \gls{PL2MF}. 
 \end{figure}
 
 \section{Query-dependent Ranking of the Graph Summary}
-\label{sec:summary-ranking}
+\label{chap6:ranking:summary-ranking}
 
 Graph summarisation is used for extracting the underlying structure of graph-shaped data. However, the size of a summary can still be an obstacle towards an effective browsing of the data.
 
@@ -234,7 +234,7 @@ However, that work proposes an approach that is independent of the actual inform
 In the case of a graph summary, we consider the information need of a user to be expressed as a graph-shaped query. Given a query over the summary, we propose to rank its solutions using the \gls{MF} ranking model. In this way, the user will first browse subgraphs of the summary that are most relevant to his need. In this section, we evaluate the \gls{MF} ranking model applied to a summary, showing the ability of the two levels of Normalisations in \gls{MF} for fine-tuning of the ranking function.
 
 \subsection{Dataset}
-\label{sec:summary-ranking:dataset}
+\label{chap6:ranking:summary-ranking:dataset}
 
 In order to evaluate the ranking on a graph summary, we use the USEWOD2013 dataset \cite{usewod:2013}. This dataset provides query logs from several SPARQL endpoints. In this evaluation, we focus on the logs from the DBpedia SPARQL endpoint. SPARQL~\cite{PrudS08} is the standard query language for RDF data. Given a graph-shaped query, it retrieves all subgraphs from a dataset which match its pattern.
 
@@ -320,7 +320,7 @@ ORDER BY ?label
 
 An entity can be a person, a place, an abstract concept, etc. For this experiment, we are interested in queries that pertain to structure of the graph. Therefore, we replace with a \emph{unique} variable any detail a query might have about a specific entity.
 
-If the detail is either a URI such as \href{http://dbpedia.org/resource/Paris}{<http://dbpedia.org/resource/Paris>}, a literal such as \emph{"Paris"}, then it is replaced with a unique variable. In the case where a literal is a type (Section~\ref{sec:ssd:type}), it is then kept as is.
+If the detail is either a URI such as \href{http://dbpedia.org/resource/Paris}{<http://dbpedia.org/resource/Paris>}, a literal such as \emph{"Paris"}, then it is replaced with a unique variable. In the case where a literal is a type (Section~\ref{chap2:semi-structured-data:type}), it is then kept as is.
 
 With regards to the ongoing example, we replace in this operation the URIs \href{http://dbpedia.org/resource/Paris}{dbr:Paris} and \href{http://dbpedia.org/resource/Eiffel\_Tower}{dbr:Eiffel\_Tower} with the variables \emph{?uri\_1} and \emph{?uri\_2}, respectively. Also, the literal "France" is replace with the variable \emph{lit\_1}.
 \begin{minted}[linenos,frame=lines,framesep=1mm]{sparql}
@@ -447,9 +447,9 @@ A straightforward approach consists in summing up all the statistics available t
 In this approach, we apply both normalisations available with the \gls{MF} ranking model, i.e., Normalisations~\ref{chap6:ranking:norm:content} and~\ref{chap6:ranking:norm:degree}. The difference of this approach with previous is that the \emph{average cardinality} of every node is considered.
 
 \subsection{Evaluation}
-\label{sec:summary-ranking:eval}
+\label{chap6:ranking:summary-ranking:eval}
 
-In Section~\ref{sec:summary-ranking:dataset} we presented a dataset of queries that were extracted from logs of the DBpedia SPARQL endpoint. In Section~\ref{sec:summary-ranking:eval} we introduced two ranking functions that we apply on sub-graphs of a graph summary which is, in this evaluation, that of DBpedia.
+In Section~\ref{chap6:ranking:summary-ranking:dataset} we presented a dataset of queries that were extracted from logs of the DBpedia SPARQL endpoint. In Section~\ref{chap6:ranking:summary-ranking:eval} we introduced two ranking functions that we apply on sub-graphs of a graph summary which is, in this evaluation, that of DBpedia.
 In this experiment, we evaluate the performance of the \gls{MF}-based approach at ranking subgraphs of a graph summary.
 
 We present first the ranking paradigm that we follow, before describing the experiment itself. Then, we describe the evaluation method for asserting the performance of the \gls{MF} extension. Finally, we discuss the results of the experiment.

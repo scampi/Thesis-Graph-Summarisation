@@ -2,11 +2,11 @@
 \label{chap4:summary:algo}
 
 In this section, we present an algorithm for generating a graph summary. Some optimisations are possible depending on the relation. However, the proposed approach is independent of the \gls{summarisation-relation} used. The algorithm takes a graph as input and outputs a graph summary, which is distinct from the input graph.
-We first present a version of the algorithm for a single dataset and then for a collection of several datasets in Section~\ref{sec:summary-algos}.
-Next, we describe in Section~\ref{sec:summary-impl} two implementations of the algorithm, one based on MapReduce~\cite{dean:2004:msd}, and the other on SPARQL.
+We first present a version of the algorithm for a single dataset and then for a collection of several datasets in Section~\ref{chap4:summary:algos}.
+Next, we describe in Section~\ref{chap4:summary:impl} two implementations of the algorithm, one based on MapReduce~\cite{dean:2004:msd}, and the other on SPARQL.
 
 \subsection{Algorithms}
-\label{sec:summary-algos}
+\label{chap4:summary:algos}
 
 The creation of a graph summary is decomposed into four steps. These steps are common to both versions of the algorithm, i.e., the graph summarisation of a single dataset and of a collection of datasets. In a first step, we aggregate all the information about a node needed for the \gls{summarisation-relation}. In a second step, we create a table that associates a node of $G$ to a sumnode. In a third step, we materialise the sumedges by joining the previous table with the entity graph. The fourth step is optional and consists in gathering statistics about the summarised graph.
 
@@ -272,7 +272,7 @@ The type features \emph{Student} and \emph{Person} of the node \texttt{e2} are s
 \end{figure}
 
 \subsection{Implementations}
-\label{sec:summary-impl}
+\label{chap4:summary:impl}
 
 We present in this section two implementations of the graph summarisation, a first one based on SPARQL and then a second based on MapReduce~\cite{dean:2004:msd}. We present only the implementations of the Algorithm~\ref{chap4:summary:alg:summary} for the summarisation of a single dataset, since they can be easily extended to the Algorithm~\ref{chap4:summary:alg:id-summary}. We outline below the required operators of the graph summarisation algorithm.
 \begin{labeling}{\textbf{\underline{Step 1:}}}
