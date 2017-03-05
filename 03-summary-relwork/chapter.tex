@@ -162,7 +162,7 @@ Each layer of the proposed index provides views of the LOD graph with varying gr
 \begin{centeremph}{Our contribution}
 	A layer can be considered as a possible summarisation of the LOD graph, although connections between sumnodes within a layer is not provided. The proposed index model is then orthogonal to our graph summarisation model, each layer being a summary itself.
 
-	We note that the third layer which is the most detailed one is based on \emph{bisimulation}; however, the definition used in that work is not the commonly used one, which we present in Section~\ref{chap:summary:bisim}.
+	We note that the third layer which is the most detailed one is based on \emph{bisimulation}; however, the definition used in that work is not the commonly used one, which we present in Section~\ref{chap4:summary:bisim}.
 \end{centeremph}
 
 %\begin{itemize}
@@ -189,14 +189,14 @@ Each layer of the proposed index provides views of the LOD graph with varying gr
 
 A graph summarisation algorithm can be used for providing insights into a graph by accumulating some statistics during the summary construction process. In the time-line of Figure~\ref{fig:timeline}, literature pertaining to this use case are depicted with a red dotted-trapeze.\\
 
-Khatchadourian et. al \cite{khatchadourian:2010:eswc} describe the structure of the graph along with statistics thanks to summaries. The proposed summary is built using the bisimulation equivalence, which is described in Section~\ref{chap:summary:bisim}.
+Khatchadourian et. al \cite{khatchadourian:2010:eswc} describe the structure of the graph along with statistics thanks to summaries. The proposed summary is built using the bisimulation equivalence, which is described in Section~\ref{chap4:summary:bisim}.
 
 \begin{centeremph}{Our contribution}
 	The presented approach is tailored towards graphs using specifically the RDF data modelling; instead, we present a graph summarisation framework that is independent of the graph modelling.
 
 	The authors consider a directed graph where only nodes are labelled: each label in our graph model presented in Section~\ref{sec:gdm:formal-model} forms a node. We use instead the same graph model for both the entity graph and for the summary graph, thus simplifying the framework.
 
-	The labelling scheme proposed in \cite{khatchadourian:2010:eswc} of sumnodes and sumedges is limiting, since it considers only parts of the resources' URI in the entity graph, e.g., the localname. The set of labels thus constructed is too small for finely controlling how much information from the graph is retained. To add more flexibility, we decouple the definition of a node from the creation of its label, where the former is discussed in Section~\ref{chap:summary:model} and the latter in Section~\ref{chap:summary:algo}.
+	The labelling scheme proposed in \cite{khatchadourian:2010:eswc} of sumnodes and sumedges is limiting, since it considers only parts of the resources' URI in the entity graph, e.g., the localname. The set of labels thus constructed is too small for finely controlling how much information from the graph is retained. To add more flexibility, we decouple the definition of a node from the creation of its label, where the former is discussed in Section~\ref{chap4:summary:model} and the latter in Section~\ref{chap4:summary:algo}.
 
 	The authors discuss the summarisation of \emph{inter-linked} datasets through the use of specific labelled edges, i.e., \emph{owl:sameAs} edges. Instead, we consider in this scenario the dataset label, which we detail in Section~\ref{chap03:summary:impl:inter-datasets}.
 \end{centeremph}
@@ -300,7 +300,7 @@ The purpose of the graph summarisation is to create a graph that share the same 
 DataGuides \cite{goldman1997dataguides} is the first work to improve the query execution through the use of an index on the summary of the structure of the graph. The summary is built with the requirement that every path in the summary is \emph{unique}; this would allow to spend less time searching through each different path. In the presence of a graph with a complex structure, the size of the summary can be as large as the graph, or even larger. This issue is discussed in \cite{goldman1999approximate}, where some constraints of DataGuides are relaxed, e.g., the existence of a path in the entity graph.\\
 
 DataGuides relies on the notion of automata for the creation of the summary: converting a graph that is a non-deterministic finite automaton to a deterministic finite automaton. Instead, several works leverage the notion of bisimulation~\cite{park:1981:cai} used in concurrency systems.
-Bisimulation is a technique that aims to replicate all the paths of a graph in a summary, so that the summary and the original graph cannot be distinguished from a user's perspective. A detailed explanation of this technique can be found in Section~\ref{chap:summary:bisim}.
+Bisimulation is a technique that aims to replicate all the paths of a graph in a summary, so that the summary and the original graph cannot be distinguished from a user's perspective. A detailed explanation of this technique can be found in Section~\ref{chap4:summary:bisim}.
 Retaining all the paths of the original graph in the summary can reveal to be excessive for complex graphs. Therefore, some constraints of the bisimulation are changed so to reduce the size of the summary, or to better adapt it to a specific application. The size of a summary is then balanced against the level of details it stores.
 
 Milo et. al \cite{Milo:1999:ISP:645503.656266} extend the work on DataGuides, using the notion of bisimulation to build an index of the structure of the graph. The authors propose to reduce further the size of a summary by defining the shape of query to answer. However, it assumes some knowledge about the structure of the graph in order to define the shape of the query.
