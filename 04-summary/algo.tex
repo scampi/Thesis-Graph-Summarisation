@@ -13,12 +13,12 @@ The creation of a graph summary is decomposed into four steps. These steps are c
 \begin{labeling}{\textbf{\underline{Step 2:}} \emph{Node to sumnode mapping.}}
 	\item[\textbf{\underline{Step 1:}} \emph{Entity description.}]
 	\phantomsection
-	\label{step-ed}
+	\label{chap4:summary:algo:step-ed}
 	In order to create a graph summary, the basic information we manipulate is an entity. The computation of the entity description \glssymbol{edesc} requires a pass over the edges, with a worst case complexity of $O(\vert A \vert)$. The entity description provides the necessary contextual information needed for the \gls{summarisation-relation}.
 
 	\item[\textbf{\underline{Step 2:}} \emph{Node to sumnode mapping.}]
 	\phantomsection
-	\label{step-hn}
+	\label{chap4:summary:algo:step-hn}
 	A sumnode unique identifier is defined based on the entity description \glssymbol{edesc}, with regards to the \gls{summarisation-relation}.
 	%This is the core operation of the \texttt{GetSumnode} function, which assigns a sumnode to a node.
 	For example, a unique identifier can be created from the \gls{types} of an entity for the relation $R_t$.
@@ -26,12 +26,12 @@ The creation of a graph summary is decomposed into four steps. These steps are c
 
 	\item[\textbf{\underline{Step 3:}} \emph{Sumedge materialisation.}]
 	\phantomsection
-	\label{step-he}
+	\label{chap4:summary:algo:step-he}
 	We need to join the previous mapping of a node to its sumnode with the entity graph in order to materialise an sumedge. We do this by two joins, i.e., on the source and target nodes. In this step, we need to visit each edge in the graph, so in the worst case it has a $O\left(\vert A \vert\right)$ complexity.
 
 	\item[\textbf{\underline{Step 4:}} \emph{Statistics gathering.}]
 	\phantomsection
-	\label{step-stats}
+	\label{chap4:summary:algo:step-stats}
 	During the previous steps, it is possible to gather statistics about the graph. This step is optional, since depending on the application in which the summary is used statistics might be unnecessary. However, gathering statistics comes at no cost, since we can re-use computations of the previous steps. Indeed in Step~2, we can keep the count of nodes that are mapped to a sumnode. In addition in Step~3, we can count the occurrences of an edge between two sumnodes. Such statistics provide insight into the graph structure, complementing the graph summary.
 \end{labeling}
 
@@ -82,8 +82,8 @@ On line~5 we retrieve the sumnode of $v$ only if it is not a type, since we cons
 
 \subparagraph{Example.}
 
-In the Figure~\ref{tab:algo-ex}, we depict the \emph{Types} summarisation $R_t$ of a graph showing people and documents. We group the edges describing a same node in \hyperref[step-ed]{Step 1}. In \hyperref[step-hn]{Step 2} we assign the sumnode \emph{h1} to the nodes (i.e., \emph{:e1} and \emph{:e3}) of type \emph{:Person}, and \emph{h2} to the node (i.e., \emph{:e2}) of type \emph{:Document}. In \hyperref[step-he]{Step 3}, we join the edges of the input graph with the table created in \hyperref[step-hn]{Step 2} in order to retrieve the sumnodes.
-It is possible to gather statistics about the summarisation in \hyperref[step-stats]{Step 4} by, e.g., grouping over the sumnodes and counting the number of rows in a group. Figure~\ref{chap4:summary:fig:algo-ex} depicts the \emph{Types} summary that is the output of the algorithm which execution is depicted in Figure~\ref{tab:algo-ex}.
+In the Figure~\ref{chap4:summary:tab:algo-ex}, we depict the \emph{Types} summarisation $R_t$ of a graph showing people and documents. We group the edges describing a same node in \hyperref[chap4:summary:algo:step-ed]{Step 1}. In \hyperref[chap4:summary:algo:step-hn]{Step 2} we assign the sumnode \emph{h1} to the nodes (i.e., \emph{:e1} and \emph{:e3}) of type \emph{:Person}, and \emph{h2} to the node (i.e., \emph{:e2}) of type \emph{:Document}. In \hyperref[chap4:summary:algo:step-he]{Step 3}, we join the edges of the input graph with the table created in \hyperref[chap4:summary:algo:step-hn]{Step 2} in order to retrieve the sumnodes.
+It is possible to gather statistics about the summarisation in \hyperref[chap4:summary:algo:step-stats]{Step 4} by, e.g., grouping over the sumnodes and counting the number of rows in a group. Figure~\ref{chap4:summary:fig:algo-ex} depicts the \emph{Types} summary that is the output of the algorithm which execution is depicted in Figure~\ref{chap4:summary:tab:algo-ex}.
 
 \begin{figure}
 	\centering
@@ -93,7 +93,7 @@ It is possible to gather statistics about the summarisation in \hyperref[step-st
 			\input{04-summary/figures/algo-ex}
 		}
 		\caption{The input data is a set of edges, one per row. The columns $u_\mathcal{W}$ and $v_\mathcal{W}$ represents the sumnodes associated with the node $u$ and $v$, respectively. The Step~2 assigns the sumnode \emph{h1} to the nodes \emph{e1} and \emph{e3}; and the sumnode \emph{h2} to the node \emph{e3}. These sumnodes are joined with the input edges in Step~3 in order to materialise the sumedges.}
-		\label{tab:algo-ex}
+		\label{chap4:summary:tab:algo-ex}
 	\end{subfigure}
 	\qquad
 	\begin{subfigure}{.7\textwidth}
@@ -101,7 +101,7 @@ It is possible to gather statistics about the summarisation in \hyperref[step-st
 		\resizebox{.7\textwidth}{!}{
 			\input{04-summary/figures/fig-algo-ex}
 		}
-		\caption{Depiction of the \emph{Types} summary created in Figure~\ref{tab:algo-ex}.}
+		\caption{Depiction of the \emph{Types} summary created in Figure~\ref{chap4:summary:tab:algo-ex}.}
 		\label{chap4:summary:fig:algo-ex}
 	\end{subfigure}
 	\caption{Example of the \emph{Types} summarisation $R_t$ in the case of a single dataset.}
@@ -114,7 +114,7 @@ The Web Data is a collection of semi-structured data that hail from a variety of
 
 \subparagraph{Challenge in summarising heterogeneous inter-linked datasets.}
 
-The information about an entity, e.g., a person, a place, an organisation, \ldots, can be spread across several datasets. In the Web of Data this happens when a same entity URI is reused across datasets. The \hyperref[step-hn]{Step 2} of the graph summarisation relies on the entity description \glssymbol{edesc} in order to create the corresponding sumnode. Some edges of the description might be erroneous, which would then impact negatively on the summary. A solution is to keep track of the \emph{origin} of an edge and act accordingly during the summarisation process.
+The information about an entity, e.g., a person, a place, an organisation, \ldots, can be spread across several datasets. In the Web of Data this happens when a same entity URI is reused across datasets. The \hyperref[chap4:summary:algo:step-hn]{Step 2} of the graph summarisation relies on the entity description \glssymbol{edesc} in order to create the corresponding sumnode. Some edges of the description might be erroneous, which would then impact negatively on the summary. A solution is to keep track of the \emph{origin} of an edge and act accordingly during the summarisation process.
 
 In Figure~\ref{chap4:summary:fig:sum-issue} we depict the summarisation of a graph which edges are spread over the datasets \emph{D1} and \emph{D2}. The former contains the edges $\{ (v_1, a, Person), (v_1, name, John) \}$, while the latter contains $\{ (v_1, a, Book), (v_1, title, Rama) \}$. Since the same node $v_1$ is used in \emph{D1} and \emph{D2}, all four edges contribute to the \gls{summarisation-relation}. That node is then mapped to the sumnode $T_1$ according to the \emph{Types} summarisation relation $R_t$.
 Due to the overlap over \emph{D1} and \emph{D2} of $v_1$'s entity description, the sumnode reports that it is of both types \emph{Person} and \emph{Book}, as well as both \gls{attributes} \emph{name} and \emph{title}.
@@ -241,7 +241,7 @@ The Algorithm~\ref{chap4:summary:alg:id-summary} takes a collections graphs from
 
 \subparagraph{Example.}
 
-In Figure~\ref{tab:id-algo-ex} we depict the summarisation $R_t$ of two inter-linked datasets, \textbf{A} and \textbf{B}, where a person in the former is related to a person in the latter. The resulting \emph{Types} summary is depicted on the Figure~\ref{chap4:summary:fig:id-algo-ex}, where the edges follows the same representation of the datasets, i.e., those which provenance is \textbf{A} are solid red, and those which provenance is \textbf{B} are dashed blue.
+In Figure~\ref{chap4:summary:tab:id-algo-ex} we depict the summarisation $R_t$ of two inter-linked datasets, \textbf{A} and \textbf{B}, where a person in the former is related to a person in the latter. The resulting \emph{Types} summary is depicted on the Figure~\ref{chap4:summary:fig:id-algo-ex}, where the edges follows the same representation of the datasets, i.e., those which provenance is \textbf{A} are solid red, and those which provenance is \textbf{B} are dashed blue.
 
 The type features \emph{Student} and \emph{Person} of the node \texttt{e2} are shared between the datasets \textbf{A} and \textbf{B}, respectively. Since that node ownership is dataset \textbf{B}, the feature which provenance is \textbf{B} has authority, i.e., \emph{Person}, while the other in \textbf{A}, i.e., \emph{Student}, has not. In order to retain the information provided by dataset \textbf{A} about that node without corrupting the information gathered by the summary, we map the node \texttt{e2} according to the provenance information:
 \begin{itemize}
@@ -257,7 +257,7 @@ The type features \emph{Student} and \emph{Person} of the node \texttt{e2} are s
 			\input{04-summary/figures/id-algo-ex}
 		}
 		\caption{The input data is a set of edges, one per row. The column ``Prov'' indicates the provenance of the edge. The columns $u_\mathcal{W}$ and $v_\mathcal{W}$ represents the sumnodes associated with the node $u$ and $v$, respectively. The ownership of \texttt{e1} is A, and the dataset B owns \texttt{e2}. The Step~2 assigns the sumnodes according to the function \texttt{GetSumnode\textsubscript{i}} in Algorithm~\ref{chap4:summary:alg:id-summary}.}
-		\label{tab:id-algo-ex}
+		\label{chap4:summary:tab:id-algo-ex}
 	\end{subfigure}
 	\quad
 	\begin{subfigure}{.8\textwidth}
@@ -265,7 +265,7 @@ The type features \emph{Student} and \emph{Person} of the node \texttt{e2} are s
 		\resizebox{.8\textwidth}{!}{
 			\input{04-summary/figures/fig-id-algo-ex}
 		}
-		\caption{Depiction of the \emph{Types} summary created in Figure~\ref{tab:id-algo-ex}. The edges which provenance is A are solid red, and those which provenance is B are dashed blue.}
+		\caption{Depiction of the \emph{Types} summary created in Figure~\ref{chap4:summary:tab:id-algo-ex}. The edges which provenance is A are solid red, and those which provenance is B are dashed blue.}
 		\label{chap4:summary:fig:id-algo-ex}
 	\end{subfigure}
 	\caption{Example of the \emph{Types} summarisation $R_t$ in the case of inter-linked datasets.}

@@ -11,8 +11,8 @@ While there are other ways to perform entity ranking on the Web of Data, e.g., o
 The datasets we are using in our experiments are the following:
 \begin{description}
   \item[INEX09] a dataset of 2,491,134 triples from DBpedia containing the description of entities in English, and converted for the INEX evaluation framework~\cite{Perez-Aguera:2010:UBS};
-  \item[SS10] the ``Billion Triple Challenge''\footnote{Billion Triple Challenge: \url{http://vmlion25.deri.ie}} (BTC) dataset, containing more than one billion triples, with the assessments (a file containing relevance judgments on a sample of query answers) of the SemSearch2010\footnote{\label{ss10}SemSearch2010: \url{http://km.aifb.kit.edu/ws/semsearch10}} challenge;
-  \item[SS11] the BTC dataset with the assessments of the ``Entity Search track'' of the SemSearch2011\footnote{\label{ss11}SemSearch2011: \url{http://km.aifb.kit.edu/ws/semsearch11/}} challenge.
+  \item[SS10] the ``Billion Triple Challenge''\footnote{Billion Triple Challenge: \url{http://vmlion25.deri.ie}} (BTC) dataset, containing more than one billion triples, with the assessments (a file containing relevance judgments on a sample of query answers) of the SemSearch2010\footnote{\label{chap6:ranking:dataset:ss10}SemSearch2010: \url{http://km.aifb.kit.edu/ws/semsearch10}} challenge;
+  \item[SS11] the BTC dataset with the assessments of the ``Entity Search track'' of the SemSearch2011\footnote{\label{chap6:ranking:dataset:ss11}SemSearch2011: \url{http://km.aifb.kit.edu/ws/semsearch11/}} challenge.
 \end{description}
 The INEX09 dataset is significantly different than the other two based on BTC. Indeed, BTC is a heterogeneous dataset, created from web crawls of several search engines. INEX09 is a highly curated dataset from DBpedia.
 
@@ -21,7 +21,7 @@ The INEX09 dataset is significantly different than the other two based on BTC. I
 In order to extract the entities from those datasets that are to be ranked, we performed the following operations:
 \begin{enumerate}
 	\item extracted the \glspl{edesc} consisting of the outgoing edges and nodes that are 1-hop away;
-	\item analysed\footnote{The analysis of a text consists in splitting on a separator character such as whitespace, in order to produce tokens to be indexed. In the case of URIs, additional separators such as slashes `/' and dots `.' are also used. See \cite{McCandless:2010:LAS,buttcher:2016:information} for further details.} each description so that it may be retrieved based on a query that is pre-defined by the SemSearch\footnote{See footnotes \ref{ss10} and \ref{ss11}} challenges; and
+	\item analysed\footnote{The analysis of a text consists in splitting on a separator character such as whitespace, in order to produce tokens to be indexed. In the case of URIs, additional separators such as slashes `/' and dots `.' are also used. See \cite{McCandless:2010:LAS,buttcher:2016:information} for further details.} each description so that it may be retrieved based on a query that is pre-defined by the SemSearch\footnote{See footnotes \ref{chap6:ranking:dataset:ss10} and \ref{chap6:ranking:dataset:ss11}} challenges; and
 	\item ranked the retrieved entities according to a ranking model to evaluate. The quality of this ranking is the subject matter in the following sections.
 \end{enumerate}
 
@@ -108,9 +108,8 @@ Overall, the experiments show that the \gls{MF} model improves significantly the
 \input{06-ranking/figures/experiments/mf-field-cmp-bar}
 
 \subsection{Effectiveness of the Weights}
-\label{sec:weights-effectiveness}
 
-In this section, we evaluate the impact of the presented weights over the \gls{MF} ranking extensions. First, we discuss the impact of discarding the attribute label as a source of possible relevant terms on the ranking performance. Then, we evaluate the weights from Section~\ref{sec:weights} developed for the \gls{MF} model.
+In this section, we evaluate the impact of the presented weights over the \gls{MF} ranking extensions. First, we discuss the impact of discarding the attribute label as a source of possible relevant terms on the ranking performance. Then, we evaluate the weights from Section~\ref{chap6:ranking:weights} developed for the \gls{MF} model.
 
 Results of the evaluations are depicted in Figure~\ref{chap6:ranking:fig:mf-weights}. The \gls{PL2MF} results are displayed on the left side of the figures, and on the right side the results of \gls{BM25MF}. Using the two-tailed Wilcoxon matched-pairs signed-ranks test~\cite{sheskin:2003:CRC,buttcher:2010:IRI:1869919}, the \gls{MF} extension with no added weight is used as the base of the comparison. Bars with a dot pattern indicate a statistically significant difference at level $0.05$ compared to the \gls{MF} extension; bars with a oblique lines pattern is at level $0.10$ instead. Raw results are reported in Table~\ref{tab:mf-effect} of the Appendix section.
 
@@ -364,7 +363,7 @@ Such a classification scheme allows to capture two aspects of a graph summary th
 We process the queries from the logs in the USEWOD2013 dataset using the function $qe$ from Definition~(\ref{chap6:ranking:def:query-extraction-function}).
 Once the operations from the function $qe$ are performed, we have then a collection of queries that are only concerned about the structure of the graph queried.
 
-Table~\ref{tab:usewod2013-queries} reports general statistics about the queries extracted from the USEWOD2013 DBpedia~3.3 logs using the function $qe$. The full list of queries is available in the Appendix~\ref{appendix:ranking}. For each category of complexity as defined in the previous section, we report in the table
+Table~\ref{chap6:ranking:tab:usewod2013-queries} reports general statistics about the queries extracted from the USEWOD2013 DBpedia~3.3 logs using the function $qe$. The full list of queries is available in the Appendix~\ref{appendix:ranking}. For each category of complexity as defined in the previous section, we report in the table
 \begin{inparaenum}[(a)]
 \item the number of queries;
 \item the number of unique terms where a term is a URI or a literal; and
@@ -405,7 +404,7 @@ Using the process outlined above, a total of 293 queries spanning over 17 catego
 		\end{tabular}
 	}
 	\caption{Queries extracted from the USEWOD2013 query logs}
-	\label{tab:usewod2013-queries}
+	\label{chap6:ranking:tab:usewod2013-queries}
 \end{table}
 
 \subsection{Graph Summary Ranking}
@@ -520,7 +519,7 @@ We compare in this paragraph the performance of both ranking functions when appl
 
 \subparagraph{Normalisation parameters impact.}
 
-Figures~\ref{chap6:ranking:fig:summary-ranking-norm} depict the impact of the Normalisation~\ref{chap6:ranking:norm:content} and~\ref{chap6:ranking:norm:degree} parameters on the ranking of graphs. On the X axis we vary the value of the parameter $b_a$ for Normalisation~\ref{chap6:ranking:norm:degree}. Each curve corresponds to a value of the parameter $b_v$ fro Normalisation~\ref{chap6:ranking:norm:content}. On the Y axis we report the MAP measurement for the \gls{MF}-based ranking approach. The raw results of the curves are available in Appendix~\ref{tab:summary-ranking-norm}.\\
+Figures~\ref{chap6:ranking:fig:summary-ranking-norm} depict the impact of the Normalisation~\ref{chap6:ranking:norm:content} and~\ref{chap6:ranking:norm:degree} parameters on the ranking of graphs. On the X axis we vary the value of the parameter $b_a$ for Normalisation~\ref{chap6:ranking:norm:degree}. Each curve corresponds to a value of the parameter $b_v$ fro Normalisation~\ref{chap6:ranking:norm:content}. On the Y axis we report the MAP measurement for the \gls{MF}-based ranking approach. The raw results of the curves are available in Appendix~\ref{appendix:ranking:tab:summary-ranking-norm}.\\
 
 In this experiment, we divided the queries into two categories: simple graphs and complex graphs. Simple graphs indicate queries that have only one star, i.e., the queries from the complexity categories 10, 9, 6, 5, 4, 3, and 2. Complex graphs represents queries that contain more than one star, i.e., the queries with complexity categories 1-1-4, 1-1-3, 1-1-2, 3-4, 2-2, 1-5, 1-4, 1-3, 1-2, and 1-1.
 
@@ -536,7 +535,7 @@ This shows the normalisation parameters introduced with the \gls{MF} ranking mod
 
 Given the outcome of the previous experiment, we set to $1.0$ the parameters of the Normalisations in the \gls{MF}-based approach for the comparison between \gls{MF}-based and basic ranking approaches of the graph summary.\\
 
-Table~\ref{tab:summary-ranking-cmp} reports the MAP values of the basic and \gls{MF}-based approaches over the \gls{typessummary} of Dbpedia. We write the MAP value in bold for the approach that has the greatest. We observe that for a majority of the query complexities, the \gls{MF}-based approach provides a better ranking than the basic approach.
+Table~\ref{chap6:ranking:tab:summary-ranking-cmp} reports the MAP values of the basic and \gls{MF}-based approaches over the \gls{typessummary} of Dbpedia. We write the MAP value in bold for the approach that has the greatest. We observe that for a majority of the query complexities, the \gls{MF}-based approach provides a better ranking than the basic approach.
 
 This shows the benefits of the \gls{MF} ranking model of normalising the data over two levels: the Normalisation~\ref{chap6:ranking:norm:content} allows to compare several solutions to a query regardless of different statistics they might have; with the Normalisation~\ref{chap6:ranking:norm:degree}, it is possible to rank solutions to a query that have different degree of a same attribute.
 

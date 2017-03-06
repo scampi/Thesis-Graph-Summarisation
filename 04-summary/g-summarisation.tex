@@ -5,10 +5,10 @@ Web Data contains a large amount of structured data spanning over many different
 
 In order to make sense of this deluge of data, summarisation techniques are available for different levels of the data. For example, all the information related to an entity can be summarised so to highlight the important parts. In this section, we are interested in the summarisation of the \emph{structure} of graphs. In the context of Web Data, the structure of a graph is defined by the use of predicates and classes.
 
-We present first a model for graph summarisation in Section~\ref{sec:summary:model}. Then in Section~\ref{chap4:summary:precise-summary}, we introduce a model for a \emph{precise} summary. Finally, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data in many cases in Section~\ref{chap4:summary:approximate}.% Finally, we describe how inter-linked datasets can be summarised.
+We present first a model for graph summarisation in Section~\ref{chap4:summary:data-model}. Then in Section~\ref{chap4:summary:precise-summary}, we introduce a model for a \emph{precise} summary. Finally, we emphasise the direction of \emph{approximate} graph summarisation as the only viable summarisation for Web Data in many cases in Section~\ref{chap4:summary:approximate}.% Finally, we describe how inter-linked datasets can be summarised.
 
 \subsection{Model}
-\label{sec:summary:model}
+\label{chap4:summary:data-model}
 
 In this section, we present a formal model of graph summarisation.
 
@@ -17,11 +17,11 @@ In this section, we present a formal model of graph summarisation.
 Graph summarisation is an operation over the graph that abstracts from its content, in order to highlights its structure. From a structural point of view, traversing a graph or its summary is equivalent. The summary of a graph exhibits the following properties:
 \begin{enumerate}
 	\item a path in the graph exists also in the summary;
-	\label{sprop-path}
+	\label{chap4:summmary:sprop-path}
 	\item both the graph and its summary share the same vocabulary; and
-	\label{sprop-voc}
+	\label{chap4:summmary:sprop-voc}
 	\item a graph may conform to several summaries.
-	\label{sprop-not-uniq}
+	\label{chap4:summmary:sprop-not-uniq}
 \end{enumerate}
 These properties of a summary are fulfilled by defining the graph summarisation as a graph \emph{homomorphism}.
 
@@ -65,7 +65,7 @@ We denote as \emph{feature} elements of the graph on which the relation of the g
 A graph and its summary do not share the same set of nodes. The nodes of the summary are taken from a set that is distinct from the set of nodes in the graph. We refer to that set as the \emph{source material} which we denote as $\mathcal{Z}$. We define in the following paragraphs two nodes of the summary that are used in its creation, i.e., the undefined sumnode and the sink sumnode.
 
 \subparagraph{Undefined sumnode.}
-\label{sec:undefined-sumnode}
+\label{chap4:summary:undefined-sumnode}
 
 Depending on the definition of the binary relation $R$ used in a graph homomorphism, some nodes of the graph do not have any mapping. For example, the node $v_0$ in Figure~\ref{chap2:semi-structured-data:fig:graph} does not have a $type$ edge; it has then no mapping for a gls{summarisation-relation} that considers the type of a node as depicted in the Figure~\ref{chap4:summary:fig:classes-summary}.
 We map such a node of the graph to a sumnode $\mathfrak{U} \in \mathcal{Z}$ that we say to be \emph{undefined} for the binary relation $R$.
@@ -101,7 +101,7 @@ $$
 
 \subsubsection{Graph Summary}
 
-Given two graphs $G$ and $\mathcal{S}$, if $G$ is homomorphic to $\mathcal{S}$ with regards to a binary relation $R$, then we call $\mathcal{S}$ the summary of $G$ as per the binary relation $R$ \cite{campinas:2012:dexa}. Indeed, the summary being homomorph to $G$ retain by definition the paths in the graph described in the property~(\ref{sprop-path}). Both graph share the set of labels $\mathcal{L}$, thus meeting the property~(\ref{sprop-voc}) of a summary.
+Given two graphs $G$ and $\mathcal{S}$, if $G$ is homomorphic to $\mathcal{S}$ with regards to a binary relation $R$, then we call $\mathcal{S}$ the summary of $G$ as per the binary relation $R$ \cite{campinas:2012:dexa}. Indeed, the summary being homomorph to $G$ retain by definition the paths in the graph described in the property~(\ref{chap4:summmary:sprop-path}). Both graph share the set of labels $\mathcal{L}$, thus meeting the property~(\ref{chap4:summmary:sprop-voc}) of a summary.
 
 \begin{definition}[Graph Summary]
 Let $V \subseteq \mathcal{Z}$ and $\mathcal{W} \subseteq \mathcal{Z}$ be two sets of nodes where $\mathcal{Z}$ is the set of source material such that
@@ -436,7 +436,7 @@ A graph summary can be constructed based on different features of the data. We p
 	\item the type URI; and
 	\item the direction of links, i.e., incoming or outgoing.
 \end{itemize}
-We report in Table~\ref{tab:sumrel} a summary of the presented relations along with the name of the summary that a relation generates.
+We report in Table~\ref{chap4:summary:tab:sumrel} a summary of the presented relations along with the name of the summary that a relation generates.
 
 \minisec{Summarisation Relation $R_{ut}$}
 
@@ -697,7 +697,7 @@ Although the nodes $v_1$ and $v_2$ are mapped to a same sumnode with $R_{at}$, t
 	\bottomrule
 	\end{tabular}}
 	\caption{Summarisation relations for approximate graph summaries}
-	\label{tab:sumrel}
+	\label{chap4:summary:tab:sumrel}
 \end{table}
 
 We note that the presented \emph{approximate} \glspl{summarisation-relation} are indeed not precise, because they do not fulfill the Definition~\ref{chap4:summary:def:precise-summary}. Indeed, it is possible to find a path in the approximate summary for which an instance as per Definition~\ref{chap4:summary:def:summary-path-instance} does not form a path in the graph. For instance, the set $\{v_1, v_5, v_6\}$ is an instance of the summary path $works \cdot location \cdot capital$; however, there is no path that connects all three nodes $v_1$, $v_5$, and $v_6$ with the attributes $works$, $location$, and $capital$.
